@@ -4,10 +4,8 @@
   "description": "Backend API for Barefoot Nomad ",
   "main": "app.js",
   "scripts": {
-    "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build ./src -s",
-    "build": "npm run clean && npm run build-babel",
-    "start": "npm run build && node ./build/app.js",
+    "heroku-postbuild": "babel src -d build",
+    "start": "node ./build/app.js",
     "dev": "nodemon --exec babel-node ./src/app.js",
     "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
