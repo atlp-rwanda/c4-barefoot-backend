@@ -1,5 +1,6 @@
 require('@babel/register')
 require('dotenv').config({path:'../.env'});
+
 module.exports =  {
   development: {
     username: process.env.LOCAL_DB_USERNAME,
