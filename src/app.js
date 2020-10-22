@@ -34,6 +34,11 @@ app.all('*', (req, res, next) => {
   next(err);
 });
 
+// catch all 404 errors
+app.use(async (req, res, next)=>{
+  res.status(404).json({ message: 'Unable to find the requested resource' });
+});
+
 // db connection check
 const { sequelize } = db;
 sequelize.authenticate()

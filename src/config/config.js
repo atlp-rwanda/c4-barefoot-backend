@@ -4,9 +4,10 @@ module.exports = {
   development: {
     use_env_variable: 'LOCAL_DB_URL',
     database: process.env.LOCAL_DB_NAME,
-    password: process.env.LOCAL_DB_PASSWORD,
-    username: process.env.LOCAL_DB_USERNAME,
-    dialect: 'postgres'
+    host: process.env.LOCAL_DB_HOST,
+    port: process.env.LOCAL_DB_PORT,
+    dialect: 'postgres',
+    operatorsAliases: 0
   },
   test: {
     use_env_variable: 'CI_DB_URL',
