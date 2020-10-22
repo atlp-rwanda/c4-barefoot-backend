@@ -6,12 +6,18 @@ import routes from './routes/routes';
 import swaggerDocument from '../swagger.json';
 
 const app = express();
+app.use(express.json());
 
 // routes
 app.use('/', routes);
 
 // docuemntation route
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
+// catch all 404 errors
+app.use(async (req, res, next)=>{
+  res.status(404).json({ message: 'Unable to find the requested resource' });
+});
 
 // db connection check
 db.authenticate()
@@ -22,8 +28,7 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Server started on port ${port} ...`);
-  console.log(process.env.NODE_ENV)
-  
+  console.log(process.env.NODE_ENV);
 });
 
 export default app;
