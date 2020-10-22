@@ -13,6 +13,7 @@ export default routes;
 import welcome from '../controllers/welcome';
 import { getUserProfile, updateUserProfile } from '../controllers/userprofile';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import verifyUserToken from '../middlewares/userprofileverification';
 =======
 import indexRoutes from './index.routes';
@@ -21,6 +22,9 @@ import profileRoute from './profile.routes';
 =======
 import { verifyUserToken, verifyUser } from '../middlewares/userprofileverification';
 >>>>>>> added verifying user before get and update user profile
+=======
+import verifyUserToken from '../middlewares/userprofileverification';
+>>>>>>> build get and update features
 
 const routes = express.Router();
 routes.use(indexRoutes);
@@ -36,10 +40,14 @@ router.get('/users/:userId', verifyUserToken, getUserProfile);
 
 // ------------------ update user profile --------
 <<<<<<< HEAD
+<<<<<<< HEAD
 router.patch('/users/:userId', verifyUserToken, updateUserProfile);
 =======
 router.patch('/users/:userId', verifyUser, updateUserProfile);
 >>>>>>> added verifying user before get and update user profile
+=======
+router.patch('/users/:userId', verifyUserToken, updateUserProfile);
+>>>>>>> build get and update features
 
 export default router;
 >>>>>>> added verifying user before get and update user profile

@@ -6,6 +6,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+<<<<<<< HEAD
         type: DataTypes.INTEGER
       },
       first_name: {
@@ -147,3 +148,42 @@ module.exports = {
     await queryInterface.dropTable('Users');
   },
 };
+=======
+        type: Sequelize.INTEGER
+      },
+      first_name: {
+        type: Sequelize.STRING
+      },
+      last_name: {
+        type: Sequelize.STRING
+      },
+      password: {
+        type: Sequelize.STRING
+      },
+      address: {
+        type: Sequelize.STRING
+      },
+      language: {
+        type: Sequelize.STRING
+      },
+      occupation: {
+        type: Sequelize.STRING
+      },
+      profile_picture: {
+        type: Sequelize.STRING
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
+  },
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Users');
+  }
+};
+>>>>>>> build get and update features
