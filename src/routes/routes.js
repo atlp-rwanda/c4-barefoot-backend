@@ -11,7 +11,7 @@ export default routes;
 =======
 import welcome from '../controllers/welcome';
 import { getUserProfile, updateUserProfile } from '../controllers/userprofile';
-import { verifyUserToken, verifyUser } from '../middlewares/userprofileverification';
+import verifyUserToken from '../middlewares/userprofileverification';
 
 const router = express.Router();
 
@@ -23,7 +23,7 @@ router.get('/', welcome);
 router.get('/users/:userId', verifyUserToken, getUserProfile);
 
 // ------------------ update user profile --------
-router.patch('/users/:userId', verifyUser, updateUserProfile);
+router.patch('/users/:userId', verifyUserToken, updateUserProfile);
 
 export default router;
 >>>>>>> added verifying user before get and update user profile

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import bcrypt from 'bcrypt';
 import UserServices from '../services/user.service';
 import UsersError from '../utils/userserror';
@@ -27,16 +26,5 @@ const updateUserProfile = async (req, res, next) => {
     res.status(200).json({ status: 200, message: 'successfully updated user profile' });
   } catch (err) { next(err); }
 };
-=======
-// get a user profile
-const getUserProfile = (req, res) => {
-  res.status(200).json({ status: 200, message: 'succesfull got user profile' });
-};
 
-// update a single user profile
-const updateUserProfile = (req, res) => {
-  res.status(200).json({ status: 200, message: 'succesfull update your profile' });
-};
-
->>>>>>> added verifying user before get and update user profile
 export { getUserProfile, updateUserProfile };

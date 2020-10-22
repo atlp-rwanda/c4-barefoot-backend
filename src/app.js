@@ -37,9 +37,12 @@ app.all('*', (req, res, next) => {
 });
 
 // catch all 404 errors
-app.use(async (res) => {
+app.use(async (req, res, next)=>{
   res.status(404).json({ message: 'Unable to find the requested resource' });
 });
+
+// db connection check
+const port = process.env.PORT || 3000;
 
 // db connection check
 const { sequelize } = db;
