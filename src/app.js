@@ -36,16 +36,16 @@ app.all('*', (req, res, next) => {
   next(err);
 });
 
+// catch all 404 errors
+app.use(async (req, res, next)=>{
+  res.status(404).json({ message: 'Unable to find the requested resource' });
+});
+
 // db connection check
 const { sequelize } = db;
 sequelize.authenticate()
   .then(() => console.log('Database connected...'))
   .catch((err) => console.log(`Error: ${err}`));
-app.use((err, req, res, next) => {
-  const statusCode = err.status || 500;
-  res.status(statusCode).json({ status: statusCode, error: err.message, stack: err.stack });
-  next(err);
-});
 
 app.use((err, req, res, next) => {
   const status = err.status || 500;
