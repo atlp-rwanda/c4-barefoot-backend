@@ -9,6 +9,7 @@ import ApplicationError from './utils/ApplicationError';
 import swaggerConfigs from './config/swaggerDoc';
 
 const app = express();
+app.use(express.json());
 
 app.use(cors());
 
@@ -25,6 +26,11 @@ app.use('/documentation', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.all('*', (req, res, next) => {
   const err = new ApplicationError('Page Requested not found', 404);
   next(err);
+});
+
+// catch all 404 errors
+app.use(async (req, res, next)=>{
+  res.status(404).json({ message: 'Unable to find the requested resource' });
 });
 
 // db connection check
