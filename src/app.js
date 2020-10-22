@@ -30,6 +30,11 @@ app.all('*', (req, res, next) => {
   next(err);
 });
 
+// catch all 404 errors
+app.use(async (req, res, next)=>{
+  res.status(404).json({ message: 'Unable to find the requested resource' });
+});
+
 // db connection check
 const port = process.env.PORT || 3000;
 
@@ -45,12 +50,17 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
+<<<<<<< HEAD
   console.log(`CORS-enabled web server listening on port ${port} ...`);
 });
 
 app.use((err, req, res) => {
   const statusCode = err.status || 500;
   res.status(statusCode).json({ Status: statusCode, Error: err.message });
+=======
+  console.log(`Server started on port ${port} ...`);
+  console.log(process.env.NODE_ENV);
+>>>>>>> build get and update features
 });
 
 export default app;
