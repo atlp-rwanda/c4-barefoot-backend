@@ -1,5 +1,11 @@
 import roles from '../utils/roles';
 import { hashPassword } from '../utils/auth';
+'use strict';
+import sequelizePaginate from 'sequelize-paginate';
+
+const {
+  Model
+} = require('sequelize');
 
 'use strict';
 module.exports = (sequelize, DataTypes) => {
@@ -60,5 +66,6 @@ module.exports = (sequelize, DataTypes) => {
   User.beforeBulkUpdate(({ attributes: user }) => {
     if (user.password) { user.password = hashPassword(user.password); }
   });
+  sequelizePaginate.paginate(User);
   return User;
 };
