@@ -31,7 +31,7 @@ app.all('*', (req, res, next) => {
 });
 
 // catch all 404 errors
-app.use(async (req, res, next)=>{
+app.use(async (res) => {
   res.status(404).json({ message: 'Unable to find the requested resource' });
 });
 
