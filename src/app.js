@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.use(cors());
 
+// routes
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: false }));
@@ -29,7 +30,7 @@ app.all('*', (req, res, next) => {
 });
 
 // catch all 404 errors
-app.use(async (req, res, next)=>{
+app.use(async (res) => {
   res.status(404).json({ message: 'Unable to find the requested resource' });
 });
 
@@ -46,7 +47,7 @@ app.listen(port, () => {
   console.log(`CORS-enabled web server listening on port ${port} ...`);
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   const statusCode = err.status || 500;
   res.status(statusCode).json({ Status: statusCode, Error: err.message });
 });
