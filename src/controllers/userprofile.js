@@ -27,4 +27,4 @@ const updateUserProfile = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
-export { getUserProfile, updateUserProfile };
+export { getUserProfile, updateUserProfile, getAllUsers };

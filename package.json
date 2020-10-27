@@ -7,12 +7,7 @@
     "heroku-postbuild": "babel src -d build",
     "start": "cross-env NODE_ENV=production npm run migrate && node ./build/app.js",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/app.js",
-<<<<<<< HEAD
-    "db:setup": "cross-env NODE_ENV=test sequelize db:migrate:undo:all && cross-env NODE_ENV=test sequelize db:migrate && cross-env NODE_ENV=test npm run seed",
-    "test": "npm run db:setup && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
-=======
     "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit",
->>>>>>> added verifying user before get and update user profile
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint . --fix",
     "createModel": "npx sequelize-cli model:generate ",
@@ -50,8 +45,7 @@
     "sequelize": "^6.3.5",
     "swagger-jsdoc": "^5.0.0",
     "sequelize-paginate": "^1.1.6",
-    "swagger-ui-express": "^4.1.4",
-    "uuid": "^8.3.1"
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
