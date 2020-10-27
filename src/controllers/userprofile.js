@@ -27,13 +27,14 @@ const getUserProfile = async (req, res) => {
   } catch (error) { res.status(404).json({ message: 'no profile associate with that user' }); }
 };
 
-// update a single user profile by comparing from tokenId and id from database
+// update a single user profile
 const updateUserProfile = async (req, res) => {
   try {
     const decodedToken = jwt.decode(res.locals);
-    const record = await UserServices.getUserById(decodedToken.id);
+    const userId = decodedToken.id;
+    const record = await UserServices.getUserById(userId);
     if (!record) return res.status(404).json({ message: 'user not found' });
-    if (record.dataValues.id !== decodedToken.id) return res.status(401).json({ message: 'owner of profile does not match signed in user' });
+    if (record.dataValues.id !== userId) return res.status(401).json({ message: 'owner of profile does not match signed in user' });
     const data = {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -43,7 +44,7 @@ const updateUserProfile = async (req, res) => {
       occupation: req.body.occupation,
       profile_picture: req.body.profile_picture
     };
-    UserServices.updateUser(data, decodedToken.id);
+    UserServices.updateUser(data, userId);
     res.status(200).json({ message: 'successfully updated user profile' });
   } catch (err) { res.status(500).json({ message: 'failed to update a user' }); }
 };
