@@ -9,13 +9,13 @@ const app = express();
 app.use(express.json());
 
 // routes
-app.use('/', routes);
+app.use('/api/v1', routes);
 
 // docuemntation route
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // catch all 404 errors
-app.use(async (req, res, next)=>{
+app.use(async (res) => {
   res.status(404).json({ message: 'Unable to find the requested resource' });
 });
 
