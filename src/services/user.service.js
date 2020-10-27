@@ -30,11 +30,11 @@ class UserService {
 
   /**
    * @param {object} data include different rows properties
-   * @param {int} id userId
+   * @param {int} userId add userId.
    * @return {string} success message
    */
-  async updateUser(data, id) {
-    this.user.update({ data }, { where: { id } });
+  async updateUser(data, userId) {
+    return this.user.update(data, { where: { id: userId } });
   }
 }
 
