@@ -21,11 +21,7 @@ class UserService {
   }
 
   /**
-<<<<<<< HEAD
   * @param {int} userId add user first name.
-=======
-  * @param {int} userId add userId.
->>>>>>> separated data and business logic and added get all users endpoint
   * @return {object} get user with provided Id
   */
   async getUserById(userId) {
@@ -33,7 +29,6 @@ class UserService {
   }
 
   /**
-<<<<<<< HEAD
   * @param {string} email add user email.
   * @return {object} get user with provided Id
   */
@@ -56,14 +51,6 @@ class UserService {
    */
   async updateUser(data, userId) {
     return this.user.update(data, { where: { id: userId } });
-=======
-   * @param {object} data include different rows properties
-   * @param {int} id userId
-   * @return {string} success message
-   */
-  async updateUser(data, id) {
-    this.user.update({ data }, { where: { id } });
->>>>>>> separated data and business logic and added get all users endpoint
   }
 }
 
