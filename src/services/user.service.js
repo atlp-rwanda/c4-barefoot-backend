@@ -21,7 +21,7 @@ class UserService {
   }
 
   /**
-  * @param {int} userId add userId.
+  * @param {int} userId add user first name.
   * @return {object} get user with provided Id
   */
   async getUserById(userId) {
@@ -29,8 +29,16 @@ class UserService {
   }
 
   /**
+  * @param {string} firstName add user first name.
+  * @return {object} get user with provided Id
+  */
+  async getUserByName(firstName) {
+    return this.user.findOne({ where: { first_name: firstName } });
+  }
+
+  /**
    * @param {object} data include different rows properties
-   * @param {int} userId add userId.
+   * @param {string} userId add userId.
    * @return {string} success message
    */
   async updateUser(data, userId) {
