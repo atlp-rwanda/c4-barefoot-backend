@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node ./build/app.js",
-    "devStart": "set NODE_ENV=development && nodemon  --exec babel-node ./src/app.js",
+    "devStart": "set NODE_ENV=development && nodemon --exec babel-node ./src/app.js",
     "createModel": "cd src && npx sequelize-cli model:generate ",
     "migrate": "cd src && npx sequelize-cli db:migrate",
     "migrate-undo": "cd src && npx sequelize-cli db:migrate:undo",
@@ -33,6 +33,7 @@
   "homepage": "https://github.com/atlp-rwanda/c2-barefoot-backend#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.23.0",
     "coverage": "^0.4.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
