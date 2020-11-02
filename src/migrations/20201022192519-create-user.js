@@ -7,6 +7,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
 <<<<<<< HEAD
+<<<<<<< HEAD
         type: DataTypes.INTEGER
       },
       first_name: {
@@ -150,40 +151,124 @@ module.exports = {
 };
 =======
         type: Sequelize.INTEGER
+=======
+        type: DataTypes.INTEGER
+>>>>>>> fixing bugs
       },
       first_name: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+        validate: {
+          notEmpty: true
+        }
       },
       last_name: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+        validate: {
+          notEmpty: true
+        }
+      },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: null,
+        validate: {
+          notEmpty: true
+        }
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: null,
+        unique: true,
+        validate: {
+          isEmail: true,
+          notEmpty: true,
+        }
       },
       password: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+        validate: {
+          min: 8,
+          notEmpty: true
+        }
+      },
+      verified: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+        validate: {
+          notEmpty: true
+        }
       },
       address: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+        validate: {
+          notEmpty: true
+        }
       },
       language: {
-        type: Sequelize.STRING
-      },
-      occupation: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+        validate: {
+          notEmpty: true
+        }
       },
       profile_picture: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+        validate: {
+          notEmpty: true
+        }
+      },
+      occupation: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+        validate: {
+          notEmpty: true
+        }
+      },
+      user_role_id: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 1,
+        validate: {
+          notEmpty: true
+        },
+      },
+      manager_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.literal('CURRENT_TIMESTAMP')
       }
     });
   },
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('Users');
+<<<<<<< HEAD
   }
 };
 >>>>>>> build get and update features
+=======
+  },
+};
+>>>>>>> fixing bugs
