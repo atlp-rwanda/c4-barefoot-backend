@@ -27,8 +27,12 @@ module.exports = {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
+<<<<<<< HEAD
         defaultValue: DataTypes.UUIDV4,
         unique: true,
+=======
+        defaultValue: null,
+>>>>>>> fixing bugs
         validate: {
           notEmpty: true
         }
@@ -36,6 +40,10 @@ module.exports = {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+<<<<<<< HEAD
+=======
+        defaultValue: null,
+>>>>>>> fixing bugs
         unique: true,
         validate: {
           isEmail: true,
@@ -44,9 +52,14 @@ module.exports = {
       },
       password: {
         type: DataTypes.STRING,
+<<<<<<< HEAD
         allowNull: false,
         defaultValue: 'password',
         unique: true,
+=======
+        allowNull: true,
+        defaultValue: null,
+>>>>>>> fixing bugs
         validate: {
           min: 8,
           notEmpty: true
