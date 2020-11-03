@@ -42,6 +42,11 @@ sequelize
   .authenticate()
   .then(() => console.log('Database connected...'))
   .catch((err) => console.log(`Error: ${err}`));
+app.use((err, req, res, next) => {
+  const statusCode = err.status || 500;
+  res.status(statusCode).json({ status: statusCode, error: err.message, stack: err.stack });
+  next(err);
+});
 
 app.listen(port, () => {
   console.log(`CORS-enabled web server listening on port ${port} ...`);
