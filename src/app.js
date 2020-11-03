@@ -52,11 +52,6 @@ app.use((err, req, res, next) => {
   next(err);
 });
 
-app.use((err, req, res, next) => {
-  const status = err.status || 500;
-  res.status(status).json({ status, error: err.message, statck: err.stack });
-});
-
 app.listen(port, () => {
   console.log(`CORS-enabled web server listening on port ${port}  ...`);
 }).on('error', function (err) {
