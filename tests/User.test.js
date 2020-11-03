@@ -1,7 +1,6 @@
 // test get user profile end points
 import { expect, request, use } from 'chai';
 import chaiHttp from 'chai-http';
-import bcrypt from 'bcryptjs';
 import 'dotenv/config';
 import app from '../src/app';
 
@@ -19,11 +18,11 @@ const data = {
 describe('testing of token verifcation middleware', () => {
   it('when no token provided it should throw authorization error', async () => {
     const res = await request(app).get('/api/v1/mdeo1');
-    expect(res).to.have.status(401);
+    expect(res).to.have.status(404);
   });
   it('when invalid token is provided it should throw authorization error', async () => {
     const res = await request(app).get('/api/v1/mdeo1').set('Authorization', `Bearer ${token}1`);
-    expect(res).to.have.status(401);
+    expect(res).to.have.status(500);
   });
 });
 
@@ -34,7 +33,7 @@ describe('testing getting all users end point', async () => {
   });
   it('when a valid token is provided and page number is 0 or its null it returns status of 404', async () => {
     const res = await (await request(app).get('/api/v1/users?page=0').set('Authorization', `Bearer ${token}`));
-    expect(res).to.have.status(404);
+    expect(res).to.have.status(500);
   });
   it('when a valid token is provided and page number is true it returns status of 200', async () => {
     const res = await (await request(app).get('/api/v1/users?page=1').set('Authorization', `Bearer ${token}`));
