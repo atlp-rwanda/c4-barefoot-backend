@@ -1,21 +1,21 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
-
+import UpdateProfileError from '../utils/updateProfileError';
 // verify user token
 const verifyUserToken = async (req, res, next) => {
   try {
-    if (!req.headers.authorization) return res.status(401).json({ status: 401, message: 'no auth header found' });
+    if (!req.headers.authorization) throw new UpdateProfileError('no auth header found', 401);
     const authHeader = req.headers.authorization.split(' ');
     const [authString, token] = authHeader;
-    if (authString !== 'Bearer') return res.status(401).json({ status: 401, message: 'no auth header found' });
-    if (!token) return res.status(401).json({ status: 401, message: 'No token found' });
+    if (authString !== 'Bearer') throw new UpdateProfileError('no auth header found', 401);
+    if (!token) throw new UpdateProfileError('No token found', 401);
     const verify = jwt.verify(token, process.env.TOKEN_SECRET);
-    if (!verify) return res.status(401).json({ status: 401, message: 'token cant be verified' });
+    if (!verify) throw new UpdateProfileError('token cant be verified', 401);
     res.locals = token;
-    if (res.locals !== token) return res.status(500).json({ status: 500, message: 'server cant assign token' });
+    if (res.locals !== token) throw new UpdateProfileError('server cant assign token', 500);
     next();
   } catch (err) {
-    return res.status(401).json({ status: 401, message: 'invalid user token' });
+    next(err);
   }
 };
 // eslint-disable-next-line import/prefer-default-export
