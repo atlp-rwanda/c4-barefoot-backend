@@ -3,14 +3,14 @@ import { v4 as uuidv4 } from 'uuid';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Users', [{
-      first_name: 'Mugabo',
-      last_name: 'Deo',
-      username: 'mdeo1',
-      occupation: 'software devlopment',
-      email: 'mdeo@gmail.com',
-      password: '12345678',
-      address: 'Kigali',
-      language: 'English',
+      first_name: 'Ineza',
+      last_name: 'Bonte',
+      username: `${uuidv4()}`,
+      occupation: 'software development',
+      email: 'inezabonte@gmail.com',
+      password: 'passPass123',
+      address: 'Nairobi',
+      language: 'French',
       profile_picture: 'image.png'
     }], {});
   },

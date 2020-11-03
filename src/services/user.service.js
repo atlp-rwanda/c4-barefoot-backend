@@ -29,11 +29,11 @@ class UserService {
   }
 
   /**
-  * @param {string} firstName add user first name.
+  * @param {string} username add username.
   * @return {object} get user with provided Id
   */
-  async getUserByName(firstName) {
-    return this.user.findOne({ where: { first_name: firstName } });
+  async getUserByUserName(username) {
+    return this.user.findOne({ where: { username } });
   }
 
   /**
