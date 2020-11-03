@@ -6,7 +6,7 @@ const profileRoute = express.Router();
 // ----------------- get all users ------------
 profileRoute.get('/users', verifyUserToken, getAllUsers);
 // ------------------ get user profile -----------
-profileRoute.get('/:firstName', verifyUserToken, getUserProfile);
+profileRoute.get('/:username', verifyUserToken, getUserProfile);
 
 // ------------------ update user profile --------
 profileRoute.patch('/update-profile', verifyUserToken, updateUserProfile);
