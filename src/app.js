@@ -23,7 +23,11 @@ app.use(async (res) => {
 db.authenticate()
   .then(() => console.log('Database connected...'))
   .catch((err) => console.log(`Error: ${err}`));
-
+app.use((err, req, res, next) => {
+  const statusCode = err.status || 500;
+  res.status(statusCode).json({ status: statusCode, error: err.message, stack: err.stack });
+  next(err);
+});
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
