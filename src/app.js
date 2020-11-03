@@ -50,17 +50,12 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
-<<<<<<< HEAD
   console.log(`CORS-enabled web server listening on port ${port} ...`);
 });
 
 app.use((err, req, res) => {
   const statusCode = err.status || 500;
   res.status(statusCode).json({ Status: statusCode, Error: err.message });
-=======
-  console.log(`Server started on port ${port} ...`);
-  console.log(process.env.NODE_ENV);
->>>>>>> build get and update features
 });
 
 export default app;
