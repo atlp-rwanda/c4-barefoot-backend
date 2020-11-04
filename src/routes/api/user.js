@@ -64,17 +64,18 @@ router.post('/signup', signupValidation, signup, sendVerificationEmail);
 /**
  * @swagger
  *
- * /api/v1/user/verification/{token}:
+ * /api/v1/user/verification/:
  *    patch:
  *      summary: The email verification endpoint
  *      description: This endpoint is used when one is verifying their email.
  *      tags: [Email verification]
  *      parameters:
- *        - in: path
+ *        - in: query
  *          name: token
  *          required: true
  *          schema:
  *            type: string
+ *          description: The token is used to verify the user
  *      responses:
  *        "200":
  *          description: Email is verified successfully
@@ -135,6 +136,6 @@ router.post('/signup', signupValidation, signup, sendVerificationEmail);
  *          Error: Account does not exist
  */
 
-router.patch('/verification/:token', verification);
+router.patch('/verification/', verification);
 
 export default router;

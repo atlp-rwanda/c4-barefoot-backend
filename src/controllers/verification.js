@@ -23,7 +23,7 @@ const verification = async (req, res, next) => {
     }
   };
 
-  jwt.verify(req.params.token, process.env.TOKEN_SECRET, (err, user) => {
+  jwt.verify(req.query.token, process.env.TOKEN_SECRET, (err, user) => {
     if (err) throw new signUpError('Invalid token', 400);
     updateUser(user.user);
   });

@@ -58,7 +58,7 @@ describe('Testing signup route', () => {
 describe('Testing email verification', () => {
   const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjMMDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
   it('Should\'nt update with invalid token', async () => {
-    const res = await request(app).patch(`/api/v1/user/verification/${invalidToken}`);
+    const res = await request(app).patch(`/api/v1/user/verification/?token=${invalidToken}`);
     expect(res).to.have.status(400);
     expect(res.type).to.equal('application/json');
     expect(res.body).to.have.property('Error');
@@ -67,14 +67,14 @@ describe('Testing email verification', () => {
 
   const validToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoicmVuZWRlb2x5bmRhQGdtYWlsLmNvbSIsImlhdCI6MTYwMzk3ODk3NX0.9JQj9YxHtXFLZHojzLSOhzxCMwisml7Pr2ynT-vhiL8';
   it('Should update email verification with valid token', async () => {
-    const res = await request(app).patch(`/api/v1/user/verification/${validToken}`);
+    const res = await request(app).patch(`/api/v1/user/verification/?token=${validToken}`);
     expect(res).to.have.status(200);
     expect(res.type).to.equal('application/json');
     expect(res.body.Message).to.equal('Email has been verified');
   });
 
   it('Shouldn\'nt verify more than once', async () => {
-    const res = await request(app).patch(`/api/v1/user/verification/${validToken}`);
+    const res = await request(app).patch(`/api/v1/user/verification/?token=${validToken}`);
     expect(res).to.have.status(400);
     expect(res.type).to.equal('application/json');
     expect(res.body.Error).to.equal('Account already verified');

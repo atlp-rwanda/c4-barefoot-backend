@@ -13,12 +13,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-let link;
-if (process.env.NODE_ENV === 'development') {
-  link = 'http://localhost:3000/verification/';
-} else {
-  link = 'https://barefoot-nomad-app-v1.herokuapp.com/verification/';
-}
 const sendVerificationEmail = async (req, res, next) => {
   const { first_name, email } = req.body;
   const accessToken = jwt.sign({ user: email }, process.env.TOKEN_SECRET);
@@ -26,7 +20,7 @@ const sendVerificationEmail = async (req, res, next) => {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: email,
     subject: 'Verify your email',
-    html: `<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='${link}${accessToken}'>Link</a>`
+    html: `<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='${process.env.FRONTEND_URL}/user/verification/?token=${accessToken}'>Link</a>`
   };
 
   try {
