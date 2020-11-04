@@ -1,6 +1,6 @@
 import models from '../models';
 
-const { User } = models;
+const { user } = models;
 /**
  * different methods on User method
  */
@@ -9,7 +9,7 @@ class UserService {
    * @param {int} user contains model properties
    */
   constructor() {
-    this.user = User;
+    this.user = user;
   }
 
   /**
