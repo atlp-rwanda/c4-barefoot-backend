@@ -5,6 +5,6 @@ import verifyUserToken from '../../middlewares/userprofileverification';
 const router = express.Router();
 
 // ------------------ get user profile -----------
-router.get('/', verifyUserToken, getUserProfile);
+router.get('/:username', verifyUserToken, getUserProfile);
 
 export default router;
