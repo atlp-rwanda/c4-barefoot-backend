@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 require('dotenv').config();
-=======
-require('dotenv').config({ path: '../.env' });
->>>>>>> added verifying user before get and update user profile
 
 module.exports = {
   development: {
