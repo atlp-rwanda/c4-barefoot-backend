@@ -33,7 +33,6 @@ const updateUserProfile = async (req, res, next) => {
       password: req.body.password,
       address: req.body.address,
       language: req.body.language,
-      occupation: req.body.occupation,
       profile_picture: req.body.profile_picture
     };
     await UserServices.updateUser(data, userId);
