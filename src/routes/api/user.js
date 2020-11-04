@@ -8,6 +8,8 @@ import logedIn from '../../helper/isLogedIn';
 import login from '../../controllers/login';
 import logout from '../../controllers/logout';
 import refreshToken from '../../controllers/refreshToken';
+import getAllUsers from '../../controllers/users';
+import verifyUserToken from '../../middlewares/usertokenverifcation';
 
 const router = express.Router();
 
