@@ -14,11 +14,16 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false
     });
+    await queryInterface.addColumn('users', 'username', {
+      type: Sequelize.STRING,
+      allowNull: false
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.removeColumn('users', 'address');
     await queryInterface.removeColumn('users', 'language');
     await queryInterface.removeColumn('users', 'profile_picture');
+    await queryInterface.removeColumn('users', 'username');
   }
 };
