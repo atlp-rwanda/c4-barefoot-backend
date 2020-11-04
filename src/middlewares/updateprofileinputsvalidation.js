@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import UpdateProfileError from '../utils/updateProfileError';
+import UsersError from '../utils/userserror';
 
 const updateProfileInputsValidation = async (req, res, next) => {
   const schema = Joi.object({
@@ -13,7 +13,7 @@ const updateProfileInputsValidation = async (req, res, next) => {
     occupation: Joi.string().allow(null),
   });
   const { error } = schema.validate(req.body);
-  if (error) throw new UpdateProfileError(error.details[0].message, 400);
+  if (error) throw new UsersError(error.details[0].message, 400);
   next();
 };
 

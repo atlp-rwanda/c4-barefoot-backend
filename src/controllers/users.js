@@ -1,5 +1,5 @@
 import UserServices from '../services/user.service';
-import usersError from '../utils/usersError'
+import usersError from '../utils/userserror';
 // get all users in database
 const getAllUsers = async (req, res, next) => {
   try {
