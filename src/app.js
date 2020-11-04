@@ -5,7 +5,7 @@ import swaggerJsDoc from 'swagger-jsdoc';
 import cors from 'cors';
 import db from './models/index';
 import routes from './routes/index';
-import ApplicationError from './utils/ApplicationError';
+import ApplicationError from './utils/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
 
 const app = express();
