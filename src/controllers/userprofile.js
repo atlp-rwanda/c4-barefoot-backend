@@ -76,7 +76,20 @@ const updateUserProfile = async (req, res, next) => {
     if (record.dataValues.id !== userId) throw new UsersError('owner of profile does not match signed in user', 401);
 >>>>>>> added routes and refactored class of errors
     if (req.body.password) req.body.password = await bcrypt.hash(req.body.password, 10);
+<<<<<<< HEAD
     UserServices.updateUser(req.body, email);
+=======
+    const data = {
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      username: req.body.username,
+      password: req.body.password,
+      address: req.body.address,
+      language: req.body.language,
+      profile_picture: req.body.profile_picture
+    };
+    await UserServices.updateUser(data, userId);
+>>>>>>> refactoring controllers and middlewares
     res.status(200).json({ status: 200, message: 'successfully updated user profile' });
   } catch (err) { next(err); }
 };

@@ -1,7 +1,10 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import VerifyTokenError from '../utils/verifytokenerror';
+<<<<<<< HEAD
 import UsersError from '../utils/userserror';
+=======
+>>>>>>> refactoring controllers and middlewares
 import UserServices from '../services/user.service';
 // verify user token
 const verifyUserToken = async (req, res, next) => {
@@ -14,10 +17,17 @@ const verifyUserToken = async (req, res, next) => {
     const verify = jwt.verify(token, process.env.TOKEN_SECRET);
     if (!verify) throw new VerifyTokenError('token cant be verified', 401);
     const decodedToken = jwt.decode(token);
+<<<<<<< HEAD
     const record = await UserServices.getUserByEmail(decodedToken.data);
     if (!record) throw new UsersError('data in token is invalid', 400);
     res.locals.token = await decodedToken.data;
     if (!res.locals.token) throw new VerifyTokenError('server cant assign token', 500);
+=======
+    const record = await UserServices.getUserById(decodedToken.data);
+    if (!record) throw new VerifyTokenError('data in token is invalid', 401);
+    res.locals = token;
+    if (res.locals !== token) throw new VerifyTokenError('server cant assign token', 500);
+>>>>>>> refactoring controllers and middlewares
     next();
   } catch (err) {
     next(err);
