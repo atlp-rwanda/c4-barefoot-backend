@@ -4,6 +4,8 @@ import signUpError from '../utils/signUpError';
 const schema = Joi.object({
   first_name: Joi.string().required().regex(/^[A-Za-z]+$/),
   last_name: Joi.string().required().regex(/^[A-Za-z]+$/),
+  username: Joi.string().required().min(5),
+  occupation: Joi.string().required().min(4),
   email: Joi.string().email().required(),
   username: Joi.string().required().min(5),
   password: Joi.string().required().min(8),

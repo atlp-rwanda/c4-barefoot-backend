@@ -29,6 +29,14 @@ class UserService {
   }
 
   /**
+  * @param {string} email add user email.
+  * @return {object} get user with provided Id
+  */
+  async getUserByEmail(email) {
+    return this.user.findOne({ where: { email } });
+  }
+
+  /**
   * @param {string} username add username.
   * @return {object} get user with provided Id
   */

@@ -7,24 +7,24 @@ import app from '../src/app';
 use(chaiHttp);
 const token = process.env.Test_Token_Secret;
 const data = {
-  first_name: 'Mugabo',
-  last_name: 'Deo',
-  username: 'mdeo123',
-  occupation: 'marketing',
-  password: 'password123',
+  first_name: 'TestName',
+  last_name: 'TestName',
+  username: 'TestName1212',
+  occupation: 'software development',
+  password: 'pa13332335',
   address: 'Kigali',
-  language: 'French',
-  profile_picture: 'hey.png'
+  language: 'English',
+  profile_picture: 'image.png'
 };
 const invalidData = {
-  first_name: 'Mugabo',
-  last_name: 'Deo',
-  username: 'mdeo123',
+  first_name: 'TestName',
+  last_name: 'TestName',
+  username: 'TestName1212',
   occupation: 'm',
-  password: 'pass',
+  password: 'pa13332335',
   address: 'Kigali',
-  language: 'French',
-  profile_picture: 'hey.png'
+  language: 'English',
+  profile_picture: 'image.png'
 };
 describe('testing getting a single user profile end point', () => {
   it('when a valid token is provided but first_name params is not in DB it returns status of 404', async () => {
@@ -32,7 +32,7 @@ describe('testing getting a single user profile end point', () => {
     expect(res).to.have.status(400);
   });
   it('when a valid token is provided  and username params is in DB it returns status of 200', async () => {
-    const res = await request(app).get('/api/v1/mdeo123').set('Authorization', `Bearer ${token}`);
+    const res = await request(app).get('/api/v1/TestName1212').set('Authorization', `Bearer ${token}`);
     // console.log(res.body);
     expect(res).to.have.status(200);
   });
