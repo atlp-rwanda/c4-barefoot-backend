@@ -61,11 +61,6 @@ module.exports = (sequelize, DataTypes) => {
   User.beforeBulkUpdate(({ attributes: user }) => {
     if (user.password) { user.password = hashPassword(user.password); }
   });
-<<<<<<< HEAD
   sequelizePaginate.paginate(User);
   return User;
-=======
-  sequelizePaginate.paginate(user);
-  return user;
->>>>>>> separated data and business logic and added get all users endpoint
 };
