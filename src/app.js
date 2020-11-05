@@ -24,14 +24,10 @@ app.use('/api/v1/', routes);
 const swaggerDocs = swaggerJsDoc(swaggerConfigs);
 app.use('/documentation', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
+// catch all 404 errors
 app.all('*', (req, res, next) => {
   const err = new ApplicationError('Page Requested not found', 404);
   next(err);
-});
-
-// catch all 404 errors
-app.use(async (res) => {
-  res.status(404).json({ message: 'Unable to find the requested resource' });
 });
 
 // db connection check
