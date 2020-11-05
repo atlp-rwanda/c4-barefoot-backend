@@ -37,9 +37,6 @@ app.all('*', (req, res, next) => {
 });
 
 // db connection check
-const port = process.env.PORT || 3000;
-
-// db connection check
 const { sequelize } = db;
 sequelize.authenticate()
   .then(() => console.log('Database connected...'))
