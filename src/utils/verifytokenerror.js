@@ -3,7 +3,7 @@ import ApplicationError from './applicationError';
 
 class VerifyTokenError extends ApplicationError {
   constructor(message) {
-    super(message, 404);
+    super(message, 401);
   }
 }
 
