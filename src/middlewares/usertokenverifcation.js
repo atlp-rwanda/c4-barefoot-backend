@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import VerifyTokenError from '../utils/verifytokenerror';
+import UsersError from '../utils/userserror';
 import UserServices from '../services/user.service';
 // verify user token
 const verifyUserToken = async (req, res, next) => {
@@ -14,9 +15,9 @@ const verifyUserToken = async (req, res, next) => {
     if (!verify) throw new VerifyTokenError('token cant be verified', 401);
     const decodedToken = jwt.decode(token);
     const record = await UserServices.getUserById(decodedToken.data);
-    if (!record) throw new VerifyTokenError('data in token is invalid', 401);
-    res.locals = token;
-    if (res.locals !== token) throw new VerifyTokenError('server cant assign token', 500);
+    if (!record) throw new UsersError('data in token is invalid', 400);
+    res.locals.token = await decodedToken.data;
+    if (!res.locals.token) throw new VerifyTokenError('server cant assign token', 500);
     next();
   } catch (err) {
     next(err);
