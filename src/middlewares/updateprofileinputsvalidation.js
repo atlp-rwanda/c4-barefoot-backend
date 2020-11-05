@@ -12,9 +12,11 @@ const updateProfileInputsValidation = async (req, res, next) => {
     language: Joi.string().required().regex(/^[A-Za-z]+$/),
     profile_picture: Joi.string().required()
   });
-  const { error } = schema.validate(req.body);
-  if (error) throw new UsersError(error.details[0].message, 400);
-  next();
+  try {
+    const { error } = schema.validate(req.body);
+    if (error) throw new UsersError(error.details[0].message, 400);
+    next();
+  } catch (err) { next(err); }
 };
 
 export default updateProfileInputsValidation;
