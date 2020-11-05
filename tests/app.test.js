@@ -18,9 +18,9 @@ describe('testing welcome router', () => {
     const res = await request(app).get('/bop');
     expect(res).to.have.status(404);
     expect(res.type).to.equal('application/json');
-    expect(res.body).to.have.property('Error');
-    expect(res.body).to.have.property('Status');
-    expect(res.body.Error).to.equal('Page Requested not found');
-    expect(res.body.Status).to.equal(404);
+    expect(res.body).to.have.property('error');
+    expect(res.body).to.have.property('status');
+    expect(res.body.error).to.equal('Page Requested not found');
+    expect(res.body.status).to.equal(404);
   });
 });
