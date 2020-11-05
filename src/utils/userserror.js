@@ -3,7 +3,7 @@ import ApplicationError from './applicationError';
 
 class UsersError extends ApplicationError {
   constructor(message) {
-    super(message, 404);
+    super(message, 400);
   }
 }
 
