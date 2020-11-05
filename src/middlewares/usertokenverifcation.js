@@ -14,7 +14,7 @@ const verifyUserToken = async (req, res, next) => {
     const verify = jwt.verify(token, process.env.TOKEN_SECRET);
     if (!verify) throw new VerifyTokenError('token cant be verified', 401);
     const decodedToken = jwt.decode(token);
-    const record = await UserServices.getUserById(decodedToken.data);
+    const record = await UserServices.getUserByEmail(decodedToken.data);
     if (!record) throw new UsersError('data in token is invalid', 400);
     res.locals.token = await decodedToken.data;
     if (!res.locals.token) throw new VerifyTokenError('server cant assign token', 500);

@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import ApplicationError from './ApplicationError';
+import ApplicationError from './applicationError';
 
 class signUpError extends ApplicationError {
   constructor(message) {
