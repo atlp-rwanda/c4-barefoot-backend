@@ -1,5 +1,5 @@
 import UserServices from '../services/user.service';
-import usersError from '../utils/userserror';
+import UsersError from '../utils/userserror';
 // get all users in database
 const getAllUsers = async (req, res, next) => {
   try {
@@ -11,7 +11,8 @@ const getAllUsers = async (req, res, next) => {
       order: [['username', 'DESC']],
     };
     const record = await UserServices.getAllUsers(options);
-    if (record.pages < page) throw new usersError(`only ${record.pages} pages available`, 404);
+    if (!record) throw new UsersError('no users found', 400);
+    if (record.pages !== 0 && record.pages < page) throw new UsersError(`only ${record.pages} pages available`, 400);
     res.status(200).json({ status: 200, message: 'successful got user profile', data: record });
   } catch (err) { next(err); }
 };
