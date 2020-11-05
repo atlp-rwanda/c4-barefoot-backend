@@ -6,6 +6,7 @@ const updateProfileInputsValidation = async (req, res, next) => {
     first_name: Joi.string().required().regex(/^[A-Za-z]+$/),
     last_name: Joi.string().required().regex(/^[A-Za-z]+$/),
     username: Joi.string().required().min(5),
+    occupation: Joi.string().required().min(4),
     password: Joi.string().required().min(8),
     address: Joi.string().required(),
     language: Joi.string().required().regex(/^[A-Za-z]+$/),
