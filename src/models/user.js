@@ -1,11 +1,6 @@
 import roles from '../utils/roles';
 import { hashPassword } from '../utils/auth';
-'use strict';
 import sequelizePaginate from 'sequelize-paginate';
-
-const {
-  Model
-} = require('sequelize');
 
 'use strict';
 module.exports = (sequelize, DataTypes) => {
