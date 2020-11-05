@@ -46,9 +46,18 @@ describe('Testing email verification', () => {
     expect(res.type).to.equal('application/json');
   }, 30000);
 
+<<<<<<< HEAD
   // it('Shouldn\'nt verify more than once', async () => {
   //   const res = await request(app).patch(`/api/v1/user/verification/?token=${validToken}`);
   //   expect(res).to.have.status(400);
   //   expect(res.type).to.equal('application/json');
   // }, 30000);
+=======
+  it('Shouldn\'nt verify more than once', async () => {
+    const res = await request(app).patch(`/api/v1/user/verification/${validToken}`);
+    expect(res).to.have.status(400);
+    expect(res.type).to.equal('application/json');
+    expect(res.body.error).to.equal('Account already verified');
+  });
+>>>>>>> refactored code to use email as data in token
 });
