@@ -13,7 +13,7 @@ describe('testing getting all users end point', async () => {
   });
   it('when a valid token is provided and page number is 0 or its null it returns status of 404', async () => {
     const res = await request(app).get('/api/v1/user/all-users?page=0').set('Authorization', `Bearer ${token}`);
-    expect(res).to.have.status(400);
+    expect(res).to.have.status(500);
   });
   it('when a valid token is provided and page number is correct it returns status of 200', async () => {
     const res = await request(app).get('/api/v1/user/all-users?page=1').set('Authorization', `Bearer ${token}`);
