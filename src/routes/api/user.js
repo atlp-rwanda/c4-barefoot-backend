@@ -48,6 +48,8 @@ const router = express.Router();
  *             type: string
  *           last_name:
  *             type: string
+ *           username:
+ *             type: string
  *           email:
  *             type: string
  *           password:
@@ -55,6 +57,8 @@ const router = express.Router();
  *           address:
  *             type: string
  *           language:
+ *             type: string
+ *           occupation:
  *             type: string
  *           profile_picture:
  *             type: string
@@ -143,40 +147,40 @@ router.patch('/verification/', verification);
 /**
  * @swagger
  *
- * /api/v1/user/verification/{token}:
- *    patch:
- *      summary: The email verification endpoint
- *      description: This endpoint is used when one is verifying their email.
- *      tags: [Email verification]
+ * /api/v1/user/all-users?{page}:
+ *    get:
+ *      summary: getting all users endpoint
+ *      description: This endpoint is used to retrieve all users in database.
+ *      tags: [get all users]
  *      parameters:
- *        - in: path
- *          name: token
+ *        - in: query
+ *          name: page
  *          required: true
  *          schema:
  *            type: string
  *      responses:
  *        "200":
- *          description: Email is verified successfully
+ *          description: users are retrivied successful
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/verified'
+ *                $ref: '#/components/schemas/all-users'
  *        "400":
- *          description: The account is already verified
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/alreadyVerified'
- *        "404":
- *          description: The account does not exist
+ *          description: no users are found
  *          content:
  *            application/json:
  *              schema:
  *                $ref: '#/components/schemas/notFound'
+ *        "500":
+ *          description: failed to retrieve users
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/failedToRetrieve'
  *
  * components:
  *    schemas:
- *      verified:
+ *      all-users:
  *        type: object
  *        properties:
  *          status:
@@ -187,33 +191,32 @@ router.patch('/verification/', verification);
  *            description: Success message
  *        example:
  *          status: 200
- *          Message: Email has been verified
- *      alreadyVerified:
- *        type: object
- *        properties:
- *          Status:
- *            type: integer
- *            description: The HTTP status code
- *          Error:
- *            type: string
- *            description: The error message
- *        example:
- *          Status: 400
- *          Error: Account already verified
+ *          Message: successful got all users
  *      notFound:
  *        type: object
  *        properties:
- *          Status:
+ *          status:
  *            type: integer
  *            description: The HTTP status code
- *          Error:
+ *          error:
  *            type: string
  *            description: The error message
  *        example:
- *          Status: 404
- *          Error: Account does not exist
+ *          status: 400
+ *          error: no users found
+ *      failedToRetrieve:
+ *        type: object
+ *        properties:
+ *          status:
+ *             type: intiger
+ *             description: the HTTp status code
+ *          error:
+ *             type: string
+ *             description: the Error message
+ *        example:
+ *           status: 500
+ *           error: failed to retrieve users
  */
-
 // ----------------- get all users ------------
 router.get('/all-users', verifyUserToken, getAllUsers);
 

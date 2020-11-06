@@ -5,7 +5,7 @@ import 'dotenv/config';
 import app from '../src/app';
 
 use(chaiHttp);
-const token = process.env.Test_Token_Secret;
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoicmVuZWRlb2x5bmRhQGdtYWlsLmNvbSIsImlhdCI6MTYwNDU5MjA0M30.X64jqDxrB2uWHIVRv6n4kn1mrpIHLByo8-sycJ8JBWY';
 describe('testing getting all users end point', async () => {
   it('when a valid token is provided and page number is bigger it returns status of 400', async () => {
     const res = await request(app).get('/api/v1/user/all-users?page=5').set('Authorization', `Bearer ${token}`);
