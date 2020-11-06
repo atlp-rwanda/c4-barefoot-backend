@@ -53,6 +53,8 @@ const router = express.Router();
  *             type: string
  *           last_name:
  *             type: string
+ *           username:
+ *             type: string
  *           email:
  *             type: string
  *           password:
@@ -60,6 +62,8 @@ const router = express.Router();
  *           address:
  *             type: string
  *           language:
+ *             type: string
+ *           occupation:
  *             type: string
  *           profile_picture:
  *             type: string

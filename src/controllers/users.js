@@ -7,13 +7,13 @@ const getAllUsers = async (req, res, next) => {
     const options = {
       attributes: ['id', 'username', 'address'],
       page, // Default 1
-      paginate: 2, // Default 25
+      paginate: 5, // Default 25
       order: [['username', 'DESC']],
     };
     const record = await UserServices.getAllUsers(options);
-    if (!record) throw new UsersError('no users', 400);
+    if (!record) throw new UsersError('no users found', 400);
     if (record.pages < page) throw new UsersError(`only ${record.pages} pages available`, 400);
-    res.status(200).json({ status: 200, message: 'successful got user profile', data: record });
+    res.status(200).json({ status: 200, message: 'successful got all users', data: record });
   } catch (err) { next(err); }
 };
 export default getAllUsers;
