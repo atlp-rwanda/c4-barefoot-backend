@@ -7,7 +7,7 @@
     "heroku-postbuild": "babel src -d build",
     "start": "cross-env NODE_ENV=production npm run migrate && node ./build/app.js",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/app.js",
-    "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit",
+    "test": "NODE_ENV=test npm run migrate && nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint . --fix",
     "createModel": "npx sequelize-cli model:generate ",
