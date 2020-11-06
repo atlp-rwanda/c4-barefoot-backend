@@ -1,4 +1,5 @@
-require('dotenv').config();
+require('@babel/register');
+require('dotenv').config({ path: '../.env' });
 
 module.exports = {
   development: {

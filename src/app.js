@@ -30,6 +30,11 @@ app.all('*', (req, res, next) => {
   next(err);
 });
 
+// catch all 404 errors
+app.use(async (res) => {
+  res.status(404).json({ message: 'Unable to find the requested resource' });
+});
+
 // db connection check
 const port = process.env.PORT || 3000;
 
