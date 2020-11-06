@@ -18,5 +18,4 @@ const updateProfileInputsValidation = async (req, res, next) => {
     next();
   } catch (err) { next(err); }
 };
-
 export default updateProfileInputsValidation;
