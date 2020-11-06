@@ -21,6 +21,8 @@ const invalidUser = {
   first_name: 'TestName',
   last_name: 'TestName',
   email: '123',
+  username: 'TestName1212',
+  occupation: 'TestName1212',
   password: 'pa13332335',
   address: 'Kigali',
   language: 'English',
@@ -35,6 +37,7 @@ describe('Testing signup route', () => {
 
   it('Should save a new user', async () => {
     const res = await request(app).post('/api/v1/user/signup').send(user);
+    console.log(res.body);
     expect(res).to.have.status(201);
     expect(res.type).to.equal('application/json');
     expect(res.body.Message).to.equal(`User ${user.first_name} has been created. Check email for verification`);
