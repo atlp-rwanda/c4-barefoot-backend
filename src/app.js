@@ -6,17 +6,14 @@ import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 import db from './models/index';
 import routes from './routes/index';
-import ApplicationError from './utils/applicationError';
+import ApplicationError from './utils/ApplicationError';
 import swaggerConfigs from './config/swaggerDoc';
 
 const app = express();
 app.use(cors());
-// app.use(express.json());
 app.use(cookieParser());
 
 const port = process.env.PORT || 3000;
-// routes
-// app.use('/', indexRoutes);
 
 // routes
 app.use(express.json());
@@ -36,16 +33,12 @@ app.all('*', (req, res, next) => {
   next(err);
 });
 
-// catch all 404 errors
-app.use(async (res) => {
-  res.status(404).json({ message: 'Unable to find the requested resource' });
-});
-
 // db connection check
 const { sequelize } = db;
 sequelize.authenticate()
   .then(() => console.log('Database connected...'))
   .catch((err) => console.log(`Error: ${err}`));
+
 app.use((err, req, res, next) => {
   const statusCode = err.status || 500;
   res.status(statusCode).json({ status: statusCode, error: err.message, stack: err.stack });
@@ -57,7 +50,7 @@ app.listen(port, () => {
 }).on('error', function (err) {
   if(err.errno === 'EADDRINUSE') {
       console.log(`----- Port ${port} is busy, trying with port ${port + 1} -----`);
-      listen(port + 1)
+      app.listen(port + 1)
   } else {
       console.log(err);
   }
