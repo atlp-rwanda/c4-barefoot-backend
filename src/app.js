@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 import db from './models/index';
 import routes from './routes/index';
-import ApplicationError from './utils/ApplicationError';
+import ApplicationError from './utils/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
 
 const app = express();
@@ -47,12 +47,12 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
   console.log(`CORS-enabled web server listening on port ${port}  ...`);
-}).on('error', function (err) {
-  if(err.errno === 'EADDRINUSE') {
-      console.log(`----- Port ${port} is busy, trying with port ${port + 1} -----`);
-      app.listen(port + 1)
+}).on('error', (err) => {
+  if (err.errno === 'EADDRINUSE') {
+    console.log(`----- Port ${port} is busy, trying with port ${port + 1} -----`);
+    app.listen(port + 1);
   } else {
-      console.log(err);
+    console.log(err);
   }
 });
 
