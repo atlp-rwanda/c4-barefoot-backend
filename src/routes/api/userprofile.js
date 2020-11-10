@@ -1,6 +1,6 @@
 import express from 'express';
 import { updateUserProfile, getUserProfile } from '../../controllers/userprofile';
-import verifyUserToken from '../../middlewares/usertokenverifcation';
+import verifyUserToken from '../../middlewares/usertokenverification';
 import updateProfileInputsValidation from '../../middlewares/updateprofileinputsvalidation';
 
 const router = express.Router();

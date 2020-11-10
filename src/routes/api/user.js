@@ -9,7 +9,7 @@ import login from '../../controllers/login';
 import logout from '../../controllers/logout';
 import refreshToken from '../../controllers/refreshToken';
 import getAllUsers from '../../controllers/users';
-import verifyUserToken from '../../middlewares/usertokenverifcation';
+import verifyUserToken from '../../middlewares/usertokenverification';
 
 const router = express.Router();
 
