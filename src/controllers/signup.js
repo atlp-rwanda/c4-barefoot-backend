@@ -17,7 +17,7 @@ const signup = async (req, res, next) => {
 
   // create the user
   try {
-    const createUser = await models.user.create(req.body);
+    const createUser = await models.User.create(req.body);
     next();
   } catch (error) {
     next(error);

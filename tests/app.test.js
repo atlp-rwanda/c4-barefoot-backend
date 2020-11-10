@@ -5,7 +5,7 @@ import app from '../src/app';
 use(chaiHttp);
 describe('testing welcome router', () => {
   it('Should get welcome message', async () => {
-    const res = await request(app).get('/api/v1/');
+    const res = await request(app).get('/api/v1');
     expect(res).to.have.status([200]);
     expect(res.type).to.equal('application/json');
     expect(res.body).to.have.property('message');
@@ -18,9 +18,9 @@ describe('testing welcome router', () => {
     const res = await request(app).get('/bop');
     expect(res).to.have.status(404);
     expect(res.type).to.equal('application/json');
-    expect(res.body).to.have.property('Error');
-    expect(res.body).to.have.property('Status');
-    expect(res.body.Error).to.equal('Page Requested not found');
-    expect(res.body.Status).to.equal(404);
+    expect(res.body).to.have.property('error');
+    expect(res.body).to.have.property('status');
+    expect(res.body.error).to.equal('Page Requested not found');
+    expect(res.body.status).to.equal(404);
   });
 });

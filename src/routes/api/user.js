@@ -3,6 +3,11 @@ import signup from '../../controllers/signup';
 import signupValidation from '../../middlewares/signupValidation';
 import sendVerificationEmail from '../../middlewares/sendEmail';
 import verification from '../../controllers/verification';
+import loginValidation from '../../middlewares/loginValidation';
+import logedIn from '../../helper/isLogedIn';
+import login from '../../controllers/login';
+import logout from '../../controllers/logout';
+import refreshToken from '../../controllers/refreshToken';
 
 const router = express.Router();
 
@@ -137,5 +142,107 @@ router.post('/signup', signupValidation, signup, sendVerificationEmail);
  */
 
 router.patch('/verification/', verification);
+/**
+ * @swagger
+ * /api/v1/user/login:
+ *   post:
+ *     tags:
+ *       - Login
+ *     summary: Route allow users to login with email and password
+ *     parameters:
+ *       - in: body
+ *         name: login
+ *         required: true
+ *         schema:
+ *           $ref: '#/components/schemas/user'
+ *     responses:
+ *       200:
+ *         description: success data
+ *         schema:
+ *           landing:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: integer
+ *               description: The http status code
+ *               example: 200
+ *             message:
+ *               type: string
+ *               description: Success message
+ *               example: Login successful
+ *             userToken:
+ *               type: string
+ *               description: token used to access for protected routes
+ *               example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzEsImZpcnN0X25hbWUiOiJBbWl
+ * components:
+ *   schemas:
+ *     user:
+ *       type: object
+ *       required:
+ *         - email
+ *         - password
+ *       properties:
+ *         email:
+ *           type: string
+ *         password:
+ *           type: string
+ */
+router.post('/login', loginValidation, login);
 
+/**
+ * @swagger
+ * /api/v1/user/logout:
+ *   post:
+ *     tags:
+ *       - Logout user
+ *     summary: Route allow users to regenerete access token
+ *     parameters:
+ *       - in: header
+ *         name: token
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: success data
+ *         schema:
+ *           refresh-token:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: integer
+ *               description: The http status code
+ *               example: 200
+ *             message:
+ *               type: string
+ *               description: success message
+ *               example: logout successful
+ */
+router.post('/logout', logedIn, logout);
+/**
+ * @swagger
+ * /api/v1/user/refresh-token:
+ *   post:
+ *     tags:
+ *       - Refresh token
+ *     summary: Route allow users to regenerete access token
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: success data
+ *         schema:
+ *           refresh-token:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: integer
+ *               description: The http status code
+ *               example: 200
+ *             userToken:
+ *               type: string
+ *               description: token used to access for protected routes
+ *               example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzEsImZpcnN0X25hbWUiOiJBbWl
+ */
+router.post('/refresh-token', refreshToken);
 export default router;
