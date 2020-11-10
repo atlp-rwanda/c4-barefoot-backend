@@ -31,6 +31,6 @@ const options = {
       bearerAuth: []
     }]
   },
-  apis: ['src/routes/api/*.js', 'src/routes/*.js']
+  apis: ['src/routes/api/*.js']
 };
 export default options;
