@@ -7,7 +7,7 @@ const schema = Joi.object({
   username: Joi.string().required().min(5),
   occupation: Joi.string().required().min(4),
   email: Joi.string().email().required(),
-  username: Joi.string().required().min(5),
+  bio: Joi.string().min(0).allow('').allow(null),
   password: Joi.string().required().min(8),
   address: Joi.string().required(),
   language: Joi.string().required().regex(/^[A-Za-z]+$/),
