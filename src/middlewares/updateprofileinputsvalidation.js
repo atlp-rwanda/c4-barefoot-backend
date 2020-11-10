@@ -3,15 +3,15 @@ import UsersError from '../utils/userserror';
 
 const updateProfileInputsValidation = async (req, res, next) => {
   const schema = Joi.object({
-    first_name: Joi.string().required().regex(/^[A-Za-z]+$/),
-    last_name: Joi.string().required().regex(/^[A-Za-z]+$/),
-    username: Joi.string().required().min(5),
-    occupation: Joi.string().required().min(4),
+    first_name: Joi.string().regex(/^[A-Za-z]+$/),
+    last_name: Joi.string().regex(/^[A-Za-z]+$/),
+    username: Joi.string().min(5),
+    occupation: Joi.string().min(4),
     bio: Joi.string().min(0).allow('').allow(null),
-    password: Joi.string().required().min(8),
-    address: Joi.string().required(),
-    language: Joi.string().required().regex(/^[A-Za-z]+$/),
-    profile_picture: Joi.string().required()
+    password: Joi.string().min(8),
+    address: Joi.string(),
+    language: Joi.string().regex(/^[A-Za-z]+$/),
+    profile_picture: Joi.string()
   });
   try {
     const { error } = schema.validate(req.body);
