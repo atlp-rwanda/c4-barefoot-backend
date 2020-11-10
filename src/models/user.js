@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     username: DataTypes.STRING,
+    occupation: DataTypes.STRING,
+    bio: { allowNull: true, type: DataTypes.STRING, defaultValue: null },
     verified: { type: DataTypes.BOOLEAN, defaultValue: false },
     user_role_id: { allowNull: true, type: DataTypes.UUID, defaultValue: roles.REQUESTER, },
     manager_id: { allowNull: true, type: DataTypes.UUID },
