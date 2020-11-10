@@ -7,7 +7,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
-
       first_name: {
         allowNull: false,
         type: Sequelize.STRING
@@ -29,6 +28,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
         unique: true
+      },
+      occupation: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       bio: {
         allowNull: true,
