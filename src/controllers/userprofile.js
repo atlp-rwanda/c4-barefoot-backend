@@ -1,7 +1,6 @@
-import bcrypt from 'bcrypt';
 import UserServices from '../services/user.service';
 import UsersError from '../utils/userserror';
-
+import { hashPassword } from '../utils/auth';
 // get a user profile with either Id or first_name
 const getUserProfile = async (req, res, next) => {
   try {
@@ -21,7 +20,7 @@ const updateUserProfile = async (req, res, next) => {
     const record = await UserServices.getUserByEmail(email);
     if (!record) throw new UsersError('user not found', 404);
     if (record.dataValues.email !== email) throw new UsersError('owner of profile does not match signed in user', 401);
-    if (req.body.password) req.body.password = await bcrypt.hash(req.body.password, 10);
+    if (req.body.password) req.body.password = hashPassword(req.body.password);
     UserServices.updateUser(req.body, email);
     res.status(200).json({ status: 200, message: 'successfully updated user profile' });
   } catch (err) { next(err); }
