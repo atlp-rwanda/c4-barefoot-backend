@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import UsersError from '../utils/userserror';
+import NotFoundRequestError from '../utils/notFoundRequestError';
 
 const updateProfileInputsValidation = async (req, res, next) => {
   const schema = Joi.object({
@@ -15,7 +15,7 @@ const updateProfileInputsValidation = async (req, res, next) => {
   });
   try {
     const { error } = schema.validate(req.body);
-    if (error) throw new UsersError(error.details[0].message, 400);
+    if (error) throw new NotFoundRequestError(error.details[0].message, 400);
     next();
   } catch (err) { next(err); }
 };
