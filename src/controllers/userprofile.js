@@ -2,7 +2,7 @@ import UserServices from '../services/user.service';
 import NotFoundRequestError from '../utils/notFoundRequestError';
 import ApplicationError from '../utils/applicationError';
 import BadRequestError from '../utils/badRequestError';
-import AuthorizationError from '../utils/authorizationerror';
+import AuthorizationError from '../utils/authorizationError';
 import { hashPassword } from '../utils/auth';
 
 // get a user profile with either Id or first_name

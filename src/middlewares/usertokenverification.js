@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import UserServices from '../services/user.service';
 import { verifyToken } from '../utils/auth';
-import AuthorizationError from '../utils/authorizationerror';
+import AuthorizationError from '../utils/authorizationError';
 import BadRequestError from '../utils/badRequestError';
 import ApplicationError from '../utils/applicationError';
 
