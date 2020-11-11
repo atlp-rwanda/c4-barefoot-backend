@@ -23,6 +23,8 @@ const router = express.Router();
  *          description: user profile is successful updated
  *        "400":
  *          description: failed to update
+ *        "404":
+ *          description: provided data is not valid
  * components:
  *    schemas:
  *      updateProfile:
@@ -40,7 +42,7 @@ const router = express.Router();
  *              type: string
  *          last_name:
  *              type: string
- *          passowrd:
+ *          password:
  *              type: string
  *          username:
  *              type: string
@@ -78,7 +80,7 @@ router.patch('/update-profile', verifyUserToken, updateProfileInputsValidation, 
  *            application/json:
  *              schema:
  *                $ref: '#/components/schemas/userProfile'
- *        "400":
+ *        "404":
  *          description: no user found
  *          content:
  *            application/json:

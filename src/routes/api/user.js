@@ -254,40 +254,46 @@ router.post('/refresh-token', refreshToken);
 /**
  * @swagger
  *
- * /api/v1/user/verification/{token}:
- *    patch:
- *      summary: The email verification endpoint
- *      description: This endpoint is used when one is verifying their email.
- *      tags: [Email verification]
+ * /api/v1/user/all-users:
+ *    get:
+ *      summary: get all users
+ *      description: This endpoint is used to get all users.
+ *      tags: [get all users]
  *      parameters:
- *        - in: path
- *          name: token
+ *        - in: query
+ *          name: page
  *          required: true
  *          schema:
  *            type: string
  *      responses:
  *        "200":
- *          description: Email is verified successfully
+ *          description: successful got all users
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/verified'
+ *                $ref: '#/components/schemas/success'
  *        "400":
- *          description: The account is already verified
+ *          description: no user found
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/alreadyVerified'
+ *                $ref: '#/components/schemas/noUser'
  *        "404":
- *          description: The account does not exist
+ *          description: number of pages provided are greater than pages available
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/notFound'
+ *                $ref: '#/components/schemas/invalidPage'
+ *        "500":
+ *          description: OFFSET must not be negative
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/offsetPage'
  *
  * components:
  *    schemas:
- *      verified:
+ *      success:
  *        type: object
  *        properties:
  *          status:
@@ -298,8 +304,8 @@ router.post('/refresh-token', refreshToken);
  *            description: Success message
  *        example:
  *          status: 200
- *          Message: Email has been verified
- *      alreadyVerified:
+ *          Message: successful got all users
+ *      noUser:
  *        type: object
  *        properties:
  *          Status:
@@ -310,8 +316,8 @@ router.post('/refresh-token', refreshToken);
  *            description: The error message
  *        example:
  *          Status: 400
- *          Error: Account already verified
- *      notFound:
+ *          Error: no user found
+ *      invalidPage:
  *        type: object
  *        properties:
  *          Status:
@@ -322,7 +328,19 @@ router.post('/refresh-token', refreshToken);
  *            description: The error message
  *        example:
  *          Status: 404
- *          Error: Account does not exist
+ *          Error: number of pages provided are greater than pages available
+ *      offsetPage:
+ *        type: object
+ *        properties:
+ *          Status:
+ *            type: integer
+ *            description: The HTTP status code
+ *          Error:
+ *            type: string
+ *            description: The error message
+ *        example:
+ *          Status: 500
+ *          Error: page should be both positive and non zero
  */
 router.get('/all-users', verifyUserToken, getAllUsers);
 export default router;
