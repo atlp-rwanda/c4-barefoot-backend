@@ -54,8 +54,8 @@ const router = express.Router();
  *              type: string
  */
 
-// ------------------ get user profile -----------
-router.get('/:username', verifyUserToken, getUserProfile);
+// ------------------ update user profile --------
+router.patch('/update-profile', verifyUserToken, updateProfileInputsValidation, updateUserProfile);
 
 /**
  * @swagger
@@ -108,10 +108,11 @@ router.get('/:username', verifyUserToken, getUserProfile);
  *            type: string
  *            description: The error message
  *        example:
- *          status: 400
+ *          status: 404
  *          message: user not found
  */
-// ------------------ update user profile --------
-router.patch('/update-profile', verifyUserToken, updateProfileInputsValidation, updateUserProfile);
+
+// ------------------ get user profile -----------
+router.get('/:username', verifyUserToken, getUserProfile);
 
 export default router;

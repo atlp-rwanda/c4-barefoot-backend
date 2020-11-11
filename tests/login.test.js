@@ -2,8 +2,7 @@ import { expect, request, use } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/app';
 import 'dotenv/config';
-import { userToken, email, password } from './dummyData';
-
+import { userToken } from './dummyData';
 
 use(chaiHttp);
 describe('authentication', () => {
@@ -24,7 +23,8 @@ describe('authentication', () => {
     expect(res.body.error).to.equal('You don\'t have an account with this email: habajeun@gmail.com');
   });
   it('it should log user in', async () => {
-    const res = await request(app).post('/api/v1/user/login').send({ email, password });
+    const res = await request(app).post('/api/v1/user/login').send({ email: 'superadmin@gmail.com', password: 'Superadmin' });
+    console.log(res.body);
     expect(res).to.have.status(200);
     expect(res.body).to.have.property('message');
     expect(res.body.message).to.equal('login successful');

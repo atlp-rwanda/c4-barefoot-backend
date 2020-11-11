@@ -1,5 +1,4 @@
 // Signup page controller
-import bcrypt from 'bcrypt';
 import models from '../models';
 import signUpError from '../utils/signUpError';
 import isUserExist from '../services/findUser';

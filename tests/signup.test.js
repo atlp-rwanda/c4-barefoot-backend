@@ -1,20 +1,14 @@
 import { expect, request, use } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/app';
-import models from '../src/models';
 import {
   validUser, invalidUser, validToken, invalidToken
 } from './dummyData';
 
 use(chaiHttp);
 describe('Testing signup route', () => {
-  models.User.destroy({
-    where: {},
-    truncate: true
-  });
   it('Should save a new user', async () => {
     const res = await request(app).post('/api/v1/user/signup').send(validUser);
-    console.log(res.body);
     expect(res).to.have.status(201);
     expect(res.type).to.equal('application/json');
   });

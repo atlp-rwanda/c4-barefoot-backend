@@ -1,5 +1,5 @@
 import { valid } from 'joi';
-import { generateToken, hashPassword } from '../src/utils/auth';
+import { generateToken } from '../src/utils/auth';
 // signup data
 
 export const validUser = {
@@ -8,7 +8,7 @@ export const validUser = {
   username: 'TestAdmin',
   occupation: 'software development',
   email: 'renedeolynda@gmail.com',
-  password: hashPassword('pa13332335'),
+  password: 'pa13332335',
   address: 'Kigali',
   language: 'English',
   profile_picture: 'image.png'
