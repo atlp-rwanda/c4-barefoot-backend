@@ -13,7 +13,7 @@ const getAllUsers = async (req, res, next) => {
     };
     const record = await UserServices.getAllUsers(options);
     if (!record) throw new NotFoundRequestError('no users found', 400);
-    if (record.pages < page) throw new NotFoundRequestError(`only ${record.pages} pages available`, 400);
+    if (record.pages < page) throw new NotFoundRequestError(`only ${record.pages} pages available`, 404);
     res.status(200).json({ status: 200, message: 'successful got all users', data: record });
   } catch (err) { next(err); }
 };
