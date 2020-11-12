@@ -7,6 +7,7 @@
     "heroku-postbuild": "babel src -d build",
     "start": "cross-env NODE_ENV=production npm run migrate && node ./build/app.js",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/app.js",
+    "testLocal": "cross-env NODE_ENV=development nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
     "db:setup": "cross-env NODE_ENV=test sequelize db:migrate:undo:all && cross-env NODE_ENV=test sequelize db:migrate && cross-env NODE_ENV=test npm run seed",
     "test": "npm run db:setup && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
