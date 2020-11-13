@@ -6,9 +6,9 @@
   "scripts": {
     "heroku-postbuild": "babel src -d build",
     "start": "cross-env NODE_ENV=production npm run migrate && node ./build/app.js",
-    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/app.js",
     "testLocal": "cross-env NODE_ENV=development nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
     "db:setup": "cross-env NODE_ENV=test sequelize db:migrate:undo:all && cross-env NODE_ENV=test sequelize db:migrate && cross-env NODE_ENV=test npm run seed",
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/app.js",
     "test": "npm run db:setup && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint . --fix",
@@ -45,9 +45,10 @@
     "pg": "^8.4.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.3.5",
-    "sequelize-cli": "^6.2.0",
     "swagger-jsdoc": "^5.0.0",
-    "swagger-ui-express": "^4.1.4"
+    "sequelize-paginate": "^1.1.6",
+    "swagger-ui-express": "^4.1.4",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",

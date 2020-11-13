@@ -1,10 +1,10 @@
 /* eslint-disable require-jsdoc */
 import ApplicationError from './applicationError';
 
-class NotFoundRequestError extends ApplicationError {
+class AuthorizationError extends ApplicationError {
   constructor(message) {
-    super(message, 404);
+    super(message, 401);
   }
 }
 
-export default NotFoundRequestError;
+export default AuthorizationError;

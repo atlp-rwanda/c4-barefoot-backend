@@ -1,5 +1,4 @@
 // Signup page controller
-import bcrypt from 'bcrypt';
 import models from '../models';
 import signUpError from '../utils/signUpError';
 import isUserExist from '../services/findUser';
@@ -12,9 +11,6 @@ const signup = async (req, res, next) => {
   if (userExist) {
     throw new signUpError('Account already exists', 400);
   }
-  // Hash password
-  req.body.password = await bcrypt.hash(req.body.password, 10);
-
   // create the user
   try {
     const createUser = await models.User.create(req.body);

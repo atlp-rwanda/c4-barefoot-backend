@@ -8,6 +8,8 @@ import logedIn from '../../helper/isLogedIn';
 import login from '../../controllers/login';
 import logout from '../../controllers/logout';
 import refreshToken from '../../controllers/refreshToken';
+import getAllUsers from '../../controllers/users';
+import verifyUserToken from '../../middlewares/usertokenverification';
 
 const router = express.Router();
 
@@ -51,6 +53,8 @@ const router = express.Router();
  *             type: string
  *           last_name:
  *             type: string
+ *           username:
+ *             type: string
  *           email:
  *             type: string
  *           password:
@@ -58,6 +62,8 @@ const router = express.Router();
  *           address:
  *             type: string
  *           language:
+ *             type: string
+ *           occupation:
  *             type: string
  *           profile_picture:
  *             type: string
@@ -245,4 +251,96 @@ router.post('/logout', logedIn, logout);
  *               example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzEsImZpcnN0X25hbWUiOiJBbWl
  */
 router.post('/refresh-token', refreshToken);
+/**
+ * @swagger
+ *
+ * /api/v1/user/all-users:
+ *    get:
+ *      summary: get all users
+ *      description: This endpoint is used to get all users.
+ *      tags: [get all users]
+ *      parameters:
+ *        - in: query
+ *          name: page
+ *          required: true
+ *          schema:
+ *            type: string
+ *      responses:
+ *        "200":
+ *          description: successful got all users
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/success'
+ *        "400":
+ *          description: no user found
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/noUser'
+ *        "404":
+ *          description: number of pages provided are greater than pages available
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/invalidPage'
+ *        "500":
+ *          description: OFFSET must not be negative
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/offsetPage'
+ *
+ * components:
+ *    schemas:
+ *      success:
+ *        type: object
+ *        properties:
+ *          status:
+ *            type: integer
+ *            description: The HTTP status code
+ *          Message:
+ *            type: string
+ *            description: Success message
+ *        example:
+ *          status: 200
+ *          Message: successful got all users
+ *      noUser:
+ *        type: object
+ *        properties:
+ *          Status:
+ *            type: integer
+ *            description: The HTTP status code
+ *          Error:
+ *            type: string
+ *            description: The error message
+ *        example:
+ *          Status: 400
+ *          Error: no user found
+ *      invalidPage:
+ *        type: object
+ *        properties:
+ *          Status:
+ *            type: integer
+ *            description: The HTTP status code
+ *          Error:
+ *            type: string
+ *            description: The error message
+ *        example:
+ *          Status: 404
+ *          Error: number of pages provided are greater than pages available
+ *      offsetPage:
+ *        type: object
+ *        properties:
+ *          Status:
+ *            type: integer
+ *            description: The HTTP status code
+ *          Error:
+ *            type: string
+ *            description: The error message
+ *        example:
+ *          Status: 500
+ *          Error: page should be both positive and non zero
+ */
+router.get('/all-users', verifyUserToken, getAllUsers);
 export default router;

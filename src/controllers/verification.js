@@ -2,7 +2,7 @@
 import jwt from 'jsonwebtoken';
 import models from '../models';
 import 'dotenv/config';
-import signUpError from '../utils/ApplicationError';
+import signUpError from '../utils/applicationError';
 import isUserExist from '../services/findUser';
 
 const verification = async (req, res, next) => {
@@ -12,10 +12,10 @@ const verification = async (req, res, next) => {
       if (!record) {
         throw new signUpError('Account does not exist', 404);
       }
-  console.log(record.verified);
-    if (record.verified === false) {
+      console.log(record.verified);
+      if (record.verified === false) {
         models.User.update({ verified: true }, { where: { email: user } });
-        return res.status(200).json({ Status: 200, Message: 'Email has been verified' });
+        return res.status(200).json({ status: 200, message: 'Email has been verified' });
       }
       throw new signUpError('Account already verified', 400);
     } catch (error) {
