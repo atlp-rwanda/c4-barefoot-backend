@@ -1,3 +1,5 @@
+import roles from '../utils/roles';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Users', {
@@ -55,6 +57,7 @@ module.exports = {
       user_role_id: {
         allowNull: true,
         type: Sequelize.UUID,
+        defaultValue: roles.REQUESTER,
         references: {
           model: 'Roles',
           key: 'id',
