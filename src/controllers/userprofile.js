@@ -19,12 +19,12 @@ const getUserProfile = async (req, res, next) => {
 const updateUserProfile = async (req, res, next) => {
   try {
     if (!res.locals.token) throw new ApplicationError('unable to obtain a payload in token', 500);
-    const email = res.locals.token;
-    const record = await UserServices.getUserByEmail(email);
+    const username = res.locals.token;
+    const record = await UserServices.getUserByUserName(username);
     if (!record) throw new NotFoundRequestError('user not found', 404);
-    if (record.dataValues.email !== email) throw new AuthorizationError('owner of profile does not match signed in user', 401);
-    UserServices.updateUser(req.body, email);
-    res.status(200).json({ status: 200, message: 'successfully updated user profile' });
+    if (record.dataValues.username !== username) throw new AuthorizationError('owner of profile does not match signed in user', 401);
+    UserServices.updateUserByUsername(req.body, username);
+    res.status(200).json({ status: 200, message: 'successfully updated your profile' });
   } catch (err) { next(err); }
 };
 export { getUserProfile, updateUserProfile };

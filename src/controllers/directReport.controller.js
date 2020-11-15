@@ -2,6 +2,7 @@ import db from '../models'
 import { findTravelRequest } from '../services/travelRequestSearch';
 import { getDataFromToken } from '../helper/tokenToData';
 import roles from '../utils/roles';
+import { decode } from 'jsonwebtoken';
 
 export const getDirectReport = async (req, res, next) => {
     const decoded = await getDataFromToken(req, res, next)

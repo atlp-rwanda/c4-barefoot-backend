@@ -15,9 +15,9 @@ const verifyUserToken = async (req, res, next) => {
     if (!token) throw new AuthorizationError('No token found', 401);
     const decodedToken = await verifyToken(token);
     if (!decodedToken) throw new AuthorizationError('token can not be decoded', 401);
-    const record = await UserServices.getUserByEmail(decodedToken.user);
+    const record = await UserServices.getUserByUserName(decodedToken.username);
     if (!record) throw new BadRequestError('data in token is invalid', 400);
-    res.locals.token = await decodedToken.user;
+    res.locals.token = await decodedToken.username;
     if (!res.locals.token) throw new ApplicationError('server cant assign token', 500);
     next();
   } catch (err) {

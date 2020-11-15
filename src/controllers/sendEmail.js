@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
-import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import 'express-async-errors';
+import { generateToken } from '../utils/auth';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -20,8 +20,8 @@ if (process.env.NODE_ENV === 'development') {
   link = process.env.PRODUCTION_LINK;
 }
 const sendVerificationEmail = async (req, res, next) => {
-  const { first_name, email } = req.body;
-  const accessToken = jwt.sign({ user: email }, process.env.TOKEN_SECRET);
+  const { first_name, username } = req.body;
+  const accessToken = generateToken({ username });
   const mailOptions = {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: email,

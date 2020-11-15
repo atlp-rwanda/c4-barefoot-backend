@@ -1,5 +1,6 @@
 import { valid } from 'joi';
 import { generateToken } from '../src/utils/auth';
+import roles from '../src/utils/roles';
 // signup data
 
 export const validUser = {
@@ -46,7 +47,7 @@ export const invalidData = {
   language: 'English',
   profile_picture: 'image.png'
 };
-const payload = { user: validUser.email };
+const payload = { username: validUser.username, user_role_id: roles.REQUESTER };
 
 export const validToken = generateToken(payload);
 

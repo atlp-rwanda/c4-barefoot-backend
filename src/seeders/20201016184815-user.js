@@ -17,6 +17,20 @@ export default {
       user_role_id: roles.MANAGER,
     },
     {
+      id: 'a9610cf3-4056-41dd-92ca-463088e23d07',
+      first_name: 'Manager',
+      last_name: 'Manager',
+      username: 'With_LineManager',
+      occupation: 'manager_occupation',
+      address: 'Kigali',
+      language: 'English',
+      email: 'With_LineManager@gmail.com',
+      password: hashPassword('With_LineManager'),
+      verified: true,
+      user_role_id: roles.MANAGER,
+      manager_id: 'fb94de4d-47ff-4079-89e8-b0186c0a3be8'
+    },
+    {
       id: '122a0d86-8b78-4bb8-b28f-8e5f7811c456',
       first_name: 'SUper',
       last_name: 'Admin',
