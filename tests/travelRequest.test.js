@@ -22,22 +22,22 @@ describe('Travel Requests', () => {
       }
     ]
   };
-  // it("Should not make travel request if not logged in", async ()=>{
-  //     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3RfbmFtZSI6Ik0iLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOiJqYWNrc3dhbHRlcjdAZ21haWwuY29tIiwiYWRkcmVzcyI6IktpZ2FsaSIsImxhbmd1YWdlIjoiS2lueWFyd2FuZGEiLCJwcm9maWxlX3BpY3R1cmUiOiJtZS5qcGciLCJpYXQiOjE2MDM4OTg0NDMsImV4cCI6MTYwMzkwNTY0M30.RoVwDUPXmnC9O9CCeexBeNhVbSiFobmXXXCm1tbTPM8"
-  //     const res = await request(app)
-  //     .get("/api/v1/requests/direct-reports/1")
-  //     // .set("Authorization", token)
-  //     expect(res).to.have.status(401)
-  //     expect(res.body).to.have.deep.property("message").equals("You are not loged in")
-  // })
-  // it("Should not make travel request if token has expired", async ()=>{
-  //     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3RfbmFtZSI6Ik0iLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOiJqYWNrc3dhbHRlcjdAZ21haWwuY29tIiwiYWRkcmVzcyI6IktpZ2FsaSIsImxhbmd1YWdlIjoiS2lueWFyd2FuZGEiLCJwcm9maWxlX3BpY3R1cmUiOiJtZS5qcGciLCJpYXQiOjE2MDM4OTg0NDMsImV4cCI6MTYwMzkwNTY0M30.RoVwDUPXmnC9O9CCeexBeNhVbSiFobmXXXCm1tbTPM8"
-  //     const res = await request(app)
-  //     .get("/api/v1/requests/direct-reports/1")
-  //     .set("Authorization", token)
-  //     expect(res).to.have.status(401)
-  //     expect(res.body).to.have.deep.property("message").equals("session has expired")
-  // })
+  it("Should not make travel request if not logged in", async ()=>{
+      // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3RfbmFtZSI6Ik0iLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOiJqYWNrc3dhbHRlcjdAZ21haWwuY29tIiwiYWRkcmVzcyI6IktpZ2FsaSIsImxhbmd1YWdlIjoiS2lueWFyd2FuZGEiLCJwcm9maWxlX3BpY3R1cmUiOiJtZS5qcGciLCJpYXQiOjE2MDM4OTg0NDMsImV4cCI6MTYwMzkwNTY0M30.RoVwDUPXmnC9O9CCeexBeNhVbSiFobmXXXCm1tbTPM8"
+      const res = await request(app)
+      .get("/api/v1/requests/request")
+      // .set("Authorization", token)
+      expect(res).to.have.status(401)
+      expect(res.body).to.have.deep.property("message").equals("You are not loged in")
+  })
+  it("Should not make travel request if token has expired", async ()=>{
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3RfbmFtZSI6Ik0iLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOiJqYWNrc3dhbHRlcjdAZ21haWwuY29tIiwiYWRkcmVzcyI6IktpZ2FsaSIsImxhbmd1YWdlIjoiS2lueWFyd2FuZGEiLCJwcm9maWxlX3BpY3R1cmUiOiJtZS5qcGciLCJpYXQiOjE2MDM4OTg0NDMsImV4cCI6MTYwMzkwNTY0M30.RoVwDUPXmnC9O9CCeexBeNhVbSiFobmXXXCm1tbTPM8"
+      const res = await request(app)
+      .get("/api/v1/requests/request")
+      .set("Authorization", token)
+      expect(res).to.have.status(401)
+      expect(res.body).to.have.deep.property("message").equals("session has expired, please login")
+  })
   it('Should make a travel request if you are logged in and have a manager', async () => {
     const User = await request(app).post('/api/v1/user/login').send(user);
     const res = await request(app)

@@ -1,4 +1,4 @@
-import { isAccommodationExist } from '../helper/isAccomodationExist';
+import isAccommodationExist  from '../helper/isAccomodationExist';
 import getDataFromToken from '../helper/tokenToData';
 import { createTravelRequest } from '../services/createTravelRequest';
 import dbDataNotFoundError from '../utils/Errors/notFoundRequestError';
@@ -16,6 +16,7 @@ const travelRequest = async (req, res, next) => {
       };
       let counter = req.body.trip.length;
       for (const records of req.body.trip) {
+        console.log(records)
         counter -= 1;
         const isAccommodationValid = await isAccommodationExist(records.accommodationId, next);
         if (!isAccommodationValid) {
