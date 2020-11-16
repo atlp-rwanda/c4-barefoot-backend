@@ -52,8 +52,8 @@ const payload = { username: validUser.username, user_role_id: roles.REQUESTER };
 export const validToken = generateToken(payload);
 
 export const invalidToken = `${validToken}234`;
-
-export const invalidDataToken = generateToken({ user: 'notFound@gmail.com' });
+export const validDataToken = generateToken({ username: 'With_LineManager', user_role_id: roles.MANAGER });
+export const invalidDataToken = generateToken({ username: 'fakeUser' });
 export const { email, password } = validUser;
 // Login data
 

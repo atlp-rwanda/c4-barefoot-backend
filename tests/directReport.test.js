@@ -14,7 +14,7 @@ describe("Travel Requests", ()=>{
         const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3RfbmFtZSI6Ik0iLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOiJqYWNrc3dhbHRlcjdAZ21haWwuY29tIiwiYWRkcmVzcyI6IktpZ2FsaSIsImxhbmd1YWdlIjoiS2lueWFyd2FuZGEiLCJwcm9maWxlX3BpY3R1cmUiOiJtZS5qcGciLCJpYXQiOjE2MDM4OTg0NDMsImV4cCI6MTYwMzkwNTY0M30.RoVwDUPXmnC9O9CCeexBeNhVbSiFobmXXXCm1tbTPM8"
         const res = await request(app)
         .get("/api/v1/directReports/")
-        .set("Authorization", token)
+        .set('Authorization', `Bearer ${token}`);
         expect(res).to.have.status(401)
         expect(res.body).to.have.deep.property("message").equals("session has expired, please login")
     })
@@ -22,8 +22,8 @@ describe("Travel Requests", ()=>{
         var User = await request(app).post("/api/v1/user/login").send(user)
         const res = await request(app)
         .get("/api/v1/directReports/")
-        .set("Authorization", User.body.data)
+        .set('Authorization', `Bearer ${User.body.data}`);
         expect(res).to.have.status(401)
-        expect(res.body).to.have.deep.property("message").equals("you are not an approved manager")
+        expect(res.body).to.have.deep.property("message").equals("you are not an approved manager");
     })
 })

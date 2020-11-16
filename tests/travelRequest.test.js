@@ -43,7 +43,7 @@ describe("Travel Requests", ()=>{
         var User = await request(app).post("/api/v1/user/login").send(user)
         const res = await request(app)
         .post("/api/v1/requests/request")
-        .set("Authorization", User.body.data)
+        .set('Authorization', `Bearer ${User.body.data}`)
         .send(tripRequest)
         expect(res).to.have.status(200)
         expect(res.body).to.have.deep.property("data")

@@ -30,7 +30,7 @@ describe("Travel Requests", ()=>{
         var User = await request(app).post("/api/v1/user/login").send(user)
         const res = await request(app)
         .get("/api/v1/requests")
-        .set("Authorization", User.body.data)
+        .set('Authorization', `Bearer ${User.body.data}`);
         expect(res).to.have.status(200)
         expect(res.body).to.be.an("array")
     })
@@ -38,7 +38,7 @@ describe("Travel Requests", ()=>{
         var User = await request(app).post("/api/v1/user/login").send(user)
         const res = await request(app)
         .get("/api/v1/requests/")
-        .set("Authorization", User.body.data)
+        .set('Authorization', `Bearer ${User.body.data}`)
         .query({requestId:"5"})
         expect(res).to.have.status(200)
         expect(res.body).to.be.an("array")
