@@ -1,5 +1,5 @@
 import { findTravelRequest } from '../services/travelRequestSearch';
-import { getDataFromToken } from '../helper/tokenToData';
+import getDataFromToken from '../helper/tokenToData';
 
 const getTravelRequest = async (req, res, next) => {
   const decoded = await getDataFromToken(req, res);
@@ -9,10 +9,11 @@ const getTravelRequest = async (req, res, next) => {
     const offset = req.query.from;
     const limit = req.query.to;
     const pagination = { offset, limit };
+    let query = '';
     if (id) { // get a specific travel request
-      var query = { userId: userid, travelId: id };
+      query = { userId: userid, travelId: id };
     } else { // get all travel request
-      var query = { userId: userid };
+      query = { userId: userid };
     }
     findTravelRequest(res, query, pagination, next);
   } catch (err) {

@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 import db from './models/index';
 import routes from './routes/index';
-import ApplicationError from './utils/applicationError';
+import ApplicationError from './utils/Errors/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
 
 const app = express();

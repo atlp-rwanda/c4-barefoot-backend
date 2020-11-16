@@ -1,8 +1,8 @@
-import UserServices from '../services/user.service';
-import NotFoundRequestError from '../utils/notFoundRequestError';
-import ApplicationError from '../utils/applicationError';
-import BadRequestError from '../utils/badRequestError';
-import AuthorizationError from '../utils/authorizationError';
+import UserServices from '../../services/user.service';
+import NotFoundRequestError from '../../utils/Errors/notFoundRequestError';
+import ApplicationError from '../../utils/Errors/applicationError';
+import BadRequestError from '../../utils/Errors/badRequestError';
+import AuthorizationError from '../../utils/Errors/authorizationError';
 
 // get a user profile with either Id or first_name
 const getUserProfile = async (req, res, next) => {

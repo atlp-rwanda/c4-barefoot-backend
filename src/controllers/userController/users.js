@@ -1,5 +1,5 @@
-import UserServices from '../services/user.service';
-import NotFoundRequestError from '../utils/notFoundRequestError';
+import UserServices from '../../services/user.service';
+import NotFoundRequestError from '../../utils/Errors/notFoundRequestError';
 
 // get all users in database
 const getAllUsers = async (req, res, next) => {

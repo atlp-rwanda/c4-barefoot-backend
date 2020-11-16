@@ -1,4 +1,3 @@
-import { valid } from 'joi';
 import { generateToken } from '../src/utils/auth';
 import roles from '../src/utils/roles';
 // signup data

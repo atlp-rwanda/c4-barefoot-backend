@@ -1,9 +1,9 @@
 import 'dotenv/config';
 import UserServices from '../services/user.service';
 import { verifyToken } from '../utils/auth';
-import AuthorizationError from '../utils/authorizationError';
-import BadRequestError from '../utils/badRequestError';
-import ApplicationError from '../utils/applicationError';
+import AuthorizationError from '../utils/Errors/authorizationError';
+import BadRequestError from '../utils/Errors/badRequestError';
+import ApplicationError from '../utils/Errors/applicationError';
 
 // verify user token
 const verifyUserToken = async (req, res, next) => {
@@ -24,5 +24,4 @@ const verifyUserToken = async (req, res, next) => {
     next(err);
   }
 };
-// eslint-disable-next-line import/prefer-default-export
 export default verifyUserToken;

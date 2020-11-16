@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import NotFoundRequestError from '../utils/notFoundRequestError';
+import NotFoundRequestError from '../utils/Errors/notFoundRequestError';
 
 const updateProfileInputsValidation = async (req, res, next) => {
   const schema = Joi.object({

@@ -2,9 +2,9 @@
 import jwt from 'jsonwebtoken';
 // import models from '../models';
 import 'dotenv/config';
-import signUpError from '../utils/applicationError';
+import signUpError from '../../utils/Errors/applicationError';
 // import isUserExist from '../services/findUser';
-import UserServices from '../services/user.service';
+import UserServices from '../../services/user.service';
 
 const verification = async (req, res, next) => {
   const updateUser = async (user) => {

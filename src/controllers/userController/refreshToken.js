@@ -1,7 +1,6 @@
-import findUser from '../services/findUser';
-import UserServices from '../services/user.service';
-import BadRequestError from '../utils/badRequestError';
-import { verifyToken, generateToken } from '../utils/auth';
+import UserServices from '../../services/user.service';
+import BadRequestError from '../../utils/Errors/badRequestError';
+import { verifyToken, generateToken } from '../../utils/auth';
 
 const refreshToken = async (req, res, next) => {
   try {

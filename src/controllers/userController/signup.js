@@ -1,7 +1,7 @@
 // Signup page controller
-import models from '../models';
-import signUpError from '../utils/signUpError';
-import isUserExist from '../services/findUser';
+import models from '../../models';
+import signUpError from '../../utils/Errors/badRequestError';
+import isUserExist from '../../services/findUser';
 import 'express-async-errors';
 
 const signup = async (req, res, next) => {

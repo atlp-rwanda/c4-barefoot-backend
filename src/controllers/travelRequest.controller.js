@@ -1,8 +1,8 @@
 import { isAccommodationExist } from '../helper/isAccomodationExist';
-import { getDataFromToken } from '../helper/tokenToData';
+import getDataFromToken from '../helper/tokenToData';
 import { createTravelRequest } from '../services/createTravelRequest';
-import dbDataNotFoundError from '../utils/dbDataNotFoundError';
-import BadRequestError from '../utils/badRequestError';
+import dbDataNotFoundError from '../utils/Errors/notFoundRequestError';
+import BadRequestError from '../utils/Errors/badRequestError';
 
 const travelRequest = async (req, res, next) => {
   const decoded = await getDataFromToken(req, res, next);
