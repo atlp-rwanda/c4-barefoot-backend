@@ -11,7 +11,7 @@ const schema = Joi.object({
   password: Joi.string().required().min(8),
   address: Joi.string().required(),
   language: Joi.string().required().regex(/^[A-Za-z]+$/),
-  profile_picture: Joi.string().required()
+  profile_picture: Joi.string()
 });
 
 export default (req, res, next) => {
