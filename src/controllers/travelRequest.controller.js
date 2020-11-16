@@ -1,6 +1,6 @@
-import { isAccommodationExist } from '../helper/isAccomodationExist';
+import isAccommodationExist from '../helper/isAccomodationExist';
 import getDataFromToken from '../helper/tokenToData';
-import { createTravelRequest } from '../services/createTravelRequest';
+import createTravelRequest from '../services/createTravelRequest';
 import dbDataNotFoundError from '../utils/Errors/notFoundRequestError';
 import BadRequestError from '../utils/Errors/badRequestError';
 
