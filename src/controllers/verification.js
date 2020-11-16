@@ -15,7 +15,8 @@ const verification = async (req, res, next) => {
       }
       console.log(record.verified);
       if (record.verified === false) {
-        UserServices.updateUserByUsername(user);
+        const data = { verified: true };
+        UserServices.updateUserByUsername(data, user);
         // models.User.update({ verified: true }, { where: { email: user } });
         return res.status(200).json({ status: 200, message: 'Email has been verified' });
       }
