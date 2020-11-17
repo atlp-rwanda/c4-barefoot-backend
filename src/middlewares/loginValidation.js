@@ -1,15 +1,15 @@
 import Joi from 'joi';
-import BadRequestError from '../utils/badRequestError';
+import BadRequestError from '../utils/Errors/badRequestError';
 
-export default function (req, res, next) {
-  const schema = Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().required().min(8)
-  });
+const schema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required().min(8)
+});
+
+export default (req, res, next) => {
   const { error } = schema.validate(req.body);
   if (error) {
-    throw new BadRequestError(error.details[0].message)
+    throw new BadRequestError(error.details[0].message);
   }
-  // return res.status(400).json({ error: error.details[0].message });
   next();
-}
+};

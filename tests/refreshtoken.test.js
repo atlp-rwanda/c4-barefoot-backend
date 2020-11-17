@@ -1,6 +1,5 @@
 import { expect, request, use } from 'chai';
 import chaiHttp from 'chai-http';
-import jwt from 'jsonwebtoken';
 import app from '../src/app';
 import 'dotenv/config';
 

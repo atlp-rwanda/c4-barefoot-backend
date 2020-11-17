@@ -1,9 +1,9 @@
 import 'dotenv/config';
 import UserServices from '../services/user.service';
 import { verifyToken } from '../utils/auth';
-import AuthorizationError from '../utils/authorizationError';
-import BadRequestError from '../utils/badRequestError';
-import ApplicationError from '../utils/applicationError';
+import AuthorizationError from '../utils/Errors/authorizationError';
+import BadRequestError from '../utils/Errors/badRequestError';
+import ApplicationError from '../utils/Errors/applicationError';
 
 // verify user token
 const verifyUserToken = async (req, res, next) => {
@@ -15,14 +15,13 @@ const verifyUserToken = async (req, res, next) => {
     if (!token) throw new AuthorizationError('No token found', 401);
     const decodedToken = await verifyToken(token);
     if (!decodedToken) throw new AuthorizationError('token can not be decoded', 401);
-    const record = await UserServices.getUserByEmail(decodedToken.user);
+    const record = await UserServices.getUserByUserName(decodedToken.username);
     if (!record) throw new BadRequestError('data in token is invalid', 400);
-    res.locals.token = await decodedToken.user;
+    res.locals.token = await decodedToken.username;
     if (!res.locals.token) throw new ApplicationError('server cant assign token', 500);
     next();
   } catch (err) {
     next(err);
   }
 };
-// eslint-disable-next-line import/prefer-default-export
 export default verifyUserToken;

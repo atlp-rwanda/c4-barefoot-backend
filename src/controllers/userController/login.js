@@ -1,9 +1,9 @@
 import 'express-async-errors';
-import isUserExist from '../services/findUser';
-import ApplicationError from '../utils/applicationError';
-import BadRequestError from '../utils/badRequestError';
-import NotFoundRequestError from '../utils/notFoundRequestError';
-import { comparePassword, generateToken } from '../utils/auth';
+import isUserExist from '../../services/findUser';
+import ApplicationError from '../../utils/Errors/applicationError';
+import BadRequestError from '../../utils/Errors/badRequestError';
+import NotFoundRequestError from '../../utils/Errors/notFoundRequestError';
+import { comparePassword, generateToken } from '../../utils/auth';
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -20,8 +20,8 @@ const login = async (req, res, next) => {
 
   try {
     const userData = {
-      id: isUser.id,
-      email: isUser.email
+      username: isUser.username,
+      user_role_id: isUser.user_role_id
     };
     const userToken = await generateToken(userData);
     // updating user refresh token in database

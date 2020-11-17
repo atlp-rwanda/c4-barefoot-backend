@@ -1,6 +1,6 @@
-import findUser from '../services/findUser';
-import BadRequestError from '../utils/badRequestError';
-import { verifyToken, generateToken } from '../utils/auth';
+import UserServices from '../../services/user.service';
+import BadRequestError from '../../utils/Errors/badRequestError';
+import { verifyToken, generateToken } from '../../utils/auth';
 
 const refreshToken = async (req, res, next) => {
   try {
@@ -14,10 +14,10 @@ const refreshToken = async (req, res, next) => {
     }
     const payload = await verifyToken(token);
     // check if user exist in databasa
-    const newUser = await findUser(payload.email);
+    const newUser = await UserServices.getUserByUserName(payload.username);
     const userData = {
-      id: newUser.id,
-      email: newUser.email
+      username: newUser.username,
+      user_role_id: newUser.user_role_id
     };
     if (!newUser) {
       throw new BadRequestError('no user found with this token', 400);

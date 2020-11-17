@@ -1,37 +1,36 @@
-import { isAccommodationExist } from '../helper/isAccomodationExist';
-import { getDataFromToken } from '../helper/tokenToData';
-import { createTravelRequest } from '../services/createTravelRequest';
-import dbDataNotFoundError from '../utils/dbDataNotFoundError';
+import isAccommodationExist  from '../helper/isAccomodationExist';
+import getDataFromToken from '../helper/tokenToData';
+import createTravelRequest from '../services/createTravelRequest';
+import dbDataNotFoundError from '../utils/Errors/notFoundRequestError';
+import BadRequestError from '../utils/Errors/badRequestError';
 
 const travelRequest = async (req, res, next) => {
-    const decoded = await getDataFromToken(req, res, next)
-    if(decoded.manager_id){
-        const request = {
-            managerId:decoded.manager_id,
-            userId:decoded.id,
-            createdAt:new Date(),
-            updatedAt: new Date(),
+  const decoded = await getDataFromToken(req, res, next);
+  try {
+    if (decoded.manager_id) {
+      const request = {
+        managerId: decoded.manager_id,
+        userId: decoded.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      let counter = req.body.trip.length;
+      for (const records of req.body.trip) {
+        console.log(records)
+        counter -= 1;
+        const isAccommodationValid = await isAccommodationExist(records.accommodationId, next);
+        if (!isAccommodationValid) {
+          throw new dbDataNotFoundError('Accommodation not found, try again');
+        } else if (counter == 0) {
+          createTravelRequest(req, res, request, next);
         }
-        var counter = req.body.trip.length
-        for(var records of req.body.trip){
-            counter -=1
-            const isAccommodationValid = await isAccommodationExist(records.accommodationId, next)
-            if(!isAccommodationValid){
-                throw new dbDataNotFoundError("Accommodation not found, try again")
-            }else if(counter == 0){
-                try{
-                    createTravelRequest(req, res, request, next)
-                }catch(err){
-                    next(err)
-                }
-            }
-        }
-    }else if(decoded.managerId == undefined){
-        console.log("session error")
-    }else{
-        res.json({message:"You need a Manager First."})
+      }
+    } else {
+      throw new BadRequestError('You need a Manager First.', 400); // added error handling
     }
-    
-}
+  } catch (err) {
+    next(err);
+  }
+};
 
-export default travelRequest
+export default travelRequest;

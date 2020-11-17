@@ -1,14 +1,13 @@
+import express from 'express';
+import isLogedIn from '../../helper/isLogedIn';
+import getDirectReport from '../../controllers/directReport.controller';
 
-import express from 'express'
-import isLogedIn from "../../helper/isLogedIn";
-import { getDirectReport } from "../../controllers/directReport.controller";
-
-const router = express.Router()
+const router = express.Router();
 
 // ----------------------- View direct report (Manager only) --------------------
 /**
  * @swagger
- * 
+ *
  * /api/v1/directReports:
  *    get:
  *      summary: A route used to get direct reports to the manager
@@ -21,7 +20,7 @@ const router = express.Router()
  *            application/json:
  *              schema:
  *                $ref: '#/components/schemas/directReports'
- * 
+ *
  * components:
  *    schemas:
  *      directReports:
@@ -36,7 +35,7 @@ const router = express.Router()
  *            items:
  *              type: object
  *              properties:
- *                 originCity: 
+ *                 originCity:
  *                   type: string
  *                 destination:
  *                   type: string
@@ -48,11 +47,11 @@ const router = express.Router()
  *                   type: integer
  *                 reason:
  *                   type: string
- *            example: 
+ *            example:
  *              [{"travelId":12,status: "pending", "accommodationId": 123, "reason":tripping, "trip":{"originCity":Kigali, "destination":Cairo, "tripDate":11/12/2020, "returnDate":11/12/2021, "accommodationId":1234567, "reason":tripping}}]
  */
 
-router.get('/', isLogedIn, getDirectReport) 
-router.get('/:travelId', isLogedIn, getDirectReport) // view direct reports
+router.get('/', isLogedIn, getDirectReport);
+router.get('/:travelId', isLogedIn, getDirectReport); // view direct reports
 
-export default router
+export default router;
