@@ -16,6 +16,9 @@ const getDataFromToken = async (req, res, next) => {
       return res.status(401).json({ message: 'session has expired, please login' });
     }
   }
+  else{
+    return res.status(404).json({ status: 404, message: 'No token found!'});
+  }
 };
 
 export default getDataFromToken;

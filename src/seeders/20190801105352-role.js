@@ -8,7 +8,7 @@ export default {
     },
     {
       id: roles.SUPER_ADMIN,
-      name: 'super-admin',
+      name: 'administrator',
     },
     {
       id: roles.MANAGER,

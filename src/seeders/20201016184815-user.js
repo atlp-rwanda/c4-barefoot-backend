@@ -62,7 +62,7 @@ export default {
       last_name: 'One',
       email: 'mj@gmail.com',
       password: hashPassword('manager1'),
-      verified: false,
+      verified: true,
       username: 'managerOne',
       occupation: 'manager_occupation',
       address: 'Kigali',

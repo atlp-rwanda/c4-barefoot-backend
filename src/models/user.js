@@ -28,14 +28,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 'https://www.cobdoglaps.sa.edu.au/wp-content/uploads/2017/11/placeholder-profile-sq.jpg'
     },
-    language: { type: DataTypes.STRING, allowNull: false, defaultValue: 'Eng' },
+    language: { type: DataTypes.STRING, allowNull: false, defaultValue: 'English' },
     address: { type: DataTypes.STRING, allowNull: false },
   }, {});
 
   User.associate = (models) => {
     User.hasOne(models.User, {
       foreignKey: 'manager_id',
-      as: 'manager',
+      as: 'line_manager',
+    });
+    User.belongsTo(models.Role,{
+      foreignKey: 'user_role_id',
+      as: 'user_role'
     });
 
     // user.hasMany(Travel_request, {

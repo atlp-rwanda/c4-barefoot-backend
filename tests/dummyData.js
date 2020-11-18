@@ -62,3 +62,47 @@ const loginUser = {
 };
 
 export const userToken = generateToken(loginUser);
+
+
+// super admin
+
+export const adminCredentials ={
+  email: 'superadmin@gmail.com',
+  password: 'Superadmin'
+} 
+// export const token = generateToken(adminCredentials);
+
+export const reqTest = {
+  "role":"test",
+  "description":"this is a test"
+};
+
+export const testPerm = { role:"test", permissions:{ "edit profile":0}};
+
+export const updateRole={
+  req:{
+    email:'manager_id@gmail.com',
+    role:'manager'
+  },
+  nonExistingUser:{
+    email:'notexist@gmail.com',
+    role: 'manager'
+  },
+  nonExistingRole:{
+    email:'manager_id@gmail.com',
+    role:'notExistRole'
+  }
+}
+
+export const line_manager = {
+  req: { email: "manager_id@gmail.com", manager_id:roles.LINE_MANAGER},
+  invalidManager: { email:"manager_id@gmail.com", manager_id: roles.MANAGER},
+  invalidUser: {email : "invalidUser@gmail.com", manager_id: roles.LINE_MANAGER},
+  invalidInput: {email:"invalidInput@gmail.com", manager_id: "123456"}
+}
+
+export const deleteReq ={
+  email: 'manager_id@gmail.com'
+}
+
+
