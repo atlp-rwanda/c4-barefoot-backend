@@ -22,7 +22,7 @@ describe('Travel Requests', () => {
     const res = await request(app)
       .get('/api/v1/directReports/')
       .set('Authorization', `Bearer ${User.body.data}`);
-    expect(res).to.have.status(401);
-    expect(res.body).to.have.deep.property('message').equals('you are not an approved manager');
+    expect(res).to.have.status(403);
+    expect(res.body).to.have.deep.property('error').equals(`You don't have permissions to [view direct reports travel requests]`);
   });
 });

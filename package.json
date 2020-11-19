@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Backend API for Barefoot Nomad ",
   "main": "app.js",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
     "heroku-postbuild": "babel src -d build",
     "start": "cross-env NODE_ENV=production npm run migrate && node ./build/app.js",
