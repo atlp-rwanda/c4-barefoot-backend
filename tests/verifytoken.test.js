@@ -9,15 +9,15 @@ use(chaiHttp);
 
 describe('testing of token verifcation middleware', () => {
   it('when no token provided it should throw 401 error', async () => {
-    const res = await request(app).get('/api/v1/TestName1212');
+    const res = await request(app).get('/api/v1/profile/TestName1212');
     expect(res).to.have.status(401);
   });
   it('when invalid token is provided it should throw 500 error', async () => {
-    const res = await request(app).get('/api/v1/TestName1212').set('Authorization', `Bearer ${invalidToken}`);
+    const res = await request(app).get('/api/v1/profile/TestName1212').set('Authorization', `Bearer ${invalidToken}`);
     expect(res).to.have.status(500);
   });
   it('when valid token is provided but data in token is invalid it should throw 400 error', async () => {
-    const res = await request(app).get('/api/v1/TestName1212').set('Authorization', `Bearer ${invalidDataToken}`);
+    const res = await request(app).get('/api/v1/profile/TestName1212').set('Authorization', `Bearer ${invalidDataToken}`);
     expect(res).to.have.status(400);
   });
 });

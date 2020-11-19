@@ -2,12 +2,13 @@ import express from 'express';
 import { updateUserProfile, getUserProfile } from '../../controllers/userController/userprofile';
 import verifyUserToken from '../../middlewares/usertokenverification';
 import updateProfileInputsValidation from '../../middlewares/updateprofileinputsvalidation';
+import permit from '../../middlewares/accessControl';
 
 const router = express.Router();
 /**
  * @swagger
  *
- * /api/v1/update-profile:
+ * /api/v1/profile/update-profile:
  *    patch:
  *      summary: update user profile end point
  *      description: This endpoint is used to update user profile.
@@ -57,12 +58,12 @@ const router = express.Router();
  */
 
 // ------------------ update user profile --------
-router.patch('/update-profile', verifyUserToken, updateProfileInputsValidation, updateUserProfile);
+router.patch('/update-profile', verifyUserToken, updateProfileInputsValidation, permit(["edit profile"]), updateUserProfile);
 
 /**
  * @swagger
  *
- * /api/v1/{username}:
+ * /api/v1/profile/{username}:
  *    get:
  *      summary: getting user profile end point
  *      description: This endpoint is used to retrieve user profile.

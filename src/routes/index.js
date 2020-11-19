@@ -17,6 +17,6 @@ routes.use('/directReports', directreportsRoutes);
 routes.use('/', landingPage);
 routes.use('/admin', permit(["all"]), adminRoutes);
 
-routes.use('/', userProfile);
+routes.use('/profile', userProfile);
 
 export default routes;

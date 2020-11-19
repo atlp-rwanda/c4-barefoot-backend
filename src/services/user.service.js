@@ -32,9 +32,13 @@ class UserService {
   * @param {string} username add username.
   * @return {object} get user with provided Id
   */
-  async getUserByUserName(username) {
-    return this.user.findOne({ where: { username } });
+ async getUserByUserName(username) {
+  const query= {
+    attributes:["id","first_name","last_name","username","bio","occupation","email","address","language","profile_picture","user_role_id","manager_id","verified","refreshtoken"],
+    where: { username: username }
   }
+  return this.user.findOne(query);
+}
 
   /**
   * @param {string} email add email.
