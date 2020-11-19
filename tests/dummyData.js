@@ -62,46 +62,108 @@ const loginUser = {
 
 export const userToken = generateToken(loginUser);
 
-
 // super admin
 
-export const adminCredentials ={
+export const adminCredentials = {
   email: 'superadmin@gmail.com',
   password: 'Superadmin'
-} 
+};
 // export const token = generateToken(adminCredentials);
 
 export const reqTest = {
-  "role":"test",
-  "description":"this is a test"
+  role: 'test',
+  description: 'this is a test'
 };
 
-export const testPerm = { role:"test", permissions:{ "edit profile":0}};
+export const testPerm = { role: 'test', permissions: { 'edit profile': 0 } };
 
-export const updateRole={
-  req:{
-    email:'manager_id@gmail.com',
-    role:'manager'
-  },
-  nonExistingUser:{
-    email:'notexist@gmail.com',
+export const updateRole = {
+  req: {
+    email: 'manager_id@gmail.com',
     role: 'manager'
   },
-  nonExistingRole:{
-    email:'manager_id@gmail.com',
-    role:'notExistRole'
+  nonExistingUser: {
+    email: 'notexist@gmail.com',
+    role: 'manager'
+  },
+  nonExistingRole: {
+    email: 'manager_id@gmail.com',
+    role: 'notExistRole'
   }
-}
+};
 
 export const line_manager = {
-  req: { email: "manager_id@gmail.com", manager_id:roles.LINE_MANAGER},
-  invalidManager: { email:"manager_id@gmail.com", manager_id: roles.MANAGER},
-  invalidUser: {email : "invalidUser@gmail.com", manager_id: roles.LINE_MANAGER},
-  invalidInput: {email:"invalidInput@gmail.com", manager_id: "123456"}
-}
+  req: { email: 'manager_id@gmail.com', manager_id: roles.LINE_MANAGER },
+  invalidManager: { email: 'manager_id@gmail.com', manager_id: roles.MANAGER },
+  invalidUser: { email: 'invalidUser@gmail.com', manager_id: roles.LINE_MANAGER },
+  invalidInput: { email: 'invalidInput@gmail.com', manager_id: '123456' }
+};
 
-export const deleteReq ={
+export const deleteReq = {
   email: 'manager_id@gmail.com'
-}
+};
 
+export const travelAdmin = {
+  email: 'traveladmin@gmail.com',
+  password: 'password'
+};
 
+export const validLocation = {
+  id: 'ae45da99-d1c5-493a-9e66-b0ffb72263fa',
+  LocationName: 'Capetown',
+  country: 'South Africa',
+  description: 'Some random description',
+  link: 'safari.com'
+};
+
+export const invalidLocation = {
+  LocationName: 'Capetown',
+  country: 'South Africa',
+  description: 'Some random description',
+};
+
+export const updateLocation = {
+  LocationName: 'Joburg',
+  country: 'South Africa',
+  description: 'Some random description',
+  link: 'safari.com'
+};
+
+export const validAccommodation = {
+
+  id: '0ce36391-2c08-3074-bddb-a4ea8cccbbc8',
+  country: 'Rwanda',
+  city: 'Kigali',
+  state: 'Nyarugenge',
+  streetAddress: 'KN 22 ST',
+  locationID: null,
+  propertyType: 'Hostel',
+  numberOfRooms: 100,
+  typeOfBed: 'Double Decker',
+  title: 'Kigali Hostels',
+  description: 'A serene environment for relaxation',
+  photos: 'image.png'
+};
+
+export const updateAccommodation = {
+  state: 'Kicukiro',
+};
+
+export const invalidAccommodation = {
+
+  id: '0ce36391-2c08-3074-bddb-a4ea8cccbbc8',
+  city: 'Kigali',
+  state: 'Nyarugenge',
+  streetAddress: 'KN 22 ST',
+  locationID: null,
+  propertyType: 'Hostel',
+  numberOfRooms: 100,
+  typeOfBed: 'Double Decker',
+  title: 'Kigali Hostels',
+  description: 'A serene environment for relaxation',
+  photos: 'image.png'
+};
+
+export const validAmenity = {
+  wifi: true
+};

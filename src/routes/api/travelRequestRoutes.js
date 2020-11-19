@@ -1,8 +1,8 @@
-import express from 'express'
-import isLogedIn from "../../helper/isLogedIn";
-import {travelRequest,cancel_travelRequest} from "../../controllers/travelRequest.controller";
-import {editTravelRequest, getTravelRequest} from "../../controllers/viewTravelRequest";
-import { createTripValidation, editTripValidation} from '../../middlewares/tripRequestsValidation'
+import express from 'express';
+import isLogedIn from '../../helper/isLogedIn';
+import { travelRequest, cancel_travelRequest } from '../../controllers/travelRequest.controller';
+import { editTravelRequest, getTravelRequest } from '../../controllers/viewTravelRequest';
+import { createTripValidation, editTripValidation } from '../../middlewares/tripRequestsValidation';
 import travelRequestsValidation from '../../middlewares/travelRequestsValidation';
 import permit from '../../middlewares/accessControl';
 
@@ -67,8 +67,7 @@ const router = express.Router();
  *        example:
  *          {"travelId":12,status: "pending", "accommodationId": 123, "reason":tripping, "trip":{"originCity":Kigali, "destination":Cairo, "tripDate":11/12/2020, "returnDate":11/12/2021, "accommodationId":1234567, "reason":tripping}}
  */
-router.post('/request', isLogedIn, createTripValidation, permit(["create travel requests"]), travelRequest) //make a request
-
+router.post('/request', isLogedIn, createTripValidation, permit(['create travel requests']), travelRequest); // make a request
 
 // ----------------------- View travelrequest --------------------
 /**
@@ -109,7 +108,7 @@ router.post('/request', isLogedIn, createTripValidation, permit(["create travel 
  *            example:
  *              [{"travelId":12,status: "pending", "accommodationId": 123, "reason":tripping, "trip":{"originCity":Kigali, "destination":Cairo, "tripDate":11/12/2020, "returnDate":11/12/2021, "accommodationId":1234567, "reason":tripping}}]
  */
-router.get('/', isLogedIn,permit(["view travel requests"]), getTravelRequest); // view all requests
+router.get('/', isLogedIn, permit(['view travel requests']), getTravelRequest); // view all requests
 
 /**
  * @swagger
@@ -146,17 +145,16 @@ router.get('/', isLogedIn,permit(["view travel requests"]), getTravelRequest); /
  *             type: string
  *           action:
  *             type: string
- *      
+ *
  */
 
-
-router.put('/',isLogedIn, travelRequestsValidation, permit(["cancel travel requests"]), cancel_travelRequest);
+router.put('/', isLogedIn, travelRequestsValidation, permit(['cancel travel requests']), cancel_travelRequest);
 
 // ----------------- View a particular travelrequest --------------------
 
 /**
  * @swagger
- * 
+ *
  * /api/v1/requests:
  *    get:
  *      summary: A route used to get one travel request made
@@ -169,7 +167,7 @@ router.put('/',isLogedIn, travelRequestsValidation, permit(["cancel travel reque
  *            application/json:
  *              schema:
  *                $ref: '#/components/schemas/travelRequestList'
- * 
+ *
  * components:
  *    schemas:
  *      travelRequestList:
@@ -189,11 +187,10 @@ router.put('/',isLogedIn, travelRequestsValidation, permit(["cancel travel reque
  *              returnDate: 11/12/2021,
  *              accommodationId: 1234567,
  *              reason: tripping}
- *            example: 
+ *            example:
  *              [{"travelId":12,status: "pending", "accommodationId": 123, "reason":tripping, "trip":{"originCity":Kigali, "destination":Cairo, "tripDate":11/12/2020, "returnDate":11/12/2021, "accommodationId":1234567, "reason":tripping}}]
  */
-router.get('/:requestId', isLogedIn, permit(["view travel requests"]), getTravelRequest) //Get single request
-
+router.get('/:requestId', isLogedIn, permit(['view travel requests']), getTravelRequest); // Get single request
 
 /**
  * @swagger
@@ -230,10 +227,10 @@ router.get('/:requestId', isLogedIn, permit(["view travel requests"]), getTravel
  *             type: string
  *           updates:
  *             type: object
- *      
+ *
  */
 
-router.put('/:requestId', isLogedIn, editTripValidation,permit(["edit travel requests"]), editTravelRequest)
+router.put('/:requestId', isLogedIn, editTripValidation, permit(['edit travel requests']), editTravelRequest);
 
 export default router;
 

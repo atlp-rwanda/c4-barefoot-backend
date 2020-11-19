@@ -13,7 +13,6 @@ const verification = async (req, res, next) => {
       if (!record) {
         throw new signUpError('Account does not exist', 404);
       }
-      console.log(record.verified);
       if (record.verified === false) {
         const data = { verified: true };
         UserServices.updateUserByUsername(data, user);

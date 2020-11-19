@@ -141,11 +141,13 @@ export const createRole = async (req, res, next) => {
       this['view direct reports travel requests'] = 0,
       this['reject direct reports travel requests'] = 0,
 
+      this['view accommodations'] = 1,
       this['create accommodations'] = 0,
       this['update accommodations'] = 0,
       this['delete accommodations'] = 0,
       this['book accommodations'] = 0,
 
+      this['view locations'] = 1,
       this['create locations'] = 0,
       this['update locations'] = 0,
       this['delete locations'] = 0;

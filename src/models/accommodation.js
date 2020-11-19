@@ -21,8 +21,9 @@ module.exports = (sequelize, DataTypes) => {
 
   Accommodation.associate = (models) => {
     Accommodation.hasOne(models.Amenity, {
-      foreignKey: 'accommodationID',
+      foreignKey: 'AccommodationId',
       as: 'Amenity',
+      onDelete: 'cascade'
     });
   };
   return Accommodation;

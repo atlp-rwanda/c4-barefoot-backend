@@ -1,7 +1,7 @@
 export default {
   up: async (queryInterface, Sequelize) => queryInterface.bulkInsert('Accommodation', [
     {
-      id: '7edd7f2c-6a67-4c85-ade2-abc6c962017b',
+      id: '0ce36391-2c08-3074-bddb-a4ea8cccbbc5',
       country: 'Rwanda',
       city: 'Kigali',
       state: 'Nyarugenge',

@@ -1,14 +1,16 @@
 import express from 'express';
-import {roleValidation, updateValidation, updateUserRoleValidation, deleteValidation, deleteValidationEmail,assignLineManagerValidation} from '../../middlewares/validation/createRole';
-import {findUsers, updateUserRole, deleteOne, createRole, getAllRoles, updatePermissions, deleteRoles, assignLineManager} from '../../controllers/admin/users_roles';
-import {changeUserRole} from '../../middlewares/changeUserRole';
+import {
+  roleValidation, updateValidation, updateUserRoleValidation, deleteValidation, deleteValidationEmail, assignLineManagerValidation
+} from '../../middlewares/validation/createRole';
+import {
+  findUsers, updateUserRole, deleteOne, createRole, getAllRoles, updatePermissions, deleteRoles, assignLineManager
+} from '../../controllers/admin/users_roles';
+import { changeUserRole } from '../../middlewares/changeUserRole';
 import permit from '../../middlewares/accessControl';
 
 const router = express.Router();
 
-
 /* retrieve all roles created */
-
 
 /**
  * @swagger
@@ -58,7 +60,7 @@ const router = express.Router();
  *                  description:
  *                    type: string
  *                    example: string
- *                  
+ *
  */
 
 router.get('/roles', getAllRoles);
@@ -136,7 +138,7 @@ router.post('/roles', roleValidation, createRole);
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/roleUpdated' 
+ *                $ref: '#/components/schemas/roleUpdated'
  *        "400":
  *          description: These permissions or values are not allowed
  *        "404":
@@ -178,10 +180,7 @@ router.post('/roles', roleValidation, createRole);
  */
 router.put('/roles/update', updateValidation, updatePermissions);
 
-
-
-/* delete a role */ 
-
+/* delete a role */
 
 /**
  * @swagger
@@ -230,13 +229,12 @@ router.put('/roles/update', updateValidation, updatePermissions);
  *             example: Role deleted successfully
  *           role:
  *             type: string
- *             example: role name      
+ *             example: role name
  */
 
 router.delete('/roles', deleteValidation, deleteRoles);
 
 /* retrieve all users */
-
 
 /**
  * @swagger
@@ -304,12 +302,11 @@ router.delete('/roles', deleteValidation, deleteRoles);
  *                  manager_id:
  *                    type: string
  *                    example: string
- * 
+ *
  */
 router.get('/users', findUsers);
 
 /* update a user role */
-
 
 /**
  * @swagger
@@ -362,11 +359,10 @@ router.get('/users', findUsers);
  *           message:
  *             type: string
  *             example: The user updated to \"Role\"
- * 
+ *
  */
 router.put('/users', updateUserRoleValidation, updateUserRole);
 // when you change a requester as a manager, then add him also to the line_manager table and also change so that we will update the primary key not the name of the role
-
 
 /**
  * @swagger
@@ -420,12 +416,11 @@ router.put('/users', updateUserRoleValidation, updateUserRole);
  *           message:
  *             type: string
  *             example: Line manager is assigned successfully
- * 
+ *
  */
-router.put('/users/line-manager',permit(["assign requesters to manager"]), assignLineManagerValidation, assignLineManager);
+router.put('/users/line-manager', permit(['assign requesters to manager']), assignLineManagerValidation, assignLineManager);
 
 /* delete one user */
-
 
 /**
  * @swagger
@@ -476,15 +471,13 @@ router.put('/users/line-manager',permit(["assign requesters to manager"]), assig
  *           message:
  *             type: string
  *             example: The user is deleted successfully!
- * 
+ *
  */
 
-router.delete('/users', deleteValidationEmail, changeUserRole , deleteOne);
+router.delete('/users', deleteValidationEmail, changeUserRole, deleteOne);
 
 /* a delete route to show how to use this middleware of permissions*
- *for this to pass you have to send exact permission(s) as parameter(s)*/
+ *for this to pass you have to send exact permission(s) as parameter(s) */
 // router.delete('/locations', permit(["all"]), dlt);
-
-
 
 export default router;

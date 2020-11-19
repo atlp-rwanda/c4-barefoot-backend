@@ -24,7 +24,6 @@ describe('authentication', () => {
   });
   it('it should log user in', async () => {
     const res = await request(app).post('/api/v1/user/login').send({ email: 'superadmin@gmail.com', password: 'Superadmin' });
-    console.log(res.body);
     expect(res).to.have.status(200);
     expect(res.body).to.have.property('message');
     expect(res.body.message).to.equal('login successful');

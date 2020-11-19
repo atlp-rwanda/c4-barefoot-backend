@@ -18,7 +18,6 @@ const router = express.Router();
  *            application/json:
  *              schema:
  *                $ref: '#/components/schemas/landing'
- *
  * components:
  *    schemas:
  *      landing:

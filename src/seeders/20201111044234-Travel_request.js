@@ -35,6 +35,16 @@ module.exports = {
         reason: 'Trippin',
         travelId: '0ce36391-2c08-3074-bddb-a4ea8cccbbc5'
       },
+      {
+        tripId: '1a52f79e-568a-45b3-9151-4dfa40bb1217',
+        originCity: 'Kigali',
+        destination: 'Nairobi',
+        tripDate: '2020-10-10',
+        returnDate: '2021-10-10',
+        accommodationId: '0ce36391-2c08-3074-bddb-a4ea8cccbbc8',
+        reason: 'Trippin',
+        travelId: '0ce36391-2c08-3074-bddb-a4ea8cccbbc5'
+      },
     ], {});
   },
 

@@ -1,6 +1,5 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const Trip = sequelize.define('Trip', {
+  const Trip = sequelize.define('Trip', {
     tripId: {
       allowNull: false,
       primaryKey: true,
@@ -28,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     accommodationId: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: true
     },
     createdAt: {
       allowNull: false,
@@ -37,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: {
       type: DataTypes.DATE
     },
-    
+
   }, {
     sequelize,
     modelName: 'Trip',
@@ -46,8 +45,8 @@ module.exports = (sequelize, DataTypes) => {
   });
   Trip.associate = (models) => {
     Trip.belongsTo(models.TravelRequest, {
-      foreignKey:'travelId',
-    })
-  }
+      foreignKey: 'travelId',
+    });
+  };
   return Trip;
 };

@@ -28,7 +28,7 @@ const refreshToken = async (req, res, next) => {
     res.cookie('make', userToken, { httpOnly: false, path: '/api/v1/user/refresh-token' });
     return res.status(200).json({ userToken });
   } catch (error) {
-    console.log(error.message);
+    next(error);
   }
 };
 

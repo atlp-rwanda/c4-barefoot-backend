@@ -14,7 +14,8 @@ module.exports = {
     database: process.env.CI_DB_NAME,
     password: process.env.CI_DB_PASSWORD,
     username: process.env.CI_DB_USERNAME,
-    dialect: 'postgres'
+    dialect: 'postgres',
+
   },
   production: {
     use_env_variable: 'DATABASE_URL',

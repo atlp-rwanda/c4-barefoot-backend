@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   Location.associate = (models) => {
     Location.hasMany(models.Accommodation, {
       foreignKey: 'locationID',
-      as: 'Location'
+      as: 'Location',
+      onDelete: 'cascade'
     });
   };
 

@@ -13,7 +13,6 @@ describe('view verified users /api/v1/user/verified-users', () => {
   });
   it('should view all verified users', async () => {
     const res = await request(app).get('/api/v1/assignUserstoManager/verified-users?page=1').set('Authorization', `Bearer ${verifiedUserToken}`);
-    console.log(res.body);
     expect(res).to.have.status(200);
     expect(res.type).to.equal('application/json');
     expect(res.body).to.have.property('message');

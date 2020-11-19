@@ -82,7 +82,19 @@ export default {
       address: 'Kigali',
       language: 'English',
       verified: true
-    },
+    }, {
+      id: '2d647115-3af7-4df0-99aa-6656c764829f',
+      first_name: 'Travel',
+      last_name: 'Admin',
+      username: 'travelAdmin',
+      occupation: 'travelAdmin_occupation',
+      email: 'traveladmin@gmail.com',
+      password: hashPassword('password'),
+      user_role_id: roles.TRAVEL_ADMIN,
+      address: 'Kigali',
+      language: 'English',
+      verified: true
+    }
 
   ], {}),
   down: (queryInterface, Sequelize) => queryInterface.bulkDelete('Users', null, {})

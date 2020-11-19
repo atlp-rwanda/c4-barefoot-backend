@@ -41,7 +41,6 @@ describe('Testing email verification', () => {
 
   it('Should update email verification with valid token', async () => {
     const res = await request(app).patch(`/api/v1/user/verification/?token=${validToken}`);
-    // console.log(res.body);
     expect(res).to.have.status(200);
     expect(res.type).to.equal('application/json');
   }, 30000);

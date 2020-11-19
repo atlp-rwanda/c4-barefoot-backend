@@ -2,7 +2,7 @@ export default {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Amenities', [
     {
       id: 'cf701c80-a729-4922-a04c-553015514a96',
-      accommodationID: '7edd7f2c-6a67-4c85-ade2-abc6c962017b',
+      AccommodationId: '0ce36391-2c08-3074-bddb-a4ea8cccbbc5',
       wifi: false,
       airConditioner: true,
       shampoo: false,
