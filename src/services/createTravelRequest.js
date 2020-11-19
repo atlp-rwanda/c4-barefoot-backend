@@ -1,4 +1,4 @@
-import db from '../models';
+import db from '../models'
 
 const createTravelRequest = async (req, res, request, next) => {
   db.TravelRequest.create(request)
