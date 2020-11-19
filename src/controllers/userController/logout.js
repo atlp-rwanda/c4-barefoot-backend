@@ -1,4 +1,4 @@
-const logout = (_req, res) => {
+const logout = (req, res) => {
   try {
     res.clearCookie('make', { path: '/api/v1/user/refresh-token' });
 

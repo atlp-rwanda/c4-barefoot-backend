@@ -1,7 +1,6 @@
 import { generateToken } from '../src/utils/auth';
 import roles from '../src/utils/roles';
 // signup data
-
 export const validUser = {
   first_name: 'TestName',
   last_name: 'TestName',
