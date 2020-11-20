@@ -1,23 +1,24 @@
-import { findTravelRequest } from '../services/travelRequestSearch';
+import findTravelRequest from '../services/travelRequestSearch';
 import getDataFromToken from '../helper/tokenToData';
 import NotFoundRequestError from '../utils/Errors/notFoundRequestError';
 import travelRequestServices from '../services/directTravelRequest';
 import ApplicationError from '../utils/Errors/applicationError';
 
-export const getTravelRequest = async (req, res) => {
-  const decoded = await getDataFromToken(req, res);
+export const getTravelRequest = async (req, res, next) => {
+  const decoded = await getDataFromToken(req, res, next);
   try {
     const id = req.params.requestId;
     const userid = decoded.id.toString();
     const offset = req.query.from;
     const limit = req.query.to;
     const pagination = { offset, limit };
+    let query = '';
     if (id) { // get a specific travel request
-      var query = { userId: userid, travelId: id };
+      query = { userId: userid, travelId: id };
     } else { // get all travel request
-      var query = { userId: userid };
+      query = { userId: userid };
     }
-    findTravelRequest(res, query, pagination);
+    findTravelRequest(res, query, next, pagination);
   } catch (err) {
     return res.status(401).json({ message: 'session has expired, please login' });
   }
@@ -31,10 +32,10 @@ export const editTravelRequest = async (req, res, next) => {
 
   try {
     const userId = decoded.id;
-    const findTravelRequest = await travelRequestServices.findItById({ travelId: id });
-    if (findTravelRequest) {
-      if (findTravelRequest.userId === userId) {
-        if (findTravelRequest.status === 'pending' || findTravelRequest.status === 'rejected' || findTravelRequest.status === 'canceled') {
+    const findTravelRequests = await travelRequestServices.findItById({ travelId: id });
+    if (findTravelRequests) {
+      if (findTravelRequests.userId === userId) {
+        if (findTravelRequests.status === 'pending' || findTravelRequests.status === 'rejected' || findTravelRequests.status === 'canceled') {
           const findTrip = await travelRequestServices.findTrip({ travelId: id, tripId });
           if (findTrip) {
             const updateTrip = await travelRequestServices.updateTrip({ tripId, changes: updates });
@@ -51,7 +52,7 @@ export const editTravelRequest = async (req, res, next) => {
             throw new NotFoundRequestError('Trip id not found', 404);
           }
         } else {
-          throw new ApplicationError(`Failed to update this trip, it is already ${findTravelRequest.status}`, 500);
+          throw new ApplicationError(`Failed to update this trip, it is already ${findTravelRequests.status}`, 500);
         }
       } else {
         throw new ApplicationError('Failed update this trip', 403);

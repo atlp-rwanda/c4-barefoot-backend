@@ -7,17 +7,17 @@ language: node_js
 node_js:
   - "stable"
 
-install:
+before_script:
   - npm install
+script:
+  - npm run test
 
-script: 
-  - npm test
-
-after_success: npm run coverage
+after_success:
+  - npm run coverage
 
 cache:
   directories:
-    - 'node_modules'
+    - "node_modules"
   yarn: true
 
 notifications:
@@ -26,6 +26,3 @@ sudo: false
 
 services:
   - postgresql
-
-deploy:
-  provider: script

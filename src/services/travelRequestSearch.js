@@ -1,6 +1,6 @@
 import db from '../models';
 
-export function findTravelRequest(res, query, next, pagination) {
+const findTravelRequest = (res, query, next, pagination) => {
   const resultSet = [];
   db.TravelRequest.findAndCountAll({ where: query, ...pagination })
     .then((tRequestDataSet) => {
@@ -17,7 +17,7 @@ export function findTravelRequest(res, query, next, pagination) {
                   Trip: tripData,
                 };
                 resultSet.push(allData);
-                if (counter == 0) { res.json(resultSet); }
+                if (counter === 0) { res.json(resultSet); }
               }
             })
             .catch((err) => {
@@ -31,4 +31,6 @@ export function findTravelRequest(res, query, next, pagination) {
     .catch((err) => {
       next(err);
     });
-}
+};
+
+export default findTravelRequest;
