@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import ApplicationError from './Errors/ApplicationError';
+import ApplicationError from './Errors/applicationError';
 
 class dbViolationError extends ApplicationError {
   constructor(message) {
