@@ -16,13 +16,19 @@ module.exports = (sequelize, DataTypes) => {
     typeOfBed: DataTypes.STRING,
     title: DataTypes.STRING,
     description: DataTypes.STRING,
-    photos: DataTypes.STRING
+    photos: DataTypes.STRING,
   });
 
   Accommodation.associate = (models) => {
     Accommodation.hasOne(models.Amenity, {
       foreignKey: 'AccommodationId',
       as: 'Amenity',
+      onDelete: 'cascade'
+    });
+
+    Accommodation.hasMany(models.Booking, {
+      foreignKey: 'accommodationId',
+      as: 'Booking',
       onDelete: 'cascade'
     });
   };

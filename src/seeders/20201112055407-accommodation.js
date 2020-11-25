@@ -13,6 +13,20 @@ export default {
       title: 'Kigali Hostels',
       description: 'A serene environment for relaxation',
       photos: 'image.png'
+    },
+    {
+      id: '520f2b37-7bac-4490-aa7a-96f15915bcd7',
+      country: 'Rwanda',
+      city: 'Kigali',
+      state: 'Nyarugenge',
+      streetAddress: 'KN 22 ST',
+      locationID: 'c6028e0d-ef88-4693-ab49-f37669891724',
+      propertyType: 'Hostel',
+      numberOfRooms: 0,
+      typeOfBed: 'Double Decker',
+      title: 'Kigali Hostels',
+      description: 'A serene environment for relaxation',
+      photos: 'image.png'
     }
   ]),
 

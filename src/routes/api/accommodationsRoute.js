@@ -4,7 +4,8 @@ import {
   getAccommodations,
   getOneAccommodation,
   updateAccommodation,
-  deleteAccommodation
+  deleteAccommodation,
+  bookAccomodation
 } from '../../controllers/accommodations';
 import permit from '../../middlewares/accessControl';
 
@@ -413,4 +414,47 @@ router.delete('/:id', permit(['delete accommodations']), deleteAccommodation);
  */
 router.post('/', permit(['create accommodations']), createAccommodation);
 
+/**
+ * @swagger
+ *
+ * /api/v1/accommodations/book/{id}:
+ *  post:
+ *    summary: This route allows managers and requesters to book accommodations
+ *    tags: [Book Accommodation]
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *            type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#components/schemas/booking'
+ *    responses:
+ *      "201":
+ *        description: The accomodation is successfully booked
+ *      "400":
+ *        description: The accommodation is full
+ *      "404":
+ *        description: Error 404 is thrown when the accommodation does not exist
+ *      "403":
+ *        description: Unauthorised users are not allowed to view accommodations
+ *
+ *  components:
+ *    schemas:
+ *      booking:
+ *        type: object
+ *        properties:
+ *                From:
+ *                     type: string
+ *                     description: From which date you intend to book an accommodation
+ *                     example: 2020-10-10
+ *                To:
+ *                     type: string
+ *                     description: Last Day of your stay at the accommodation
+ *                     example: 2020-10-12
+ */
+router.post('/book/:id', permit(['book accommodations']), bookAccomodation);
 export default router;

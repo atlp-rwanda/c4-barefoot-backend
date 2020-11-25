@@ -13,7 +13,7 @@ let User = '';
 describe('Testing the route of retrieving all roles', () => {
   it('should return all roles for success', async () => {
     User = await request(app).post('/api/v1/user/login').send(adminCredentials);
-
+    console.log(User.body.data);
     const res = await request(app).get('/api/v1/admin/roles').set('Authorization', `Bearer ${User.body.data}`);
 
     expect(res.type).to.equal('application/json');

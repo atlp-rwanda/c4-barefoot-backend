@@ -68,7 +68,11 @@ export const adminCredentials = {
   email: 'superadmin@gmail.com',
   password: 'Superadmin'
 };
-// export const token = generateToken(adminCredentials);
+
+export const requester = {
+  email: 'sequester@gmail.com',
+  password: 'password'
+};
 
 export const reqTest = {
   role: 'test',
@@ -166,4 +170,9 @@ export const invalidAccommodation = {
 
 export const validAmenity = {
   wifi: true
+};
+
+export const bookDates = {
+  From: '2020-10-26',
+  To: '2020-11-12'
 };

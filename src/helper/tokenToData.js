@@ -7,7 +7,6 @@ const getDataFromToken = async (req, res, next) => {
     const authHeader = req.headers.authorization.split(' ');
     const [authString, token] = authHeader;
     const authorization = token;
-    console.log("Auth: " + authorization)
     try {
       const user = await verifyToken(authorization);
       const userInfo = UserServices.getUserByUserName(user.username);
