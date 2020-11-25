@@ -5,6 +5,10 @@ import travelRequestServices from '../services/directTravelRequest';
 import NotFoundRequestError from '../utils/Errors/notFoundRequestError';
 import ApplicationError from '../utils/Errors/applicationError';
 import BadRequestError from '../utils/Errors/badRequestError';
+import pusher from '../config/pusher';
+import models from '../models';
+import findUserById from '../services/findUserById';
+import { approveTravelRequestEmail } from '../middlewares/sendNotificationEmail';
 
 export const getDirectReport = async (req, res, next) => {
   const decoded = await getDataFromToken(req, res, next);
@@ -37,6 +41,7 @@ export const approve_reject_TravelRequest = async (req, res, next) => {
   try {
     if (action === 'approve' || action === 'reject') {
       const findTravelRequest = await travelRequestServices.findItById({ travelId: travelRequestId });
+      const user = await findUserById(findTravelRequest.userId);
       if (findTravelRequest) {
         const userId = decoded.id;
         if (findTravelRequest.managerId === userId) {
@@ -45,7 +50,18 @@ export const approve_reject_TravelRequest = async (req, res, next) => {
           if (findTravelRequest.status === 'pending' || (findTravelRequest.status === 'rejected' && action !== 'reject')) {
             const changes = (action === 'approve') ? 'approved' : 'rejected';
             const updateStatus = await travelRequestServices.updateStatus({ travelId: travelRequestId, status: { status: changes } });
+
             if (updateStatus) {
+              //in-app notification and email notification
+              const newNotificantion = {
+                user_id: user.id,
+                title: `${req.body.action} Travel Request`,
+                message: `Your travel request was ${req.body.action}d! `
+                  };
+                  
+               const notification = await models.Notification.create(newNotificantion);
+               pusher.trigger('bare-foot-normad', 'notification', notification);
+               const mail = await approveTravelRequestEmail(user.email, req.body.action);
               return res.status(201).json({ status: 201, message: 'Operation performed successfully!' });
             }
             throw new ApplicationError('Failed to approve this travel request, try again!', 500);

@@ -9,5 +9,11 @@ export const notManagerVerifiedUser = {
   role: '45429837-ed2c-435d-bc22-ad9c5dbe3782'
 };
 
+const sequesterForTest = {
+  role: '45429837-ed2c-435d-bc22-ad9c5dbe3782',
+  username: 'requesterOne',
+};
+export const testToken = generateToken(sequesterForTest);
+
 export const verifiedUserToken = generateToken(verifiedUser);
 export const notManagerVerifiedUserToken = generateToken(notManagerVerifiedUser);
