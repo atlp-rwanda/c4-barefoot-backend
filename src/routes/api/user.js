@@ -1,7 +1,7 @@
 import express from 'express';
 import signup from '../../controllers/userController/signup';
 import signupValidation from '../../middlewares/signupValidation';
-import sendVerificationEmail from '../../middlewares/sendEmail';
+import {sendVerificationEmail, sendResetPasswordEmail} from '../../middlewares/sendEmail';
 import verification from '../../controllers/userController/verification';
 import loginValidation from '../../middlewares/loginValidation';
 import logedIn from '../../helper/isLogedIn';
@@ -10,6 +10,8 @@ import logout from '../../controllers/userController/logout';
 import refreshToken from '../../controllers/userController/refreshToken';
 import getAllUsers from '../../controllers/userController/users';
 import verifyUserToken from '../../middlewares/usertokenverification';
+import {RequestResetEmail, validateResetPassword} from '../../middlewares/resetPasswordValidation';
+import verifyResetPassword from '../../controllers/userController/updateResetPassword';
 
 const router = express.Router();
 
@@ -343,4 +345,91 @@ router.post('/refresh-token', refreshToken);
  *          Error: page should be both positive and non zero
  */
 router.get('/all-users', verifyUserToken, getAllUsers);
+
+
+/**
+ * @swagger
+ *
+ * /api/v1/user/reset-password:
+ *    post:
+ *      summary: A route that allows a user to send the email if he wishes to reset the password
+ *      tags: [Users]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/requestReset'
+ *      responses:
+ *        "200":
+ *          description: The request is sent. Check email for verification
+ *        "400":
+ *          description: For sending wrong properties in the request
+ *        "500":
+ *          description: Failed to send a reset password email
+ *
+ * components:
+ *    schemas:
+ *      requestReset:
+ *        type: object
+ *        required:
+ *          - email
+ *        properties:
+ *           email:
+ *             type: string
+ *
+ */
+
+router.post('/request-reset-password', RequestResetEmail, sendResetPasswordEmail);
+
+
+/**
+ * @swagger
+ *
+ * /api/v1/user/reset-password/:
+ *    patch:
+ *      summary: the endpoint used to provide a new password and reset the old password
+ *      description: This endpoint is used when one is providing a new password to reset the old password.
+ *      tags: [Users]
+ *      parameters:
+ *        - in: query
+ *          name: token
+ *          required: true
+ *          schema:
+ *            type: string
+ *          description: The token is used to verify the user
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/resetPassword'
+ *      responses:
+ *        "200":
+ *          description: Password reset successfully
+ *          content:
+ *        "400":
+ *          description: Password not match
+ *        "401":
+ *          description: Invalid token
+ *        "404":
+ *          description: The account does not exist
+ *        "500":
+ *          description: Failed to reset the password
+ *
+ * components:
+ *    schemas:
+ *      resetPassword:
+ *        type: object
+ *        required:
+ *          - password
+ *          - confirmPassword
+ *        properties:
+ *           password:
+ *             type: string
+ *           confirmPassword:
+ *             type: string
+ */
+router.patch('/reset-password', validateResetPassword, verifyResetPassword);
+
 export default router;
