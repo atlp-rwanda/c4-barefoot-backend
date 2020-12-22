@@ -36,7 +36,7 @@ export const getOneAccommodation = async (req, res, next) => {
     if (!singleAccommodation) {
       throw new accommodationNotFound('Accommodation does not exist');
     }
-    const amenities = await models.Amenity.findOne({ where: { AccommodationId: id }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
+    const amenities = await models.Amenity.findOne({ where: { accommodationID: id }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
     res.status(200).json({ singleAccommodation, amenities });
   } catch (error) {
     next(error);

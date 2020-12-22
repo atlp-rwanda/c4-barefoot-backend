@@ -18,7 +18,7 @@ import notiRoute from './api/notification';
 const routes = express.Router();
 
 routes.use('/user', userRoute);
-routes.use('/requests/', travelRequestroutes);
+routes.use('/requests', travelRequestroutes);
 routes.use('/directReports', directreportsRoutes);
 routes.use('/comment', tRequestsCommentsRoutes);
 routes.use('/ratings', reviewsRoutes);
