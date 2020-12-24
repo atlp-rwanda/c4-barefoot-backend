@@ -29,3 +29,5 @@ jobs:
     - run: npm test
       env:
         CI_DB_URL: postgres://diuufquoindnkx:2c396b2ea7d796317d79965a9bbf76095e08feefca7a981a3614157a360793da@ec2-35-168-54-239.compute-1.amazonaws.com:5432/d3jnp07h8bsjmj
+        TOKEN_SECRET: secret
+        FRONTEND_URL: http://localhost:3000/api/v1
