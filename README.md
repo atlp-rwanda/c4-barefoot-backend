@@ -1,6 +1,5 @@
 # c1-barefoot-backend
-[![Build Status](https://travis-ci.com/atlp-rwanda/c2-barefoot-backend.svg?token=1XybCTDw8TEfYfRbKuNS&branch=develop)](https://travis-ci.com/atlp-rwanda/c2-barefoot-backend) [![Coverage Status](https://coveralls.io/repos/github/atlp-rwanda/c2-barefoot-backend/badge.svg?branch=develop)](https://coveralls.io/github/atlp-rwanda/c2-barefoot-backend?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/e3c9894d9fd5a5ced4a0/maintainability)](https://codeclimate.com/github/atlp-rwanda/c2-barefoot-backend/maintainability)
-
+[![Actions Status](https://github.com/RobDWaller/csp-generator/workflows/Build%20and%20Test/badge.svg)](https://github.com/RobDWaller/csp-generator/actions)
 >You can find coveralls repo token `.sample-env` file.
 
 ## Running the project
