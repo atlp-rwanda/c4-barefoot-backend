@@ -1,5 +1,5 @@
 # c1-barefoot-backend
-[![Actions Status](https://github.com/RobDWaller/csp-generator/workflows/Build%20and%20Test/badge.svg)](https://github.com/RobDWaller/csp-generator/actions)
+[![Actions Status](https://https://github.com/atlp-rwanda/c4-barefoot-backend/workflows/Barefoot-Nomad-tests/badge.svg)](https://https://github.com/atlp-rwanda/c4-barefoot-backend/actions)
 >You can find coveralls repo token `.sample-env` file.
 
 ## Running the project
