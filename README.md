@@ -1,7 +1,5 @@
 # c1-barefoot-backend
-[![Actions Status](https://https://github.com/c4-barefoot-backend/workflows/BarefootNomad/badge.svg)](https://https://github.com/c4-BarefootNomad/actions)
-
-
+[![CI/CD Actions Status](https://https://github.com/c4-barefoot-backend/workflows/BarefootNomad/badge.svg)](https://https://github.com/c4-BarefootNomad/actions)
 
 >You can find coveralls repo token `.sample-env` file.
 
