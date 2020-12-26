@@ -1,5 +1,5 @@
 # c1-barefoot-backend
-[![Actions Status](https://https://github.com/atlp-rwanda/c4-barefoot-backend/workflows/BarefootNomad/badge.svg)](https://https://github.com/atlp-rwanda/c4-BarefootNomad/actions)
+[![Actions Status](https://https://github.com/c4-barefoot-backend/workflows/BarefootNomad/badge.svg)](https://https://github.com/c4-BarefootNomad/actions)
 
 
 
