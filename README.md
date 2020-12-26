@@ -1,7 +1,7 @@
 # c1-barefoot-backend
-[![Actions Status](https://https://github.com/atlp-rwanda/c4-barefoot-backend/workflows/Barefoot-Nomad-tests/badge.svg)](https://https://github.com/atlp-rwanda/c4-barefoot-backend/actions)
+[![Actions Status](https://https://github.com/atlp-rwanda/c4-barefoot-backend/workflows/BarefootNomad/badge.svg)](https://https://github.com/atlp-rwanda/c4-BarefootNomad/actions)
 
-![example branch parameter](https://github.com/actions/c4-barefoot-backend/workflows/Barefoot-Nomad-tests/badge.svg?branch=ft-develop)
+
 
 >You can find coveralls repo token `.sample-env` file.
 
