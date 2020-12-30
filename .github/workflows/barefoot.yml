@@ -27,7 +27,9 @@ jobs:
     - run: npm install
     - run: npm run build --if-present
     - run: npm test
+    - uses: CyimanaFaisal/codeclimate-action@v2.2.4
       env:
         CI_DB_URL: postgres://diuufquoindnkx:2c396b2ea7d796317d79965a9bbf76095e08feefca7a981a3614157a360793da@ec2-35-168-54-239.compute-1.amazonaws.com:5432/d3jnp07h8bsjmj
         TOKEN_SECRET: secret
         FRONTEND_URL: http://localhost:3000/api/v1
+        CC_TEST_REPORTER_ID: 60fd172ab0b90b78e8990376fc9bf5723d11809848478995a13a66b976033cc6
