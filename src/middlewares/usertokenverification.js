@@ -18,7 +18,7 @@ const verifyUserToken = async (req, res, next) => {
     const record = await UserServices.getUserByUserName(decodedToken.username);
     if (!record) throw new BadRequestError('data in token is invalid', 400);
     res.locals.token = await decodedToken.username;
-    if (!res.locals.token) throw new ApplicationError('server cant assign token', 500);
+    if (!res.locals.token) throw new ApplicationError("server can't assign token", 500);
     next();
   } catch (err) {
     next(err);

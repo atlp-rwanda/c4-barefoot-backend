@@ -20,7 +20,7 @@ const assignUserTomanagerEmail = async (email) => {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: email,
     subject: 'Verify your email',
-    html: '<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> You was assigned to a manager.</p> <br>'
+    html: '<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> You were assigned to a manager.</p> <br>'
   };
 
   try {

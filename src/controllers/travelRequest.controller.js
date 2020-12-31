@@ -56,7 +56,7 @@ export const cancel_travelRequest = async (req, res, next) => {
               const newNotificantion = {
                 user_id: userId,
                 title: 'Cancel Travel Request',
-                message: `You ${req.body.action}ed your travel request `
+                message: `You ${req.body.action}ed your travel request`
                   };
 
                const notification = await models.Notification.create(newNotificantion);

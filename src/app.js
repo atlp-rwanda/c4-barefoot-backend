@@ -8,9 +8,7 @@ import db from './models/index';
 import routes from './routes/index';
 import ApplicationError from './utils/Errors/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
-import i18next from 'i18next';
-import i18nextMiddleware from 'i18next-express-middleware';
-import Backend from 'i18next-node-fs-backend';
+import i18n from './controllers/i18n';
 
 const app = express();
 app.use(cors());
@@ -18,26 +16,12 @@ app.use(cookieParser());
 
 const port = process.env.PORT || 3000;
 
-// app.use(i18nextMiddleware.handle(i18next));
-i18next.init({
-  lng: 'en',
-  debug: true,
-  resources: {
-    en: {
-      translation: {
-        "key": "Hello World!"
-      }
-    }
-  }
-}, function(err, t){
-  document.querySelector('#output').innerHTML = i18next.t('key');
-});
 
 // routes
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
-
+app.use(i18n.init);
 // routes
 app.use('/api/v1/', routes);
 // app.use(cors());
