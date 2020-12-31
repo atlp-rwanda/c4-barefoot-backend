@@ -1,8 +1,8 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import sinon from 'sinon';
-import {successSignUp,signUp,failedSignIn} from '../controllers/googleSignup'
-import app from '../app';
+import {successSignUp,signUp,failedSignIn} from '../src/controllers/googleSignup'
+import app from '../src/app';
 const expect = chai.expect;
 
 
