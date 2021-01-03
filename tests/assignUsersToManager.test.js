@@ -4,7 +4,7 @@ import app from '../src/app';
 import { verifiedUserToken, notManagerVerifiedUserToken } from './mockData';
 
 use(chaiHttp);
-describe('/api/v1/user/verified-users/:id', () => {
+describe('ASSIGNING THE USER TO THE MANAGER TESTING', () => {
   it('It should not assign user to managers if no token provided', async () => {
     const res = await request(app).patch('/api/v1/assignUserstoManager/verified-users/122a0d86-8b78-4bb8-b28f-8e5f7811c456');
     expect(res).to.have.status(401);
@@ -15,7 +15,7 @@ describe('/api/v1/user/verified-users/:id', () => {
     expect(res).to.have.status(400);
     expect(res.type).to.equal('application/json');
   });
-  it('It should not assign user to managers if is not manager', async () => {
+  it('It should not assign user to managers if provided ID is not for manager', async () => {
     const res = await request(app).patch('/api/v1/assignUserstoManager/verified-users/122a0d86-8b78-4bb8-b28f-8e5f7811c456').set('Authorization', `Bearer ${notManagerVerifiedUserToken}`);
     expect(res).to.have.status(401);
     expect(res.type).to.equal('application/json');

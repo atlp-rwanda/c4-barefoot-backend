@@ -7,7 +7,7 @@ import { invalidToken, invalidDataToken } from './dummyData';
 
 use(chaiHttp);
 
-describe('testing of token verifcation middleware', () => {
+describe('TOKEN VERIFICATION TESTING', () => {
   it('when no token provided it should throw 401 error', async () => {
     const res = await request(app).get('/api/v1/profile/TestName1212');
     expect(res).to.have.status(401);

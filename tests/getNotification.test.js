@@ -4,7 +4,7 @@ import app from '../src/app';
 import { verifiedUserToken, testToken } from './mockData';
 
 use(chaiHttp);
-describe('/api/v1/user/verified-users-manager', () => {
+describe('VERIFIED USERS TESTINGS', () => {
   it('It should not get notifications if no token provided', async () => {
     const res = await request(app).get('/api/v1//notification/notifications');
     expect(res).to.have.status(401);

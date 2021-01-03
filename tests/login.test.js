@@ -5,7 +5,7 @@ import 'dotenv/config';
 import { userToken } from './dummyData';
 
 use(chaiHttp);
-describe('authentication', () => {
+describe('AUTHENTICATION END-POINTS TESTING', () => {
   it('it not login without email', async () => {
     const res = await request(app).post('/api/v1/user/login').send({ password: '1234567890' });
     expect(res).to.have.status(400);
@@ -29,8 +29,8 @@ describe('authentication', () => {
     expect(res.body.message).to.equal('login successful');
   });
 });
-describe('/logout', () => {
-  it('it should logout user', async () => {
+describe('LOGOUT END-POINT TESTING', () => {
+  it('it should logout the logged in user', async () => {
     const res = await request(app).post('/api/v1/user/logout').set('Authorization', `Bearer ${userToken}`);
     expect(res).to.have.status(200);
     expect(res.body).to.have.property('message');
