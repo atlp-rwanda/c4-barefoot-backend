@@ -13,6 +13,8 @@ import cookieSession from 'cookie-session';
 import i18n from './controllers/i18n';
 
 
+import cron from 'node-cron'
+import expiredBookings from './helper/expiredbookings'
 const app = express();
 app.use(cors());
 app.use(cookieParser());
@@ -69,6 +71,9 @@ app.listen(port, () => {
   } else {
     console.log(err);
   }
+});
+cron.schedule('* * * * *', () => {
+  expiredBookings();
 });
 
 export default app;

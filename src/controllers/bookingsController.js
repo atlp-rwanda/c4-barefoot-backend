@@ -15,4 +15,7 @@ const showBookings = async (req, res, next) => {
   }
 };
 
-export default showBookings;
+
+export default showBookings ;
+
+ 
