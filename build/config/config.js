@@ -1,3 +1,5 @@
+"use strict";
+
 require('dotenv').config();
 
 module.exports = {
@@ -7,8 +9,8 @@ module.exports = {
     host: process.env.LOCAL_DB_HOST,
     port: process.env.LOCAL_DB_PORT,
     dialect: 'postgres',
-    operatorsAliases: 0, 
-    logging: false,
+    operatorsAliases: 0,
+    logging: false
   },
   test: {
     use_env_variable: 'CI_DB_URL',
@@ -23,7 +25,6 @@ module.exports = {
         rejectUnauthorized: false
       }
     }
-    
   },
   production: {
     use_env_variable: 'DATABASE_URL',
