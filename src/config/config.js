@@ -32,11 +32,11 @@ module.exports = {
     username: process.env.DB_USERNAME,
     dialect: 'postgres',
     logging: false,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
-    }
+    // dialectOptions: {
+    //   ssl: {
+    //     require: true,
+    //     rejectUnauthorized: false
+    //   }
+    // }
   }
 };
