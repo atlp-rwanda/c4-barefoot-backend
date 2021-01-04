@@ -19,8 +19,8 @@ const assignUserTomanagerEmail = async (email) => {
   const mailOptions = {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: email,
-    subject: 'Verify your email',
-    html: '<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> You were assigned to a manager.</p> <br>'
+    subject: res.__('Verify your email'),
+    html: res.__('<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> You were assigned to a manager.</p> <br>')
   };
 
   try {
@@ -36,8 +36,8 @@ export const approveTravelRequestEmail = async (email, action) => {
   const mailOptions = {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: email,
-    subject: 'Rejected travel request',
-    html: `<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> Your travel request was ${action}d.</p> <br>`
+    subject: res.__('Rejected travel request'),
+    html: res.__(`<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> Your travel request was ${action}d.</p> <br>`)
   };
 
   try {
@@ -53,9 +53,9 @@ export const cancelTravelRequestEmail = async (email, action) => {
   const mailOptions = {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: email,
-    subject: 'Rejected travel request',
-    html: `<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> You ${action}ed your travel request
-    .</p> <br>`
+    subject: res.__('Rejected travel request'),
+    html: res.__(`<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> You ${action}ed your travel request
+    .</p> <br>`)
   };
 
   try {

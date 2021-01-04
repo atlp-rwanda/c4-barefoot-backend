@@ -7,7 +7,7 @@ import isUserExist from '../../services/findUserByUsername';
 
 const notific = async (req, res) => {
   const userData = req.headers.authorization;
-  if (!userData) return res.status(401).json({ status: 401, message: 'Unauthorized, Please login!' });
+  if (!userData) return res.status(401).json({ status: 401, message: res.__('Unauthorized, Please login!') });
   const token = userData.split(' ')[1];
   const decoded = await verifyToken(token);
   const user = await isUserExist(decoded.username);

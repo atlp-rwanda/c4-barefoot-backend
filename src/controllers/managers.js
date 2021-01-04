@@ -6,12 +6,12 @@ const assignUsers = async (req, res, next) => {
     const page = parseInt(req.query.page, 10);
     const storedRole = await roles();
     storedRole.filter(async (rol) => {
-      if (rol.name === 'manager') {
+      if (rol.name === res.__('manager')) {
         const data = rol.id;
         const manager = await findManager(data, page);
 
         return res.status(200).json({
-          status: 200, message: 'available managers', page, managers: manager
+          status: 200, message: res.__('available managers'), page, managers: manager
         });
       }
     });

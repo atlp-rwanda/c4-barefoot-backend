@@ -48,7 +48,7 @@ app.use('/documentation', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 // catch all 404 errors
 app.all('*', (req, res, next) => {
-  const err = new ApplicationError('Page Requested not found', 404);
+  const err = new ApplicationError(res.__('Page Requested not found'), 404);
   next(err);
 });
 
@@ -68,7 +68,7 @@ app.listen(port, () => {
   console.log(`CORS-enabled web server listening on port ${port}  ...`);
 }).on('error', (err) => {
   if (err.errno === 'EADDRINUSE') {
-    console.log(`----- Port ${port} is busy, trying with port ${port + 1} -----`);
+    console.log(res.__(`----- Port ${port} is busy, trying with port ${port + 1} -----`));
     app.listen(port + 1);
   } else {
     console.log(err);
