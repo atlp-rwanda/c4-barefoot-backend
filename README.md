@@ -1,5 +1,6 @@
-# c1-barefoot-backend
-## Barefoot Badges
+
+# c4-barefoot-backend
+
 ![CI/ CD Build](https://github.com/atlp-rwanda/c4-barefoot-backend/workflows/Build/badge.svg?branch=main) [![Maintainability](https://api.codeclimate.com/v1/badges/77747358b84994c029a5/maintainability)](https://codeclimate.com/github/atlp-rwanda/c4-barefoot-backend/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/77747358b84994c029a5/test_coverage)](https://codeclimate.com/github/atlp-rwanda/c4-barefoot-backend/test_coverage)
 
 >You can find coveralls repo token `.sample-env` file.
