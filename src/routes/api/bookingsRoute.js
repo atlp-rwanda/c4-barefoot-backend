@@ -1,9 +1,9 @@
 import express from 'express';
-import bookingsController from '../../controllers/bookingsController';
+import { showBookings } from '../../controllers/bookingsController';
 import permit from '../../middlewares/accessControl';
 
 const router = express.Router();
 
-router.get('/', permit(['book accommodations']), bookingsController);
+router.get('/', permit(['book accommodations']), showBookings);
 
 export default router;

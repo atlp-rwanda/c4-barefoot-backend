@@ -11,10 +11,10 @@ import swaggerConfigs from './config/swaggerDoc';
 import passport from "passport";
 import cookieSession from 'cookie-session';
 import i18n from './controllers/i18n';
+import cron from 'node-cron';
+import { expiredBookings } from './controllers/bookingsController';
 
 
-import cron from 'node-cron'
-import expiredBookings from './helper/expiredbookings'
 const app = express();
 app.use(cors());
 app.use(cookieParser());
