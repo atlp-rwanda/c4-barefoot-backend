@@ -9,7 +9,7 @@ use(chaiHttp);
 describe('SIGNUP END-POINTS TESTNG', () => {
   it('Should save a new user', async () => {
     const res = await request(app).post('/api/v1/user/signup').send(validUser);
-    expect(res).to.have.status(201);
+    expect(res).to.have.status(200);
     expect(res.type).to.equal('application/json');
   });
 
@@ -36,7 +36,7 @@ describe('SIGNUP END-POINTS TESTNG', () => {
     expect(res.body.error).to.equal('Invalid token');
   });
 
-  it('Should update email verification with valid token', async () => {
+  it('Should update verify the email with valid token', async () => {
     const res = await request(app).patch(`/api/v1/user/verification/?token=${validToken}`);
     expect(res).to.have.status(200);
     expect(res.type).to.equal('application/json');
