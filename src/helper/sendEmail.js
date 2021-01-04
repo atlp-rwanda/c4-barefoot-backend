@@ -4,14 +4,15 @@ import 'dotenv/config';
 const sendEmail = (userInfo) =>{
 
     const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true, // use SSL
-        auth: {
-          user: process.env.GMAIL_EMAIL,
-          pass: process.env.GMAIL_PASSWORD
-        }
-      });
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // use SSL
+      auth: {
+        type:"loggin",
+        user: process.env.GMAIL_EMAIL,
+        pass: process.env.GMAIL_PASSWORD
+      }
+    });
       
       
     const mailOptions = {

@@ -6,7 +6,7 @@ import app from '../src/app';
 import { validDataToken } from './dummyData';
 
 use(chaiHttp);
-describe('testing getting all users end point', async () => {
+describe('USERS END-POINT TESTING', async () => {
   it('when a valid token is provided and page number is bigger it returns status of 404', async () => {
     const res = await request(app).get('/api/v1/user/all-users?page=5').set('Authorization', `Bearer ${validDataToken}`);
     expect(res).to.have.status(404);
