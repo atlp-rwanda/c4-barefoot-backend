@@ -23,14 +23,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atlp-rwanda/c4-barefoot-backend.git"
+    "url": "git+https://github.com/atlp-rwanda/c2-barefoot-backend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/atlp-rwanda/c4-barefoot-backend/issues"
+    "url": "https://github.com/atlp-rwanda/c2-barefoot-backend/issues"
   },
-  "homepage": "https://github.com/atlp-rwanda/c4-barefoot-backend#readme",
+  "homepage": "https://github.com/atlp-rwanda/c2-barefoot-backend#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
