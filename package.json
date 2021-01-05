@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel src -d build",
     "start": "cross-env NODE_ENV=production npm run migrate && node ./build/app.js",
-    "test-local": "cross-env NODE_ENV=development nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
+    "test-local": "cross-env NODE_ENV=development nyc --reporter=html --reporter=text mocha --require @babel/register ./*.test.js --timeout 1000000 --exit || true",
     "db:setup": "cross-env NODE_ENV=test sequelize db:migrate:undo:all && cross-env NODE_ENV=test sequelize db:migrate && cross-env NODE_ENV=test npm run seed",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/app.js",
     "test": "npm run migrate seed && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
@@ -51,7 +51,8 @@
     "sequelize-paginate": "^1.1.6",
     "swagger-jsdoc": "^5.0.0",
     "swagger-ui-express": "^4.1.4",
-    "uuid": "^8.3.1"
+    "uuid": "^8.3.1",
+    "web-push": "^3.4.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",

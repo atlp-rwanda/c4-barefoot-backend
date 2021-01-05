@@ -13,6 +13,7 @@ const createTravelRequest = async (req, res, request, next) => {
               .then((tripData) => {
                 const allData = { ...tRequestData.get({ plain: true }), tripData };
                 res.json({ message: 'Trip request sent successfully', data: allData });
+                next();
               })
               .catch((err) => { next(err); });
           }

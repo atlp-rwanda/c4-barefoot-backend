@@ -5,6 +5,7 @@ import managerPermissions from '../../helper/managerPermissions';
 import isManager from '../../helper/isManager';
 import assignUsersToManagers from '../../controllers/assignUsersToManager';
 import assignUsersToManagerValidation from '../../middlewares/assignUaserToManager';
+import {managerAssignmentNotification} from '../../middlewares/pushNotification'
 
 const router = express.Router();
 /**
@@ -111,6 +112,6 @@ router.get('/verified-users/managers', isManager, managerUsers);
  *               description: retrieved data users
  *
  */
-router.patch('/verified-users/:id', isManager, managerPermissions, assignUsersToManagerValidation, assignUsersToManagers);
+router.patch('/verified-users/:id', isManager, managerPermissions, assignUsersToManagerValidation, assignUsersToManagers, managerAssignmentNotification);
 
 export default router;

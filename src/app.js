@@ -8,6 +8,7 @@ import db from './models/index';
 import routes from './routes/index';
 import ApplicationError from './utils/Errors/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
+import path from 'path'
 
 const app = express();
 app.use(cors());
@@ -23,6 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 // routes
 app.use('/api/v1/', routes);
 // app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // documentation route
 const swaggerDocs = swaggerJsDoc(swaggerConfigs);
