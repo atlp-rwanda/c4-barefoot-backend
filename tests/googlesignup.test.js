@@ -1,22 +1,17 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import sinon from 'sinon';
-import {successSignUp,signUp,failedSignIn} from '../src/controllers/googleSignup'
+import models from '../src/models';
 import app from '../src/app';
-const expect = chai.expect;
+import sinon from 'sinon';
+import {successSignUp,_} from '../src/controllers/googleSignup';
+
+let should = chai.should();
 
 
-describe('#Sign Up with Google',()=>{
-  let status ,send, res;
-    beforeEach((done) => {
-      // status = sinon.stub();
-      send = sinon.spy();
-      res = { send, status };
-      // status.returns(res);
-      done();
-    });
-    it('It should signUp a user with his google account',async(done)=>{
-        let req={user:{
+chai.use(chaiHttp)
+
+let req={body:{},
+        user:{
           provider: 'google',
           sub: '106180666226862347646',
           id: '106180666226862347646',
@@ -36,19 +31,73 @@ describe('#Sign Up with Google',()=>{
               type: 'default'
             }
           ]
-        }
-        }
-        const mock =sinon.mock(res);
+        }};
 
-        mock.expects('send').once().withExactArgs({message:'successfully Logged In'})
-         const result = await signUp(req,res)
-         done()
-         const stub =sinon.stub(signUp(req,res)).returns({message:'successfully Logged In',
-        token:result.token})
-          expect(stub.calledOnce).to.be.true;
-          expect(stub.args[0],message).to.equal("successfully Logged In")
-          mock.verify();
-          
-          
+let req2={body:{},
+          user:{
+            provider: 'google',
+            sub: '10618066622686234753',
+            id: '106180666226862347643',
+            displayName: 'test one',
+            name: { givenName: 'test', familyName: 'one' },
+            given_name: 'test',
+            family_name: 'one',
+            email_verified: true,
+            verified: true,
+            language: 'en',
+            locale: undefined,
+            email: 'test@gmail.com',
+            emails: [ { value: 'test@gmail.com', type: 'account' } ],
+            photos: [
+              {
+                value: 'https://lh3.googleusercontent.com/a-/AOh14Ghe0RBclUzQrw32zJrUjIY-uN7XjLnYNr4SIX7U=s96-c',
+                type: 'default'
+              }
+            ]
+          }};
+
+describe('#Sign Up with Google',()=>{
+    beforeEach((done) => {
+        models.User.destroy({where:{email:'test@gmail.com'}})
+        .then(deleted=>{
+          console.log('deleted');
+        })
+        .catch(err=>{
+          console.log('not deleted')
+        });
+        done()
+      });
+
+    it('It should signIn a user with his google account',(done)=>{
+        chai.request(app)
+        .get('/api/v1/google/signup')
+        .send(req)
+        .end((err,res)=>{
+          res.should.have.status(200);
+          res.body.should.be.a('Object');
+          res.body.should.have.property('message').eql('successfully Logged In')
+          done()
+        })
+      })
+
+      it('It should first signUp a user if he has no account and then signIn the user',(done)=>{
+          chai.request(app)
+          .get('/api/v1/google/signup')
+          .send(req2)
+          .end((err,res)=>{
+            res.should.have.status(200);
+            res.body.should.be.a('Object');
+            res.body.should.have.property('message').eql('successfully Logged In')
+            done()
+          })  
     })
+    it('It should redirect to signUp',(done)=>{
+      let res={
+        redirect:function(){}
+      }
+      successSignUp(req,res);
+      const mock = sinon.mock(res);
+      mock.expects("redirect").once().withExactArgs("/api/v1/google/signUp");
+      done() 
+})
 })
