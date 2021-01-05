@@ -8,18 +8,18 @@ const findTrip = async (res, query, location, next, offset, limit) => {
     
     try {
         await db.Trip.findAndCountAll({
-            limit, offset, 
-            where: {destination:location},
+            limit, offset,
+            where: { destination: location },
             include: [{
                 model: db.TravelRequest,
                 where: query
             }]
-            
+
         }).then((result) => {
-            res.json({result})
+            res.json({ result })
         })
-           
-            
+
+
     } catch (error) {
         next(error)
     }
