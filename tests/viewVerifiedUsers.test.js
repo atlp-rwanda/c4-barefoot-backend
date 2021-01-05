@@ -4,7 +4,7 @@ import app from '../src/app';
 import { verifiedUserToken } from './mockData';
 
 use(chaiHttp);
-describe('view verified users /api/v1/user/verified-users', () => {
+describe('VERIFIED USER END-POINT TESTING', () => {
   it('should not view all verified users if no token provided', async () => {
     const res = await request(app).get('/api/v1/assignUserstoManager/verified-users?page=1');
     expect(res).to.have.status(401);

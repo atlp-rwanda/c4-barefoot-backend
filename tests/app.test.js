@@ -3,7 +3,7 @@ import chaiHttp from 'chai-http';
 import app from '../src/app';
 
 use(chaiHttp);
-describe('testing welcome router', () => {
+describe('WELCOME END-POINTS TESTING', () => {
   it('Should get welcome message', async () => {
     const res = await request(app).get('/api/v1');
     expect(res).to.have.status([200]);
@@ -14,7 +14,7 @@ describe('testing welcome router', () => {
     expect(res.body.status).to.equal(200);
   });
 
-  it('Should get error 404 when page doesn\'t exist', async () => {
+  it('Should get 404 page', async () => {
     const res = await request(app).get('/bop');
     expect(res).to.have.status(404);
     expect(res.type).to.equal('application/json');
