@@ -131,26 +131,26 @@ export const createRole = async (req, res, next) => {
     function Perm() {
       this[res.__('edit profile')] = 1,
 
-      this['assign requesters to manager'] = 0,
-      this['create travel requests'] = 0,
-      this['view travel requests'] = 0,
-      this['edit travel requests'] = 0,
-      this['cancel travel requests'] = 0,
+      this[res.__('assign requesters to manager')] = 0,
+      this[res.__('create travel requests')] = 0,
+      this[res.__('view travel requests')] = 0,
+      this[res.__('edit travel requests')] = 0,
+      this[res.__('cancel travel requests')] = 0,
 
-      this['approve direct reports travel requests'] = 0,
-      this['view direct reports travel requests'] = 0,
-      this['reject direct reports travel requests'] = 0,
+      this[res.__('approve direct reports travel requests')] = 0,
+      this[res.__('view direct reports travel requests')] = 0,
+      this[res.__('reject direct reports travel requests')] = 0,
 
-      this['view accommodations'] = 1,
-      this['create accommodations'] = 0,
-      this['update accommodations'] = 0,
-      this['delete accommodations'] = 0,
-      this['book accommodations'] = 0,
+      this[res.__('view accommodations')] = 1,
+      this[res.__('create accommodations')] = 0,
+      this[res.__('update accommodations')] = 0,
+      this[res.__('delete accommodations')] = 0,
+      this[res.__('book accommodations')] = 0,
 
-      this['view locations'] = 1,
-      this['create locations'] = 0,
-      this['update locations'] = 0,
-      this['delete locations'] = 0;
+      this[res.__('view locations')] = 1,
+      this[res.__('create locations')] = 0,
+      this[res.__('update locations')] = 0,
+      this[res.__('delete locations')] = 0;
     }
 
     // import existing data in index.json

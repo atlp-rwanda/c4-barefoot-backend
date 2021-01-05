@@ -189,5 +189,6 @@
 	"Something went wrong. Please try again": "Habayemo ikibazo, mwongere mugerageze",
 	"your token expired": "token yawe yarangiye",
 	" is busy, trying with port": " irahuze, turi kugerageza",
-	"No token found!": "Nta token ufite!"
+	"No token found!": "Nta token ufite!",
+	"You are not loged in": "Ntabwo winjiye"
 }
