@@ -7,7 +7,7 @@ use(chaiHttp);
 
 let travelRequestId = '';
 
-describe('Travel Requests', () => {
+describe('TRAVEL REQUEST END-POINTS TESTING', () => {
   const REQUESTER = {
     email: 'sequester@gmail.com',
     password: 'password',
@@ -26,22 +26,6 @@ describe('Travel Requests', () => {
   };
   let User = '';
   let tripId = '';
-  // it("Should not make travel request if not logged in", async ()=>{
-  //     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3RfbmFtZSI6Ik0iLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOiJqYWNrc3dhbHRlcjdAZ21haWwuY29tIiwiYWRkcmVzcyI6IktpZ2FsaSIsImxhbmd1YWdlIjoiS2lueWFyd2FuZGEiLCJwcm9maWxlX3BpY3R1cmUiOiJtZS5qcGciLCJpYXQiOjE2MDM4OTg0NDMsImV4cCI6MTYwMzkwNTY0M30.RoVwDUPXmnC9O9CCeexBeNhVbSiFobmXXXCm1tbTPM8"
-  //     const res = await request(app)
-  //     .get("/api/v1/requests/direct-reports/1")
-  //     // .set("Authorization", token)
-  //     expect(res).to.have.status(401)
-  //     expect(res.body).to.have.deep.property("message").equals("You are not loged in")
-  // })
-  // it("Should not make travel request if token has expired", async ()=>{
-  //     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3RfbmFtZSI6Ik0iLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOiJqYWNrc3dhbHRlcjdAZ21haWwuY29tIiwiYWRkcmVzcyI6IktpZ2FsaSIsImxhbmd1YWdlIjoiS2lueWFyd2FuZGEiLCJwcm9maWxlX3BpY3R1cmUiOiJtZS5qcGciLCJpYXQiOjE2MDM4OTg0NDMsImV4cCI6MTYwMzkwNTY0M30.RoVwDUPXmnC9O9CCeexBeNhVbSiFobmXXXCm1tbTPM8"
-  //     const res = await request(app)
-  //     .get("/api/v1/requests/direct-reports/1")
-  //     .set("Authorization", token)
-  //     expect(res).to.have.status(401)
-  //     expect(res.body).to.have.deep.property("message").equals("session has expired")
-  // })
   it('Should make a travel request if you are logged in and have a manager', async () => {
     User = await request(app).post('/api/v1/user/login').send(REQUESTER);
     const res = await request(app)
@@ -73,34 +57,33 @@ describe('Travel Requests', () => {
     expect(res.body).to.have.deep.property('status');
     expect(res.body).to.have.deep.property('message').equals('Trip updated successfully!');
   });
+  
+  const user = {
+    email: 'sequester@gmail.com',
+    password: 'password',
+  };
+  it('Should get travel requests if you are logged in', async () => {
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app)
+      .get('/api/v1/requests')
+      .set('Authorization', `Bearer ${User.body.data}`);
+    expect(res).to.have.status(200);
+    expect(res.body).to.be.an('array');
+  });
+  it('Should get a single travel requests if you are logged in', async () => {
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app)
+      .get('/api/v1/requests/')
+      .set('Authorization', `Bearer ${User.body.data}`)
+      .query({ requestId: '5' });
+    expect(res).to.have.status(200);
+    expect(res.body).to.be.an('array');
+  });
 
-  // after(()=>{
-  //     // delete data inserted by the tests.
-  //     const trip = {
-  //         originCity:'Kigali',
-  //         destination:"Cairo",
-  //         tripDate:"2020-12-12",
-  //         returnDate:"2020-01-01",
-  //         accommodationId:"1234567",
-  //         reason:"enjoying"
-  //     }
-  //     models.Trip.findOne({where:trip}).then((res) =>{
-  //         models.Trip.destroy({where:trip}).then(result =>{
-  //             models.TravelRequest.destroy({where:{travelId:res.travelId}})
-  //             .then(result =>{
-  //             })
-  //         })
-  //     })
-
-  // })
-});
-
-describe('MANAGER travel requests', () => {
   const MANAGER = {
     email: 'mj@gmail.com',
     password: 'manager1',
   };
-  let User = '';
   it('should return all travel requests sent', async () => {
     User = await request(app).post('/api/v1/user/login').send(MANAGER);
     const res = await request(app)

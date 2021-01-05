@@ -9,22 +9,13 @@ import routes from './routes/index';
 import ApplicationError from './utils/Errors/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
 import i18n from './controllers/i18n';
-// import { LocaleService } from './services/localeService';
 
-// const localeService = new LocaleService(i18n);
 
 const app = express();
 app.use(cors());
 app.use(cookieParser());
 
 const port = process.env.PORT || 3000;
-
-
-// Get locales information
-// console.log(localeService.getLocales());
-// console.log(localeService.getCurrentLocale());
-
-
 
 // routes
 app.use(express.json());
@@ -37,10 +28,6 @@ app.use(i18n.init);
 // routes
 app.use('/api/v1/', routes);
 // app.use(cors());
-
-
-
-
 
 // documentation route
 const swaggerDocs = swaggerJsDoc(swaggerConfigs);

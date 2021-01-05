@@ -72,7 +72,7 @@ export const deleteAccommodation = async (req, res, next) => {
 
     const checkTrips = await accommodationService.getSingleAccommodation(req.params.id);
     if (checkTrips) {
-      const updateTrips = await models.Trip.update({ accommodationId: null }, { where: { accommodationId: req.params.id } });
+      const updateTrips = await models.Trip.update({ AccommodationId: null }, { where: { AccommodationId: req.params.id } });
     }
 
     const dltAmenity = await models.Amenity.destroy({ where: { AccommodationId: req.params.id } });

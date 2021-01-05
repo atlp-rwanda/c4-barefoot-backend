@@ -4,7 +4,7 @@ import app from '../src/app';
 import 'dotenv/config';
 
 use(chaiHttp);
-describe('Rates and Reviews', () => {
+describe('RATES AND REVIEWS END-POINTS TESTING', () => {
   const user = {
     email: 'sequester@gmail.com',
     password: 'password',

@@ -5,7 +5,7 @@ import app from '../src/app';
 import 'dotenv/config';
 
 use(chaiHttp);
-describe('Travel Requests', () => {
+describe('REQUEST COMMENT ENDPOINTS TESTING', () => {
   const user = {
     email: 'sequester@gmail.com',
     password: 'password',

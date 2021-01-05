@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
-      accommodationID: {
+      AccommodationId: {
         allowNull: true,
         type: Sequelize.UUID,
         unique: true,

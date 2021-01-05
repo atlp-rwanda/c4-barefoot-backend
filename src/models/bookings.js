@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    accommodationId: {
+    AccommodationId: {
       type: DataTypes.UUID,
       allowNull: false
     },
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Booking.associate = (models) => {
     Booking.belongsTo(models.Accommodation, {
-      foreignKey: 'accommodationId',
+      foreignKey: 'AccommodationId',
       as: 'accommodation'
 
     });
