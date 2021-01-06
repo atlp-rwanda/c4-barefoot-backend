@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('subscriptions', {
+    await queryInterface.createTable('Subscriptions', {
       id: {
         allowNull: false,
         default: Sequelize.fn('uuid_generate_v4'),
@@ -14,12 +14,19 @@ module.exports = {
       expirationTime: {
         type: Sequelize.INTEGER
       },
-      keys: {
+      auth: {
         type: Sequelize.TEXT
-      }
+      },
+      p256dh: {
+        type: Sequelize.TEXT
+      },
+      userId: {
+        type: Sequelize.UUID
+      },
+      
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('subscriptions');
+    await queryInterface.dropTable('Subscriptions');
   }
 };
