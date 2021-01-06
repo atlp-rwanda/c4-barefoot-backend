@@ -8,10 +8,17 @@ import db from './models/index';
 import routes from './routes/index';
 import ApplicationError from './utils/Errors/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
-
+import passport from "passport";
+import cookieSession from 'cookie-session';
 const app = express();
 app.use(cors());
 app.use(cookieParser());
+app.use(cookieSession({
+  name: 'tuto-session',
+  keys: ['key1', 'key2']
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 const port = process.env.PORT || 3000;
 
