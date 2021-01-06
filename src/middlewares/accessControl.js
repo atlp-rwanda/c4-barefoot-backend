@@ -14,7 +14,8 @@ export default function permit(permission) {
       // if(!userToken){
       //   throw new accessDenied('No token found',403);
       // }
-      const tokenVerify = await getDataFromToken(req, res);
+      //const tokenVerify = await getDataFromToken(req, res);
+      const tokenVerify = await getDataFromToken;
 
       const findRoleById = await roleServices.findRoleById({ id: tokenVerify.user_role_id });
       if (findRoleById) {

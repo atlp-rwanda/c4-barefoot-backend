@@ -1,4 +1,6 @@
 import express from 'express';
+import http from 'http';
+import socketio from 'socket.io';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 import cors from 'cors';
@@ -10,15 +12,18 @@ import ApplicationError from './utils/Errors/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
 
 const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 app.use(cors());
 app.use(cookieParser());
 
-const port = process.env.PORT || 3000;
+
 
 // routes
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static('./src/public'));
 
 // routes
 app.use('/api/v1/', routes);
@@ -40,13 +45,22 @@ sequelize.authenticate()
   .then(() => console.log('Database connected...'))
   .catch((err) => console.log(`Error: ${err}`));
 
+//Run when client connect
+io.on('connection', socket=>{
+  socket.emit('welcome', 'Welcome to the chat area');
+  
+
+});
+
 app.use((err, req, res, next) => {
   const statusCode = err.status || 500;
   res.status(statusCode).json({ status: statusCode, error: err.message, stack: err.stack });
   next(err);
 });
 
-app.listen(port, () => {
+const port = process.env.PORT || 3000;
+
+server.listen(port, () => {
   console.log(`CORS-enabled web server listening on port ${port}  ...`);
 }).on('error', (err) => {
   if (err.errno === 'EADDRINUSE') {
