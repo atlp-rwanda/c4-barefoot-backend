@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       type: DataTypes.UUID
     },
-    accommodationId: {
+    AccommodationId: {
       type: DataTypes.UUID,
       allowNull: false
     },
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Review.associate = (models) => {
     Review.belongsTo(models.Accommodation,{
-      foreignKey:'accommodationId',
+      foreignKey:'AccommodationId',
       as: 'accommodation'
       
     });

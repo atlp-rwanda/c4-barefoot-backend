@@ -14,6 +14,7 @@ import amenityRoute from './api/amenityRoute';
 import reviewsRoutes from './api/ratesAndReviewsRoutes';
 import bookingsRoute from './api/bookingsRoute';
 import notiRoute from './api/notification';
+import signinWithGoogleRoute from "./api/signinWithGooglerRoute";
 
 const routes = express.Router();
 
@@ -32,5 +33,6 @@ routes.use('/admin', permit(['all']), adminRoutes);
 routes.use('/bookings', bookingsRoute);
 routes.use('/profile', userProfile);
 routes.use('/notification', notiRoute);
+routes.use('/google',signinWithGoogleRoute);
 
 export default routes;
