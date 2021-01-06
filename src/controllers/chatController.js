@@ -87,11 +87,24 @@ export const postChat = async (req, res, next) => {
   }
 };
 export const deleteChatMessage = async (req, res, next) => {
-  try {
-    //
-  } catch (err) {
+  try{
+    const chat = await models.Chat.findOne({
+        where: {
+            uuid: req.body.id
+        }
+    });
+    
+    if(chat){
+        await chat.destroy();
+        res.status(200).json({message: 'Message deleted'});
+    }else{
+        res.status(400).json({message: 'Message not available'});
+    }
+    
+    
+}catch(err){
     next(err);
-  }
+}
 };
 // Getting all chats for one user
 export const allChats = async (req, res, next) => {
