@@ -36,7 +36,7 @@ export const getOneAccommodation = async (req, res, next) => {
     if (!singleAccommodation) {
       throw new accommodationNotFound('Accommodation does not exist');
     }
-    const amenities = await models.Amenity.findOne({ where: { accommodationID: id }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
+    const amenities = await models.Amenity.findOne({ where: { AccommodationId: id }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
     res.status(200).json({ singleAccommodation, amenities });
   } catch (error) {
     next(error);
@@ -66,7 +66,7 @@ export const deleteAccommodation = async (req, res, next) => {
 
     const checkTrips = await accommodationService.getSingleAccommodation(req.params.id);
     if (checkTrips) {
-      const updateTrips = await models.Trip.update({ accommodationId: null }, { where: { accommodationId: req.params.id } });
+      const updateTrips = await models.Trip.update({ AccommodationId: null }, { where: { AccommodationId: req.params.id } });
     }
 
     const dltAmenity = await models.Amenity.destroy({ where: { AccommodationId: req.params.id } });

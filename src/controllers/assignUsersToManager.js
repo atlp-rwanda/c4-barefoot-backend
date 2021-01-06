@@ -28,7 +28,7 @@ const assignUsersToManager = async (req, res) => {
 
     return res.status(200).json({ status: 200, message: `user was assigned to manager with this Id ${manager_id}` });
   } catch (error) {
-    res.json(error.message, error.stack);
+    res.status(500).json({error:error.message, stack:error.stack});
   }
 };
 export default assignUsersToManager;
