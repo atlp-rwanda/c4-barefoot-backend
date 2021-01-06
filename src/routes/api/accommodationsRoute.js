@@ -457,4 +457,9 @@ router.post('/', permit(['create accommodations']), createAccommodation);
  *                     example: 2020-10-12
  */
 router.post('/book/:id', permit(['book accommodations']), bookAccomodation);
+
+
+
 export default router;
+
+

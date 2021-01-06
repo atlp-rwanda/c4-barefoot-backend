@@ -50,7 +50,7 @@ export const updateUserRole = async (req, res, next) => {
         /* update the user role */
         const upDate = await usersService.updateUserRole({ email, user_role_id: findRole.id });
         if (upDate) {
-          res.status(201).json({ status: 201, message: res.__(`The user role is updated to ${role}`) });
+          return res.status(201).json({ status: 201, message: res.__(`The user role is updated to ${role}`) });
         } else {
           throw new applicationError(res.__('Failed to update this role, try again!'), 500);
         }

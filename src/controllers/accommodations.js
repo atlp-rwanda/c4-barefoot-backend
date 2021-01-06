@@ -101,11 +101,3 @@ export const bookAccomodation = async (req, res, next) => {
   }
 };
 
-export const topBooks = async (req, res, next)=>{
-  try {
-    const getAccommodationid = models.Booking.findOne({ where: { accommodationId: query }, attributes: { exclude: [res.__('createdAt'), res.__('updatedAt')] } });
-  return accommodationId;
-  } catch (error) {
-    
-  }
-}

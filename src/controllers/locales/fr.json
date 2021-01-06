@@ -187,6 +187,7 @@
 	"Something went wrong. Please try again": "Un problème est survenu. Veuillez réessayer",
 	"your token expired": "votre jeton a expiré",
 	" is busy, trying with port": " est occupé, essaye avec le port",
-    "No token found!": "Aucun jeton trouvé!",
-    "You are not loged in": "Vous n'êtes pas connecté"
+	"No token found!": "Aucun jeton trouvé!",
+	"You are not loged in": "Vous n'êtes pas connecté",
+	"Logout successful!": "Déconnexion réussie!"
 }
