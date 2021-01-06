@@ -1,11 +1,11 @@
 import UserServices from '../services/user.service';
 import { verifyToken } from '../utils/auth';
 
-const getDataFromToken = async (req, res, next) => {
+const getDataFromCookies = async (req, res, next) => {
   if (req.cookies && req.cookies.authorization) {
-    // added these two lines to get a same auth header(Bearer Auth)
-    const authHeader = req.cookies.authorization.split(' ');
-    const [authString, token] = authHeader;
+    // added these two lines to get a same auth cookie(Bearer Auth)
+    const authCookie = req.cookies.authorization.split(' ');
+    const [authString, token] = authCookie;
     const authorization = token;
     try {
       const user = await verifyToken(authorization);
@@ -19,4 +19,4 @@ const getDataFromToken = async (req, res, next) => {
   }
 };
 
-export default getDataFromToken;
+export default getDataFromCookies;
