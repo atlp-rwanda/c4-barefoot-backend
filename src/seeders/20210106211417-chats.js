@@ -13,7 +13,7 @@ module.exports = {
       uuid: '0ce36391-2c08-3074-bddb-a4ea8bbcbbc6',
       sender: 'a9610cf3-4056-41dd-92ca-463088e23d07',
       receiver: '2d647115-3af7-4df0-99aa-6656c764829f',
-      message: 'Hello Dear!',
+      message: 'Good afternoon!',
       createdAt: '2021-01-01 12:07:22.717+02',
       updatedAt: '2021-01-01 12:07:22.717+02',
       status: 'true'
@@ -22,7 +22,7 @@ module.exports = {
       uuid: '0ce36391-2c08-3074-bddb-a4ea8bbcbbc7',
       sender: '2d647115-3af7-4df0-99aa-6656c764829f',
       receiver: 'a9610cf3-4056-41dd-92ca-463088e23d07',
-      message: 'Hello Dear!',
+      message: "I'm fine! How about we make a trip this first day ?",
       createdAt: '2021-01-01 12:07:42.717+02',
       updatedAt: '2021-01-01 12:07:42.717+02',
       status: 'true'
@@ -31,7 +31,7 @@ module.exports = {
       uuid: '0ce36391-2c08-3074-bddb-a4ea8bbcbbc6',
       sender: 'a9610cf3-4056-41dd-92ca-463088e23d07',
       receiver: '2d647115-3af7-4df0-99aa-6656c764829f',
-      message: 'Hello Dear!',
+      message: 'Sounds cool, let us get trippin to Cairo, How about it?',
       createdAt: '2021-01-01 12:08:22.717+02',
       updatedAt: '2021-01-01 12:08:22.717+02',
       status: 'false'
