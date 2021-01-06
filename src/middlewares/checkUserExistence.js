@@ -9,7 +9,11 @@ const checkUserExistance=async(req,res,next)=>{
         }
         let account= await userExist(user.email);
         if(!account){
-            const User={first_name:user.given_name,last_name:user.family_name,username:user.displayName,email:user.email,language:user.language,profile_picture:user.photos[0].value,varified:user.verified,
+            const User={first_name:user.given_name,
+                last_name:user.family_name,
+                username:user.displayName,email:user.email,
+                language:user.language,
+                profile_picture:user.photos[0].value,varified:user.verified,
             };
             try{
                 account=await models.User.create(User);
