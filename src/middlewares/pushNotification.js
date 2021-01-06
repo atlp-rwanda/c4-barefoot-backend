@@ -4,6 +4,21 @@ import findSubscription from '../services/findSubscription';
 import getDataFromToken from '../helper/tokenToData';
 
 
+function sendNotifications(subscriptions, payload){
+    subscriptions.forEach(subscription => {
+        wp.sendNotification({
+           endpoint: subscription.endpoint,
+           expirationTime: subscription.expirationTime,
+           keys:{
+               auth: subscription.auth,
+               p256dh: subscription.p256dh
+           }
+       }, payload).catch( err=> console.log(err));
+
+   });
+}
+
+
 const sendTravelRequestNotification= async (req,res,next)=>{
     const decoded = await getDataFromToken(req, res, next);
     const receiverId= decoded.manager_id;
@@ -16,17 +31,8 @@ const sendTravelRequestNotification= async (req,res,next)=>{
     });
 
 
-    subscriptions.forEach(subscription => {
-         wp.sendNotification({
-            endpoint: subscription.endpoint,
-            expirationTime: subscription.expirationTime,
-            keys:{
-                auth: subscription.auth,
-                p256dh: subscription.p256dh
-            }
-        }, payload).catch( err=> console.log(err));
-
-    });
+    
+    sendNotifications(subscriptions, payload);
 
     console.log('Notification middleware executed successfully!');
 
@@ -46,17 +52,8 @@ const sendRequestApprovalNotification= async (req,res,next)=>{
     });
 
 
-    subscriptions.forEach(subscription => {
-         wp.sendNotification({
-            endpoint: subscription.endpoint,
-            expirationTime: subscription.expirationTime,
-            keys:{
-                auth: subscription.auth,
-                p256dh: subscription.p256dh
-            }
-        }, payload).catch( err=> console.log(err));
-
-    });
+    
+    sendNotifications(subscriptions,payload);
 
     console.log('Notification middleware executed successfully!');
 
@@ -83,31 +80,11 @@ const managerAssignmentNotification= async (req,res,next)=>{
 
 
 
-    managerSub.forEach(subscription => {
-         wp.sendNotification({
-            endpoint: subscription.endpoint,
-            expirationTime: subscription.expirationTime,
-            keys:{
-                auth: subscription.auth,
-                p256dh: subscription.p256dh
-            }
-        }, managerPayload).catch( err=> console.log(err));
-
-    });
+    sendNotifications(managerSub,managerPayload);
 
 
 
-    requesterSub.forEach(subscription => {
-         wp.sendNotification({
-            endpoint: subscription.endpoint,
-            expirationTime: subscription.expirationTime,
-            keys:{
-                auth: subscription.auth,
-                p256dh: subscription.p256dh
-            }
-        }, requesterPayload).catch( err=> console.log(err));
-
-    });
+    sendNotifications(requesterSub, requesterPayload);
 
     console.log('Notification middleware executed successfully!');
 
@@ -129,17 +106,8 @@ const sendCommentNotification= async (req,res,next)=>{
     });
 
 
-    subscriptions.forEach(subscription => {
-         wp.sendNotification({
-            endpoint: subscription.endpoint,
-            expirationTime: subscription.expirationTime,
-            keys:{
-                auth: subscription.auth,
-                p256dh: subscription.p256dh
-            }
-        }, payload).catch( err=> console.log(err));
-
-    });
+ 
+    sendNotifications(subscriptions,payload);
 
     console.log('Notification middleware executed successfully!');
 
