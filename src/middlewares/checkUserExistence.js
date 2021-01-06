@@ -25,6 +25,8 @@ const checkUserExistance=async(req,res,next)=>{
                 })
             }
         
-        }else{next()}
+        }else{
+            next();
+        }
     }
 export default checkUserExistance;
