@@ -5,7 +5,7 @@ import db from '../models';
 
 
 const findTrip = async (res, query, location, next, offset, limit) => {
-    
+
     try {
         await db.Trip.findAndCountAll({
             limit, offset,
@@ -44,10 +44,7 @@ export const displayNumberOfTrips = async (res, query, next) => {
                                     if (counter === 0) {
                                         let countedTrips = resultSet1.reduce((r, c) => (r[c] = (r[c] || 0) + 1, r), {})
                                         res.json({ countedTrips });
-                                    }
-                                }
-                            })
-                    });
+                                    } } })  });
                 } else {
                     res.status(404).json({ message: 'No trip Found' });
                 }

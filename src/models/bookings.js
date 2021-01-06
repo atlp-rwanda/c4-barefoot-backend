@@ -26,11 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Booking.associate = (models) => {
     Booking.belongsTo(models.Accommodation, {
-<<<<<<< HEAD
-      foreignKey: 'accommodationId',
-=======
       foreignKey: 'AccommodationId',
->>>>>>> main
       as: 'accommodation'
 
     });
