@@ -4,32 +4,29 @@ import db from '../models';
 
 
 
-const findTrip = async (res, query, location, next, offset, limit) => {
-
-    try {
-        await db.Trip.findAndCountAll({
-            limit, offset,
-            where: { destination: location },
-            include: [{
-                model: db.TravelRequest,
-                where: query
-            }]
-
-        }).then((result) => {
-            res.json({ result })
-        })
-
-
-    } catch (error) {
-        next(error)
+const findTrip = async (res, query, location, offset, limit) => {
+    try{
+    const result = await db.Trip.findAndCountAll({
+        limit, offset,
+        where: { destination: location },
+        include: [{
+          model: db.TravelRequest,
+          where: query
+        }]
+  
+      })
+      res.json({ result })
+  
+    } catch (err) {
+      return res.status(401).json(err.message);
     }
 
 };
 
 
-export const displayNumberOfTrips = async (res, query, next) => {
+export const displayNumberOfTrips = async (res, query) => {
     let resultSet1 = [];
-    try {
+    
         await db.TravelRequest.findAndCountAll({ where: query })
             .then((tRequestDataSet) => {
                 if (tRequestDataSet.rows.length > 0) {
@@ -44,14 +41,15 @@ export const displayNumberOfTrips = async (res, query, next) => {
                                     if (counter === 0) {
                                         let countedTrips = resultSet1.reduce((r, c) => (r[c] = (r[c] || 0) + 1, r), {})
                                         res.json({ countedTrips });
-                                    } } })  });
+                                    }
+                                }
+                            })
+                    });
                 } else {
                     res.status(404).json({ message: 'No trip Found' });
                 }
             })
-    } catch (error) {
-        next(error)
-    }
+    
 };
 
 

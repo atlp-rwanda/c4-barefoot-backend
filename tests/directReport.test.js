@@ -4,20 +4,12 @@ import app from '../src/app';
 import 'dotenv/config';
 
 use(chaiHttp);
-<<<<<<< HEAD
-describe('Travel Requests', () => {
-=======
 describe('TRAVEL REQUESTS', () => {
->>>>>>> main
   const user = {
     email: 'sequester@gmail.com',
     password: 'password',
   };
-<<<<<<< HEAD
-  it('Should not get direct travel request if not token has expired', async () => {
-=======
   it('Should not get direct travel request if token has expired', async () => {
->>>>>>> main
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3RfbmFtZSI6Ik0iLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOiJqYWNrc3dhbHRlcjdAZ21haWwuY29tIiwiYWRkcmVzcyI6IktpZ2FsaSIsImxhbmd1YWdlIjoiS2lueWFyd2FuZGEiLCJwcm9maWxlX3BpY3R1cmUiOiJtZS5qcGciLCJpYXQiOjE2MDM4OTg0NDMsImV4cCI6MTYwMzkwNTY0M30.RoVwDUPXmnC9O9CCeexBeNhVbSiFobmXXXCm1tbTPM8';
     const res = await request(app)
       .get('/api/v1/directReports/')

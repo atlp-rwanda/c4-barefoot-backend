@@ -7,11 +7,7 @@ use(chaiHttp);
 
 let User = '';
 
-<<<<<<< HEAD
-describe('Testing booking of accommodations', () => {
-=======
 describe('BOOKINGS END-POINT TEST', () => {
->>>>>>> main
   it('Should book an accommodation', async () => {
     User = await request(app).post('/api/v1/user/login').send(requester);
     const res = await request(app).post('/api/v1/accommodations/book/0ce36391-2c08-3074-bddb-a4ea8cccbbc5').set('Authorization', `Bearer ${User.body.data}`).send(bookDates);
