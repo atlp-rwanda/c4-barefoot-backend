@@ -31,7 +31,8 @@ async function send(){
         method: 'POST',
         body: JSON.stringify(subscription),
         headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiNzI1NGE5ZTctMmUxYi00ZjgzLWFkNzMtNzhiOTBkZDNkZjc3IiwidXNlcm5hbWUiOiJtYW5hZ2VyT25lIiwiaWF0IjoxNjA5NzA1NDA4LCJleHAiOjE2MTAzMTAyMDh9.XPJX4ThWG_dho2pOD0seRypD5DhYfY0B2-5tZI57lTA'
         }
     });
 

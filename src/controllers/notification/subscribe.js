@@ -1,6 +1,7 @@
 const models= require('../../models');
 import { decode } from 'jsonwebtoken';
-import getDataFromToken from '../../helper/gettokenFromCookies';
+import getDataFromToken from '../../helper/tokenToData';
+
 import hasSubscribed from '../../services/subscriptions';
 
 const subscribe= async (req,res, next)=>{
