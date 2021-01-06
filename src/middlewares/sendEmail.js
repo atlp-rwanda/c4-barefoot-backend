@@ -10,13 +10,13 @@ export const sendVerificationEmail = async (req, res, next) => {
   const { first_name, username, email } = req.body;
   const accessToken = generateToken({ username });
 
-  const userInfoVerify = {
+  const userInfo = {
     email: email,
     subject: res.__('Verify your email'),
     html: res.__(`<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='${process.env.FRONTEND_URL}/user/verification?token=${accessToken}'>Link</a>`)
   };
 
-  const sendmail = await sendEmail(userInfoVerify);
+  const sendmail = await sendEmail(userInfo);
 
   try {
     if(sendmail){
@@ -40,13 +40,13 @@ export const sendResetPasswordEmail = async (req, res, next) => {
     if (!userFound.verified) return res.status(401).json({ status: 401, error: res.__('Account not verified') });
     const resetToken = generateToken({ username: userFound.username });
 
-    const userInfoReset = {
+    const userInfo = {
       email: email,
       subject: res.__('Reset your password'),
       html: res.__(`<p>Hello, you requested to reset your password on Barefoot Nomad, Click on the link below to enter new password.</p> <br> <a href='${process.env.FRONTEND_URL}/user/reset-password?token=${resetToken}'><b>Reset password Link</b></a>`)
     };
 
-    const sendmail = await sendEmail(userInfoReset);
+    const sendmail = await sendEmail(userInfo);
 
     if(sendmail){
       return res.status(200).json({ status: 200, message: res.__('Request sent successfully, please check your email to reset your password') });

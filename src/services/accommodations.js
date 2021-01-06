@@ -9,7 +9,7 @@ const getAccommodation = (page = 1) => {
 };
 
 const getSingleAccommodation = (query) => {
-  const singleAccommodation = models.Accommodation.findOne({ where: { id: query }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
+  const singleAccommodation = models.Accommodation.findOne({ where: { id: query }, attributes: { exclude: [res.__('createdAt'), res.__('updatedAt')] } });
   return singleAccommodation;
 };
 
