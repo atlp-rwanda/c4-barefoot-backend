@@ -14,7 +14,9 @@ import amenityRoute from './api/amenityRoute';
 import reviewsRoutes from './api/ratesAndReviewsRoutes';
 import bookingsRoute from './api/bookingsRoute';
 import notiRoute from './api/notification';
-import chatRoutes from './api/chatRoutes';
+// import signinWithGoogleRoute from "./api/signinWithGooglerRoute";
+import chatRoom from './api/chatRoutes';
+
 const routes = express.Router();
 
 routes.use('/user', userRoute);
@@ -32,7 +34,7 @@ routes.use('/admin', permit(['all']), adminRoutes);
 routes.use('/bookings', bookingsRoute);
 routes.use('/profile', userProfile);
 routes.use('/notification', notiRoute);
-routes.use('/chat', chatRoutes);
-
+// routes.use('/google',signinWithGoogleRoute);
+routes.use('/chat/loadUsers', chatRoom);
 
 export default routes;

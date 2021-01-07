@@ -1,29 +1,44 @@
 import express from 'express';
-import http from 'http';
-import socketio from 'socket.io';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
+import http from 'http';
+import socketio from 'socket.io';
 import db from './models/index';
 import routes from './routes/index';
 import ApplicationError from './utils/Errors/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
+// import passport from "passport";
+// import cookieSession from 'cookie-session';
+
+// socket.io
+import newUserConnection from './controllers/chatrooms/chat';
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
+export const io = socketio(server, {
+  cors: {
+    origin: '*'
+  }
+});
+
 app.use(cors());
 app.use(cookieParser());
+// app.use(cookieSession({
+//   name: 'tuto-session',
+//   keys: ['key1', 'key2']
+// }))
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-
+const port = process.env.PORT || 3000;
 
 // routes
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('./src/public'));
 
 // routes
 app.use('/api/v1/', routes);
@@ -45,20 +60,11 @@ sequelize.authenticate()
   .then(() => console.log('Database connected...'))
   .catch((err) => console.log(`Error: ${err}`));
 
-//Run when client connect
-io.on('connection', socket=>{
-  socket.emit('welcome', 'Welcome to the chat area');
-  
-
-});
-
 app.use((err, req, res, next) => {
   const statusCode = err.status || 500;
   res.status(statusCode).json({ status: statusCode, error: err.message, stack: err.stack });
   next(err);
 });
-
-const port = process.env.PORT || 3000;
 
 server.listen(port, () => {
   console.log(`CORS-enabled web server listening on port ${port}  ...`);
@@ -70,5 +76,6 @@ server.listen(port, () => {
     console.log(err);
   }
 });
+io.on('connection', newUserConnection);
 
-export default app;
+export default server;
