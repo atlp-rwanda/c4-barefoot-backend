@@ -6,7 +6,7 @@ name: BarefootNomad
 
 on:
   push:
-    branches: [ main ]
+    branches: [ ft-trip-history ]
   pull_request:
     branches: [ ft-trip-history ]
 
