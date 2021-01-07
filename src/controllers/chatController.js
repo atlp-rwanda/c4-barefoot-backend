@@ -2,7 +2,7 @@ import { Op } from 'sequelize';
 import models from '../models';
 import { verifyToken } from '../utils/auth';
 
-// Getting users from user table to begin chat, this method is called when u have not yet chatted
+// Getting users to begin chat, this is called when user has not yet chatted
 export const getUsersToChatWith = async (req, res, next) => {
   try {
     const users = await models.User.findAll();
@@ -12,7 +12,7 @@ export const getUsersToChatWith = async (req, res, next) => {
   }
 };
 
-// getting chats btn two users
+// getting chats between two users
 export const getChatsBetweenTwoUsers = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
@@ -74,9 +74,9 @@ export const postChat = async (req, res, next) => {
         receiver: req.body.to,
       };
 
-      const chat_message = await models.Chat.create(chat);
-      console.log(chat_message);
-      res.send(chat_message);
+      const chatMessage = await models.Chat.create(chat);
+      console.log(chatMessage);
+      res.send(chatMessage);
     } else {
       res.status(400).json({
         message: 'User does not exist'
@@ -86,27 +86,30 @@ export const postChat = async (req, res, next) => {
     next(err);
   }
 };
+
 export const deleteChatMessage = async (req, res, next) => {
-  try{
+  try {
     const chat = await models.Chat.findOne({
-        where: {
-            uuid: req.body.id
-        }
+      where: {
+        uuid: req.body.id
+      }
     });
-    
-    if(chat){
-        await chat.destroy();
-        res.status(200).json({message: 'Message deleted'});
-    }else{
-        res.status(400).json({message: 'Message not available'});
+    if (chat) {
+      await chat.destroy();
+      res.status(200).json({
+        message: 'Message deleted'
+      });
+    } else {
+      res.status(400).json({
+        message: 'Message not available'
+      });
     }
-    
-    
-}catch(err){
+  } catch (err) {
     next(err);
-}
+  }
 };
-// Getting all chats for one user
+
+// Get all chatList for one user
 export const allChats = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
@@ -125,8 +128,20 @@ export const allChats = async (req, res, next) => {
         }
       }
     });
-
-    res.status(200).json([loggedInUser.username, chats]);
+    const chatListIds = new Set();
+    chats.forEach((chat) => {
+      chatListIds.add(chat.sender);
+      chatListIds.add(chat.receiver);
+    });
+    if (chatListIds.has(loggedInUser.id)) {
+      chatListIds.delete(loggedInUser.id);
+    }
+    const chatList = await models.User.findAll({
+      where: {
+        id: Array.from(chatListIds)
+      }
+    });
+    res.status(200).json(chatList);
   } catch (err) {
     next(err);
   }
