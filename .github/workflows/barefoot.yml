@@ -6,9 +6,9 @@ name: BarefootNomad
 
 on:
   push:
-    branches: [ ft-develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ ft-develop ]
+    branches: [ main ]
 
 
 jobs:
