@@ -27,7 +27,7 @@ module.exports = function (sequelize, DataTypes) {
     returnDate: {
       type: DataTypes.DATE
     },
-    AccommodationId: {
+    accommodationId: {
       type: DataTypes.UUID,
       allowNull: true
     },

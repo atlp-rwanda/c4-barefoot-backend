@@ -39,6 +39,8 @@ var _bookingsRoute = _interopRequireDefault(require("./api/bookingsRoute"));
 
 var _notification = _interopRequireDefault(require("./api/notification"));
 
+var _tripRoute = _interopRequireDefault(require("./api/tripRoute"));
+
 var routes = _express["default"].Router();
 
 routes.use('/user', _user["default"]);
@@ -55,5 +57,6 @@ routes.use('/admin', (0, _accessControl["default"])(['all']), _adminRoutes["defa
 routes.use('/bookings', _bookingsRoute["default"]);
 routes.use('/profile', _userprofile["default"]);
 routes.use('/notification', _notification["default"]);
+routes.use('/trips', _tripRoute["default"]);
 var _default = routes;
 exports["default"] = _default;

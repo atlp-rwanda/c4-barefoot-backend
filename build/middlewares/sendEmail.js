@@ -60,15 +60,16 @@ var sendVerificationEmail = /*#__PURE__*/function () {
             throw new _applicationError["default"]("Failed to send the verification email, please try again!", 500);
 
           case 12:
-            _context.next = 17;
+            _context.next = 18;
             break;
 
           case 14:
             _context.prev = 14;
             _context.t0 = _context["catch"](6);
+            next(_context.t0);
             next(_context.t0.message);
 
-          case 17:
+          case 18:
           case "end":
             return _context.stop();
         }
