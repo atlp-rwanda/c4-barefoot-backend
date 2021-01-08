@@ -30,11 +30,9 @@ export const getTotalOfTripsByLocation = async (req, res,next) => {
     const userid = decoded.id.toString();
     let query = { userId: userid };
     let resultSet1 = [];
-
     let travels = await db.TravelRequest.findAndCountAll({ where: query })
     if (travels.rows.length > 0) {
       let counter = travels.rows.length;
-      //looping in all travel requests to find the trips made by that travel request id
         travels.rows.forEach((trData) => {
             db.Trip.findAll({ where: { travelId: trData.travelId } })
                 .then((tripData) => {
