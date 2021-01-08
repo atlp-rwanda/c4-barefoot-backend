@@ -1,5 +1,6 @@
 
 import getDataFromToken from '../helper/tokenToData';
+import {displayTravelRequest,findTrip,findTripByTravelRequests} from '../services/tripHistorySearch.js'
 import db from '../models';
 
 export const getTripHistory = async (req, res, next) => {
@@ -11,18 +12,12 @@ export const getTripHistory = async (req, res, next) => {
     const limit = req.query.limit;
     const location = req.params.location;
     let query = { userId: userid };
-     
-    let result = await db.Trip.findAndCountAll({
-      limit, offset,
-      where: { destination: location },
-      include: [{
-          model: db.TravelRequest,
-          where: query
-      }]
-
-  })
-    res.json(result)  
+     let trips = await findTrip(query,location,limit,offset)
+  
+    res.json(trips)  
 };
+
+
 
 export const getTotalOfTripsByLocation = async (req, res,next) => {
   const decoded = await getDataFromToken(req, res, next);
@@ -30,28 +25,23 @@ export const getTotalOfTripsByLocation = async (req, res,next) => {
     const userid = decoded.id.toString();
     let query = { userId: userid };
     let resultSet1 = [];
-    let travels = await db.TravelRequest.findAndCountAll({ where: query })
-    if (travels.rows.length > 0) {
+    let travels = await displayTravelRequest(query);
       let counter = travels.rows.length;
         travels.rows.forEach((trData) => {
-            db.Trip.findAll({ where: { travelId: trData.travelId } })
+           db.Trip.findAll({ where: { travelId: trData.travelId } })
                 .then((tripData) => {
                   counter -= 1;
-                  //only selecting trips with destination
+                  //only selecting trips with their destination 
                     let result = tripData.map(a => a.destination);
                     resultSet1.push(result)
                   if (counter === 0) {
-                      //grouping same datas
+                      //grouping same destination trips before displaying them
                         let countedTrips = resultSet1.reduce((r, c) => (r[c] = (r[c] || 0) + 1, r), {})
                         res.json({ countedTrips });
                     }
                 })
         });
-    } else {
-        res.status(404).json({ message: 'No trip Found' });
-    }
   } catch (err) {
     return res.status(401).json(err.message);
   }
 };
-
