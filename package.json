@@ -4,9 +4,7 @@
   "description": "Backend API for Barefoot Nomad ",
   "main": "app.js",
   "scripts": {
-
     "start": "NODE_ENV=production npm run migrate && babel-node ./src/app.js",
-
     "test-local": "cross-env NODE_ENV=development nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
     "db:setup": "cross-env NODE_ENV=test sequelize db:migrate:undo:all && cross-env NODE_ENV=test sequelize db:migrate && cross-env NODE_ENV=test npm run seed",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/app.js",
@@ -49,6 +47,7 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "github-actions-badge": "^1.1.0",
+    "i18n": "^0.13.2",
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.4.14",
