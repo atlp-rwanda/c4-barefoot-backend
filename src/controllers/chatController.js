@@ -118,7 +118,8 @@ export const allChats = async (req, res, next) => {
     const loggedInUser = await models.User.findOne({
       where: {
         username: user.username
-      }
+      },
+      attributes: ['id']
     });
     const chats = await models.Chat.findAll({
       where: {
@@ -126,7 +127,8 @@ export const allChats = async (req, res, next) => {
           sender: loggedInUser.id,
           receiver: loggedInUser.id
         }
-      }
+      },
+      attributes: ['sender', 'receiver']
     });
     const chatListIds = new Set();
     chats.forEach((chat) => {
@@ -139,7 +141,10 @@ export const allChats = async (req, res, next) => {
     const chatList = await models.User.findAll({
       where: {
         id: Array.from(chatListIds)
-      }
+      },
+      attributes: ['id', 'first_name', 'last_name', 'email', 'username', 'occupation',
+        'user_role_id', 'manager_id', 'profile_picture', 'language', 'address'
+      ]
     });
     res.status(200).json(chatList);
   } catch (err) {
