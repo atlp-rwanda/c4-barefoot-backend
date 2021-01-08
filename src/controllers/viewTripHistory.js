@@ -21,9 +21,7 @@ export const getTripHistory = async (req, res, next) => {
       }]
 
   })
-    res.json(result)
-  
-    
+    res.json(result)  
 };
 
 export const getTotalOfTripsByLocation = async (req, res,next) => {
