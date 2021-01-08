@@ -6,7 +6,8 @@ import { verifyToken } from '../utils/auth';
 export const getUsersToChatWith = async (req, res, next) => {
   try {
     const users = await models.User.findAll({
-
+      attributes: ['id', 'first_name', 'last_name', 'email', 'username', 'occupation',
+        'bio', 'user_role_id', 'manager_id', 'profile_picture', 'language', 'address']
     });
     res.send(users);
   } catch (err) {
