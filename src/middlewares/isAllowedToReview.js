@@ -12,7 +12,7 @@ export const isAllowedToReview = async (req, res, next)=>{
             if(hasBooked){
                 next();
             }else{
-                throw new accessDenied('Not allowed to review this accommodation');
+                throw new accessDenied(res.__('Not allowed to review this accommodation'));
             }
 
         }
