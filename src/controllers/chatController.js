@@ -5,7 +5,9 @@ import { verifyToken } from '../utils/auth';
 // Getting users to begin chat, this is called when user has not yet chatted
 export const getUsersToChatWith = async (req, res, next) => {
   try {
-    const users = await models.User.findAll();
+    const users = await models.User.findAll({
+
+    });
     res.send(users);
   } catch (err) {
     next(err);
@@ -110,7 +112,7 @@ export const deleteChatMessage = async (req, res, next) => {
 };
 
 // Get all chatList for one user
-export const allChats = async (req, res, next) => {
+export const getChatList = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
@@ -149,5 +151,34 @@ export const allChats = async (req, res, next) => {
     res.status(200).json(chatList);
   } catch (err) {
     next(err);
+  }
+};
+
+// mark chat message as read
+export const markAsRead = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1];
+    const user = await verifyToken(token);
+    const receiver = await models.User.findOne({
+      where: {
+        username: user.username
+      },
+      attributes: ['id']
+    });
+    await models.Chat.update(
+      { status: true },
+      {
+        where: {
+          receiver: receiver.id,
+          sender: req.body.sender
+        }
+      }
+    );
+    return res.status(200).json({
+      message: 'marked as read'
+    });
+  } catch (error) {
+    next(error);
   }
 };
