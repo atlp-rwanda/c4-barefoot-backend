@@ -25,9 +25,7 @@ const expiredBookings = async () => {
         checkedout: false
       }
     });
-    if (!booking[0]) {
-      throw new notFound('You do not have any bookings');
-    }
+    
     booking.forEach(async singleBooking => {
       // 
       await models.Accommodation.increment(
@@ -51,6 +49,7 @@ const expiredBookings = async () => {
         checkedout: false
       }
     })
+    return 'Bookings checked out';
   } catch (error) {
     console.log(error);
   }
