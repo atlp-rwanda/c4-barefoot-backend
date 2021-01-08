@@ -12,7 +12,7 @@ const createTravelRequest = async (req, res, request, next) => {
             db.Trip.bulkCreate(req.body.trip, { hooks: true })
               .then((tripData) => {
                 const allData = { ...tRequestData.get({ plain: true }), tripData };
-                res.json({ message: 'Trip request sent successfully', data: allData });
+                res.json({ message: res.__('Trip request sent successfully'), data: allData });
               })
               .catch((err) => { next(err); });
           }

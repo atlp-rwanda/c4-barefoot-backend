@@ -20,10 +20,10 @@ const TravelRequestComment = async (req, res, next) => {
           next(err);
         }
       } else {
-        throw new BadRequestError('You must provide comment');
+        throw new BadRequestError(res.__('You must provide comment'));
       }
     } else {
-      throw new BadRequestError('You must provide request id');
+      throw new BadRequestError(res.__('You must provide request id'));
     }
   } catch (err) {
     next(err);
