@@ -1,0 +1,11 @@
+[
+  "20190801105352-role.js",
+  "20201016184815-user.js",
+  "20201111044234-Travel_request.js",
+  "20201112054253-location.js",
+  "20201112055407-accommodation.js",
+  "20201112060424-amenity.js",
+  "20201116055408-comments.js",
+  "20201119180537-notification.js",
+  "20201123091449-bookings.js"
+]
