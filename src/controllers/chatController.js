@@ -24,12 +24,14 @@ export const getChatsBetweenTwoUsers = async (req, res, next) => {
     const loggedInUser = await models.User.findOne({
       where: {
         username: user.username
-      }
+      },
+      attributes: ['id']
     });
     const userToChatWith = await models.User.findOne({
       where: {
         id: req.params.id
-      }
+      },
+      attributes: ['id']
     });
 
     const chats = await models.Chat.findAll({
@@ -42,11 +44,14 @@ export const getChatsBetweenTwoUsers = async (req, res, next) => {
           { sender: req.params.id },
           { receiver: loggedInUser.id }
         )
-      )
+      ),
+      order: [
+        ['createdAt', 'DESC']
+      ]
     });
     res.status(200).json({
-      currentUser: loggedInUser.username,
-      otherUser: userToChatWith.username,
+      currentUser: loggedInUser.id,
+      otherUser: userToChatWith.id,
       chats
     });
   } catch (err) {
@@ -54,12 +59,12 @@ export const getChatsBetweenTwoUsers = async (req, res, next) => {
   }
 };
 
+// send chatMessage to someone registered
 export const postChat = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
     const user = await verifyToken(token);
-    // getting the user_id of the logged in user
     const loggedInUser = await models.User.findOne({
       where: {
         username: user.username
@@ -78,7 +83,6 @@ export const postChat = async (req, res, next) => {
       };
 
       const chatMessage = await models.Chat.create(chat);
-      console.log(chatMessage);
       res.send(chatMessage);
     } else {
       res.status(400).json({
@@ -90,11 +94,20 @@ export const postChat = async (req, res, next) => {
   }
 };
 
+// delete a message if you are the sender
 export const deleteChatMessage = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+  const user = await verifyToken(token);
+  const currentUser = await models.User.findOne({
+    where: { username: user.username },
+    attributes: ['id']
+  });
   try {
     const chat = await models.Chat.findOne({
       where: {
-        uuid: req.body.id
+        uuid: req.body.id,
+        sender: currentUser.id
       }
     });
     if (chat) {
@@ -179,6 +192,42 @@ export const markAsRead = async (req, res, next) => {
     return res.status(200).json({
       message: 'marked as read'
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// visitor message incomming
+export const visitorMessage = async (req, res, next) => {
+  try {
+    const chatV = {};
+    chatV.visitor = req.body.visitor;
+    chatV.message = req.body.message;
+    chatV.sender = chatV.visitor;
+    const newChatV = await models.ChatV.create(chatV);
+    res.status(200).json(newChatV);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// response from support to visitor
+export const supportResponse = async (req, res, next) => {
+  try {
+    const chatV = {};
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1];
+    const user = await verifyToken(token);
+    const loggedInUser = await models.User.findOne({
+      where: { username: user.username },
+      attributes: ['id', 'email']
+    });
+    chatV.sender = loggedInUser.email;
+    chatV.message = req.body.message;
+    chatV.visitor = req.body.visitor;
+
+    const newChatV = await models.ChatV.create(chatV);
+    return res.status(200).json(newChatV);
   } catch (error) {
     next(error);
   }

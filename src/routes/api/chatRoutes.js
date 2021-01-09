@@ -1,8 +1,10 @@
 import express from 'express';
 import verifyUserToken from '../../middlewares/usertokenverification';
 import {
-  getChatList, getChatsBetweenTwoUsers, getUsersToChatWith, postChat, markAsRead,
+  getChatList, getChatsBetweenTwoUsers, getUsersToChatWith, postChat, markAsRead, deleteChatMessage,
+  visitorMessage, supportResponse
 } from '../../controllers/chatController';
+import permit from '../../middlewares/accessControl';
 
 const router = express.Router();
 
@@ -21,4 +23,13 @@ router.post('/', verifyUserToken, postChat);
 // mark the message status to `true` by receiver
 router.patch('/read', verifyUserToken, markAsRead);
 
-module.exports = router;
+// delete a chat
+router.delete('/', verifyUserToken, deleteChatMessage);
+
+// visitor's messages incoming
+router.post('/visitor', visitorMessage);
+
+// support's response to visitor
+router.post('/support', verifyUserToken, supportResponse);
+
+export default router;
