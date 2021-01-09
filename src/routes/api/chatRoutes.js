@@ -2,7 +2,7 @@ import express from 'express';
 import verifyUserToken from '../../middlewares/usertokenverification';
 import {
   getChatList, getChatsBetweenTwoUsers, getUsersToChatWith, postChat, markAsRead, deleteChatMessage,
-  visitorMessage, supportResponse
+  visitorMessage, supportResponse, readAsVisitor, readAsSupport
 } from '../../controllers/chatController';
 import permit from '../../middlewares/accessControl';
 
@@ -29,7 +29,13 @@ router.delete('/', verifyUserToken, deleteChatMessage);
 // visitor's messages incoming
 router.post('/visitor', visitorMessage);
 
+// visitor reads the support message
+router.patch('/visitor', readAsVisitor);
+
 // support's response to visitor
 router.post('/support', verifyUserToken, supportResponse);
+
+// support reads the visitor message
+router.patch('/support', verifyUserToken, readAsSupport);
 
 export default router;

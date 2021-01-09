@@ -232,3 +232,45 @@ export const supportResponse = async (req, res, next) => {
     next(error);
   }
 };
+
+// visitor reads the support message
+export const readAsVisitor = async (req, res, next) => {
+  try {
+    await models.ChatV.update(
+      { status: true },
+      {
+        where: {
+          visitor: req.body.visitor,
+          sender: {
+            [Op.ne]: req.body.visitor
+          }
+        }
+      }
+    );
+    res.status(200).send({
+      message: 'marked as read!'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// read visitor's messages as any from support
+export const readAsSupport = async (req, res, next) => {
+  try {
+    await models.ChatV.update(
+      { status: true },
+      {
+        where: {
+          visitor: req.body.visitor,
+          sender: req.body.visitor
+        }
+      }
+    );
+    res.status(200).send({
+      message: 'marked as read!'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
