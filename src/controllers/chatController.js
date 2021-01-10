@@ -39,10 +39,10 @@ export const getChatsBetweenTwoUsers = async (req, res, next) => {
       where: models.Sequelize.or(
         models.Sequelize.and(
           { sender: loggedInUser.id, },
-          { receiver: req.params.id }
+          { receiver: userToChatWith.id }
         ),
         models.Sequelize.and(
-          { sender: req.params.id },
+          { sender: userToChatWith.id },
           { receiver: loggedInUser.id }
         )
       ),
@@ -57,6 +57,54 @@ export const getChatsBetweenTwoUsers = async (req, res, next) => {
     });
   } catch (err) {
     next(err);
+  }
+};
+
+// getting chats between two users
+export const getLastMessageBetweenTwo = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1];
+    const user = await verifyToken(token);
+    const loggedInUser = await models.User.findOne({
+      where: {
+        username: user.username
+      },
+      attributes: ['id']
+    });
+    const userToChatWith = await models.User.findOne({
+      where: {
+        id: req.params.id
+      },
+      attributes: ['id']
+    });
+
+    if (userToChatWith instanceof models.User) {
+      const lastMessage = await models.Chat.findOne({
+        where: {
+          [Op.or]: {
+            sender: loggedInUser.id,
+            receiver: loggedInUser.id
+          },
+          [Op.or]: {
+            sender: userToChatWith.id,
+            receiver: userToChatWith.id
+          }
+        },
+        order: [
+          ['createdAt', 'DESC']
+        ]
+      });
+      res.status(200).json({
+        currentUser: loggedInUser.id,
+        otherUser: userToChatWith.id,
+        lastMessage
+      });
+    } else {
+      throw new ApplicationError('User not found', 404);
+    }
+  } catch (err) {
+    //
   }
 };
 

@@ -2,7 +2,7 @@ import express from 'express';
 import verifyUserToken from '../../middlewares/usertokenverification';
 import {
   getChatList, getChatsBetweenTwoUsers, getUsersToChatWith, postChat, markAsRead, deleteChatMessage,
-  visitorMessage, supportResponse, readAsVisitor, readAsSupport, getChatsV
+  visitorMessage, supportResponse, readAsVisitor, readAsSupport, getChatsV, getLastMessageBetweenTwo
 } from '../../controllers/chatController';
 import permit from '../../middlewares/accessControl';
 
@@ -13,6 +13,9 @@ router.get('/loadUsers', verifyUserToken, getUsersToChatWith);
 
 // router.get('/recentChats', verifyUserToken, getRecentChatUsers);
 router.get('/:id', verifyUserToken, getChatsBetweenTwoUsers);
+
+// get last message between two users
+router.get('/last/:id', verifyUserToken, getLastMessageBetweenTwo);
 
 // getting chats for one user
 router.get('/chatlist/me', verifyUserToken, getChatList);
