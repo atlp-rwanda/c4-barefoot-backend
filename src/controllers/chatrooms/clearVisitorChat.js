@@ -3,7 +3,8 @@ import models from '../../models';
 
 const clearVisitorChat = async () => {
   const now = new Date();
-  now.setDate(now.getDate() - 15);
+  const lifetime = process.env.VISITOR_CHAT_LIFETIME || 15;
+  now.setDate(now.getDate() - lifetime);
   const deleteBefore = now.toISOString();
   try {
     const chatV = await models.ChatV.destroy({
