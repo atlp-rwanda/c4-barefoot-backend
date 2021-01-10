@@ -82,13 +82,13 @@ export const getLastMessageBetweenTwo = async (req, res, next) => {
     if (userToChatWith instanceof models.User) {
       const lastMessage = await models.Chat.findOne({
         where: {
-          [Op.or]: {
-            sender: loggedInUser.id,
-            receiver: loggedInUser.id
-          },
-          [Op.or]: {
-            sender: userToChatWith.id,
-            receiver: userToChatWith.id
+          [Op.and]: {
+            sender: {
+              [Op.or]: [userToChatWith.id, loggedInUser.id]
+            },
+            receiver: {
+              [Op.or]: [userToChatWith.id, loggedInUser.id]
+            }
           }
         },
         order: [
