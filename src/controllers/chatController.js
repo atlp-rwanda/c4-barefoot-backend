@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import models from '../models';
 import { verifyToken } from '../utils/auth';
+import ApplicationError from '../utils/Errors/applicationError';
 
 // Getting users to begin chat, this is called when user has not yet chatted
 export const getUsersToChatWith = async (req, res, next) => {
@@ -270,6 +271,23 @@ export const readAsSupport = async (req, res, next) => {
     res.status(200).send({
       message: 'marked as read!'
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// get chats between visitor and support teams
+export const getChatsV = async (req, res, next) => {
+  try {
+    const chatsV = await models.ChatV.findAll({
+      where: {
+        visitor: req.body.visitor
+      },
+      order: [
+        ['createdAt', 'DESC']
+      ]
+    });
+    res.status(200).send(chatsV);
   } catch (error) {
     next(error);
   }
