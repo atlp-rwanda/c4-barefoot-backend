@@ -24,4 +24,3 @@ describe('USER PROFILE END-POINTS TESTING', () => {
     expect(res).to.have.status(200);
   });
 });
-
