@@ -1,10 +1,10 @@
 import express from 'express';
 import verifyUserToken from '../../middlewares/usertokenverification';
 import {
-  getChatList, getChatsBetweenTwoUsers, getUsersToChatWith, postChat, markAsRead, deleteChatMessage,
-  visitorMessage, supportResponse, readAsVisitor, readAsSupport, getChatsV, getLastMessageBetweenTwo
+  getChatList, getChatsBetweenTwoUsers, getUsersToChatWith, postChat, markAsRead,
+  deleteChatMessage, visitorMessage, supportResponse, readAsVisitor, readAsSupport,
+  getChatsV, getLastMessageBetweenTwo
 } from '../../controllers/chatController';
-import permit from '../../middlewares/accessControl';
 
 const router = express.Router();
 
