@@ -20,7 +20,6 @@ import triproute from './api/tripRoute'
 import signinWithGoogleRoute from "./api/signinWithGooglerRoute";
 import chatRoom from './api/chatRoutes';
 
-
 const routes = express.Router();
 
 routes.use('/user', userRoute);
@@ -43,6 +42,5 @@ routes.use('/trips', triproute)
 
 routes.use('/google',signinWithGoogleRoute);
 routes.use('/chat', chatRoom);
-
 
 export default routes;
