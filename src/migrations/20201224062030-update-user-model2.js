@@ -8,10 +8,11 @@ module.exports = {
     ]);
   },
 
-  down: (queryInterface) => {
+  down: (queryInterface,Sequelize) => {
     return Promise.all([
       queryInterface.changeColumn('Users', 'address', {
-        allowNull: true
+        allowNull: true,
+        type: Sequelize.STRING
       })
     ]);
   },
