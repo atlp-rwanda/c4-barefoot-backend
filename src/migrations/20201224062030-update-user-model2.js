@@ -9,6 +9,10 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return Promise.all([queryInterface.changeColumn('Users', 'address')]);
+    return Promise.all([
+      queryInterface.changeColumn('Users', 'address', {
+        allowNull: true
+      })
+    ]);
   },
 };

@@ -10,34 +10,12 @@ let should = chai.should();
 
 chai.use(chaiHttp)
 
-let req={body:{},
-        user:{
-          provider: 'google',
-          sub: '106180666226862347646',
-          id: '106180666226862347646',
-          displayName: 'Niyonkuru Blaise',
-          name: { givenName: 'Niyonkuru', familyName: 'Blaise' },
-          given_name: 'Niyonkuru',
-          family_name: 'Blaise',
-          email_verified: true,
-          verified: true,
-          language: 'en',
-          locale: undefined,
-          email: 'blaiseniyonkuru12@gmail.com',
-          emails: [ { value: 'blaiseniyonkuru12@gmail.com', type: 'account' } ],
-          photos: [
-            {
-              value: 'https://lh3.googleusercontent.com/a-/AOh14Ghe0RBclUzQrw32zJrUjIY-uN7XjLnYNr4SIX7U=s96-c',
-              type: 'default'
-            }
-          ]
-        }};
 
-let req2={body:{},
+let req={body:{},
           user:{
             provider: 'google',
-            sub: '10618066622686234753',
-            id: '106180666226862347643',
+            sub: '10618066698786234753',
+            id: '106180666568862347643',
             displayName: 'test one',
             name: { givenName: 'test', familyName: 'one' },
             given_name: 'test',
@@ -50,7 +28,7 @@ let req2={body:{},
             emails: [ { value: 'test@gmail.com', type: 'account' } ],
             photos: [
               {
-                value: 'https://lh3.googleusercontent.com/a-/AOh14Ghe0RBclUzQrw32zJrUjIY-uN7XjLnYNr4SIX7U=s96-c',
+                value: 'https://lh3.googleusercontent.com/a-/AOh14Ghe0xffggdrlUzQrw32zJrUjIY-uN7XjLnYNr4SIX7U=s96-c',
                 type: 'default'
               }
             ]
@@ -68,7 +46,19 @@ describe('#Sign Up with Google',()=>{
         done()
       });
 
-    it('It should signIn a user with his google account',(done)=>{
+      it('It should first signUp a user if he has no account and then signIn the user',(done)=>{
+          chai.request(app)
+          .get('/api/v1/google/signup')
+          .send(req)
+          .end((err,res)=>{
+            res.should.have.status(200);
+            res.body.should.be.a('Object');
+            res.body.should.have.property('message').eql('successfully Logged In')
+            done()
+          })  
+    })
+
+     it('It should signIn a user with his google account',(done)=>{
         chai.request(app)
         .get('/api/v1/google/signup')
         .send(req)
@@ -79,18 +69,6 @@ describe('#Sign Up with Google',()=>{
           done()
         })
       })
-
-      it('It should first signUp a user if he has no account and then signIn the user',(done)=>{
-          chai.request(app)
-          .get('/api/v1/google/signup')
-          .send(req2)
-          .end((err,res)=>{
-            res.should.have.status(200);
-            res.body.should.be.a('Object');
-            res.body.should.have.property('message').eql('successfully Logged In')
-            done()
-          })  
-    })
     it('It should redirect to signUp',(done)=>{
       let res={
         redirect:function(){}
