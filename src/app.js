@@ -13,6 +13,7 @@ import swaggerConfigs from './config/swaggerDoc';
 import passport from "passport";
 import cookieSession from 'cookie-session';
 import i18n from './controllers/i18n';
+import './controllers/chatrooms/clearVisitorChat';
 import newUserConnection from './controllers/chatrooms/chat';
 
 
