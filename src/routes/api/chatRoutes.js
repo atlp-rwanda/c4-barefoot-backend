@@ -3,22 +3,25 @@ import verifyUserToken from '../../middlewares/usertokenverification';
 import {
   getChatList, getChatsBetweenTwoUsers, getUsersToChatWith, postChat, markAsRead,
   deleteChatMessage, visitorMessage, supportResponse, readAsVisitor, readAsSupport,
-  getChatsV, getLastMessageBetweenTwo, getVisitorsList
+  getChatsV, getLastMessageBetweenTwo, getVisitorsList, getUnreadMessages
 } from '../../controllers/chatController';
 
 const router = express.Router();
 
 // loading users for the first time
-router.get('/loadUsers', verifyUserToken, getUsersToChatWith);
+router.get('/users', verifyUserToken, getUsersToChatWith);
 
 // router.get('/recentChats', verifyUserToken, getRecentChatUsers);
-router.get('/:id', verifyUserToken, getChatsBetweenTwoUsers);
+router.get('/', verifyUserToken, getChatsBetweenTwoUsers);
+
+// get number of unreads between two users
+router.get('/unread', verifyUserToken, getUnreadMessages);
 
 // get last message between two users
-router.get('/last/:id', verifyUserToken, getLastMessageBetweenTwo);
+router.get('/last', verifyUserToken, getLastMessageBetweenTwo);
 
 // getting chats for one user
-router.get('/chatlist/me', verifyUserToken, getChatList);
+router.get('/chatlist', verifyUserToken, getChatList);
 
 // loading users you recently chatted with
 router.post('/', verifyUserToken, postChat);
@@ -42,9 +45,9 @@ router.post('/support', verifyUserToken, supportResponse);
 router.patch('/support', verifyUserToken, readAsSupport);
 
 // support gets list of visitors chatting
-router.get('/support/visitors', verifyUserToken, getVisitorsList);
+router.get('/visitors', verifyUserToken, getVisitorsList);
 
 // support gets the visitor's message
-router.get('/support/visitor', verifyUserToken, getChatsV);
+router.get('/visitor', verifyUserToken, getChatsV);
 
 export default router;
