@@ -340,3 +340,21 @@ export const getChatsV = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getVisitorsList = async (req, res, next) => {
+  try {
+    const chats = await models.ChatV.findAll({
+      attributes: ['visitor'],
+      order: [
+        ['createdAt', 'DESC']
+      ]
+    });
+    const chatListVisitors = new Set();
+    chats.forEach((chat) => {
+      chatListVisitors.add(chat.visitor);
+    });
+    res.status(200).json(Array.from(chatListVisitors));
+  } catch (err) {
+    next(err);
+  }
+};
