@@ -135,7 +135,7 @@ export const updateLocation = {
 
 export const validAccommodation = {
 
-  id: '0ce36391-2c08-3074-bddb-a4ea8cccbbc8',
+  // id: '0ce36391-2c08-3074-bddb-a4ea8cccbbc8',
   country: 'Rwanda',
   city: 'Kigali',
   state: 'Nyarugenge',

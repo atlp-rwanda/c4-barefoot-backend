@@ -33,7 +33,7 @@ const expiredBookings = async () => {
           numberOfRooms: +1
         }, {
           where: {
-          id: singleBooking.accommodationId
+          id: singleBooking.AccommodationId
         }
       })
       // 
