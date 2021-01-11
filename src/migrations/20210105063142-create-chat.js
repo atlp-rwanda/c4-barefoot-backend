@@ -1,33 +1,33 @@
-'use strict';
 module.exports = {
   up: async (queryInterface, DataTypes) => {
     await queryInterface.createTable('Chats', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
-      },
-      uuid: {
-        type: DataTypes.UUID
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.fn('uuid_generate_v4')
       },
       sender: {
         type: DataTypes.UUID,
-        allowNull:false
+        allowNull: false
       },
       receiver: {
         type: DataTypes.UUID,
-        allowNull:false
+        allowNull: false
       },
       message: {
-        type: DataTypes.TEXT
+        type: DataTypes.TEXT,
+        allowNull: false
       },
-      file: {
-        type: DataTypes.STRING
+      type: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        default: 'plain-text'
       },
       status: {
         type: DataTypes.BOOLEAN,
-        allowNull:false
+        allowNull: false,
+        default: false
       },
       createdAt: {
         allowNull: false,
