@@ -19,7 +19,7 @@ const assignUserTomanagerEmail = async (email) => {
   const mailOptions = {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: email,
-    subject: 'Verify your email',
+    subject: res.__('Verify your email'),
     html: '<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> You was assigned to a manager.</p> <br>'
   };
 
@@ -36,7 +36,7 @@ export const approveTravelRequestEmail = async (email, action) => {
   const mailOptions = {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: email,
-    subject: 'Rejected travel request',
+    subject: res.__('Rejected travel request'),
     html: `<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> Your travel request was ${action}d.</p> <br>`
   };
 
@@ -53,7 +53,7 @@ export const cancelTravelRequestEmail = async (email, action) => {
   const mailOptions = {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: email,
-    subject: 'Rejected travel request',
+    subject: res.__('Rejected travel request'),
     html: `<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> You ${action}ed your travel request
     .</p> <br>`
   };
