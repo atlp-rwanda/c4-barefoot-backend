@@ -3,7 +3,7 @@ import verifyUserToken from '../../middlewares/usertokenverification';
 import {
   getChatList, getChatsBetweenTwoUsers, getUsersToChatWith, postChat, markAsRead,
   deleteChatMessage, visitorMessage, supportResponse, readAsVisitor, readAsSupport,
-  getChatsV, getLastMessageBetweenTwo
+  getChatsV, getLastMessageBetweenTwo, getVisitorsList
 } from '../../controllers/chatController';
 
 const router = express.Router();
@@ -40,6 +40,9 @@ router.post('/support', verifyUserToken, supportResponse);
 
 // support reads the visitor message
 router.patch('/support', verifyUserToken, readAsSupport);
+
+// support gets list of visitors chatting
+router.get('/support/visitors', verifyUserToken, getVisitorsList);
 
 // support gets the visitor's message
 router.get('/support/visitor', verifyUserToken, getChatsV);
