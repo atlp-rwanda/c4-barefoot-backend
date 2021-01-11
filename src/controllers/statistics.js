@@ -2,14 +2,7 @@ import models from '../models'
 import UserServices from '../services/user.service';
 
 const getStatistics = async function (req, res, next) {
-    // const { page } = req.query;
-    // const options = {
-    //     attributes: ['id', 'username', 'address'],
-    //     page, // Default 1
-    //     paginate: 5, // Default 25
-    //     order: [['username', 'DESC']],
-    //     manager_id: !null
-    // };
+   
     const { Op } = require("sequelize");
     const activeUsers = await models.User.findAll({
         where: {
@@ -55,11 +48,9 @@ accommodations.forEach(accommodation => {
     }
 });
 let sortedAccomodatio = []
-
 for( const key in accommodationArr){
     sortedAccomodatio.push([key,accommodationArr[key]])
 }
-
 sortedAccomodatio.sort(function(a, b) {
     return b[1] - a[1];
 });
