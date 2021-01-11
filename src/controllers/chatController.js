@@ -30,7 +30,7 @@ export const getChatsBetweenTwoUsers = async (req, res, next) => {
     });
     const userToChatWith = await models.User.findOne({
       where: {
-        id: req.params.id
+        id: req.body.id
       },
       attributes: ['id']
     });
@@ -74,7 +74,7 @@ export const getLastMessageBetweenTwo = async (req, res, next) => {
     });
     const userToChatWith = await models.User.findOne({
       where: {
-        id: req.params.id
+        id: req.body.id
       },
       attributes: ['id']
     });
@@ -356,5 +356,47 @@ export const getVisitorsList = async (req, res, next) => {
     res.status(200).json(Array.from(chatListVisitors));
   } catch (err) {
     next(err);
+  }
+};
+
+export const getUnreadMessages = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1];
+    const user = await verifyToken(token);
+    const loggedInUser = await models.User.findOne({
+      where: {
+        username: user.username
+      },
+      attributes: ['id']
+    });
+    const userToChatWith = await models.User.findOne({
+      where: {
+        id: req.body.id
+      },
+      attributes: ['id']
+    });
+
+    if (userToChatWith instanceof models.User) {
+      const unreadMessages = await models.Chat.findAndCountAll({
+        where: {
+          sender: userToChatWith.id,
+          receiver: loggedInUser.id,
+          status: false
+        },
+        order: [
+          ['createdAt', 'DESC']
+        ]
+      });
+      res.status(200).json({
+        currentUser: loggedInUser.id,
+        otherUser: userToChatWith.id,
+        unreadMessages
+      });
+    } else {
+      throw new ApplicationError('User not found', 404);
+    }
+  } catch (err) {
+    //
   }
 };
