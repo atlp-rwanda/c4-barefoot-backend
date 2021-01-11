@@ -8,15 +8,12 @@ const subscribe= async (req,res, next)=>{
     const decoded= await getDataFromToken(req,res,next);
     const subscription= req.body;
 
-    // console.log('@@@@@@@@@hasSubscribed: ', await hasSubscribed(subscription.keys.auth));
-
     if(await hasSubscribed(subscription.keys.auth)){
         console.log('You have already subscribed');
         res.status(200).json('You have already subscribed');
     }
     else{
-        // console.log(subscription);
-        // console.log('############Token: ',decoded.dataValues.id)
+
     
         const data= await models.Subscription.create({
             endpoint: subscription.endpoint,
