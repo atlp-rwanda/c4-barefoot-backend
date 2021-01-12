@@ -5,7 +5,7 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
-        defaultValue: DataTypes.fn('uuid_generate_v4')
+        default: DataTypes.fn('uuid_generate_v4')
       },
       sender: {
         type: DataTypes.UUID,
