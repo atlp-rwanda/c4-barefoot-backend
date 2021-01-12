@@ -210,4 +210,3 @@ describe('USER END-POINTS TESTING', () => {
     expect(res.body.error).to.have.equal('invalidemail@gmail.com does not exist!');
   });
 });
-
