@@ -5,8 +5,6 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 import http from 'http';
-// import passport from "passport";
-// import cookieSession from 'cookie-session';
 import socketio from 'socket.io';
 import db from './models/index';
 import routes from './routes/index';
