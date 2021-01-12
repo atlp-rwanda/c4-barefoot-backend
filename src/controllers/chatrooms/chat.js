@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { verify } from 'jsonwebtoken';
 import { io } from '../../app';
 import Chat from '../../models/chat';
 import models from '../../models';
@@ -23,7 +23,8 @@ const newMessage = async (data) => {
   }
 };
 
-export const userDisconnected = () => {
+const userDisconnected = (socket) => {
+  console.log('User left : ', socket.id);
   io.emit('disconnected', {
     message: 'someone just left :\'(',
     who: ['hunted', 'bug']
@@ -31,6 +32,14 @@ export const userDisconnected = () => {
 };
 
 export const newUserConnection = (socket) => {
+  // Connection now authenticated to receive further events
+  //   console.log('user authenticated');
+  //   socket.on('message', (message) => {
+  //     io.emit('message', message);
+  //   }
+  // socket.on('authenticate', (token) => {
+  //   verify(token);
+  console.log('User connected : ', socket.id);
   socket.broadcast.emit('new-connection', {
     message: 'someone just connected',
     who: ['firstname', 'lastname']

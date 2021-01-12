@@ -5,6 +5,8 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 import http from 'http';
+// import passport from "passport";
+// import cookieSession from 'cookie-session';
 import socketio from 'socket.io';
 import db from './models/index';
 import routes from './routes/index';
@@ -13,8 +15,9 @@ import swaggerConfigs from './config/swaggerDoc';
 import passport from "passport";
 import cookieSession from 'cookie-session';
 import i18n from './controllers/i18n';
-import './controllers/chatrooms/clearVisitorChat';
 import newUserConnection from './controllers/chatrooms/chat';
+import socketAuth from './controllers/chatrooms/socketAuth';
+import './controllers/chatrooms/clearVisitorChat';
 
 
 const app = express();
@@ -80,6 +83,6 @@ server.listen(port, () => {
     console.log(err);
   }
 });
-io.on('connection', newUserConnection);
+io.use(socketAuth).on('connection', newUserConnection);
 
 export default app;
