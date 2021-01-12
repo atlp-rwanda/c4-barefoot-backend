@@ -30,7 +30,7 @@ export const getChatsBetweenTwoUsers = async (req, res, next) => {
     });
     const userToChatWith = await models.User.findOne({
       where: {
-        id: req.body.id
+        id: req.query.id
       },
       attributes: ['id']
     });
@@ -74,7 +74,7 @@ export const getLastMessageBetweenTwo = async (req, res, next) => {
     });
     const userToChatWith = await models.User.findOne({
       where: {
-        id: req.body.id
+        id: req.query.id
       },
       attributes: ['id']
     });
@@ -95,16 +95,12 @@ export const getLastMessageBetweenTwo = async (req, res, next) => {
           ['createdAt', 'DESC']
         ]
       });
-      res.status(200).json({
-        currentUser: loggedInUser.id,
-        otherUser: userToChatWith.id,
-        lastMessage
-      });
+      res.status(200).json(lastMessage);
     } else {
       throw new ApplicationError('User not found', 404);
     }
   } catch (err) {
-    //
+    next(err);
   }
 };
 
@@ -154,7 +150,7 @@ export const deleteChatMessage = async (req, res, next) => {
   try {
     const chat = await models.Chat.findOne({
       where: {
-        id: req.body.id,
+        id: req.query.id,
         sender: currentUser.id
       }
     });
@@ -230,7 +226,7 @@ export const markAsRead = async (req, res, next) => {
     });
     const sender = await models.User.findOne({
       where: {
-        id: req.body.sender,
+        id: req.query.sender,
       },
       attributes: ['id']
     });
@@ -311,20 +307,32 @@ export const supportResponse = async (req, res, next) => {
 // visitor reads the support message
 export const readAsVisitor = async (req, res, next) => {
   try {
-    await models.ChatV.update(
-      { status: true },
-      {
-        where: {
-          visitor: req.body.visitor,
-          sender: {
-            [Op.ne]: req.body.visitor
+    const visitor = await models.ChatV.findOne({
+      where: {
+        visitor: req.query.visitor,
+        sender: req.query.visitor,
+      }
+    });
+    if (visitor) {
+      await models.ChatV.update(
+        { status: true },
+        {
+          where: {
+            visitor: visitor.visitor,
+            sender: {
+              [Op.ne]: visitor.visitor
+            }
           }
         }
-      }
-    );
-    res.status(200).send({
-      message: 'marked as read!'
-    });
+      );
+      res.status(200).send({
+        message: 'marked as read!'
+      });
+    } else {
+      res.status(404).send({
+        message: 'User not found'
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -335,8 +343,8 @@ export const readAsSupport = async (req, res, next) => {
   try {
     const visitor = await models.ChatV.findOne({
       where: {
-        visitor: req.body.visitor,
-        sender: req.body.visitor,
+        visitor: req.query.visitor,
+        sender: req.query.visitor,
       }
     });
     if (visitor) {
@@ -344,8 +352,8 @@ export const readAsSupport = async (req, res, next) => {
         { status: true },
         {
           where: {
-            visitor: req.body.visitor,
-            sender: req.body.visitor
+            visitor: visitor.visitor,
+            sender: visitor.visitor
           }
         }
       );
@@ -367,7 +375,7 @@ export const getChatsV = async (req, res, next) => {
   try {
     const chatsV = await models.ChatV.findAll({
       where: {
-        visitor: req.body.visitor
+        visitor: req.query.visitor
       },
       order: [
         ['createdAt', 'DESC']
@@ -410,7 +418,7 @@ export const getUnreadMessages = async (req, res, next) => {
     });
     const userToChatWith = await models.User.findOne({
       where: {
-        id: req.body.id
+        id: req.query.id
       },
       attributes: ['id']
     });
@@ -435,7 +443,7 @@ export const getUnreadMessages = async (req, res, next) => {
       throw new ApplicationError('User not found', 404);
     }
   } catch (err) {
-    //
+    next(err);
   }
 };
 
@@ -443,14 +451,14 @@ export const visitorGetsChatVs = async (req, res, next) => {
   try {
     const hasChattedBefore = await models.ChatV.findOne({
       where: {
-        visitor: req.body.visitor,
-        sender: req.body.visitor
+        visitor: req.query.visitor,
+        sender: req.query.visitor
       }
     });
     if (hasChattedBefore) {
       const chatVs = await models.ChatV.findAll({
         where: {
-          visitor: req.body.visitor
+          visitor: hasChattedBefore.visitor
         },
         order: [
           ['createdAt', 'DESC']
