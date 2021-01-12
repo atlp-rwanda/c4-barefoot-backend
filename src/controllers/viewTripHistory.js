@@ -26,7 +26,6 @@ export const getTotalOfTripsByLocation = async (req, res, next) => {
     let query = { userId: userid };
     let resultSet1 = [];
     let travels = await displayTravelRequest(query);
-    
     let counter = travels.rows.length;
     if (counter > 0) {
       travels.rows.forEach((trData) => {
@@ -43,9 +42,8 @@ export const getTotalOfTripsByLocation = async (req, res, next) => {
             }
           })
       });
-    } else {
-      res.json("no trip was made");
     }
+    res.json("no trip was made");
   } catch (err) {
     return res.status(401).json(err.message);
   }
