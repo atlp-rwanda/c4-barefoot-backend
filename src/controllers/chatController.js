@@ -121,17 +121,16 @@ export const postChat = async (req, res, next) => {
     });
     const chatTo = await models.User.findOne({
       where: {
-        id: req.body.to
+        id: req.body.receiver
       }
     });
     if (chatTo) {
-      const chat = {
-        message: req.body.chat_message,
+      const chatMessage = await models.Chat.create({
         sender: loggedInUser.id,
-        receiver: req.body.to,
-      };
-
-      const chatMessage = await models.Chat.create(chat);
+        receiver: chatTo.id,
+        message: req.body.message,
+        type: req.body.type
+      });
       res.send(chatMessage);
     } else {
       res.status(400).json({
@@ -155,7 +154,7 @@ export const deleteChatMessage = async (req, res, next) => {
   try {
     const chat = await models.Chat.findOne({
       where: {
-        uuid: req.body.id,
+        id: req.body.id,
         sender: currentUser.id
       }
     });
@@ -229,18 +228,33 @@ export const markAsRead = async (req, res, next) => {
       },
       attributes: ['id']
     });
-    await models.Chat.update(
-      { status: true },
-      {
-        where: {
-          receiver: receiver.id,
-          sender: req.body.sender
-        }
-      }
-    );
-    return res.status(200).json({
-      message: 'marked as read'
+    const sender = await models.User.findOne({
+      where: {
+        id: req.body.sender,
+      },
+      attributes: ['id']
     });
+    if (sender) {
+      await models.Chat.update(
+        { status: true },
+        {
+          where: {
+            receiver: receiver.id,
+            sender: sender.id
+          }
+        }
+      );
+      res.status(200).json({
+        message: 'marked as read',
+        sender: sender.id,
+        receiver: receiver.id
+      });
+    } else {
+      res.status(404).send({
+        message: 'user not found',
+        sender
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -253,6 +267,7 @@ export const visitorMessage = async (req, res, next) => {
     chatV.visitor = req.body.visitor;
     chatV.message = req.body.message;
     chatV.sender = chatV.visitor;
+    chatV.type = req.body.type;
     const newChatV = await models.ChatV.create(chatV);
     res.status(200).json(newChatV);
   } catch (error) {
@@ -271,12 +286,23 @@ export const supportResponse = async (req, res, next) => {
       where: { username: user.username },
       attributes: ['id', 'email']
     });
-    chatV.sender = loggedInUser.email;
-    chatV.message = req.body.message;
-    chatV.visitor = req.body.visitor;
-
-    const newChatV = await models.ChatV.create(chatV);
-    return res.status(200).json(newChatV);
+    const visitor = await models.ChatV.findOne({
+      where: {
+        visitor: req.body.visitor,
+        sender: req.body.visitor
+      }
+    });
+    if (visitor) {
+      chatV.sender = loggedInUser.email;
+      chatV.message = req.body.message;
+      chatV.visitor = req.body.visitor;
+      const newChatV = await models.ChatV.create(chatV);
+      res.status(200).json(newChatV);
+    } else {
+      res.status(404).json({
+        message: 'visitor not found'
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -307,18 +333,30 @@ export const readAsVisitor = async (req, res, next) => {
 // read visitor's messages as any from support
 export const readAsSupport = async (req, res, next) => {
   try {
-    await models.ChatV.update(
-      { status: true },
-      {
-        where: {
-          visitor: req.body.visitor,
-          sender: req.body.visitor
-        }
+    const visitor = await models.ChatV.findOne({
+      where: {
+        visitor: req.body.visitor,
+        sender: req.body.visitor,
       }
-    );
-    res.status(200).send({
-      message: 'marked as read!'
     });
+    if (visitor) {
+      await models.ChatV.update(
+        { status: true },
+        {
+          where: {
+            visitor: req.body.visitor,
+            sender: req.body.visitor
+          }
+        }
+      );
+      res.status(200).send({
+        message: 'marked as read!'
+      });
+    } else {
+      res.status(404).send({
+        message: 'visitor not found'
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -398,5 +436,38 @@ export const getUnreadMessages = async (req, res, next) => {
     }
   } catch (err) {
     //
+  }
+};
+
+export const visitorGetsChatVs = async (req, res, next) => {
+  try {
+    const hasChattedBefore = await models.ChatV.findOne({
+      where: {
+        visitor: req.body.visitor,
+        sender: req.body.visitor
+      }
+    });
+    if (hasChattedBefore) {
+      const chatVs = await models.ChatV.findAll({
+        where: {
+          visitor: req.body.visitor
+        },
+        order: [
+          ['createdAt', 'DESC']
+        ]
+      });
+      chatVs.forEach((chat) => {
+        if (chat.sender !== chat.visitor) {
+          chat.sender = 'Barefoot Nomad Support';
+        }
+      });
+      res.status(200).json(chatVs);
+    } else {
+      res.status(401).send({
+        message: 'You have not been here before'
+      });
+    }
+  } catch (error) {
+    next(error);
   }
 };
