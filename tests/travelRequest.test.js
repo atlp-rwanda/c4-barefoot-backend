@@ -93,6 +93,7 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
     expect(res.body).to.be.an('array');
   });
   it('should reject the travel request', async () => {
+    User = await request(app).post('/api/v1/user/login').send(MANAGER);
     const requestData = { travelRequestId, action: 'reject' };
     const res = await request(app)
       .put('/api/v1/directReports')
@@ -103,6 +104,7 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
     expect(res.body).to.have.deep.property('message').equals('Operation performed successfully!');
   });
   it('should approve the travel request', async () => {
+    User = await request(app).post('/api/v1/user/login').send(MANAGER);
     const requestData = { travelRequestId, action: 'approve' };
     const res = await request(app)
       .put('/api/v1/directReports')
