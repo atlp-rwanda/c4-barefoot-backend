@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     type: {
       type: DataTypes.TEXT,
       allowNull: false,
-      default: 'plain-text'
+      defaultValue: 'plain-text'
     },
     status: {
       type: DataTypes.BOOLEAN,
