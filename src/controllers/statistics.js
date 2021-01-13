@@ -1,22 +1,16 @@
 import models from '../models'
+import sequelize from 'sequelize'
+import topBookedccommodation from '../helper/topBookedAccomodation'
 const getStatistics = async function (req, res, next) {
     const { Op } = require("sequelize");
     const activeUsers = await models.User.findAll({
-        where: { manager_id: { [Op.not]: null } } })
+        where: {manager_id: {[Op.not]: null } } })
   // get top visited Location
     const topVisitedLocation =  await models.Location.findAll({
                 attributes: ['LocationName',[sequelize.fn('COUNT',sequelize.col('LocationName')),'visits']],
                 group: ['LocationName'],
                 order:[[sequelize.fn('COUNT', sequelize.col('LocationName')), 'DESC']],
-                limit:3 // You can change 3 to any number you want
-             })
-            //Get top booked accommodation
-            const topBookedccommodationId =  await models.Booking.findAll({
-                attributes: ['accommodationId',[sequelize.fn('COUNT',sequelize.col('accommodationId')),'bookings']],
-                group: ['accommodationId'],
-                order:[[sequelize.fn('COUNT', sequelize.col('accommodationId')), 'DESC']],
-                limit:3 // You can change 3 to any number you want
-            })
+                limit:3 })
         //Get the number of  Accomodation and Locations
     const numberOfAccommodation = await models.Accommodation.findAndCountAll({})
     const numberOfLocation = await models.Location.findAndCountAll({})
@@ -27,7 +21,6 @@ const getStatistics = async function (req, res, next) {
         numberOfAccommodation: numberOfAccommodation.count,
         numberOfLocation,
         topVisitedLocation,
-        topBookedccommodationId 
-    }) }
+        topBookedccommodation })}
 module.exports = getStatistics
 
