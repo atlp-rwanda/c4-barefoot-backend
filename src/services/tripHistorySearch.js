@@ -17,11 +17,9 @@ export const findTrip = async (query, location, limit, offset) => {
 
 export const displayTravelRequest = async (query) => {
     let travels = await db.TravelRequest.findAndCountAll({ where: query })
-    // if (travels.rows.length > 0) {
+
     return travels
-    // } else {
-    //     return "no Trip was made"
-    //  }
+
 }
 
 
