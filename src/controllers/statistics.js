@@ -1,5 +1,4 @@
 import models from '../models'
-import sequelize from 'sequelize'
 const getStatistics = async function (req, res, next) {
     const { Op } = require("sequelize");
     const activeUsers = await models.User.findAll({
