@@ -18,9 +18,8 @@ const getStatistics = async function (req, res, next) {
                 order:[[sequelize.fn('COUNT', sequelize.col('accommodationId')), 'DESC']],
                 limit:3 // You can change 3 to any number you want
             })
-        //Get the number of  Accomodation
+        //Get the number of  Accomodation and Locations
     const numberOfAccommodation = await models.Accommodation.findAndCountAll({})
-    //Get the number of Locations
     const numberOfLocation = await models.Location.findAndCountAll({})
     res.status(200).send({
         title: 'STATISTICS',
