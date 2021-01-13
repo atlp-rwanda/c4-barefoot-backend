@@ -7,8 +7,7 @@ import ApplicationError from '../utils/Errors/applicationError';
 export const getUsersToChatWith = async (req, res, next) => {
   try {
     const users = await models.User.findAll({
-      attributes: ['id', 'first_name', 'last_name', 'email', 'username', 'occupation',
-        'bio', 'user_role_id', 'manager_id', 'profile_picture', 'language', 'address']
+      attributes: ['id', 'first_name', 'last_name', 'profile_picture']
     });
     res.send(users);
   } catch (err) {
@@ -118,7 +117,8 @@ export const postChat = async (req, res, next) => {
     const chatTo = await models.User.findOne({
       where: {
         id: req.body.receiver
-      }
+      },
+      attributes: ['id']
     });
     if (chatTo) {
       const chatMessage = await models.Chat.create({
@@ -202,9 +202,7 @@ export const getChatList = async (req, res, next) => {
       where: {
         id: Array.from(chatListIds)
       },
-      attributes: ['id', 'first_name', 'last_name', 'email', 'username', 'occupation',
-        'user_role_id', 'manager_id', 'profile_picture', 'language', 'address'
-      ]
+      attributes: ['id', 'first_name', 'last_name', 'profile_picture']
     });
     res.status(200).json(chatList);
   } catch (err) {
@@ -247,8 +245,7 @@ export const markAsRead = async (req, res, next) => {
       });
     } else {
       res.status(404).send({
-        message: 'user not found',
-        sender
+        message: 'user not found'
       });
     }
   } catch (error) {
@@ -280,7 +277,7 @@ export const supportResponse = async (req, res, next) => {
     const user = await verifyToken(token);
     const loggedInUser = await models.User.findOne({
       where: { username: user.username },
-      attributes: ['id', 'email']
+      attributes: ['email']
     });
     const visitor = await models.ChatV.findOne({
       where: {
