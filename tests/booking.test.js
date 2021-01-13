@@ -40,19 +40,20 @@ describe('BOOKINGS END-POINT TEST', () => {
     User = await request(app).post('/api/v1/user/login').send(travelAdmin);
     const resAcc = await request(app).post('/api/v1/accommodations').set('Authorization', `Bearer ${User.body.data}`).send(validAccommodation);
     // Create Expiring Booking
-    const accomodationId = resAcc.body.accommodation.id;
+    const AccomodationId = resAcc.body.accommodation.id;
     const bookingDates = {
       From: moment().add(-2, 'days'),
       To: moment().add(-1, 'days')
     };
     User = await request(app).post('/api/v1/user/login').send(requester);
-    const resBook = await request(app).post(`/api/v1/accommodations/book/${accomodationId}`).set('Authorization', `Bearer ${User.body.data}`).send(bookingDates);
+    const resBook = await request(app).post(`/api/v1/accommodations/book/${AccomodationId}`).set('Authorization', `Bearer ${User.body.data}`).send(bookingDates);
     
     await expiredBookings();
 
-    const accomodationDetails = await request(app).get(`/api/v1/accommodations/${accomodationId}`).set('Authorization', `Bearer ${User.body.data}`);
+    const accomodationDetails = await request(app).get(`/api/v1/accommodations/${AccomodationId}`).set('Authorization', `Bearer ${User.body.data}`);
 
     expect(validAccommodation.numberOfRooms).to.equal(accomodationDetails.body.singleAccommodation.numberOfRooms);
 
   })
 });
+ 
