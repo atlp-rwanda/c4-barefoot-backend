@@ -1,6 +1,7 @@
 import express from 'express';
 import getStatistics from '../../controllers/statistics';
 import isSuperAdmin from '../../helper/isSuperUser';
+import isTravelAdmin from '../../helper/isTravelAdmin'
 
 const router = express.Router();
 
@@ -33,6 +34,6 @@ const router = express.Router();
  *            description: Success message
  *            example: Welcome to Barefoot Nomad
  */
-router.get('/',isSuperAdmin, getStatistics)
+router.get('/',isTravelAdmin,isSuperAdmin, getStatistics)
 
 export default router;
