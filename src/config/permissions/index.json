@@ -73,7 +73,7 @@
     "create accommodations": 1,
     "update accommodations": 1,
     "delete accommodations": 1,
-    "book accommodations": 0,
+    "book accommodations": 1,
     "view locations": 1,
     "create locations": 1,
     "update locations": 1,
