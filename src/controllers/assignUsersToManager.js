@@ -23,7 +23,7 @@ const assignUsersToManager = async (req, res) => {
 
     const notification = await createNotification(newNotificantion);
 
-    //pusher.trigger('bare-foot-normad', 'notification', { notification });
+    pusher.trigger('bare-foot-normad', 'notification', { notification });
     const notifiEmail = await sendNotificationEmail(user.email);
 
     return res.status(200).json({ status: 200, message: res.__(`user was assigned to manager with this Id ${manager_id}`) });
