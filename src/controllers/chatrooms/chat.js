@@ -32,14 +32,6 @@ const userDisconnected = (socket) => {
 };
 
 export const newUserConnection = (socket) => {
-  // Connection now authenticated to receive further events
-  //   console.log('user authenticated');
-  //   socket.on('message', (message) => {
-  //     io.emit('message', message);
-  //   }
-  // socket.on('authenticate', (token) => {
-  //   verify(token);
-  console.log('User connected : ', socket.id);
   socket.broadcast.emit('new-connection', {
     message: 'someone just connected',
     who: ['firstname', 'lastname']
