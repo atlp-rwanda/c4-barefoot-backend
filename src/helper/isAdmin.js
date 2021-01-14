@@ -8,8 +8,9 @@ const isAdmin = async (req, res, next) => {
   const token = bearerToken.split(' ')[1];
   const decoded = await verifyToken(token);
   const roles = await findRoles(decoded.role);
-  if (roles.name !== 'travel-admin' || roles.name!=='Administrator') throw new UnauthorizedError('Access denied');
-  if  (roles.name === 'travel-admin' || roles.name==='Administrator') return next();
+  if  (roles.name === 'travel-admin' || roles.name==='administrator') return next();
+  if (roles.name !== 'travel-admin' || roles.name!=='administrator') throw new UnauthorizedError('Access denied');
+
 };
 // user.user_role_id
 
