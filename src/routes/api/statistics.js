@@ -34,6 +34,6 @@ const router = express.Router();
  *            description: Success message
  *            example: Welcome to Barefoot Nomad
  */
-router.get('/',isTravelAdmin,isSuperAdmin, getStatistics)
+router.get('/', isLogedIn, permit(['view statistics']), getStatistics)
 
 export default router;
