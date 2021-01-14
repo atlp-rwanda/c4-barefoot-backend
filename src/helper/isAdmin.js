@@ -10,7 +10,6 @@ const isAdmin = async (req, res, next) => {
   const roles = await findRoles(decoded.role);
   if  (roles.name === 'travel-admin' || roles.name==='administrator') return next();
   if (roles.name !== 'travel-admin' || roles.name!=='administrator') throw new UnauthorizedError('Access denied');
-
 };
 // user.user_role_id
 
