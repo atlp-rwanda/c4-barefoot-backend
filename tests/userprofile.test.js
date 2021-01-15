@@ -20,7 +20,7 @@ describe('USER PROFILE END-POINTS TESTING', () => {
     expect(res).to.have.status(404);
   });
   it('should update the user profile', async () => {
-    const res = await request(app).patch('/api/v1/profile/update-profilenpm').send(validData).set('Authorization', `Bearer ${validToken}`);
+    const res = await request(app).patch('/api/v1/profile/update-profile').send(validData).set('Authorization', `Bearer ${validToken}`);
     expect(res).to.have.status(200);
   });
 });

@@ -55,5 +55,12 @@ describe('BOOKINGS END-POINT TEST', () => {
     expect(validAccommodation.numberOfRooms).to.equal(accomodationDetails.body.singleAccommodation.numberOfRooms);
 
   })
+  it('Should return 404 when no bookings are found', async () => {
+    User = await request(app).post('/api/v1/user/login').send(adminCredentials);
+    const res = await request(app).get('/api/v1/bookings').set('Authorization', `Bearer ${User.body.data}`);
+    expect(res).to.have.status(404);
+    expect(res.body).to.have.property('message');
+    expect(res.body.message).to.equal('You do not have any bookings');
+  });
 });
  
