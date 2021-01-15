@@ -21,7 +21,7 @@ describe('REQUEST COMMENT ENDPOINTS TESTING', () => {
   it('Should get a single travel requests comment', async () => {
     const User = await request(app).post('/api/v1/user/login').send(user);
     const res = await request(app)
-      .get('/api/v1/comment/0ce36391-2c08-3074-bddb-a4ea8cccbbc5/041f6104-799a-439a-b282-19f62c60849c')
+      .get('/api/v1/comment/0ce36391-2c08-3074-bddb-a4ea8cccbbc5')
       .set('Authorization', `Bearer ${User.body.data}`);
     expect(res).to.have.status(200);
     expect(res.body).to.be.an('array');

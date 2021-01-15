@@ -190,5 +190,6 @@
 	"No token found!": "Aucun jeton trouvé!",
 	"You are not loged in": "Vous n'êtes pas connecté",
 	"Logout successful!": "Déconnexion réussie!",
-	"successfully Logged In": "connecté avec succès"
+	"successfully Logged In": "connecté avec succès",
+	"no Trip was made": "aucun voyage n'a été fait"
 }
