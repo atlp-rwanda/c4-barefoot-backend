@@ -2,7 +2,7 @@ import db from '../models';
 
 
 
-export const findTrip = async (query,location,limit,offset) => {
+export const findTrip = async (query, location, limit, offset) => {
     let result = await db.Trip.findAndCountAll({
         limit, offset,
         where: { destination: location },
@@ -10,7 +10,7 @@ export const findTrip = async (query,location,limit,offset) => {
             model: db.TravelRequest,
             where: query
         }]
-  
+
     })
     return result;
 }
