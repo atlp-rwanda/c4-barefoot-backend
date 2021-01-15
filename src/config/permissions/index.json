@@ -63,7 +63,7 @@
     "edit profile": 1,
     "assign requesters to manager": 0,
     "create travel requests": 0,
-    "view travel requests": 0,
+    "view travel requests": 1,
     "edit travel requests": 0,
     "cancel travel requests": 0,
     "approve direct reports travel requests": 0,

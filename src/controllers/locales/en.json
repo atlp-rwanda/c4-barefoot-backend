@@ -83,5 +83,6 @@
 	"no auth header found": "no auth header found",
 	"data in token is invalid": "data in token is invalid",
 	"verified users": "verified users",
-	"No token found!": "No token found!"
+	"No token found!": "No token found!",
+	"You don't have permissions to [view travel requests]": "You don't have permissions to [view travel requests]"
 }
