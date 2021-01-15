@@ -73,7 +73,7 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
   it('Should get a single travel requests if you are logged in', async () => {
     const User = await request(app).post('/api/v1/user/login').send(user);
     const res = await request(app)
-      .get('/api/v1/requests/')
+      .get('/api/v1/requests')
       .set('Authorization', `Bearer ${User.body.data}`)
       .query({ requestId: '5' });
     expect(res).to.have.status(200);

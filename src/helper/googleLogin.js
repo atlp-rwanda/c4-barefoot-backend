@@ -1,7 +1,7 @@
 import models from '../models';
 import 'express-async-errors';
 import jwt from"jsonwebtoken";
-import 'dotenv/config'
+import 'dotenv/config';
 
 const successlogIn=async(account)=>{
     const token=jwt.sign({

@@ -8,12 +8,13 @@ const sendEmail = (userInfo) =>{
       port: 465,
       secure: true, // use SSL
       auth: {
-        type:'loggin',
+        type:'Oauth2',
         user: process.env.GMAIL_EMAIL,
+        password: process.env.GMAIL_PASSWORD,
         clientId: process.env.CLIENT_ID, 
         clientSecret: process.env.CLIENT_SECRET,
         refreshToken: process.env.REFRESH_TOKEN,   
-        accessToken: process.env.ACCESS_TOKEN
+        accessToken: process.env.ACCESS_TOKEN 
       }
     });
       
