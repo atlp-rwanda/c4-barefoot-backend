@@ -1,6 +1,5 @@
 import express from 'express';
 import getStatistics from '../../controllers/statistics';
-import isSuperAdmin from '../../helper/isSuperUser';
 import isAdmin from '../../helper/isAdmin'
 
 const router = express.Router();

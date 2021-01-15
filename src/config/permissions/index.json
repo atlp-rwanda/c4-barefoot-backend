@@ -18,7 +18,7 @@
     "create locations": 1,
     "update locations": 1,
     "delete locations": 1,
-    "view statistics":1
+    "view statistics": 1
   },
   "manager": {
     "edit profile": 1,
@@ -79,7 +79,7 @@
     "create locations": 1,
     "update locations": 1,
     "delete locations": 1,
-    "view statistics":1
+    "view statistics": 1
   },
   "travel-team-member": {
     "edit profile": 1,
