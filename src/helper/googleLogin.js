@@ -7,7 +7,7 @@ const successlogIn=async(account)=>{
     const token=jwt.sign({
          email:account.email,
         userId:account.id
-    },process.env.jwt_key,
+    },process.env.TOKEN_SECRET,
     {
         expiresIn:'1h'
     })
