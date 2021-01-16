@@ -7,6 +7,7 @@ import hasSubscribed from '../../services/subscriptions';
 const subscribe= async (req,res, next)=>{
     const decoded= await getDataFromToken(req,res,next);
     const subscription= req.body;
+    console.log(subscription);
 
     if(await hasSubscribed(subscription.keys.auth)){
         console.log('You have already subscribed');
