@@ -2,7 +2,7 @@ import { verifyToken } from '../utils/auth';
 import findRoles from '../services/findRoles';
 import UnauthorizedError from '../utils/Errors/authorizationError';
 
-const isAdmin = async (req, next) => {
+const isAdmin = async (req, res, next) => {
     const bearerToken = req.headers.authorization;
     if (!bearerToken) throw new UnauthorizedError('Unauthorized');
     const token = bearerToken.split(' ')[1];

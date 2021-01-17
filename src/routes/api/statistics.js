@@ -1,6 +1,6 @@
 import express from 'express';
 import getStatistics from '../../controllers/statistics';
-import isSuperAdmin from '../../helper/isSuperUser';
+import permit from '../../middlewares/accessControl';
 import isAdmin from '../../helper/isAdmin'
 
 const router = express.Router();
@@ -34,6 +34,6 @@ const router = express.Router();
  *            description: Success message
  *            example: Welcome to Barefoot Nomad
  */
-router.get('/', isAdmin, getStatistics)
+router.get('/', isAdmin, permit(['view statistics']), getStatistics)
 
 export default router;
