@@ -1,16 +1,30 @@
 import models from '../models'
-import sequelize from 'sequelize'
 
 const limit = 5
 
-//Get top booked accommodation
 const getBookedAccomodation = async function (req,res) {
-const topBookedccommodation =  await models.Booking.findAll({
-    attributes: ['accommodationId',[sequelize.fn('COUNT',sequelize.col('accommodationId')),'bookings']],
-    group: ['accommodationId'],
-    order:[[sequelize.fn('COUNT', sequelize.col('accommodationId')), 'DESC']],
-    limit: limit
-})
-return topBookedccommodation
+    const accommodations = await models.Booking.findAll({
+        attributes: ['accommodationId','id']
+    })
+    let accommodationArr = {}
+    accommodations.forEach(accommodation => {
+        const id = accommodation.accommodationId
+        if(accommodationArr.hasOwnProperty(id)){
+        accommodationArr[id] = accommodationArr[id] + 1
+        } else{
+            accommodationArr[id] = 1
+        }
+    });
+    let sortedAccomodatio = []
+    
+    for( const key in accommodationArr){
+        sortedAccomodatio.push([key,accommodationArr[key]])
+    }
+    
+    sortedAccomodatio.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+    
+return sortedAccomodatio
 }
 module.exports = getBookedAccomodation
