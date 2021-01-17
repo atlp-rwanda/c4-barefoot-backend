@@ -23,7 +23,7 @@ module.exports = {
         destination: 'Cairo', 
         tripDate: '2020-10-10', 
         returnDate: '2021-10-10', 
-        AccommodationId:'0ce36391-2c08-3074-bddb-a4ea8cccbbc5', 
+        accommodationId:'0ce36391-2c08-3074-bddb-a4ea8cccbbc5', 
         reason: "Trippin",
         travelId:'0ce36391-2c08-3074-bddb-a4ea8cccbbc5'
       },
@@ -33,7 +33,7 @@ module.exports = {
         destination: 'Kampala', 
         tripDate: '2020-10-10', 
         returnDate: '2021-10-10', 
-        AccommodationId:'0ce36391-2c08-3074-bddb-a4ea8cccbbc5', 
+        accommodationId:'0ce36391-2c08-3074-bddb-a4ea8cccbbc5', 
         reason: "Trippin",
         travelId:'0ce36391-2c08-3074-bddb-a4ea8cccbbc5'
       },
@@ -43,7 +43,7 @@ module.exports = {
         destination: 'Nairobi',
         tripDate: '2020-10-10',
         returnDate: '2021-10-10',
-        AccommodationId: '0ce36391-2c08-3074-bddb-a4ea8cccbbc8',
+        accommodationId: '0ce36391-2c08-3074-bddb-a4ea8cccbbc8',
         reason: 'Trippin',
         travelId: '0ce36391-2c08-3074-bddb-a4ea8cccbbc5'
       },
@@ -53,7 +53,7 @@ module.exports = {
         destination: 'Nairobi',
         tripDate: '2020-10-10',
         returnDate: '2021-10-10',
-        AccommodationId: '0ce36391-2c08-3074-bddb-a4ea8cccbbc8',
+        accommodationId: '0ce36391-2c08-3074-bddb-a4ea8cccbbc8',
         reason: 'Trippin',
         travelId: '0ce36391-2c08-3074-bddb-a4ea8cccbbc5'
       },

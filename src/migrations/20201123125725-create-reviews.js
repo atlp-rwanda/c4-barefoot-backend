@@ -15,7 +15,7 @@ module.exports = {
           key:'id'
         }
       },
-      AccommodationId: {
+      accommodationId: {
         allowNull: true,
         type: Sequelize.UUID,
         references: {
