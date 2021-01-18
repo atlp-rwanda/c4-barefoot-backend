@@ -1,10 +1,8 @@
 import { error } from 'console';
 const URL = require('url').URL;
 const request = require('request');
-//const http = require('http');
 export const weatherData = function(req, res, data) {
-    const city = req.query.city
-    //   console.log('############', city)
+    const city = req.query.city  
     const options = {
     url: `https://community-open-weather-map.p.rapidapi.com/weather?q=${city}` ,
     headers: {
