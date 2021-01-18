@@ -17,7 +17,7 @@ import notiRoute from './api/notification';
 
 import triproute from './api/tripRoute'
 
-import signinWithGoogleRoute from "./api/signinWithGooglerRoute";
+//import signinWithGoogleRoute from "./api/signinWithGooglerRoute";
 import chatRoom from './api/chatRoutes';
 
 const routes = express.Router();
@@ -40,7 +40,7 @@ routes.use('/notification', notiRoute);
 
 routes.use('/trips', triproute)
 
-routes.use('/google',signinWithGoogleRoute);
+//routes.use('/google',signinWithGoogleRoute);
 routes.use('/chat', chatRoom);
 
 export default routes;
