@@ -1,17 +1,10 @@
 import { expect, request, use } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/app';
+import { validToken } from './dummyData';
 
 use(chaiHttp);
-
 describe("VISITOR'S CHAT", () => {
-  const TRAVEL_ADMIN = {
-    email: 'traveladmin@gmail.com',
-    password: 'password',
-    id: '2d647115-3af7-4df0-99aa-6656c764829f',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiNGZkMDg0YTAtY2RkNi00N2E1LWFhZjUtNWZkYzhiNTYyOWRkIiwidXNlcm5hbWUiOiJ0cmF2ZWxBZG1pbiIsImlhdCI6MTYxMDQ2NjgzNCwiZXhwIjoxNjExMDcxNjM0fQ.uxb1kf5SFC8rX5br7aKN-qOHDfPfWJ9Ug052M7pfZBM'
-  };
-
   const TestChatText = {
     visitor: 'visitor@visitor.vstr',
     message: 'test test test'
@@ -34,7 +27,7 @@ describe("VISITOR'S CHAT", () => {
   });
 
   it('Should allow support to mark visitor messages as read', async () => {
-    const res = await request(app).patch(`/api/v1/chat/support?visitor=${TestChatText.visitor}`).set('Authorization', `Bearer ${TRAVEL_ADMIN.token}`).send();
+    const res = await request(app).patch(`/api/v1/chat/support?visitor=${TestChatText.visitor}`).set('Authorization', `Bearer ${validToken}`).send();
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.body).to.be.a('Object');
@@ -42,7 +35,7 @@ describe("VISITOR'S CHAT", () => {
   });
 
   it('Should indicate visitor not found if s/he has not chatted', async () => {
-    const res = await request(app).patch('/api/v1/chat/support?visitor=vvvvvvvvvvv@vnvnv.vnvn').set('Authorization', `Bearer ${TRAVEL_ADMIN.token}`).send();
+    const res = await request(app).patch('/api/v1/chat/support?visitor=vvvvvvvvvvv@vnvnv.vnvn').set('Authorization', `Bearer ${validToken}`).send();
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(404);
     expect(res.body).to.be.a('Object');
@@ -50,14 +43,14 @@ describe("VISITOR'S CHAT", () => {
   });
 
   it('Should indicate visitor not found if s/he has not chatted', async () => {
-    const res = await request(app).get('/api/v1/chat/visitors').set('Authorization', `Bearer ${TRAVEL_ADMIN.token}`);
+    const res = await request(app).get('/api/v1/chat/visitors').set('Authorization', `Bearer ${validToken}`);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.body).to.be.a('Array');
   });
 
   it('Should allow support to get the chat with a visitor', async () => {
-    const res = await request(app).get(`/api/v1/chat/support?visitor=${TestChatText.visitor}`).set('Authorization', `Bearer ${TRAVEL_ADMIN.token}`);
+    const res = await request(app).get(`/api/v1/chat/support?visitor=${TestChatText.visitor}`).set('Authorization', `Bearer ${validToken}`);
     expect(res).to.have.status(200);
     expect(res.type).to.equal('application/json');
     expect(res.body).to.be.a('Array');

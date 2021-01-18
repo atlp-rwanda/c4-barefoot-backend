@@ -6,9 +6,9 @@ name: BarefootNomad
 
 on:
   push:
-    branches: [ ft-trip-history ]
+    branches: [ fix-trip-history ]
   pull_request:
-    branches: [ ft-trip-history ]
+    branches: [ fix-trip-history ]
 
 
 jobs:
