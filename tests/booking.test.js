@@ -37,7 +37,7 @@ describe('BOOKINGS END-POINT TEST', () => {
     User = await request(app).post('/api/v1/user/login').send(adminCredentials);
     const res = await request(app).get('/api/v1/bookings').set('Authorization', `Bearer ${User.body.data}`);
     expect(res).to.have.status(404);
-    expect(res.body).to.have.property('error');
-    expect(res.body.error).to.equal('You do not have any bookings');
+    expect(res.body).to.have.property('message');
+    expect(res.body.message).to.equal('You do not have any bookings');
   });
 });
