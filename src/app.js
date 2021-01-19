@@ -8,6 +8,8 @@ import db from './models/index';
 import routes from './routes/index';
 import ApplicationError from './utils/Errors/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
+import path from 'path'
+
 import passport from "passport";
 import cookieSession from 'cookie-session';
 import i18n from './controllers/i18n';
@@ -41,6 +43,9 @@ app.use(i18n.init);
 // routes
 app.use('/api/v1/', routes);
 // app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // documentation route
 const swaggerDocs = swaggerJsDoc(swaggerConfigs);

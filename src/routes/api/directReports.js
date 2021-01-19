@@ -3,6 +3,8 @@ import isLogedIn from '../../helper/isLogedIn';
 import { getDirectReport,approve_reject_TravelRequest } from "../../controllers/directReport.controller";
 import travelRequestsValidation from '../../middlewares/travelRequestsValidation';
 import permit from '../../middlewares/accessControl';
+import {sendRequestApprovalNotification} from '../../middlewares/pushNotification';
+
 
 const router = express.Router()
 
@@ -140,6 +142,6 @@ router.get('/:travelId', isLogedIn, permit(["view direct reports travel requests
  *             type: string
  *      
  */
-router.put('/',isLogedIn,travelRequestsValidation,permit(["approve direct reports travel requests","reject direct reports travel requests"]), approve_reject_TravelRequest)
+router.put('/',isLogedIn,travelRequestsValidation,permit(["approve direct reports travel requests","reject direct reports travel requests"]), approve_reject_TravelRequest, sendRequestApprovalNotification)
 
 export default router;
