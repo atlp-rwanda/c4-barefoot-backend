@@ -34,7 +34,6 @@ const sendTravelRequestNotification= async (req,res,next)=>{
     
     sendNotifications(subscriptions, payload);
 
-    console.log('Notification middleware executed successfully!');
 
 
 }
@@ -55,7 +54,6 @@ const sendRequestApprovalNotification= async (req,res,next)=>{
     
     sendNotifications(subscriptions,payload);
 
-    console.log('Notification middleware executed successfully!');
 
 }
 
@@ -86,7 +84,6 @@ const managerAssignmentNotification= async (req,res,next)=>{
 
     sendNotifications(requesterSub, requesterPayload);
 
-    console.log('Notification middleware executed successfully!');
 
 
 
@@ -109,7 +106,6 @@ const sendCommentNotification= async (req,res,next)=>{
  
     sendNotifications(subscriptions,payload);
 
-    console.log('Notification middleware executed successfully!');
 
 }
 

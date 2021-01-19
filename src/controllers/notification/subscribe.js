@@ -10,7 +10,6 @@ const subscribe= async (req,res, next)=>{
     console.log(subscription);
 
     if(await hasSubscribed(subscription.keys.auth)){
-        console.log('You have already subscribed');
         res.status(200).json('You have already subscribed');
     }
     else{
@@ -24,8 +23,6 @@ const subscribe= async (req,res, next)=>{
             userId: decoded.dataValues.id
         });
     
-        console.log('Subscribed succesfully!');
-        console.log(data);
         res.status(201).json('Subscribed succesfully!');
     }
 
