@@ -5,6 +5,8 @@ import { editTravelRequest, getTravelRequest } from '../../controllers/viewTrave
 import { createTripValidation, editTripValidation } from '../../middlewares/tripRequestsValidation';
 import travelRequestsValidation from '../../middlewares/travelRequestsValidation';
 import permit from '../../middlewares/accessControl';
+import {sendTravelRequestNotification} from '../../middlewares/pushNotification'
+
 
 const router = express.Router();
 
@@ -67,7 +69,7 @@ const router = express.Router();
  *        example:
  *          {"travelId":12,status: "pending", "accommodationId": 123, "reason":tripping, "trip":{"originCity":Kigali, "destination":Cairo, "tripDate":11/12/2020, "returnDate":11/12/2021, "accommodationId":1234567, "reason":tripping}}
  */
-router.post('/request', isLogedIn, createTripValidation, permit(['create travel requests']), travelRequest); // make a request
+router.post('/request', isLogedIn, createTripValidation, permit(['create travel requests']), travelRequest, sendTravelRequestNotification); // make a request
 
 // ----------------------- View travelrequest --------------------
 /**
