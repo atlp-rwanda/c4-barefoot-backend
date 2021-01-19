@@ -45,7 +45,10 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Amenity.associate = (models) => {
-    Amenity.belongsTo(models.Accommodation);
+    Amenity.belongsTo(models.Accommodation,{
+      foreignKey: 'accommodationId',
+      as: 'accommodation'
+    });
   };
 
   return Amenity;
