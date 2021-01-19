@@ -1,4 +1,5 @@
 {
+
 	"login successful": "login successful",
 	"Accommodation does not exist": "Accommodation does not exist",
 	"Accommodation successfully updated": "Accommodation successfully updated",
@@ -29,7 +30,7 @@
 	"Role deleted successfully": "Role deleted successfully",
 	"manager_id@gmail.com does not exist or not verified!": "manager_id@gmail.com does not exist or not verified!",
 	"notexist@gmail.com does not exist or not verified!": "notexist@gmail.com does not exist or not verified!",
-	"manager_id@gmail.com does not exist!": "manager_id@gmail.com does not exist!",
+	"The user is deleted successfully!": "The user is deleted successfully!",
 	"invalidemail@gmail.com does not exist!": "invalidemail@gmail.com does not exist!",
 	"Welcome to Barefoot Nomad": "Welcome to Barefoot Nomad",
 	"Page Requested not found": "Page Requested not found",

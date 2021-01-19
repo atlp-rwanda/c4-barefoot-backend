@@ -11,6 +11,10 @@ import swaggerConfigs from './config/swaggerDoc';
 import passport from "passport";
 import cookieSession from 'cookie-session';
 import i18n from './controllers/i18n';
+import cron from 'node-cron';
+import { expiredBookings } from '../src/controllers/bookingsController';
+
+// const expired = new Checkout();
 
 
 const app = express();
@@ -69,6 +73,9 @@ app.listen(port, () => {
   } else {
     console.log(err);
   }
+});
+cron.schedule('* * * * *', () => {
+ expiredBookings();
 });
 
 export default app;

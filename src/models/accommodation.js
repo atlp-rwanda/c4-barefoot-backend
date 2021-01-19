@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Accommodation.hasMany(models.Booking, {
-      foreignKey: 'accommodationId',
+      foreignKey: 'AccommodationId',
       foreignKey: 'AccommodationId',
       as: 'Booking',
       onDelete: 'cascade'
