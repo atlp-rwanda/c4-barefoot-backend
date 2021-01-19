@@ -39,11 +39,11 @@ module.exports = {
     seederStorage: 'sequelize',
     seederStorageTableName: 'sequelize_data',
     logging: false,
-    // dialectOptions: {
-    //   ssl: {
-    //     require: true,
-    //     rejectUnauthorized: false
-    //   }
-    // }
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
   }
 };
