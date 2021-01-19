@@ -21,6 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     To: {
       type: DataTypes.DATE,
       allowNull: false
+    },
+    checkedout: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   });
 

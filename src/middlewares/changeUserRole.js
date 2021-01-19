@@ -11,7 +11,7 @@ export const changeUserRole = async (req, res, next) => {
       // user with a role
       if (findUser.user_role_id !== null) {
         const findRoleById = await roleServices.findRoleById({ id: findUser.user_role_id });
-        if (findRoleById.name === 'administrator') { throw new accessDenied('Can not delete the administrator!'); }
+        if (findRoleById.name === 'administrator') { throw new accessDenied(res.__('Can not delete the administrator!')); }
         const changeRole = await usersService.changeRole({ change: null, manager_id: findUser.id });
       }
       // user with relationships
@@ -21,7 +21,7 @@ export const changeUserRole = async (req, res, next) => {
       }
       next();
     } else {
-      throw new notFound(`${userEmail} does not exist!`);
+      throw new notFound(res.__(`${userEmail} does not exist!`));
     }
   } catch (err) {
     next(err);

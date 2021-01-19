@@ -10,9 +10,7 @@ const checkUserExistance=async(req,res,next)=>{
         let account= await userExist(user.email);
         if(!account){
            await register(user);
-           next();
-        }else{
-            next();
         }
+        next()
     }
 export default checkUserExistance;

@@ -1,5 +1,5 @@
 import db from '../models';
-import dbDataNotFoundError from '../utils/Errors/notFoundRequestError';
+import NotFoundRequestError from '../utils/Errors/notFoundRequestError';
 
 const findTravelRequestComments = (res, query, next, pagination) => {
   try {
@@ -8,7 +8,7 @@ const findTravelRequestComments = (res, query, next, pagination) => {
         if (tRequestComments.rows.length > 0) {
           res.status(200).json(tRequestComments.rows);
         } else {
-          throw new dbDataNotFoundError('No comments found');
+          throw new NotFoundRequestError(res.__('No comments found'));
         }
       })
       .catch((err) => {

@@ -6,9 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=production npm run migrate && babel-node ./src/app.js",
     "test-local": "cross-env NODE_ENV=development nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
-    "db:setup": "cross-env NODE_ENV=test sequelize db:migrate:undo:all && cross-env NODE_ENV=test sequelize db:migrate && cross-env NODE_ENV=test npm run seed",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/app.js",
-    "test": "npm run db:setup && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
+    "test": "NODE_ENV=test npm run migrate && NODE_ENV=test npm run seed && NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint . --fix",
     "createModel": "npx sequelize-cli model:generate ",
@@ -47,8 +46,11 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "github-actions-badge": "^1.1.0",
+    "googleapis": "^67.0.0",
+    "i18n": "^0.13.2",
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
+    "node-cron": "^2.0.3",
     "nodemailer": "^6.4.14",
     "passport": "^0.4.1",
     "passport-google-oauth2": "^0.2.0",
@@ -60,7 +62,8 @@
     "sequelize-paginate": "^1.1.6",
     "swagger-jsdoc": "^5.0.0",
     "swagger-ui-express": "^4.1.4",
-    "uuid": "^8.3.1"
+    "uuid": "^8.3.1",
+    "web-push": "^3.4.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
