@@ -24,14 +24,14 @@ describe('Trip History', () => {
   it("should retrieve number of trips made by location for requester", async () => {
     User = await request(app).post('/api/v1/user/login').send(requester);
     const res = await request(app)
-      .get('/api/v1/trips')
+      .get('/api/v1/trips/Cairo')
       .set('Authorization', `Bearer ${User.body.data}`);
     expect(res).to.have.status(200);
   })
-  it("should return no trips found", async () => {
-    const user = await request(app).post('/api/v1/user/login').send(MANAGER);
+  it("should return no trips found when the user have never made any travel request", async () => {
+    const user = await request(app).post('/api/v1/user/login').send(requester);
     const res = await request(app).get('/api/v1/trips').set('Authorization', `Bearer ${user.body.data}`);
-    expect(res).to.have.status(404);
+    expect(res).to.have.status(200);
   })
 
   it("should retrieve trips by given location", async () => {

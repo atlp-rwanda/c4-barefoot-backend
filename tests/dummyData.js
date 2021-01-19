@@ -104,7 +104,7 @@ export const line_manager = {
 };
 
 export const deleteReq = {
-  email: 'manager_id@gmail.com'
+  email: 'mindinmiddle@gmail.com'
 };
 
 export const travelAdmin = {
@@ -142,7 +142,7 @@ export const validAccommodation = {
   streetAddress: 'KN 22 ST',
   locationID: null,
   propertyType: 'Hostel',
-  numberOfRooms: 100,
+  numberOfRooms: 100, 
   typeOfBed: 'Double Decker',
   title: 'Kigali Hostels',
   description: 'A serene environment for relaxation',

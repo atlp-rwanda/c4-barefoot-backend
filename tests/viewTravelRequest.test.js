@@ -33,7 +33,7 @@ describe('Travel Requests', () => {
     expect(res).to.have.status(200);
     expect(res.body).to.be.an('array');
   });
-  it('Should get a single travel requests if you are logged in', async () => {
+  it('Should get a single travel request when logged in and given the id', async () => {
     const User = await request(app).post('/api/v1/user/login').send(user);
     const res = await request(app)
       .get('/api/v1/requests/')

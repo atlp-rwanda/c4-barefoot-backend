@@ -157,7 +157,7 @@ describe('USER END-POINTS TESTING', () => {
   });
   it('should update the role of the user', async () => {
     User = await request(app).post('/api/v1/user/login').send(adminCredentials);
-    const res = await request(app).pu('/api/v1/admin/users').set('Authorization', `Bearer ${User.body.data}`).send(updateRoleData);
+    const res = await request(app).put('/api/v1/admin/users').set('Authorization', `Bearer ${User.body.data}`).send(updateRoleData);
 
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(201);
@@ -190,6 +190,7 @@ describe('USER END-POINTS TESTING', () => {
     expect(res.body).to.have.property('error');
   });
   it('should delete the user', async () => {
+    User = await request(app).post('/api/v1/user/login').send(adminCredentials);
     const res = await request(app).delete('/api/v1/admin/users').send(deleteReq).set('Authorization', `Bearer ${User.body.data}`);
 
     expect(res.type).to.equal('application/json');

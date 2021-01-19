@@ -77,7 +77,7 @@ export const deleteOne = async (req, res, next) => {
         throw new applicationError(res.__('Failed to delete this user! Try again'), 500);
       }
     } else {
-      throw new notFound(res.__(`${userEmail} does not exist!`));
+      throw new notFound(userEmail+ res.__(" does not exist!"));
     }
   } catch (error) {
     next(error);
