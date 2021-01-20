@@ -3,7 +3,8 @@ export function createTravelComment(req, res, query, next) {
     try{
         db.TravelComments.create(query)
         .then(tCommentData => {
-            res.status(200).json({message:"comment created successfully", tCommentData})
+            res.status(200).json({message:"comment created successfully", tCommentData});
+            next();
         })
         .catch(err => {
             switch(err.parent.code){
