@@ -14,7 +14,7 @@ const refreshToken = async (req, res, next) => {
     }
     const payload = await verifyToken(token);
     // check if user exist in databasa
-    const newUser = await UserServices.getUserByUserName(payload.username);
+    const newUser = await UserServices.getUserByUserNameAndToken(payload.username,token);
     const userData = {
       username: newUser.username,
       user_role_id: newUser.user_role_id
