@@ -1,4 +1,5 @@
 {
+
 	"login successful": "login successful",
 	"Accommodation does not exist": "Accommodation does not exist",
 	"Accommodation successfully updated": "Accommodation successfully updated",
@@ -29,7 +30,7 @@
 	"Role deleted successfully": "Role deleted successfully",
 	"manager_id@gmail.com does not exist or not verified!": "manager_id@gmail.com does not exist or not verified!",
 	"notexist@gmail.com does not exist or not verified!": "notexist@gmail.com does not exist or not verified!",
-	"manager_id@gmail.com does not exist!": "manager_id@gmail.com does not exist!",
+	"The user is deleted successfully!": "The user is deleted successfully!",
 	"invalidemail@gmail.com does not exist!": "invalidemail@gmail.com does not exist!",
 	"Welcome to Barefoot Nomad": "Welcome to Barefoot Nomad",
 	"Page Requested not found": "Page Requested not found",
@@ -72,6 +73,7 @@
 	"approved": "approved",
 	"approve Travel Request": "approve Travel Request",
 	"Your travel request was approved!": "Your travel request was approved!",
+<<<<<<< HEAD
 	"You don't have an account with this email: shumbushedgar@gmail.com": "You don't have an account with this email: shumbushedgar@gmail.com",
 	"You are not loged in": "You are not loged in",
 	"notification not found": "notification not found",
@@ -94,4 +96,19 @@
 	"You don't have an account with this email: managertwo@gmail.com": "You don't have an account with this email: managertwo@gmail.com",
 	"Password incorrect": "Password incorrect",
 	"You were assigned to manager of a9610cf3-4056-41dd-92ca-463088e23d07": "You were assigned to manager of a9610cf3-4056-41dd-92ca-463088e23d07"
+=======
+
+
+	"You don't have an account with this email: shumbushedgar@gmail.com": "You don't have an account with this email: shumbushedgar@gmail.com",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzMTg0MSwiZXhwIjoxNjExMTM2NjQxfQ.DwJx9dQIyAnSLoLNbaXz5uE0Xqr5maRNFTynyOJZxM4'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzMTg0MSwiZXhwIjoxNjExMTM2NjQxfQ.DwJx9dQIyAnSLoLNbaXz5uE0Xqr5maRNFTynyOJZxM4'>Link</a>",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzMTkyMCwiZXhwIjoxNjExMTM2NzIwfQ.KP6mLOODZ2Sr34b2aTysNMAEeH9iZIaEa9OJxM-EMrA'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzMTkyMCwiZXhwIjoxNjExMTM2NzIwfQ.KP6mLOODZ2Sr34b2aTysNMAEeH9iZIaEa9OJxM-EMrA'>Link</a>",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzNzI1MSwiZXhwIjoxNjExMTQyMDUxfQ.8SG6kL47mj1YT67NyPq06IqTAPWZr2KNH2yJZRrCtYo'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzNzI1MSwiZXhwIjoxNjExMTQyMDUxfQ.8SG6kL47mj1YT67NyPq06IqTAPWZr2KNH2yJZRrCtYo'>Link</a>",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzODEyNywiZXhwIjoxNjExMTQyOTI3fQ.eNTCpkrHaQ2Ov3JBPvriGKno2iVMb4yR38oPlvEhOD8'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzODEyNywiZXhwIjoxNjExMTQyOTI3fQ.eNTCpkrHaQ2Ov3JBPvriGKno2iVMb4yR38oPlvEhOD8'>Link</a>",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDU1NDU2NiwiZXhwIjoxNjExMTU5MzY2fQ.ghfcDdy0ad1kzQMQfVTh8crt-taQpUtpBrl0uxiQKIU'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDU1NDU2NiwiZXhwIjoxNjExMTU5MzY2fQ.ghfcDdy0ad1kzQMQfVTh8crt-taQpUtpBrl0uxiQKIU'>Link</a>",
+	"User CYIMANA has been created. Check email for verification": "User CYIMANA has been created. Check email for verification",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDU1NDkyNiwiZXhwIjoxNjExMTU5NzI2fQ.p90OYojPsimKAdDbbQFq2o336Y1AXaXMmy1hC9PF2W8'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDU1NDkyNiwiZXhwIjoxNjExMTU5NzI2fQ.p90OYojPsimKAdDbbQFq2o336Y1AXaXMmy1hC9PF2W8'>Link</a>",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDU1NTM4NSwiZXhwIjoxNjExMTYwMTg1fQ.W3K9ruSUjPJgWZIOMUD79R_5Lz4EnkfaFlTxBJXxLxw'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDU1NTM4NSwiZXhwIjoxNjExMTYwMTg1fQ.W3K9ruSUjPJgWZIOMUD79R_5Lz4EnkfaFlTxBJXxLxw'>Link</a>",
+	"You were assigned to manager of fb94de4d-47ff-4079-89e8-b0186c0a3be8": "You were assigned to manager of fb94de4d-47ff-4079-89e8-b0186c0a3be8",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDU2MjU3NCwiZXhwIjoxNjExMTY3Mzc0fQ.mGmfa38TV4fooysrxvrHmGpyYVMWUI6xTwIyRoI36XY'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDU2MjU3NCwiZXhwIjoxNjExMTY3Mzc0fQ.mGmfa38TV4fooysrxvrHmGpyYVMWUI6xTwIyRoI36XY'>Link</a>
+>>>>>>> 9c45a94dbdb6d03ed70f8c49f6ca98fbf59d9a59
 }
