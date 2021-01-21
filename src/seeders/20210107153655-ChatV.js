@@ -22,7 +22,7 @@ module.exports = {
     },
     {
       id: 'd1ebb771-88fd-4543-9055-852abda33ce4',
-      receiver: 'visitor@yahoo.com',
+      receiver: 'support-team',
       sender: 'visitor@yahoo.com',
       message: 'Do you have accomodations in Nigeria ?',
       type: 'plain-text',
@@ -52,7 +52,7 @@ module.exports = {
     },
     {
       id: '6f33c2ef-4cdd-4dd4-aedc-daa00d9dcd4c',
-      receiver: 'visitor@yahoo.com',
+      receiver: 'support-team',
       sender: 'visitor@yahoo.com',
       message: 'Great! Now help me to signup with my yahoo. I do not see `Signin with Yahoo`. Am I not eligible here ?',
       type: 'plain-text',
@@ -72,7 +72,7 @@ module.exports = {
     },
     {
       id: '69f4d340-ccfd-4ad5-85cd-90588a4454f2',
-      receiver: 'otherVisitor@gmail.com',
+      receiver: 'support-team',
       sender: 'otherVisitor@gmail.com',
       message: 'Hello Support!',
       type: 'plain-text',
@@ -92,7 +92,7 @@ module.exports = {
     },
     {
       id: '2391257e-be0c-4ccb-ab52-65e5e88dfb7b',
-      receiver: 'otherVisitor@gmail.com',
+      receiver: 'support-team',
       sender: 'otherVisitor@gmail.com',
       message: 'My iPhone 11 Pro is not working 😭',
       type: 'plain-text',

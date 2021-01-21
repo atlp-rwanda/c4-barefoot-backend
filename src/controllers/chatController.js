@@ -257,9 +257,9 @@ export const markAsRead = async (req, res, next) => {
 export const visitorMessage = async (req, res, next) => {
   try {
     const chatV = {};
-    chatV.visitor = req.body.visitor;
     chatV.message = req.body.message;
-    chatV.sender = chatV.visitor;
+    chatV.receiver = 'support-team';
+    chatV.sender = req.body.sender;
     chatV.type = req.body.type;
     const newChatV = await models.ChatV.create(chatV);
     res.status(200).json(newChatV);
@@ -281,14 +281,17 @@ export const supportResponse = async (req, res, next) => {
     });
     const visitor = await models.ChatV.findOne({
       where: {
-        visitor: req.body.visitor,
-        sender: req.body.visitor
+        [Op.or]: {
+          receiver: req.body.visitor,
+          sender: req.body.visitor
+        }
       }
     });
     if (visitor) {
       chatV.sender = loggedInUser.email;
       chatV.message = req.body.message;
-      chatV.visitor = req.body.visitor;
+      chatV.type = req.body.type;
+      chatV.receiver = req.body.visitor;
       const newChatV = await models.ChatV.create(chatV);
       res.status(200).json(newChatV);
     } else {
@@ -306,8 +309,10 @@ export const readAsVisitor = async (req, res, next) => {
   try {
     const visitor = await models.ChatV.findOne({
       where: {
-        visitor: req.query.visitor,
-        sender: req.query.visitor,
+        [Op.or]: {
+          receiver: req.query.visitor,
+          sender: req.query.visitor,
+        }
       }
     });
     if (visitor) {
@@ -315,9 +320,9 @@ export const readAsVisitor = async (req, res, next) => {
         { status: true },
         {
           where: {
-            visitor: visitor.visitor,
+            receiver: req.query.visitor,
             sender: {
-              [Op.ne]: visitor.visitor
+              [Op.ne]: req.query.visitor
             }
           }
         }
@@ -340,7 +345,7 @@ export const readAsSupport = async (req, res, next) => {
   try {
     const visitor = await models.ChatV.findOne({
       where: {
-        visitor: req.query.visitor,
+        receiver: 'support-team',
         sender: req.query.visitor,
       }
     });
@@ -349,8 +354,8 @@ export const readAsSupport = async (req, res, next) => {
         { status: true },
         {
           where: {
-            visitor: visitor.visitor,
-            sender: visitor.visitor
+            sender: visitor.sender,
+            receiver: 'support-team'
           }
         }
       );
@@ -372,7 +377,10 @@ export const getChatsV = async (req, res, next) => {
   try {
     const chatsV = await models.ChatV.findAll({
       where: {
-        visitor: req.query.visitor
+        [Op.or]: {
+          sender: req.query.visitor,
+          receiver: req.query.visitor
+        }
       },
       order: [
         ['createdAt', 'DESC']
@@ -387,14 +395,16 @@ export const getChatsV = async (req, res, next) => {
 export const getVisitorsList = async (req, res, next) => {
   try {
     const chats = await models.ChatV.findAll({
-      attributes: ['visitor'],
+      where: {
+        receiver: 'support-team'
+      },
       order: [
         ['createdAt', 'DESC']
       ]
     });
     const chatListVisitors = new Set();
     chats.forEach((chat) => {
-      chatListVisitors.add(chat.visitor);
+      chatListVisitors.add(chat.sender);
     });
     res.status(200).json(Array.from(chatListVisitors));
   } catch (err) {
@@ -446,24 +456,21 @@ export const getUnreadMessages = async (req, res, next) => {
 
 export const visitorGetsChatVs = async (req, res, next) => {
   try {
-    const hasChattedBefore = await models.ChatV.findOne({
+    const chatVs = await models.ChatV.findAll({
       where: {
-        visitor: req.query.visitor,
-        sender: req.query.visitor
-      }
+        [Op.or]: {
+          receiver: req.query.visitor,
+          sender: req.query.visitor
+        }
+      },
+      order: [
+        ['createdAt', 'DESC']
+      ]
     });
-    if (hasChattedBefore) {
-      const chatVs = await models.ChatV.findAll({
-        where: {
-          visitor: hasChattedBefore.visitor
-        },
-        order: [
-          ['createdAt', 'DESC']
-        ]
-      });
+    if (chatVs) {
       chatVs.forEach((chat) => {
-        if (chat.sender !== chat.visitor) {
-          chat.sender = 'Barefoot Nomad Support';
+        if (chat.sender !== req.query.visitor) {
+          chat.sender = 'support-team';
         }
       });
       res.status(200).json(chatVs);
