@@ -13,7 +13,5 @@ export default {
       lockOnDoor: true
     }
   ]),
-
   down: (queryInterface, Sequelize) => queryInterface.bulkDelete('Amenities', null, {})
-
 };
