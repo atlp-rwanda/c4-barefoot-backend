@@ -218,6 +218,9 @@
 	"successfully Logged In": "successfully Logged In",
 	"Your travel request was rejectd!": "Your travel request was rejectd!",
 	"Your travel request was approved!": "Your travel request was approved!",
-	"You don't have an account with this email: shumbushedgar@gmail.com": "You don't have an account with this email: shumbushedgar@gmail.com"
-
+	"You don't have an account with this email: shumbushedgar@gmail.com": "You don't have an account with this email: shumbushedgar@gmail.com",
+	"The user role is updated to manager": "The user role is updated to manager",
+	"The user is deleted successfully!": "The user is deleted successfully!",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1//user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RBZG1pbiIsImlhdCI6MTYxMTIwNzczNywiZXhwIjoxNjExODEyNTM3fQ.JRZZvwGeSc61jdVF81y16bsfRwWMw8XaLiSbcgV9qSU'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1//user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RBZG1pbiIsImlhdCI6MTYxMTIwNzczNywiZXhwIjoxNjExODEyNTM3fQ.JRZZvwGeSc61jdVF81y16bsfRwWMw8XaLiSbcgV9qSU'>Link</a>",
+	"You don't have an account with this email: shumbushoedgar@gmail.com": "You don't have an account with this email: shumbushoedgar@gmail.com"
 }
