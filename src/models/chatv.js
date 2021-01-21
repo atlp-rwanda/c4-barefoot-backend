@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    visitor: {
+    sender: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    sender: {
+    receiver: {
       type: DataTypes.STRING,
       allowNull: false
     },

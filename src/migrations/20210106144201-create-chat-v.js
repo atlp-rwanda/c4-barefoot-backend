@@ -7,11 +7,11 @@ module.exports = {
         type: Sequelize.UUID,
         default: Sequelize.fn('uuid_generate_v4')
       },
-      visitor: {
+      sender: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      sender: {
+      receiver: {
         type: Sequelize.STRING,
         allowNull: false
       },

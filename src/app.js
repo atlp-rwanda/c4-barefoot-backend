@@ -16,7 +16,7 @@ import i18n from './controllers/i18n';
 import newUserConnection from './controllers/chatrooms/chat';
 import socketAuth from './controllers/chatrooms/socketAuth';
 import './controllers/chatrooms/clearVisitorChat';
-const users = [];
+import { handshake, userConnection } from './controllers/chatrooms/chat';
 
 
 const app = express();
@@ -82,41 +82,9 @@ server.listen(port, () => {
     console.log(err);
   }
 });
-io.use(async (socket, next)=>{
-  const token = socket.handshake.query.token;
-  const userId = socket.handshake.query.loggedInUser;
-  users[userId] = socket.id;
-  next();
-});
-io.on("connection", socket=>{
-  socket.on('user_connected', userId=>{
-    io.emit('user_connected', userId);
-  })
-  //listening for incoming messages
-  socket.on('send_message', data=>{
-    console.log(data);
-    if(data.visitor){
-      const socketId = users[data.receiver];
-      users[data.sender] = socket.id;
-      io.to(socketId).emit('new_message', data);
-      db.ChatV.create({
-        visitor: data.sender,
-        sender: data.receiver,
-        message: data.message
-      });
 
-    }else {
-      const socketId = users[data.receiver];
-      io.to(socketId).emit('new_message', data);
-      db.Chat.create({
-        sender: data.sender,
-        receiver: data.receiver,
-        message: data.message,
-        type: 'plain-text'
-      })
-    }
-    
-  })
-});
+//chat handler
+io.use(handshake).on("connection", userConnection);
+
 
 export default app;

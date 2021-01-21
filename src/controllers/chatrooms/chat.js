@@ -1,44 +1,50 @@
-import jwt, { verify } from 'jsonwebtoken';
-import { io } from '../../app';
-import Chat from '../../models/chat';
 import models from '../../models';
+const users = [];
+import { io } from '../../app';
 
-const newMessage = async (data) => {
-  const {
-    token, 
-    // message, time, msg_from, msg_to
-  } = data;
+export const handshake = async (socket, next)=>{
+  
+  if(socket.handshake && socket.handshake.query && socket.handshake.query.token){
+    const token = socket.handshake.query.token;
+    const userId = socket.handshake.query.loggedInUser;
+    users[userId] = socket.id;
 
-  await jwt.verify(token, process.env.TOKEN_SECRET, (err, USER) => {
-    if (!USER) {
-      USER = 'visitor';
-    }
-    console.log(USER);
-  });
-  console.log(data);
-  try {
-    models.Chat.create(data);
-  } catch (e) {
-    console.log(e);
+  }else if(socket.handshake && socket.handshake.query && socket.handshake.query.visitor){
+    users[socket.handshake.query.visitor]= socket.id;
+
   }
-};
+  next();
+}
 
-const userDisconnected = (socket) => {
-  console.log('User left : ', socket.id);
-  io.emit('disconnected', {
-    message: 'someone just left :\'(',
-    who: ['hunted', 'bug']
-  });
-};
+export const userConnection = socket=>{
+  //listening for incoming messages
+  socket.on('send_message', data=>{
+    if(data.metadata==='visitor'){
+      const socketId = users['2d647115-3af7-4df0-99aa-6656c764829f'];
+      //sending message requesting support to travel admin
+      io.to(socketId).emit('request_support', data);
+      //sending support message to the visitor
+      io.to(users[data.receiver]).emit('support_message', data);
+      models.ChatV.create({
+        sender: data.sender,
+        receiver: data.receiver,
+        message: data.message
+      });
+  
+    }else {
+      //sending message to the receiver
+      io.to(users[data.receiver]).emit('new_message', data);
+      models.Chat.create({
+        sender: data.sender,
+        receiver: data.receiver,
+        message: data.message,
+        type: 'plain-text'
+      })
+    }
+    
+  })
+ 
+}
 
-export const newUserConnection = (socket) => {
-  socket.broadcast.emit('new-connection', {
-    message: 'someone just connected',
-    who: ['firstname', 'lastname']
-  });
-  socket.on('disconnect', userDisconnected);
 
-  socket.on('chat-private', newMessage);
-};
 
-export default newUserConnection;
