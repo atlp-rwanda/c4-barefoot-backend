@@ -5,13 +5,10 @@ import { verifyToken, generateToken } from '../../utils/auth';
 const refreshToken = async (req, res, next) => {
   try {
     const token = req.cookies.make;
-    try {
+   
       if (!token) {
         throw new BadRequestError(res.__('Please login!'), 400);
       }
-    } catch (e) {
-      next(e);
-    }
     const payload = await verifyToken(token);
     // check if user exist in databasa
     const newUser = await UserServices.getUserByUserNameAndToken(payload.username,token);
