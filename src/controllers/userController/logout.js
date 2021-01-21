@@ -15,7 +15,7 @@ const logout = async (req, res) => {
   const token = req.header('authorization').replace('Bearer ', '');
   try {
 
-    console.log(token);
+   
     if (!token) {
       throw new BadRequestError(res.__('Please login!'), 400);
     }
