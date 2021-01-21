@@ -8,9 +8,15 @@ import db from './models/index';
 import routes from './routes/index';
 import ApplicationError from './utils/Errors/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
+import path from 'path'
+
 import passport from "passport";
 import cookieSession from 'cookie-session';
 import i18n from './controllers/i18n';
+import cron from 'node-cron';
+import { expiredBookings } from '../src/controllers/bookingsController';
+
+// const expired = new Checkout();
 
 
 const app = express();
@@ -37,6 +43,9 @@ app.use(i18n.init);
 // routes
 app.use('/api/v1/', routes);
 // app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // documentation route
 const swaggerDocs = swaggerJsDoc(swaggerConfigs);
@@ -69,6 +78,9 @@ app.listen(port, () => {
   } else {
     console.log(err);
   }
+});
+cron.schedule('* * * * *', () => {
+ expiredBookings();
 });
 
 export default app;
