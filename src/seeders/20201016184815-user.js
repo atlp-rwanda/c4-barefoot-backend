@@ -83,6 +83,19 @@ export default {
       language: 'English',
       verified: true
     }, {
+      id: 'd74fcc5e-5755-4366-83ef-cf306b013c46',
+      first_name: 'pushRequester',
+      last_name: 'One',
+      username: 'pushrequester',
+      occupation: 'push_notification_requester',
+      email: 'pushnotfication@gmail.com',
+      password: hashPassword('pushnotification'),
+      manager_id: '0ce36391-2c08-4703-bddb-a4ea8cccbbc5',
+      user_role_id: roles.REQUESTER,
+      address: 'Kigali',
+      language: 'English',
+      verified: true
+    }, {
       id: '2d647115-3af7-4df0-99aa-6656c764829f',
       first_name: 'Travel',
       last_name: 'Admin',
