@@ -42,13 +42,9 @@ routes.use('/notification', notiRoute);
 
 routes.use('/trips', triproute)
 
-<<<<<<< HEAD
-//routes.use('/google',signinWithGoogleRoute);
 routes.use('/chat', chatRoom);
-=======
 routes.use('/google',signinWithGoogleRoute);
 
 routes.use('/statistics',statistics);
->>>>>>> main
 
 export default routes;
