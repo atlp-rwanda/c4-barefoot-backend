@@ -14,7 +14,7 @@ import passport from "passport";
 import cookieSession from 'cookie-session';
 import i18n from './controllers/i18n';
 import { handshake, userConnection } from './controllers/chatrooms/chat';
-
+import './controllers/chatrooms/clearVisitorChat';
 
 const app = express();
 const server = http.createServer(app);
@@ -82,6 +82,5 @@ server.listen(port, () => {
 
 //chat handler
 io.use(handshake).on("connection", userConnection);
-
 
 export default app;
