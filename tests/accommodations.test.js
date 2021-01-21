@@ -42,7 +42,6 @@ describe('ACCOMMODATION ROUTES TESTING', () => {
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.body).to.have.property('singleAccommodation');
-    expect(res.body).to.have.property('amenities');
   });
 
   it('Should not retrieve accommodation with no existance', async () => {

@@ -4,11 +4,11 @@ import models from '../src/models';
 import app from '../src/app';
 import sinon from 'sinon';
 import {successSignUp,_} from '../src/controllers/googleSignup';
+import { expect, request, use } from 'chai';
 
-let should = chai.should();
 
 
-chai.use(chaiHttp)
+use(chaiHttp)
 
 
 let req={body:{},
@@ -46,16 +46,12 @@ describe('#Sign Up with Google',()=>{
         done()
       });
 
-      it('It should first signUp a user if he has no account and then signIn the user',(done)=>{
-          chai.request(app)
-          .get('/api/v1/google/signup')
-          .send(req)
-          .end((err,res)=>{
-            res.should.have.status(200);
-            res.body.should.be.a('Object');
-            res.body.should.have.property('message').eql('successfully Logged In')
-            done()
-          })  
+      it('It should first signUp a user if he has no account and then signIn the user',async ()=>{
+        const res = await request(app).get('/api/v1/google/signup').send(req);
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.a('Object');
+            expect(res.body).to.have.property('message').eql('successfully Logged In')
+          })
     })
 
      it('It should signIn a user with his google account',(done)=>{
@@ -77,5 +73,4 @@ describe('#Sign Up with Google',()=>{
       const mock = sinon.mock(res);
       mock.expects("redirect").once().withExactArgs("/api/v1/google/signUp");
       done() 
-})
-})
+    })

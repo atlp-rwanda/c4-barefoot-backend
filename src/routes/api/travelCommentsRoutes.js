@@ -2,6 +2,8 @@ import express from 'express';
 import TravelRequestComment from '../../controllers/travelRequestComments';
 import getTravelRequestComments from '../../controllers/viewTravelRequestComments';
 import isLogedIn from '../../helper/isLogedIn';
+import {sendCommentNotification} from '../../middlewares/pushNotification'
+
 
 const router = express.Router();
 
@@ -56,7 +58,7 @@ const router = express.Router();
                 "createdAt": "2020-11-16T07:42:53.061Z"
             }
  */
-router.post('/:travelId', isLogedIn, TravelRequestComment); // create travel request comment
+router.post('/:travelId', isLogedIn, TravelRequestComment, sendCommentNotification); // create travel request comment
 
 /**
  * @swagger

@@ -5,6 +5,8 @@ import {
   adminCredentials, reqTest, testPerm, updateRole, deleteReq
 } from './dummyData';
 
+const upRoleId = "0ce36391-2c08-3074-bddb-a4ea8cccbbc8";
+
 use(chaiHttp);
 let User = '';
 
@@ -140,6 +142,11 @@ describe('ROLES END-POINTS TESTING', () => {
 /* ------------------------test of GET /api/v1/admin/users ------------------*/
 
 describe('USER END-POINTS TESTING', () => {
+
+  const updateRoleData = {
+    email: 'songachillethe1her@gmail.com',
+    role: 'manager'
+  }
   it('should return all users', async () => {
     const res = await request(app).get('/api/v1/admin/users').set('Authorization', `Bearer ${User.body.data}`);
 
@@ -149,11 +156,11 @@ describe('USER END-POINTS TESTING', () => {
     expect(res.body).to.have.property('users');
   });
   it('should update the role of the user', async () => {
-    const res = await request(app).put('/api/v1/admin/users').send(updateRole.req).set('Authorization', `Bearer ${User.body.data}`);
+    User = await request(app).post('/api/v1/user/login').send(adminCredentials);
+    const res = await request(app).pu('/api/v1/admin/users').set('Authorization', `Bearer ${User.body.data}`).send(updateRoleData);
 
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(201);
-    expect(res.body).to.have.property('status');
     expect(res.body).to.have.property('message');
     expect(res.body.message).to.equal(`The user role is updated to ${updateRole.req.role}`);
   });

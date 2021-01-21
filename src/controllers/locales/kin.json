@@ -191,5 +191,6 @@
 	" is busy, trying with port": " irahuze, turi kugerageza",
 	"No token found!": "Nta token ufite!",
 	"You are not loged in": "Ntabwo winjiye",
-	"successfully Logged In": "Mwinjiye neza!"
+	"successfully Logged In": "Mwinjiye neza!",
+	"no Trip was made": "nta rugendo rwakozwe"
 }

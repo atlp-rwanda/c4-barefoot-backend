@@ -14,6 +14,7 @@ export const signUp=async(req,res)=>{
     }
     const result=await loginUser(user);
     res.send({
+        status: 200,
         message:res.__('successfully Logged In'),
         token:result.token
     })
