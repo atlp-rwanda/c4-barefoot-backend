@@ -6,9 +6,6 @@ import {
 } from './dummyData';
 import models from '../src/models';
 
-
-const tokenTest = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiNDU0Mjk4MzctZWQyYy00MzVkLWJjMjItYWQ5YzVkYmUzNzgyIiwidXNlcm5hbWUiOiJyZXF1ZXN0ZXJPbmUiLCJpYXQiOjE2MTAwMjUxNDQsImV4cCI6MTYxMDYyOTk0NH0.I02xNm4iD2dM0GW4fUXw98Mcmyx0K_AQIORsZ5fMOFk";
-
 use(chaiHttp);
 describe('SIGNUP END-POINTS TESTNG', () => {
 
@@ -41,7 +38,7 @@ describe('SIGNUP END-POINTS TESTNG', () => {
     expect(res.body.error).to.equal('Invalid token');
   });
   it('Should update email verification with valid token', async () => {
-    const res = await request(app).patch(`/api/v1/user/verification/?token=${tokenTest}`);
+    const res = await request(app).patch(`/api/v1/user/verification/?token=${validToken}`);
     expect(res).to.have.status(200);
     expect(res.type).to.equal('application/json');
   }, 30000);

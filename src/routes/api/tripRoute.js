@@ -6,4 +6,4 @@ import { getTotalOfTripsByLocation, getTripHistory } from '../../controllers/vie
 const router = express.Router();
 router.get('/:location', isLogedIn, permit(['view travel requests']), getTripHistory);
 router.get('/', isLogedIn, permit(['view travel requests']), getTotalOfTripsByLocation);
-export default router
+export default router;
