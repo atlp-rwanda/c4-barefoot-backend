@@ -29,7 +29,6 @@ routes.use('/requests', travelRequestroutes);
 routes.use('/directReports', directreportsRoutes);
 routes.use('/comment', tRequestsCommentsRoutes);
 routes.use('/ratings', reviewsRoutes);
-
 routes.use('/assignUserstoManager', managerRouter);
 routes.use('/', landingPage);
 routes.use('/locations', locationsRoute);
@@ -39,16 +38,9 @@ routes.use('/admin', permit(['all']), adminRoutes);
 routes.use('/bookings', bookingsRoute);
 routes.use('/profile', userProfile);
 routes.use('/notification', notiRoute);
-
 routes.use('/trips', triproute)
-
-<<<<<<< HEAD
-//routes.use('/google',signinWithGoogleRoute);
-routes.use('/chat', chatRoom);
-=======
 routes.use('/google',signinWithGoogleRoute);
-
+routes.use('/chat', chatRoom);
 routes.use('/statistics',statistics);
->>>>>>> main
 
 export default routes;
