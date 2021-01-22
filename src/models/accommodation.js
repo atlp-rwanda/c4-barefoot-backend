@@ -21,14 +21,14 @@ module.exports = (sequelize, DataTypes) => {
 
   Accommodation.associate = (models) => {
     Accommodation.hasOne(models.Amenity, {
-      foreignKey: 'AccommodationId',
+      foreignKey: 'accommodationId',
       as: 'Amenity',
       onDelete: 'cascade'
     });
 
     Accommodation.hasMany(models.Booking, {
-      foreignKey: 'AccommodationId',
-      foreignKey: 'AccommodationId',
+      foreignKey: 'accommodationId',
+      foreignKey: 'accommodationId',
       as: 'Booking',
       onDelete: 'cascade'
     });
