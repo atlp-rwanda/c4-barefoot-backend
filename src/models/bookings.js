@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    AccommodationId: {
+    accommodationId: {
       type: DataTypes.UUID,
       allowNull: false
     },
