@@ -4,9 +4,9 @@ import roles from '../src/utils/roles';
 export const validUser = {
   first_name: 'TestName',
   last_name: 'TestName',
-  username: 'TestAdmin',
+  username: 'NewAdmin',
   occupation: 'software development',
-  email: 'testadmin@gmail.com',
+  email: 'newadmin@gmail.com',
   password: 'pa13332335',
   address: 'Kigali',
   language: 'English',
@@ -83,7 +83,7 @@ export const testPerm = { role: 'test', permissions: { 'edit profile': 0 } };
 
 export const updateRole = {
   req: {
-    email: 'testadmin@gmail.com',
+    email: 'newadmin@gmail.com',
     role: 'manager'
   },
   nonExistingUser: {
@@ -104,7 +104,7 @@ export const line_manager = {
 };
 
 export const deleteReq = {
-  email: 'testadmin@gmail.com'
+  email: 'newadmin@gmail.com'
 };
 
 export const travelAdmin = {
