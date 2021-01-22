@@ -252,7 +252,7 @@ router.post('/logout', logedIn, logout);
  *               description: token used to access for protected routes
  *               example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzEsImZpcnN0X25hbWUiOiJBbWl
  */
-router.post('/refresh-token', refreshToken);
+router.post('/refresh-token', logedIn, refreshToken);
 /**
  * @swagger
  *
