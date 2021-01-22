@@ -29,7 +29,7 @@ export const getDirectReport = async (req, res, next) => {
         findTravelRequest(res, query, next, pagination);
       }
     } else {
-      res.status(401).json({ message: res.__('you are not an approved manager') });
+      res.status(401).json({ message: 'you are not an approved manager' });
     }
   } catch (e) {
     next(e);
@@ -47,36 +47,36 @@ export const approve_reject_TravelRequest = async (req, res, next) => {
         if (findTravelRequest.managerId === userId) {
           // travel request can be approve if it is pending or rejected
           // and can be rejected if it is pending only
-          if (findTravelRequest.status === res.__('pending') || (findTravelRequest.status === res.__('rejected') && action !== res.__('reject'))) {
-            const changes = (action === res.__('approve')) ? res.__('approved') : res.__('rejected');
+          if (findTravelRequest.status === 'pending'|| (findTravelRequest.status === 'rejected' && action !== 'reject')) {
+            const changes = (action === 'approve') ? 'approved' : 'rejected';
             const updateStatus = await travelRequestServices.updateStatus({ travelId: travelRequestId, status: { status: changes } });
 
             if (updateStatus) {
               //in-app notification and email notification
               const newNotificantion = {
                 user_id: user.id,
-                title: res.__(`${req.body.action} Travel Request`),
-                message: res.__(`Your travel request was ${req.body.action}d!`)
+                title: `${req.body.action} Travel Request`,
+                message: `Your travel request was ${req.body.action}ed!`
                   };
                   
                const notification = await models.Notification.create(newNotificantion);
               //  pusher.trigger('bare-foot-normad', 'notification', notification);
                const mail = await approveTravelRequestEmail(user.email, req.body.action);
-              res.status(201).json({ status: 201, message: res.__('Operation performed successfully!') });
+              res.status(201).json({ status: 201, message: 'Operation performed successfully!' });
               next();
             }
-            throw new ApplicationError(res.__('Failed to approve this travel request, try again!'), 500);
+            throw new ApplicationError('Failed to approve this travel request, try again!', 500);
           } else {
-            throw new BadRequestError(res.__(`The travel request is already ${findTravelRequest.status}`), 400);
+            throw new BadRequestError(`The travel request is already ${findTravelRequest.status}`, 400);
           }
         } else {
-          throw new ApplicationError(res.__('Failed to access this travel request!'), 500);
+          throw new ApplicationError('Failed to access this travel request!', 500);
         }
       } else {
-        throw new NotFoundRequestError(res.__('The travel request does not exist!'), 404);
+        throw new NotFoundRequestError('The travel request does not exist!', 404);
       }
     } else {
-      throw new BadRequestError(res.__('Can not perform this action'), 400);
+      throw new BadRequestError('Can not perform this action', 400);
     }
   } catch (error) {
     next(error);
