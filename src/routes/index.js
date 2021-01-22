@@ -17,9 +17,11 @@ import notiRoute from './api/notification';
 
 import triproute from './api/tripRoute'
 
+//import signinWithGoogleRoute from "./api/signinWithGooglerRoute";
+import chatRoom from './api/chatRoutes';
+
 import signinWithGoogleRoute from "./api/signinWithGooglerRoute";
-
-
+import statistics from "./api/statistics";
 const routes = express.Router();
 
 routes.use('/user', userRoute);
@@ -40,7 +42,13 @@ routes.use('/notification', notiRoute);
 
 routes.use('/trips', triproute)
 
+<<<<<<< HEAD
+//routes.use('/google',signinWithGoogleRoute);
+routes.use('/chat', chatRoom);
+=======
 routes.use('/google',signinWithGoogleRoute);
 
+routes.use('/statistics',statistics);
+>>>>>>> main
 
 export default routes;
