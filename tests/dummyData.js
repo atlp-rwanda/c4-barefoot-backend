@@ -4,9 +4,9 @@ import roles from '../src/utils/roles';
 export const validUser = {
   first_name: 'TestName',
   last_name: 'TestName',
-  username: 'NewAdmin',
+  username: 'TestUserOne',
   occupation: 'software development',
-  email: 'newadmin@gmail.com',
+  email: 'testuserone@gmail.com',
   password: 'pa13332335',
   address: 'Kigali',
   language: 'English',
@@ -83,7 +83,7 @@ export const testPerm = { role: 'test', permissions: { 'edit profile': 0 } };
 
 export const updateRole = {
   req: {
-    email: 'newadmin@gmail.com',
+    email: 'testuserone@gmail.com',
     role: 'manager'
   },
   nonExistingUser: {
@@ -104,7 +104,7 @@ export const line_manager = {
 };
 
 export const deleteReq = {
-  email: 'newadmin@gmail.com'
+  email: 'testuserone@gmail.com'
 };
 
 export const travelAdmin = {
@@ -135,14 +135,14 @@ export const updateLocation = {
 
 export const validAccommodation = {
 
-  id: '0ce36391-2c08-3074-bddb-a4ea8cccbbc9',
+  id: '0ce36391-2c08-3074-bddb-a4ea8cccbbc2',
   country: 'Rwanda',
   city: 'Kigali',
   state: 'Nyarugenge',
   streetAddress: 'KN 22 ST',
   locationID: null,
   propertyType: 'Hostel',
-  numberOfRooms: 100,
+  numberOfRooms: 100, 
   typeOfBed: 'Double Decker',
   title: 'Kigali Hostels',
   description: 'A serene environment for relaxation',

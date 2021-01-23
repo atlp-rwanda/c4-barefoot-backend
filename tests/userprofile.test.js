@@ -12,7 +12,7 @@ describe('USER PROFILE END-POINTS TESTING', () => {
     expect(res).to.have.status(404);
   });
   it('should get user profile', async () => {
-    const res = await request(app).get('/api/v1/profile/requesterOne').set('Authorization', `Bearer ${validToken}`);
+    const res = await request(app).get('/api/v1/profile/TestUserOne').set('Authorization', `Bearer ${validToken}`);
     expect(res).to.have.status(200);
   });
   it('should not update the user profile', async () => {

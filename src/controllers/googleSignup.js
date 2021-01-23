@@ -8,8 +8,8 @@ export const successSignUp=async(req,res,next)=>{
 export const signUp=async(req,res)=>{
     let user;
     if(req.user){ 
-        user=req.user;}
-    else{
+        user=req.user;
+    }else{
         user=req.body.user;
     }
     const result=await loginUser(user);

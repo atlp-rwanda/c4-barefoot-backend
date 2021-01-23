@@ -6,9 +6,9 @@ name: BarefootNomad
 
 on:
   push:
-    branches: [ fix-trip-history ]
+    branches: [ fix-refresh-token ]
   pull_request:
-    branches: [ fix-trip-history ]
+    branches: [ fix-refresh-token ]
 
 
 jobs:

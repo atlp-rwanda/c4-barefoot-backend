@@ -1,6 +1,6 @@
 
 import getDataFromToken from '../helper/tokenToData';
-import { displayTravelRequest, findTrip, findTripByTravelRequests } from '../services/tripHistorySearch.js'
+import { displayTravelRequest, findTrip } from '../services/tripHistorySearch.js'
 import db from '../models';
 
 export const getTripHistory = async (req, res, next) => {
@@ -29,8 +29,9 @@ export const getTotalOfTripsByLocation = async (req, res, next) => {
     let counter = travels.rows.length;
     if (counter > 0) {
       travels.rows.forEach((trData) => {
-        db.Trip.findAll({ where: { travelId: trData.travelId } })
-          .then((tripData) => {
+        db.Trip.findAll({ where: { travelId: trData.travelId 
+        } 
+      }).then((tripData) => {
             counter -= 1;
             //only selecting trips with their destination 
             let result = tripData.map(a => a.destination);
@@ -45,6 +46,6 @@ export const getTotalOfTripsByLocation = async (req, res, next) => {
     }
     res.json("no trip was made");
   } catch (err) {
-    return res.status(401).json(err.message);
+    return res.status(500).json(err.message);
   }
 };

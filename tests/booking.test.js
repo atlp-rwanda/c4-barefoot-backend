@@ -40,7 +40,7 @@ describe('BOOKINGS END-POINT TEST', () => {
     User = await request(app).post('/api/v1/user/login').send(travelAdmin);
     const resAcc = await request(app).post('/api/v1/accommodations').set('Authorization', `Bearer ${User.body.data}`).send(validAccommodation);
     // Create Expiring Booking
-    const AccomodationId = resAcc.body.accommodation.id;
+    const AccomodationId = resAcc.body.accommodationId;
     const bookingDates = {
       From: moment().add(-2, 'days'),
       To: moment().add(-1, 'days')

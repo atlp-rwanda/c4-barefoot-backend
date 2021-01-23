@@ -36,7 +36,7 @@ export const approveTravelRequestEmail = async (email, action) => {
   const mailOptions = {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: email,
-    subject: res.__('Rejected travel request'),
+    subject: 'Rejected travel request',
     html: `<p><strong>Barefoot Nomad</strong><br><br> Hi, <br> Your travel request was ${action}d.</p> <br>`
   };
 

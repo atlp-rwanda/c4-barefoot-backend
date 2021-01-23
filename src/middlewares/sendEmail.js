@@ -20,7 +20,7 @@ export const sendVerificationEmail = async (req, res, next) => {
 
   try {
     if(sendmail){
-      return res.status(201).json({ Message: res.__(`User ${first_name} has been created. Check email for verification`) });
+      return res.status(201).json({ message: res.__(`User ${first_name} has been created. Check email for verification`) });
     }else{
       throw new ApplicationError(res.__("Failed to send the verification email, please try again!"), 500);
     }

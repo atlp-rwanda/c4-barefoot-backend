@@ -1,7 +1,7 @@
 import { roles } from '../services/roles';
 import findManager from '../services/findManager';
 
-const assignUsers = async (req, res, next) => {
+const managerUsers = async (req, res, next) => {
   try {
     const page = parseInt(req.query.page, 10);
     const storedRole = await roles();
@@ -19,4 +19,4 @@ const assignUsers = async (req, res, next) => {
     next(error);
   }
 };
-export default assignUsers;
+export default managerUsers;
