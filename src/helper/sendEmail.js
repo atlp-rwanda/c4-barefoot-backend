@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import 'dotenv/config';
 import {google} from 'googleapis';
+import emailTemplate from './emailTemplate';
 const oAuth2Client=new google.auth.OAuth2(process.env.CLIENT_ID,process.env.CLIENT_SECRET,process.env.REDIRECT_URL);
 oAuth2Client.setCredentials({refresh_token:process.env.REFRESH_TOKEN});
 // const sendEmail = async (userInfo) =>{
@@ -48,7 +49,7 @@ const sendEmail = async (userInfo) =>{
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: userInfo.email,
     subject: userInfo.subject,
-    html: userInfo.html
+    html: emailTemplate(userInfo.html)
   };
   try {
     const sendmail = transporter.sendMail(mailOptions);
@@ -58,4 +59,4 @@ const sendEmail = async (userInfo) =>{
      return err;;
   }
 }
-export default sendEmail;
+export default sendEmail;// 

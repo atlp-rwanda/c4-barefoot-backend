@@ -9,20 +9,20 @@ const verification = async (req, res, next) => {
     try {
       const record = await UserServices.getUserByUserName(user);
       if (!record) {
-        throw new notFoundError(res.__('Account does not exist'));
+        throw new notFoundError(('Account does not exist'));
       }
       if (record.verified === false) {
         const data = { verified: true };
         UserServices.updateUserByUsername(data, user);
-        return res.status(200).json({ status: 200, message: res.__('Email has been verified') });
-      } throw new badRequest(res.__('Account already verified'));
+        return res.status(200).json({ status: 200, message: ('Email has been verified') });
+      } throw new badRequest(('Account already verified'));
     } catch (error) {
       next(error);
     }
   };
 
   jwt.verify(req.query.token, process.env.TOKEN_SECRET, (err, user) => {
-    if (err) throw new badRequest(res.__('Invalid token'));
+    if (err) throw new badRequest(('Invalid token'));
     updateUser(user.username);
   });
 };

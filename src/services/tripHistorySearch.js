@@ -20,7 +20,7 @@ export const displayTravelRequest = async (query) => {
     if (travels.rows.length > 0) {
         return travels
     } else {
-        return res.__("no Trip was made")
+        return ("no Trip was made")
      }
 }
 

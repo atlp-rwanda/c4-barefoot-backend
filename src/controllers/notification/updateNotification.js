@@ -6,16 +6,16 @@ const updateNotifications = async (req, res) => {
   const notificationId = req.params.id;
   const status = 'readed';
   const userData = req.headers.authorization;
-  if (!userData) return res.status(401).json({ status: 401, message: res.__('Unauthorized, Please login!') });
+  if (!userData) return res.status(401).json({ status: 401, message: ('Unauthorized, Please login!') });
   const token = userData.split(' ')[1];
   const decoded = await verifyToken(token);
 
   const notification = await findNotificationById(notificationId);
-  if (!notification) throw new NotFoundRequestError(res.__('notification not found'), 404);
+  if (!notification) throw new NotFoundRequestError(('notification not found'), 404);
   try {
     const updated = await updateNotification(notificationId);
     console.log(updated);
-    return res.status(200).json({ status: 200, message: res.__('notification updated successful!') });
+    return res.status(200).json({ status: 200, message: ('notification updated successful!') });
   } catch (error) {
     console.log(error.message, error.stack);
   }

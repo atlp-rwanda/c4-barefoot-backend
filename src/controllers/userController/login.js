@@ -9,14 +9,14 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
   const isUser = await isUserExist(email);
   if (isUser === null) {
-    throw new NotFoundRequestError(res.__(`You don't have an account with this email: ${email}`), 404);
+    throw new NotFoundRequestError((`You don't have an account with this email: ${email}`), 404);
   }
 
   if (isUser.verified === false) {
-    throw new ApplicationError(res.__('Please verify your email first'), 403);
+    throw new ApplicationError(('Please verify your email first'), 403);
   }
   const result = comparePassword(password, isUser.password);
-  if (!result) throw new BadRequestError(res.__('Password incorrect'), 400);
+  if (!result) throw new BadRequestError(('Password incorrect'), 400);
 
   try {
     const userProfile = {
@@ -43,7 +43,7 @@ const login = async (req, res, next) => {
     await isUser.update({ refreshtoken: userToken });
     res.cookie('make', userToken, { httpOnly: false, path: '/api/v1/user/refresh-token' });
     return res.status(200).json({
-      status: 200, message: res.__('login successful'), data: userToken, profile: userProfile
+      status: 200, message: ('login successful'), data: userToken, profile: userProfile
     });
   } catch (err) {
     next(err);

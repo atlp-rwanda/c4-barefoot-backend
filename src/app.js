@@ -53,7 +53,7 @@ app.use('/documentation', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 // catch all 404 errors
 app.all('*', (req, res, next) => {
-  const err = new ApplicationError(res.__('Page Requested not found'), 404);
+  const err = new ApplicationError(('Page Requested not found'), 404);
   next(err);
 });
 

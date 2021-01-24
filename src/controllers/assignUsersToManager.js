@@ -1,9 +1,9 @@
 import pusher from '../config/pusher';
 import findUser from '../services/findUserById';
 import models from '../models';
-import sendNotificationEmail from '../middlewares/sendNotificationEmail';
 import NotFoundRequestError from '../utils/Errors/notFoundRequestError';
 import { createNotification } from '../services/notification';
+import sendEmail from '../helper/sendEmail';
 
 const assignUsersToManager = async (req, res, next) => {
   const userId = req.params.id;
@@ -23,7 +23,18 @@ const assignUsersToManager = async (req, res, next) => {
 
     const notification = await createNotification(newNotificantion);
 
-    const notifiEmail = await sendNotificationEmail(user.email);
+
+    const mailOptions = {
+      email: user.email,
+      subject: 'Verify your email',
+      html: `<p>
+			Hi Lynda,</br>                                                                                                         
+            Hope this email finds you well. Thank you for sending your request at</br>
+            Barefoot nomad ,You have been  successfully assigned to the manager.                                   
+		</p>
+		<p>Kindly regard</p>`
+    };
+    const sendmail = await sendEmail(mailOptions);
 
     res.status(200).json({ status: 200, message: `user was assigned to manager with this Id ${manager_id}` });
     next();

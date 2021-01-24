@@ -25,7 +25,7 @@ const findTravelRequest = (res, query, next, pagination) => {
             });
         });
       } else {
-        res.status(404).json({ message: res.__('Travel request(s) Not Found') });
+        res.status(404).json({ message: ('Travel request(s) Not Found') });
       }
     })
     .catch((err) => {

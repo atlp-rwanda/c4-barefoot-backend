@@ -8,7 +8,7 @@ import BadRequestError from '../utils/Errors/badRequestError';
 import pusher from '../config/pusher';
 import models from '../models';
 import findUserById from '../services/findUserById';
-import { approveTravelRequestEmail } from '../middlewares/sendNotificationEmail';
+import sendEmail from '../helper/sendEmail';
 
 export const getDirectReport = async (req, res, next) => {
   const decoded = await getDataFromToken(req, res, next);
@@ -60,10 +60,20 @@ export const approve_reject_TravelRequest = async (req, res, next) => {
                   };
                   
                const notification = await models.Notification.create(newNotificantion);
-              //  pusher.trigger('bare-foot-normad', 'notification', notification);
-               const mail = await approveTravelRequestEmail(user.email, req.body.action);
-              res.status(201).json({ status: 201, message: 'Operation performed successfully!' });
-              next();
+                //  pusher.trigger('bare-foot-normad', 'notification', notification);
+                const mailOptions = {
+                  email: email,
+                  subject: 'Your travel request',
+                  html: ` <p>
+                  Hi Lynda,</br>                                                                                                         
+                        Hope this email finds you well. Thank you for sending your request at</br>
+                        Barefoot nomad ,Your travel request have been ${req.body.action}d.                                   
+                </p>
+                <p>Kindly regard</p>`
+                };
+                await sendEmail(mailOptions);
+                res.status(201).json({ status: 201, message: 'Operation performed successfully!' });
+                next();
             }
             throw new ApplicationError('Failed to approve this travel request, try again!', 500);
           } else {
@@ -82,3 +92,17 @@ export const approve_reject_TravelRequest = async (req, res, next) => {
     next(error);
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
