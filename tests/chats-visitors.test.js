@@ -1,7 +1,7 @@
 import { expect, request, use } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/app';
-import { validToken } from './dummyData';
+import { validToken, travelAdmin } from './dummyData';
 
 use(chaiHttp);
 describe("VISITOR'S CHAT", () => {
@@ -9,6 +9,11 @@ describe("VISITOR'S CHAT", () => {
     visitor: 'visitor@visitor.vstr',
     message: 'test test test'
   };
+
+const user = {
+  email: 'sequester@gmail.com',
+  password: 'password'
+}
 
   it('Should mark messages sent from support to visitor as read', async () => {
     const res = await request(app).patch(`/api/v1/chat/visitor?visitor=${TestChatText.visitor}`);
@@ -27,7 +32,8 @@ describe("VISITOR'S CHAT", () => {
   });
 
   it('Should allow support to mark visitor messages as read', async () => {
-    const res = await request(app).patch(`/api/v1/chat/support?visitor=${TestChatText.visitor}`).set('Authorization', `Bearer ${validToken}`).send();
+    const User = await request(app).post('/api/v1/user/login').send(travelAdmin);
+    const res = await request(app).patch(`/api/v1/chat/support?visitor=${TestChatText.visitor}`).set('Authorization', `Bearer ${User.body.data}`).send();
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.body).to.be.a('Object');
@@ -35,7 +41,8 @@ describe("VISITOR'S CHAT", () => {
   });
 
   it('Should indicate visitor not found if s/he has not chatted', async () => {
-    const res = await request(app).patch('/api/v1/chat/support?visitor=vvvvvvvvvvv@vnvnv.vnvn').set('Authorization', `Bearer ${validToken}`).send();
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).patch('/api/v1/chat/support?visitor=vvvvvvvvvvv@vnvnv.vnvn').set('Authorization', `Bearer ${User.body.data}`).send();
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(404);
     expect(res.body).to.be.a('Object');
@@ -43,14 +50,16 @@ describe("VISITOR'S CHAT", () => {
   });
 
   it('Should indicate visitor not found if s/he has not chatted', async () => {
-    const res = await request(app).get('/api/v1/chat/visitors').set('Authorization', `Bearer ${validToken}`);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).get('/api/v1/chat/visitors').set('Authorization', `Bearer ${User.body.data}`);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.body).to.be.a('Array');
   });
 
   it('Should allow support to get the chat with a visitor', async () => {
-    const res = await request(app).get(`/api/v1/chat/support?visitor=${TestChatText.visitor}`).set('Authorization', `Bearer ${validToken}`);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).get(`/api/v1/chat/support?visitor=${TestChatText.visitor}`).set('Authorization', `Bearer ${User.body.data}`);
     expect(res).to.have.status(200);
     expect(res.type).to.equal('application/json');
     expect(res.body).to.be.a('Array');

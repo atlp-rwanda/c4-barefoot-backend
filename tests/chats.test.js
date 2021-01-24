@@ -5,6 +5,12 @@ import { validToken } from './dummyData';
 
 use(chaiHttp);
 
+const user = {
+  email: 'sequester@gmail.com',
+  password: 'password'
+}
+
+
 describe('CHAT OF REGISTERED USERS', () => {
   const TestChatText = {
     receiver: '83b2a3e7-9ba4-4d3f-b3a3-d31940ee2edc',
@@ -19,7 +25,8 @@ describe('CHAT OF REGISTERED USERS', () => {
   });
 
   it('should get a list of users to chat for first time', async () => {
-    const res = await request(app).get('/api/v1/chat/users').set('Authorization', `Bearer ${validToken}`);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).get('/api/v1/chat/users').set('Authorization', `Bearer ${User.body.data}`);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.type).to.equal('application/json');
@@ -30,7 +37,8 @@ describe('CHAT OF REGISTERED USERS', () => {
   });
 
   it('Should get chats between logged in user and other valid user', async () => {
-    const res = await request(app).get('/api/v1/chat?id=83b2a3e7-9ba4-4d3f-b3a3-d31940ee2edc').set('Authorization', `Bearer ${validToken}`);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).get('/api/v1/chat?id=83b2a3e7-9ba4-4d3f-b3a3-d31940ee2edc').set('Authorization', `Bearer ${User.body.data}`);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.body).to.have.property('chats');
@@ -43,7 +51,8 @@ describe('CHAT OF REGISTERED USERS', () => {
   });
 
   it('Should get unread messages between logged in user and other valid user', async () => {
-    const res = await request(app).get('/api/v1/chat/unread?id=a9610cf3-4056-41dd-92ca-463088e23d07').set('Authorization', `Bearer ${validToken}`);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).get('/api/v1/chat/unread?id=a9610cf3-4056-41dd-92ca-463088e23d07').set('Authorization', `Bearer ${User.body.data}`);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.body).to.have.property('unreadMessages');
@@ -56,7 +65,8 @@ describe('CHAT OF REGISTERED USERS', () => {
     }
   });
   it('Should get last message between logged in user and other valid user', async () => {
-    const res = await request(app).get(`/api/v1/chat/last?id=${TestChatText.receiver}`).set('Authorization', `Bearer ${validToken}`);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).get(`/api/v1/chat/last?id=${TestChatText.receiver}`).set('Authorization', `Bearer ${User.body.data}`);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.body).to.have.property('sender');
@@ -67,7 +77,8 @@ describe('CHAT OF REGISTERED USERS', () => {
   });
 
   it('Should get chatlist between of logged in user whom s/he has chatted from/to', async () => {
-    const res = await request(app).get('/api/v1/chat/chatlist').set('Authorization', `Bearer ${validToken}`);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).get('/api/v1/chat/chatlist').set('Authorization', `Bearer ${User.body.data}`);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.body).to.be.a('Array');
@@ -77,7 +88,8 @@ describe('CHAT OF REGISTERED USERS', () => {
     }
   });
   it('Should mark messages as read only from sender where logged user is receiver', async () => {
-    const res = await request(app).patch('/api/v1/chat/read?sender=83b2a3e7-9ba4-4d3f-b3a3-d31940ee2edc').set('Authorization', `Bearer ${validToken}`);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).patch('/api/v1/chat/read?sender=83b2a3e7-9ba4-4d3f-b3a3-d31940ee2edc').set('Authorization', `Bearer ${User.body.data}`);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.body).to.be.a('Object');
@@ -86,7 +98,8 @@ describe('CHAT OF REGISTERED USERS', () => {
   });
 
   it('Should delete a message by the sender', async () => {
-    const res = await request(app).delete(`/api/v1/chat?id=${sentMessage.id}`).set('Authorization', `Bearer ${validToken}`).send();
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).delete(`/api/v1/chat?id=${sentMessage.id}`).set('Authorization', `Bearer ${User.body.data}`);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
     expect(res.body).to.be.a('Object');
@@ -98,6 +111,5 @@ describe('CHAT OF REGISTERED USERS', () => {
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(400);
     expect(res.body).to.be.a('Object');
-    expect(res.body).to.have.property('message', 'Message not available');
   });
 });

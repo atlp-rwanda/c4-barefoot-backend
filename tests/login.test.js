@@ -2,7 +2,12 @@ import { expect, request, use } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/app';
 import 'dotenv/config';
-import { userToken } from './dummyData';
+
+
+const user = {
+  email: 'sequester@gmail.com',
+  password: 'password'
+}
 
 use(chaiHttp);
 describe('AUTHENTICATION END-POINTS TESTING', () => {
@@ -31,7 +36,8 @@ describe('AUTHENTICATION END-POINTS TESTING', () => {
 });
 describe('LOGOUT END-POINT TESTING', () => {
   it('it should logout the logged in user', async () => {
-    const res = await request(app).post('/api/v1/user/logout').set('Authorization', `Bearer ${userToken}`);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).post('/api/v1/user/logout').set('Authorization', `Bearer ${User.body.data}`);
     expect(res).to.have.status(200);
     expect(res.body).to.have.property('message');
     expect(res.body.message).to.equal('Logout successful!');

@@ -6,21 +6,31 @@ import { validData, invalidData, validToken, userProfileUpdate } from './dummyDa
 
 use(chaiHttp);
 
+const user = {
+  email: 'sequester@gmail.com',
+  password: 'password'
+}
+
+
 describe('USER PROFILE END-POINTS TESTING', () => {
   it('Should not get user profile', async () => {
-    const res = await request(app).get('/api/v1/profile/Sam').set('Authorization', `Bearer ${validToken}`);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).get('/api/v1/profile/UnexistUser').set('Authorization', `Bearer ${User.body.data}`);
     expect(res).to.have.status(404);
   });
   it('should get user profile', async () => {
-    const res = await request(app).get('/api/v1/profile/TestUserOne').set('Authorization', `Bearer ${validToken}`);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).get('/api/v1/profile/TestUserOne').set('Authorization', `Bearer ${User.body.data}`);
     expect(res).to.have.status(200);
   });
   it('should not update the user profile', async () => {
-    const res = await request(app).patch('/api/v1/profile/update-profile').set('Authorization', `Bearer ${validToken}`).send(invalidData);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).patch('/api/v1/profile/update-profile').set('Authorization', `Bearer ${User.body.data}`).send(invalidData);
     expect(res).to.have.status(404);
   });
   it('should update the user profile', async () => {
-    const res = await request(app).patch('/api/v1/profile/update-profile').set('Authorization', `Bearer ${validToken}`).send(validData);
+    const User = await request(app).post('/api/v1/user/login').send(user);
+    const res = await request(app).patch('/api/v1/profile/update-profile').set('Authorization', `Bearer ${User.body.data}`).send(validData);
     expect(res).to.have.status(200);
   });
 });

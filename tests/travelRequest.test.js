@@ -12,6 +12,10 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
     email: 'sequester@gmail.com',
     password: 'password',
   };
+  const userTwo = {
+    email: 'mj@gmail.com',
+    password: 'manager1',
+  };
   const tripRequest = {
     trip: [
       {
@@ -38,8 +42,18 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
     expect(res.body).to.have.deep.property('message').equals('Trip request sent successfully');
   });
   it('Should cancel a travel request if it is created', async () => {
-    User = await request(app).post('/api/v1/user/login').send(REQUESTER);
-    const requestData = { travelRequestId, action: 'cancel' };
+    //login the user
+    User = await request(app).post('/api/v1/user/login').send(userTwo);
+    //make the new travel request
+    const travelMake = await request(app)
+      .post('/api/v1/requests/request')
+      .send(tripRequest).set('Authorization', `Bearer ${User.body.data}`);
+    //define request data
+    const requestData = { 
+      travelRequestId: travelMake.travelId,
+      action: 'cancel' 
+    };
+    //cancel the trip request made
     const res = await request(app)
       .put('/api/v1/requests')
       .set('Authorization', `Bearer ${User.body.data}`)

@@ -135,14 +135,14 @@ export const updateLocation = {
 
 export const validAccommodation = {
 
-  id: '0ce36391-2c08-3074-bddb-a4ea8cccbbc2',
+  id: '0ce36391-2c08-3074-bddb-a4ea8cccbbc8',
   country: 'Rwanda',
   city: 'Kigali',
   state: 'Nyarugenge',
   streetAddress: 'KN 22 ST',
   locationID: null,
   propertyType: 'Hostel',
-  numberOfRooms: 100, 
+  numberOfRooms: 100,
   typeOfBed: 'Double Decker',
   title: 'Kigali Hostels',
   description: 'A serene environment for relaxation',
