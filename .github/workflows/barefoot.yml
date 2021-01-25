@@ -6,10 +6,9 @@ name: BarefootNomad
 
 on:
   push:
-    branches: [ fix-refresh-token ]
+    branches: [ fix-timeout-error ]
   pull_request:
-    branches: [ fix-refresh-token ]
-
+    branches: [ fix-timeout-error  ]
 
 jobs:
   build:
