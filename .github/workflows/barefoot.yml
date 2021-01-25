@@ -5,9 +5,9 @@
 name: Build
 on:
   push:
-    branches: [ main ]
+    branches: [ fix-timeout-error ]
   pull_request:
-    branches: [ main ]
+    branches: [ fix-timeout-error  ]
 
 jobs:
   build:
