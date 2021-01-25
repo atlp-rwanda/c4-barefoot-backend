@@ -4,13 +4,32 @@ import swaggerJsDoc from 'swagger-jsdoc';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
+import http from 'http';
+import socketio from 'socket.io';
 import db from './models/index';
 import routes from './routes/index';
 import ApplicationError from './utils/Errors/applicationError';
 import swaggerConfigs from './config/swaggerDoc';
+import path from 'path'
+
 import passport from "passport";
 import cookieSession from 'cookie-session';
+import i18n from './controllers/i18n';
+import { handshake, userConnection } from './controllers/chatrooms/chat';
+import './controllers/chatrooms/clearVisitorChat';
+import cron from 'node-cron';
+import { expiredBookings } from '../src/controllers/bookingsController';
+
+// const expired = new Checkout();
+
+
 const app = express();
+const server = http.createServer(app);
+export const io = socketio(server, {
+  cors: {
+    origin: '*'
+  }
+});
 app.use(cors());
 app.use(cookieParser());
 app.use(cookieSession({
@@ -27,9 +46,16 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
+//initializing internationalization
+app.use(i18n.init);
+
+
 // routes
 app.use('/api/v1/', routes);
 // app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // documentation route
 const swaggerDocs = swaggerJsDoc(swaggerConfigs);
@@ -37,7 +63,7 @@ app.use('/documentation', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 // catch all 404 errors
 app.all('*', (req, res, next) => {
-  const err = new ApplicationError('Page Requested not found', 404);
+  const err = new ApplicationError(res.__('Page Requested not found'), 404);
   next(err);
 });
 
@@ -53,15 +79,21 @@ app.use((err, req, res, next) => {
   next(err);
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`CORS-enabled web server listening on port ${port}  ...`);
 }).on('error', (err) => {
   if (err.errno === 'EADDRINUSE') {
     console.log(`----- Port ${port} is busy, trying with port ${port + 1} -----`);
-    app.listen(port + 1);
+    server.listen(port + 1);
   } else {
     console.log(err);
   }
 });
+cron.schedule('* * * * *', () => {
+ expiredBookings();
+});
+
+//chat handler
+io.use(handshake).on("connection", userConnection);
 
 export default app;

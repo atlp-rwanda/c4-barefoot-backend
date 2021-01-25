@@ -12,23 +12,23 @@ const verifyResetPassword = async (req, res, next) => {
 
     
     const decodedToken = await verifyToken(token);
-    if (decodedToken.username === undefined) throw new AuthorizationError('Invalid Token');
-    if (password !== confirmPassword) throw new BadRequestError('Passwords do not match');
+    if (decodedToken.username === undefined) throw new AuthorizationError(res.__('Invalid Token'));
+    if (password !== confirmPassword) throw new BadRequestError(res.__('Passwords do not match'));
 
     const record = await userServices.getUserByUserName(decodedToken.username);
     if (!record) {
-      throw new NotFoundRequestError('Account does not exist');
+      throw new NotFoundRequestError(res.__('Account does not exist'));
     }
     //check if the token was used
-    if(record.refreshtoken === token){throw new ApplicationError("Can not reset the password again! Token expired.")}
+    if(record.refreshtoken === token){throw new ApplicationError(res.__("Can not reset the password again! Token expired."))}
     const updatePassword = userServices.updateUserByUsername({password:password},decodedToken.username);
     
     if(updatePassword){
       //update the used token
       const updateToken = userServices.updateUserByUsername({refreshtoken:token},decodedToken.username);
-      return res.status(200).json({ status: 200, message: 'Password reset successfully' });
+      return res.status(200).json({ status: 200, message: res.__('Password reset successfully') });
     }else{ 
-      throw new ApplicationError("Failed to reset this password, please Try again!");
+      throw new ApplicationError(res.__("Failed to reset this password, please Try again!"));
     }
     
   } catch (err) { next(err); }
