@@ -27,11 +27,19 @@ export const getTotalOfTripsByLocation = async (req, res, next) => {
     let resultSet1 = [];
     let travels = await displayTravelRequest(query);
     let counter = travels.rows.length;
+    console.log(counter)
     if (counter > 0) {
       travels.rows.forEach((trData) => {
+<<<<<<< HEAD
         db.Trip.findAll({ where: { travelId: trData.travelId 
         } 
       }).then((tripData) => {
+=======
+        console.log("_________", +counter)
+        db.Trip.findAll({ where: { travelId: trData.travelId } })
+          .then((tripData) => {
+            console.log("_________", +counter)
+>>>>>>> 451495adc6fcdb1f5e7d4b52efd1c2f05107f0fa
             counter -= 1;
             //only selecting trips with their destination 
             let result = tripData.map(a => a.destination);
@@ -43,8 +51,11 @@ export const getTotalOfTripsByLocation = async (req, res, next) => {
             }
           })
       });
+    } else {
+      res.json("no trip was made");
     }
-    res.json("no trip was made");
+
+
   } catch (err) {
     return res.status(500).json(err.message);
   }
