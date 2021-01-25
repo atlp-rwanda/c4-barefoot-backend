@@ -44,19 +44,19 @@ export const cancel_travelRequest = async (req, res, next) => {
   const decoded = await getDataFromToken(req, res, next);
 
   try {
-    if (action === res.__('cancel')) {
+    if (action === 'cancel') {
       const userId = decoded.id;
       const findTravelRequest = await travelRequestServices.findItById({ travelId: travelRequestId });
       if (findTravelRequest) {
         if (findTravelRequest.userId === userId) {
           const changes = res.__('canceled');
-          if (findTravelRequest.status === res.__('pending')) {
+          if (findTravelRequest.status === 'pending') {
             const updateStatus = await travelRequestServices.updateStatus({ travelId: travelRequestId, status: { status: changes } });
             if (updateStatus) {
               const newNotificantion = {
                 user_id: userId,
-                title: res.__('Cancel Travel Request'),
-                message: res.__(`You ${req.body.action}ed your travel request`)
+                title: 'Cancel Travel Request',
+                message: `You ${req.body.action}ed your travel request`
                   };
 
                const notification = await models.Notification.create(newNotificantion);

@@ -44,13 +44,8 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
   it('Should cancel a travel request if it is created', async () => {
     //login the user
     User = await request(app).post('/api/v1/user/login').send(userTwo);
-    //make the new travel request
-    const travelMake = await request(app)
-      .post('/api/v1/requests/request')
-      .send(tripRequest).set('Authorization', `Bearer ${User.body.data}`);
-    //define request data
     const requestData = { 
-      travelRequestId: travelMake.travelId,
+      travelRequestId: '1819eb85b-1739-422b-86b0-6c464792cfb9',
       action: 'cancel' 
     };
     //cancel the trip request made

@@ -192,5 +192,7 @@
 	"No token found!": "Nta token ufite!",
 	"You are not loged in": "Ntabwo winjiye",
 	"successfully Logged In": "Mwinjiye neza!",
-	"no Trip was made": "nta rugendo rwakozwe"
+	"no Trip was made": "nta rugendo rwakozwe",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href=''http://localhost:3000/api/v1'/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RVc2VyaWlpIiwiaWF0IjoxNjExNTk3NDU0LCJleHAiOjE2MTIyMDIyNTR9.U7A5CO2rTCmQNqI0Va17UcCdVfbBHjBUQfD2ITWjGLI'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href=''http://localhost:3000/api/v1'/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RVc2VyaWlpIiwiaWF0IjoxNjExNTk3NDU0LCJleHAiOjE2MTIyMDIyNTR9.U7A5CO2rTCmQNqI0Va17UcCdVfbBHjBUQfD2ITWjGLI'>Link</a>",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href=''http://localhost:3000/api/v1'/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RVc2VyaWlpdSIsImlhdCI6MTYxMTU5NzUwMCwiZXhwIjoxNjEyMjAyMzAwfQ.3bvmNyUlg1xnqNiwBTQ8S3_c38DWxRJrpT4emguuQns'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href=''http://localhost:3000/api/v1'/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RVc2VyaWlpdSIsImlhdCI6MTYxMTU5NzUwMCwiZXhwIjoxNjEyMjAyMzAwfQ.3bvmNyUlg1xnqNiwBTQ8S3_c38DWxRJrpT4emguuQns'>Link</a>"
 }
