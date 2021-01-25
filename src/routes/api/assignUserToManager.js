@@ -1,11 +1,10 @@
 import express from 'express';
-import managerUsers from '../../controllers/managers';
 import verifiedUser from '../../controllers/getVerifiedUsers';
 import managerPermissions from '../../helper/managerPermissions';
 import isManager from '../../helper/isManager';
 import assignUsersToManagers from '../../controllers/assignUsersToManager';
 import assignUsersToManagerValidation from '../../middlewares/assignUaserToManager';
-
+import findAllManagers from '../../controllers/findAllManagers';
 const router = express.Router();
 /**
  * @swagger
@@ -67,15 +66,15 @@ router.get('/verified-users', isManager, verifiedUser);
  *               description: retrieved data users
  *
  */
-router.get('/verified-users/managers', isManager, managerUsers);
+router.get('/verified-users/managers', isManager,findAllManagers);
 
 /**
  * @swagger
  * /api/v1/assignUserstoManager/verified-users/:id:
  *   patch:
  *     tags:
- *       - Assign Verified users Manager
- *     summary: manager should get all verified Manager
+ *       - Assign a verified user to a manager
+ *     summary: Assign a user to  a manager
  *     parameters:
  *       - in: body
  *         name: manager_id
