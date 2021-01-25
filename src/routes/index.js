@@ -39,6 +39,8 @@ routes.use('/bookings', bookingsRoute);
 routes.use('/profile', userProfile);
 routes.use('/notification', notiRoute);
 routes.use('/trips', triproute)
+
+routes.use('/chat', chatRoom);
 routes.use('/google',signinWithGoogleRoute);
 routes.use('/chat', chatRoom);
 routes.use('/statistics',statistics);
