@@ -85,7 +85,7 @@ export const bookAccomodation = async (req, res, next) => {
     }
     const newRooms = accommodations.numberOfRooms - 1;
     const user = await getUserData(req, res);
-    req.body.AccommodationId = req.params.id;
+    req.body.accommodationId = req.params.id;
     req.body.username = user.username;
     const booking = await models.Booking.create(req.body);
     const update = await models.Accommodation.update({ numberOfRooms: newRooms }, { where: { id: req.params.id } });
