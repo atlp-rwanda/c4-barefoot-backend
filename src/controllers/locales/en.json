@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
 	"login successful": "login successful",
 	"Accommodation does not exist": "Accommodation does not exist",
 	"edit profile": "edit profile",
@@ -31,10 +30,7 @@
 	"mindinmiddle@gmail.com does not exist!": "mindinmiddle@gmail.com does not exist!",
 	"invalidemail@gmail.com does not exist!": "invalidemail@gmail.com does not exist!",
 	"Welcome to Barefoot Nomad": "Welcome to Barefoot Nomad",
-=======
->>>>>>> 451495adc6fcdb1f5e7d4b52efd1c2f05107f0fa
 	"Page Requested not found": "Page Requested not found",
-	"successfully Logged In": "successfully Logged In",
 	"Unauthorized": "Unauthorized",
 	"Access denied": "Access denied",
 	"Assign user to manager": "Assign user to manager",

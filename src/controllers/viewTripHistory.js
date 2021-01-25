@@ -30,16 +30,10 @@ export const getTotalOfTripsByLocation = async (req, res, next) => {
     console.log(counter)
     if (counter > 0) {
       travels.rows.forEach((trData) => {
-<<<<<<< HEAD
-        db.Trip.findAll({ where: { travelId: trData.travelId 
-        } 
-      }).then((tripData) => {
-=======
         console.log("_________", +counter)
         db.Trip.findAll({ where: { travelId: trData.travelId } })
           .then((tripData) => {
             console.log("_________", +counter)
->>>>>>> 451495adc6fcdb1f5e7d4b52efd1c2f05107f0fa
             counter -= 1;
             //only selecting trips with their destination 
             let result = tripData.map(a => a.destination);
