@@ -8,7 +8,7 @@ import badRequest from '../utils/Errors/badRequestError';
 export const createAccommodation = async (req, res, next) => {
   try {
     const accommodation = await models.Accommodation.create(req.body);
-    const amenity = await models.Amenity.create({ AccommodationId: accommodation.id });
+    const amenity = await models.Amenity.create({ accommodationId: accommodation.id });
     res.status(201).json({ accommodation });
   } catch (error) {
     next(error);
@@ -36,7 +36,7 @@ export const getOneAccommodation = async (req, res, next) => {
     if (!singleAccommodation) {
       throw new accommodationNotFound(('Accommodation does not exist'));
     }
-    // const amenities = await models.Amenity.findOne({ where: { accommodationID: id }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
+    // const amenities = await models.Amenity.findOne({ where: { accommodationId: id }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
     res.status(200).json({ singleAccommodation});
   } catch (error) {
     next(error);
@@ -66,10 +66,10 @@ export const deleteAccommodation = async (req, res, next) => {
 
     const checkTrips = await accommodationService.getSingleAccommodation(req.params.id);
     if (checkTrips) {
-      const updateTrips = await models.Trip.update({ AccommodationId: null }, { where: { AccommodationId: req.params.id } });
+      const updateTrips = await models.Trip.update({ accommodationId: null }, { where: { accommodationId: req.params.id } });
     }
 
-    const dltAmenity = await models.Amenity.destroy({ where: { AccommodationId: req.params.id } });
+    const dltAmenity = await models.Amenity.destroy({ where: { accommodationId: req.params.id } });
     const dltAccommodation = await models.Accommodation.destroy({ where: { id: req.params.id } });
     res.status(201).json({ status: 201, message: 'Accommodation has been deleted' });
   } catch (error) {
@@ -85,7 +85,7 @@ export const bookAccomodation = async (req, res, next) => {
     }
     const newRooms = accommodations.numberOfRooms - 1;
     const user = await getUserData(req, res);
-    req.body.AccommodationId = req.params.id;
+    req.body.accommodationId = req.params.id;
     req.body.username = user.username;
     const booking = await models.Booking.create(req.body);
     const update = await models.Accommodation.update({ numberOfRooms: newRooms }, { where: { id: req.params.id } });
