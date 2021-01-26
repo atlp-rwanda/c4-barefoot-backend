@@ -39,19 +39,18 @@ export const travelRequest = async (req, res, next) => {
           
        const notification = await models.Notification.create(newNotificantion);
       //  pusher.trigger('bare-foot-normad', 'notification', notification);
-      //  const mail = await TravelRequestComments (user.email, req.body);
       const mailOptions = {
         email: manager.email,
         subject: 'your user has made a request',
         name: manager.username,
-        body: "the user you are assigned to has made a travel request"};
+        body: "<p></br>Hope this email finds you well. Thank you for sending your request at</br>Barefoot nomad ,the user you are assigned to has made a travel request.</p><p>Kindly regard</p>"
+      };
       await sendEmail(mailOptions);
       res.status(201).json({ status: 201, message: 'Operation performed successfully!' });
       next();
     } else {
       throw new BadRequestError(('You need a Manager First.'), 400); // added error handling
     }
-    
   } catch (err) {
     next(err);
   }
@@ -60,8 +59,7 @@ export const travelRequest = async (req, res, next) => {
 export const cancel_travelRequest = async (req, res, next) => {
   const { travelRequestId, action } = req.body;
   const decoded = await getDataFromToken(req, res, next);
-
-  try {
+try {
     if (action === 'cancel') {
       const userId = decoded.id;
       const findTravelRequest = await travelRequestServices.findItById({ travelId: travelRequestId });
@@ -81,8 +79,9 @@ export const cancel_travelRequest = async (req, res, next) => {
               //  pusher.trigger('bare-foot-normad', 'notification', notification);
                const mailOptions = {
                 email: user.email,
+                name:user.username,
                 subject: 'You canceled travel request',
-                body: "Hi Hope this email finds you well. Thank you for sending your request at Barefoot nomad ,Your travel request have been canceled"
+                body: "<p></br>Hope this email finds you well. Thank you for sending your request at</br>Barefoot nomad ,You  have been assigned to a manager.</p><p>Kindly regard</p>",
               };
               await sendEmail(mailOptions);
                return res.status(201).json({ status: 201, message: 'Travel request canceled successfully!' });
