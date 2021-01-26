@@ -8,6 +8,7 @@ import NotFoundRequestError from '../utils/Errors/notFoundRequestError';
 import pusher from '../config/pusher';
 import models from '../models';
 import sendEmail from '../helper/sendEmail';
+import findUserById from '../services/findUserById'
 
 export const travelRequest = async (req, res, next) => {
   const decoded = await getDataFromToken(req, res, next);
@@ -29,9 +30,28 @@ export const travelRequest = async (req, res, next) => {
           createTravelRequest(req, res, request, next);
         }
       }
+      const manager = await findUserById(decoded.manager_id)
+      const newNotificantion = {
+        managerId: decoded.id,
+        title: 'your user has made a Travel Request',
+        message: "The user you are assigned to has made a travel request  "
+          };
+          
+       const notification = await models.Notification.create(newNotificantion);
+      //  pusher.trigger('bare-foot-normad', 'notification', notification);
+      //  const mail = await TravelRequestComments (user.email, req.body);
+      const mailOptions = {
+        email: manager.email,
+        subject: 'your user has made a request',
+        name: manager.username,
+        body: "the user you are assigned to has made a travel request"};
+      await sendEmail(mailOptions);
+      res.status(201).json({ status: 201, message: 'Operation performed successfully!' });
+      next();
     } else {
       throw new BadRequestError(('You need a Manager First.'), 400); // added error handling
     }
+    
   } catch (err) {
     next(err);
   }
@@ -45,6 +65,7 @@ export const cancel_travelRequest = async (req, res, next) => {
     if (action === 'cancel') {
       const userId = decoded.id;
       const findTravelRequest = await travelRequestServices.findItById({ travelId: travelRequestId });
+      const user = await findUserById(findTravelRequest.userId);
       if (findTravelRequest) {
         if (findTravelRequest.userId === userId) {
           const changes = 'canceled';
@@ -56,24 +77,15 @@ export const cancel_travelRequest = async (req, res, next) => {
                 title: 'Cancel Travel Request',
                 message: `You ${req.body.action}ed your travel request`
                   };
-
                const notification = await models.Notification.create(newNotificantion);
-              //  console.log(notification);
               //  pusher.trigger('bare-foot-normad', 'notification', notification);
                const mailOptions = {
-                email: decoded.email,
-                subject: 'Your travel request',
-                html: `<p>
-                Hi Lynda,</br>                                                                                                         
-                      Hope this email finds you well. Thank you for sending your request at</br>
-                      Barefoot nomad ,You have canceled your travel request.                                   
-              </p>
-              <p>Kindly regard</p>`
+                email: user.email,
+                subject: 'You canceled travel request',
+                body: "Hi Hope this email finds you well. Thank you for sending your request at Barefoot nomad ,Your travel request have been canceled"
               };
               await sendEmail(mailOptions);
-              //  console.log(mail);
-
-              return res.status(201).json({ status: 201, message: 'Travel request canceled successfully!' });
+               return res.status(201).json({ status: 201, message: 'Travel request canceled successfully!' });
             }
             throw new ApplicationError(('Failed to cancel this travel request, try again!'), 500);
           } else {

@@ -50,16 +50,14 @@ export const approve_reject_TravelRequest = async (req, res, next) => {
           if (findTravelRequest.status === 'pending'|| (findTravelRequest.status === 'rejected' && action !== 'reject')) {
             const changes = (action === 'approve') ? 'approved' : 'rejected';
             const updateStatus = await travelRequestServices.updateStatus({ travelId: travelRequestId, status: { status: changes } });
-
-            if (updateStatus) {
+          if (updateStatus) {
               //in-app notification and email notification
               const newNotificantion = {
                 user_id: user.id,
                 title: `${req.body.action} Travel Request`,
                 message: `Your travel request was ${req.body.action}ed!`
                   };
-                  
-               const notification = await models.Notification.create(newNotificantion);
+                  const notification = await models.Notification.create(newNotificantion);
                 //  pusher.trigger('bare-foot-normad', 'notification', notification);
                 const mailOptions = {
                   email: email,

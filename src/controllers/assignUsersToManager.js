@@ -13,30 +13,15 @@ const assignUsersToManager = async (req, res, next) => {
     if (!user) {
       throw new NotFoundRequestError((`User with this ${userId} is not exist`), 404);
     }
-
-    const newNotificantion = {
-      user_id: userId,
-      title: 'Assign user to manager',
-      message: `You were assigned to manager of ${manager_id}`
-    };
-    models.User.update({ manager_id }, { where: { email: user.email } });
-
-    const notification = await createNotification(newNotificantion);
-
-
-    const mailOptions = {
+   models.User.update({ manager_id }, { where: { email: user.email } });
+      const mailOptions = {
       email: user.email,
       subject: 'Verify your email',
-      html: `<p>
-			Hi Lynda,</br>                                                                                                         
-            Hope this email finds you well. Thank you for sending your request at</br>
-            Barefoot nomad ,You have been  successfully assigned to the manager.                                   
-		</p>
-		<p>Kindly regard</p>`
+      name: user.username,
+      body: "you was assigned to a manager",
     };
     const sendmail = await sendEmail(mailOptions);
-
-    res.status(200).json({ status: 200, message: `user was assigned to manager with this Id ${manager_id}` });
+  res.status(200).json({ status: 200, message: `user was assigned to manager with this Id ${manager_id}` });
     next();
   } catch (error) {
     res.status(500).json({error:error.message, stack:error.stack});

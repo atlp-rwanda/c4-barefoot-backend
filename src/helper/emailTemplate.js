@@ -1,104 +1,334 @@
-const htmlEmail = (emailText) => {
-return (`<html lang="en">
-<head>
-	<link rel="stylesheet" href="">
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Email Template</title>
-	<style>
-		body {
-    margin: 0;
-    padding: 0;
+const htmlEmail = (content) => {
+return (`<html>
+<title>Template</title>
+<style>
+	/* -------------------------------------
+    GLOBAL
+------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  font-size: 14px;
 }
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: steelblue;
-    color: white;
-    
-}
-.brand-title {
-    font-size: 1.5rem;
-    margin: .5rem;
 
+img {
+  max-width: 100%;
 }
-.content{
-    margin: 80px;
-    padding: 80px;
-}
-footer{
-	margin: 100px;
-}
-@media ( max-width:400px ) {
-	
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: steelblue;
-    color: white;
-    
-}
-.brand-title {
-    font-size: 1.5rem;
-    margin: .5rem;
 
+body {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+  width: 100% !important;
+  height: 100%;
+  line-height: 1.6;
 }
-.content{
-    margin: 20px;
-    padding: 20px;
+
+/* Lets make sure all tables have defaults */
+table td {
+  vertical-align: top;
 }
-footer{
-	margin: 20px;
+
+/* -------------------------------------
+    BODY & CONTAINER
+------------------------------------- */
+body {
+  background-color: #f6f6f6;
 }
-	
+
+.body-wrap {
+  background-color: #f6f6f6;
+  width: 100%;
 }
-@media ( max-width:1024px ) {
-	
-	.navbar {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		background-color: steelblue;
-		color: white;
-		
-	}
-	.brand-title {
-		font-size: 1.5rem;
-		margin: .5rem;
-	
-	}
-	.content{
-		width: 70%;
-		height: 70%;
-		margin: 20px;
-		padding: 20px;
-		
-	}
-	footer{
-		margin:100px;
-}	
-	}
-	</style>
+
+.container {
+  display: block !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  /* makes it centered */
+  clear: both !important;
+}
+
+.content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: block;
+  padding: 20px;
+}
+
+/* -------------------------------------
+    HEADER, FOOTER, MAIN
+------------------------------------- */
+.main {
+  background: #fff;
+  border: 1px solid #e9e9e9;
+  border-radius: 3px;
+}
+
+.content-wrap {
+  padding: 20px;
+}
+
+.content-block {
+  padding: 0 0 20px;
+}
+
+.header {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.footer {
+  width: 100%;
+  clear: both;
+  color: #999;
+  padding: 20px;
+}
+.footer a {
+  color: #999;
+}
+.footer p, .footer a, .footer unsubscribe, .footer td {
+  font-size: 12px;
+}
+
+/* -------------------------------------
+    GRID AND COLUMNS
+------------------------------------- */
+.column-left {
+  float: left;
+  width: 50%;
+}
+
+.column-right {
+  float: left;
+  width: 50%;
+}
+
+/* -------------------------------------
+    TYPOGRAPHY
+------------------------------------- */
+h1, h2, h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  color: #000;
+  margin: 40px 0 0;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+p, ul, ol {
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+p li, ul li, ol li {
+  margin-left: 5px;
+  list-style-position: inside;
+}
+
+/* -------------------------------------
+    LINKS & BUTTONS
+------------------------------------- */
+a {
+  color: #348eda;
+  text-decoration: underline;
+}
+
+.btn-primary {
+  text-decoration: none;
+  color: #FFF;
+  background-color: #348eda;
+  border: solid #348eda;
+  border-width: 10px 20px;
+  line-height: 2;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 5px;
+  text-transform: capitalize;
+}
+
+/* -------------------------------------
+    OTHER STYLES THAT MIGHT BE USEFUL
+------------------------------------- */
+.last {
+  margin-bottom: 0;
+}
+
+.first {
+  margin-top: 0;
+}
+
+.padding {
+  padding: 10px 0;
+}
+
+.aligncenter {
+  text-align: center;
+}
+
+.alignright {
+  text-align: right;
+}
+
+.alignleft {
+  text-align: left;
+}
+
+.clear {
+  clear: both;
+}
+
+/* -------------------------------------
+    Alerts
+------------------------------------- */
+.alert {
+  font-size: 16px;
+  color: #fff;
+  font-weight: 500;
+  padding: 20px;
+  text-align: center;
+  border-radius: 3px 3px 0 0;
+}
+.alert a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+}
+.alert.alert-warning {
+  background: #ff9f00;
+}
+.alert.alert-bad {
+  background: #d0021b;
+}
+.alert.alert-good {
+  background: #68b90f;
+}
+
+/* -------------------------------------
+    INVOICE
+------------------------------------- */
+.invoice {
+  margin: 40px auto;
+  text-align: left;
+  width: 80%;
+}
+.invoice td {
+  padding: 5px 0;
+}
+.invoice .invoice-items {
+  width: 100%;
+}
+.invoice .invoice-items td {
+  border-top: #eee 1px solid;
+}
+.invoice .invoice-items .total td {
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #333;
+  font-weight: 700;
+}
+
+/* -------------------------------------
+    RESPONSIVE AND MOBILE FRIENDLY STYLES
+------------------------------------- */
+@media only screen and (max-width: 640px) {
+  h1, h2, h3, h4 {
+    font-weight: 600 !important;
+    margin: 20px 0 5px !important;
+  }
+
+  h1 {
+    font-size: 22px !important;
+  }
+
+  h2 {
+    font-size: 18px !important;
+  }
+
+  h3 {
+    font-size: 16px !important;
+  }
+
+  .container {
+    width: 100% !important;
+  }
+
+  .content, .content-wrapper {
+    padding: 10px !important;
+  }
+
+  .invoice {
+    width: 100% !important;
+  }
+}
+
+</style>
+
 </head>
-<body>
-	<nav class="navbar" >
-		<div class="brand-title">Barefoot nomad</div>
-	</nav>
-	
-	<div class="content">
-		
-		<h3>Barefoot nomad</h3>
-		
-		${emailText}
-		
-	</div>
-	<footer>
-		<a href="">from @Barefootnomad.com</a>
-	</footer>
-</body>
-</html>`);
-}
+
+<body data-new-gr-c-s-check-loaded="14.992.0" data-gr-ext-installed="">
+
+<table class="body-wrap">
+	<tbody><tr>
+		<td></td>
+		<td class="container" width="600">
+			<div class="content">
+				<table class="main" width="100%" cellpadding="0" cellspacing="0">
+					<tbody><tr>
+						
+						<td class="content-wrap">
+							<table width="100%" cellpadding="0" cellspacing="0">
+								<tbody><tr>
+									<td class="content-block" style="margin-bottom: 15px; font-weight: bold;">
+										Barefoot Nomad.
+									</td>
+								</tr>
+								<tr>
+									<td class="content-block">
+									Hi ${content.name}
+									</td>
+								</tr>
+								<tr>
+									<td class="content-block">
+									${content.body}	
+									</td>
+								</tr>
+								
+					
+							</tbody></table>
+						</td>
+					</tr>
+				</tbody></table>
+				</div>
+		</td>
+		<td></td>
+	</tr>
+</tbody></table>
+
+
+
+</body></html>`);
+	}
 export default  htmlEmail;
 	
+{/* <p> Hi ${content.name} </br> ${content.body}</p> */}
+// `);
