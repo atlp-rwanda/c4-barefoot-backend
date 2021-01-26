@@ -67,7 +67,7 @@ body {
 }
 
 .content-wrap {
-  padding: 20px;
+  padding: 0px;
 }
 
 .content-block {
@@ -92,18 +92,6 @@ body {
   font-size: 12px;
 }
 
-/* -------------------------------------
-    GRID AND COLUMNS
-------------------------------------- */
-.column-left {
-  float: left;
-  width: 50%;
-}
-
-.column-right {
-  float: left;
-  width: 50%;
-}
 
 /* -------------------------------------
     TYPOGRAPHY
@@ -169,82 +157,9 @@ a {
 /* -------------------------------------
     OTHER STYLES THAT MIGHT BE USEFUL
 ------------------------------------- */
-.last {
-  margin-bottom: 0;
-}
-
-.first {
-  margin-top: 0;
-}
-
-.padding {
-  padding: 10px 0;
-}
 
 .aligncenter {
   text-align: center;
-}
-
-.alignright {
-  text-align: right;
-}
-
-.alignleft {
-  text-align: left;
-}
-
-.clear {
-  clear: both;
-}
-
-/* -------------------------------------
-    Alerts
-------------------------------------- */
-.alert {
-  font-size: 16px;
-  color: #fff;
-  font-weight: 500;
-  padding: 20px;
-  text-align: center;
-  border-radius: 3px 3px 0 0;
-}
-.alert a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 16px;
-}
-.alert.alert-warning {
-  background: #ff9f00;
-}
-.alert.alert-bad {
-  background: #d0021b;
-}
-.alert.alert-good {
-  background: #68b90f;
-}
-
-/* -------------------------------------
-    INVOICE
-------------------------------------- */
-.invoice {
-  margin: 40px auto;
-  text-align: left;
-  width: 80%;
-}
-.invoice td {
-  padding: 5px 0;
-}
-.invoice .invoice-items {
-  width: 100%;
-}
-.invoice .invoice-items td {
-  border-top: #eee 1px solid;
-}
-.invoice .invoice-items .total td {
-  border-top: 2px solid #333;
-  border-bottom: 2px solid #333;
-  font-weight: 700;
 }
 
 /* -------------------------------------
@@ -281,7 +196,23 @@ a {
   }
 }
 
+
 </style>
+<!-- <style>
+	.body-wrap{
+		padding: 10rem;
+		align-content: center;
+	}
+	.title{
+		padding: 10px;
+		background-color:#257AAA ;
+		color: white;
+		margin-top: -20px;
+		font-size: 30px;
+		}
+
+	
+</style> -->
 
 </head>
 
@@ -296,20 +227,33 @@ a {
 					<tbody><tr>
 						
 						<td class="content-wrap">
-							<table width="100%" cellpadding="0" cellspacing="0">
-								<tbody><tr>
-									<td class="content-block" style="margin-bottom: 15px; font-weight: bold;">
-										Barefoot Nomad.
+							<table width="100%" style="margin-bottom: 30px" cellpadding="0" cellspacing="0">
+								<tbody>
+                  <tr style="background-color: #348eda;">
+                    <td class="title" style="padding: 20px; font-weight: bold;">
+                      Barefoot Nomad.
+                    </td>
+                </tr>
+                </tbody>
+              </table>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tbody>
+								<tr>
+									<td style="padding: 20px;" class="content-block">
+                    Hi ${content.name},
+                    <br>
+                    ${content.body}
+									</td>
+								</tr>
+
+								<tr>
+									<td style="padding: 20px;" class="content-block">
+									
 									</td>
 								</tr>
 								<tr>
-									<td class="content-block">
-									Hi ${content.name}
-									</td>
-								</tr>
-								<tr>
-									<td class="content-block">
-									${content.body}	
+									<td style="padding: 0px 20px 20px 20px;" class="content-block">
+										<img src="https://res.cloudinary.com/dk0bik4yw/image/upload/v1611676157/Barefoot_hu20hz.png" alt="HTML5 Icon" style="width:40px;height:40px;">
 									</td>
 								</tr>
 								
@@ -317,8 +261,7 @@ a {
 							</tbody></table>
 						</td>
 					</tr>
-				</tbody></table>
-				</div>
+				</tbody></table></div>
 		</td>
 		<td></td>
 	</tr>
