@@ -34,7 +34,7 @@ export const verifyToken = async (token) => {
 export const verifyResetPasswordToken = async (token) => {
   const decoded = await jwt.verify(token, process.env.TOKEN_SECRET, (error) => {
     if (error) {
-      return { messages: res.__('your token expired') };
+      return { messages: ('your token expired') };
     }
   });
   return decoded;

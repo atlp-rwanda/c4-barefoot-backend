@@ -20,7 +20,7 @@ export const getTravelRequest = async (req, res, next) => {
     }
     findTravelRequest(res, query, next, pagination);
   } catch (err) {
-    return res.status(401).json({ message: res.__('session has expired, please login') });
+    return res.status(401).json({ message: 'session has expired, please login' });
   }
 };
 
@@ -35,30 +35,30 @@ export const editTravelRequest = async (req, res, next) => {
     const findTravelRequests = await travelRequestServices.findItById({ travelId: id });
     if (findTravelRequests) {
       if (findTravelRequests.userId === userId) {
-        if (findTravelRequests.status === res.__('pending') || findTravelRequests.status === res.__('rejected') || findTravelRequests.status === res.__('canceled')) {
+        if (findTravelRequests.status === 'pending' || findTravelRequests.status === 'rejected' || findTravelRequests.status === 'canceled') {
           const findTrip = await travelRequestServices.findTrip({ travelId: id, tripId });
           if (findTrip) {
             const updateTrip = await travelRequestServices.updateTrip({ tripId, changes: updates });
             if (updateTrip) {
-              const updateStatus = await travelRequestServices.updateStatus({ status: { status: res.__('pending') }, travelId: id });
+              const updateStatus = await travelRequestServices.updateStatus({ status: { status: 'pending' }, travelId: id });
               if (updateStatus) {
-                return res.status(201).json({ status: 201, message: res.__('Trip updated successfully!') });
+                return res.status(201).json({ status: 201, message: 'Trip updated successfully!'});
               }
-              throw new ApplicationError(res.__('Failed to update the status, try again!'), 500);
+              throw new ApplicationError(('Failed to update the status, try again!'), 500);
             } else {
-              throw new ApplicationError(res.__('Failed to update this trip, try again!'), 500);
+              throw new ApplicationError(('Failed to update this trip, try again!'), 500);
             }
           } else {
-            throw new NotFoundRequestError(res.__('Trip id not found'), 404);
+            throw new NotFoundRequestError(('Trip id not found'), 404);
           }
         } else {
-          throw new ApplicationError(res.__(`Failed to update this trip, it is already ${findTravelRequests.status}`), 500);
+          throw new ApplicationError((`Failed to update this trip, it is already ${findTravelRequests.status}`), 500);
         }
       } else {
-        throw new ApplicationError(res.__('Failed update this trip'), 403);
+        throw new ApplicationError(('Failed update this trip'), 403);
       }
     } else {
-      throw new NotFoundRequestError(res.__('The travel request does not exist!'), 404);
+      throw new NotFoundRequestError(('The travel request does not exist!'), 404);
     }
   } catch (error) {
     next(error);
