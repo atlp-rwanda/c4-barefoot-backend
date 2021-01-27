@@ -5,15 +5,29 @@ import { validToken, travelAdmin } from './dummyData';
 
 use(chaiHttp);
 describe("VISITOR'S CHAT", () => {
-  const TestChatText = {
-    visitor: 'visitor@visitor.vstr',
-    message: 'test test test'
-  };
+//   const TestChatText = {
+//     visitor: 'visitor@visitor.vstr',
+//     message: 'test test test'
+//   };
 
+// const user = {
+//   email: 'sequester@gmail.com',
+//   password: 'password'
+// }
+const TestChatText = {
+  visitor: 'visitor@visitor.vstr',
+  message: 'test test test',
+  sender: 'visitor@visitor.vstr'
+};
 const user = {
   email: 'sequester@gmail.com',
   password: 'password'
-}
+};
+before(async () => {
+  await request(app).post('/api/v1/chat/visitor').send(TestChatText);
+  const User = await request(app).post('/api/v1/user/login').send(user);
+  await request(app).post('/api/v1/chat/support').set('Authorization', `Bearer ${User.body.data}`);
+});
 
   it('Should mark messages sent from support to visitor as read', async () => {
     const res = await request(app).patch(`/api/v1/chat/visitor?visitor=${TestChatText.visitor}`);
@@ -65,7 +79,7 @@ const user = {
     expect(res.body).to.be.a('Array');
     if (res.body.length > 0) {
       expect(res.body[0]).to.be.a('Object');
-      expect(res.body[0]).to.have.property('visitor', TestChatText.visitor);
+      expect(res.body[0]).to.have.property('receiver');
       expect(res.body[0]).to.have.property('sender');
       expect(res.body[0]).to.have.property('message');
       expect(res.body.some((chat) => chat.sender === TestChatText.visitor)).to.equal(true);
@@ -79,7 +93,7 @@ const user = {
     expect(res.body).to.be.a('Array');
     if (res.body.length > 0) {
       expect(res.body[0]).to.be.a('Object');
-      expect(res.body[0]).to.have.property('visitor', TestChatText.visitor);
+      expect(res.body[0]).to.have.property('receiver');
       expect(res.body[0]).to.have.property('sender');
       expect(res.body[0]).to.have.property('message');
       expect(res.body.some((chat) => chat.sender === TestChatText.visitor)).to.equal(true);
