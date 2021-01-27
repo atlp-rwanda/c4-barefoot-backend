@@ -8,7 +8,7 @@ const findTravelRequestComments = (res, query, next, pagination) => {
         if (tRequestComments.rows.length > 0) {
           res.status(200).json(tRequestComments.rows);
         } else {
-          throw new NotFoundRequestError(res.__('No comments found'));
+          throw new NotFoundRequestError(('No comments found'));
         }
       })
       .catch((err) => {

@@ -31,7 +31,7 @@ const logout = async (req, res) => {
     await newUser.update({ refreshtoken: userToken });
     res.clearCookie('make', { path: '/api/v1/user/refresh-token' });
 
-    res.status(200).json({ status: 200, message: res.__('Logout successful!') });
+    res.status(200).json({ status: 200, message: ('Logout successful!') });
   } catch (error) {
     res.status(400).json(error.message);
   }

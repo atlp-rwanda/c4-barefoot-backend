@@ -9,7 +9,7 @@ const signup = async (req, res, next) => {
 
   const userExist = await isUserExist(req.body.email);
   if (userExist) {
-    throw new signUpError(res.__('Account already exists'), 400);
+    throw new signUpError(('Account already exists'), 400);
   }
   // create the user
   try {

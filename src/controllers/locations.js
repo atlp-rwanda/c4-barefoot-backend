@@ -9,7 +9,7 @@ export const getLocations = async (req, res, next) => {
   try {
     const locations = await retrieveLocations(page);
     if (!locations) {
-      throw new locationNotFound(res.__('There are no locations available'));
+      throw new locationNotFound(('There are no locations available'));
     }
     res.status(200).json({ status: 200, page, locations });
   } catch (error) {
@@ -31,7 +31,7 @@ export const getOneLocation = async (req, res, next) => {
   try {
     const singleLocation = await models.Location.findOne({ where: { id } });
     if (!singleLocation) {
-      throw new locationNotFound(res.__('Location does not exist'));
+      throw new locationNotFound(('Location does not exist'));
     }
     res.status(200).json(singleLocation);
   } catch (error) {
@@ -43,10 +43,10 @@ export const updateLocation = async (req, res, next) => {
   try {
     const locationExist = await models.Location.findOne({ where: { id: req.params.id } });
     if (!locationExist) {
-      throw new locationNotFound(res.__('Location does not exist'));
+      throw new locationNotFound(('Location does not exist'));
     }
     const update = await models.Location.update(req.body, { where: { id: req.params.id } });
-    res.status(201).json({ status: 201, message: res.__('Location successfully updated') });
+    res.status(201).json({ status: 201, message: 'Location successfully updated' });
   } catch (error) {
     next(error);
   }
@@ -56,16 +56,16 @@ export const deleteLocation = async (req, res, next) => {
   try {
     const locationExist = await models.Location.findOne({ where: { id: req.params.id } });
     if (!locationExist) {
-      throw new locationNotFound(res.__('Location does not exist'));
+      throw new locationNotFound(('Location does not exist'));
     }
 
     const linkedAccommodation = await models.Accommodation.findOne({ where: { locationID: req.params.id } });
     if (linkedAccommodation) {
-      throw new badRequest(res.__('This location can not be deleted with linked accomodations.'));
+      throw new badRequest(('This location can not be deleted with linked accomodations.'));
     }
 
     const dltLocation = await models.Location.destroy({ where: { id: req.params.id } });
-    res.status(201).json({ status: 201, message: res.__('Location has been deleted') });
+    res.status(201).json({ status: 201, message:'Location has been deleted' });
   } catch (error) {
     next(error);
   }

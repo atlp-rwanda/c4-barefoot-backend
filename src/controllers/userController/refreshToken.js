@@ -7,7 +7,7 @@ const refreshToken = async (req, res, next) => {
     const token = req.cookies.make;
    
       if (!token) {
-        throw new BadRequestError(res.__('Please login!'), 400);
+        throw new BadRequestError(('Please login!'), 400);
       }
     const payload = await verifyToken(token);
     // check if user exist in databasa
@@ -17,7 +17,7 @@ const refreshToken = async (req, res, next) => {
       user_role_id: newUser.user_role_id
     };
     if (!newUser) {
-      throw new BadRequestError(res.__('no user found with this token'), 400);
+      throw new BadRequestError(('no user found with this token'), 400);
     }
     const userToken = generateToken(userData);
     
