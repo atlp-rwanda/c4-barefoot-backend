@@ -20,7 +20,8 @@ describe('CHAT OF REGISTERED USERS', () => {
   const sentMessage = {};
   let r;
   before(async () => {
-    r = await request(app).post('/api/v1/chat').set('Authorization', `Bearer ${validToken}`).send(TestChatText);
+    const User = await request(app).post('/api/v1/user/login').send(user)
+    r = await request(app).post('/api/v1/chat').set('Authorization', `Bearer ${User.body.data}`).send(TestChatText);
     sentMessage.id = r.body.id;
   });
 
