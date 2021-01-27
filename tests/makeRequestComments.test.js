@@ -5,32 +5,30 @@ import models from '../src/models';
 import 'dotenv/config';
 
 use(chaiHttp);
-describe('REQUEST CIMMENTING END-POINTS TESTING', () => {
+describe('REQUEST COMMENTING END-POINTS TESTING', () => {
   const user = {
-    email: 'sequester@gmail.com',
-    password: 'password',
+    email: 'mj@gmail.com',
+    password: 'manager1'
   };
-  const Comment = {
-    comment: 'Hello there!',
+  const comment = {
+    comment: 'Hello there!'
   };
   it('Should post a travel request comment', async () => {
     const User = await request(app).post('/api/v1/user/login').send(user);
     const res = await request(app)
       .post('/api/v1/comment/0ce36391-2c08-3074-bddb-a4ea8cccbbc5')
       .set('Authorization', `Bearer ${User.body.data}`)
-      .send(Comment);
-    expect(res).to.have.status(200);
-    expect(res.body).to.have.deep.property('tCommentData');
-    expect(res.body).to.have.deep.property('message').equals('comment created successfully');
+      .send(comment);
+    expect(res).to.have.status(201);
+    expect(res.body).to.have.deep.property('message').equals('Operation performed successfully!');
   });
   it('Should not post comment to non-existing travel request id', async () => {
     const User = await request(app).post('/api/v1/user/login').send(user);
     const res = await request(app)
-      .post('/api/v1/comment/0ce36391-2c08-3074-bddb-a4ea8cccbbb5')
+      .post('/api/v1/comment/0ce36391-2c08-3074-bddb-a4ea8cccbbb0')
       .set('Authorization', `Bearer ${User.body.data}`)
-      .send(Comment);
+      .send(comment);
     expect(res).to.have.status(400);
-    expect(res.body).to.have.deep.property('message').equals('Travel request with this id does not exist.');
   });
 
 });

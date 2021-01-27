@@ -75,9 +75,8 @@ describe('Testing notifiactions', () => {
       .post(`/api/v1/comment/${travelRequestId}`)
       .set('Authorization', `Bearer ${User.body.data}`)
       .send(Comment);
-    expect(res).to.have.status(200);
-    expect(res.body).to.have.deep.property('tCommentData');
-    expect(res.body).to.have.deep.property('message').equals('comment created successfully');
+    expect(res).to.have.status(201);
+    expect(res.body).to.have.deep.property('message').equals('Operation performed successfully!');
   });
 
 });

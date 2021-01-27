@@ -209,5 +209,8 @@
 	"Travel request canceled successfully!": "Travel request canceled successfully!",
 	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href=''http://localhost:3000/api/v1'/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RVc2VyT25lIiwiaWF0IjoxNjExNzQwMjY5LCJleHAiOjE2MTIzNDUwNjl9.asmkdGqixrrEuawODrxXN8mYDdFF9fn1EvvzQ_9xnTk'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href=''http://localhost:3000/api/v1'/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RVc2VyT25lIiwiaWF0IjoxNjExNzQwMjY5LCJleHAiOjE2MTIzNDUwNjl9.asmkdGqixrrEuawODrxXN8mYDdFF9fn1EvvzQ_9xnTk'>Link</a>",
 	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href=''http://localhost:3000/api/v1'/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RVc2VyT25lIiwiaWF0IjoxNjExNzQwMzcxLCJleHAiOjE2MTIzNDUxNzF9.bLYQ_jLJCtKVG3GUteDwaattQlzStsT7J7VY3PA0mhk'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href=''http://localhost:3000/api/v1'/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RVc2VyT25lIiwiaWF0IjoxNjExNzQwMzcxLCJleHAiOjE2MTIzNDUxNzF9.bLYQ_jLJCtKVG3GUteDwaattQlzStsT7J7VY3PA0mhk'>Link</a>",
-	"testuserone@gmail.com does not exist or not verified!": "testuserone@gmail.com does not exist or not verified!"
+	"testuserone@gmail.com does not exist or not verified!": "testuserone@gmail.com does not exist or not verified!",
+	"You must provide comment": "You must provide comment",
+	"Can not perform this operation!": "Can not perform this operation!",
+	"this travel request do not exit": "this travel request do not exit"
 }

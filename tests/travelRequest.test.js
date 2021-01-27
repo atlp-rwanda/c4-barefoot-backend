@@ -9,10 +9,6 @@ let travelRequestId = '';
 
 describe('TRAVEL REQUEST END-POINTS TESTING', () => {
   const REQUESTER = {
-    email: 'sequester@gmail.com',
-    password: 'password',
-  };
-  const userTwo = {
     email: 'mj@gmail.com',
     password: 'manager1',
   };
