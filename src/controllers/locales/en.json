@@ -92,5 +92,7 @@
 	"data in token is invalid": "data in token is invalid",
 	"notification not found": "notification not found",
 	"no auth header found": "no auth header found",
-	"verified users": "verified users"
+	"verified users": "verified users",
+	"The user is deleted successfully!": "The user is deleted successfully!",
+	"Travel request canceled successfully!": "Travel request canceled successfully!"
 }

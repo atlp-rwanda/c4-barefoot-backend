@@ -110,6 +110,6 @@ router.get('/verified-users/managers', isManager,findAllManagers);
  *               description: retrieved data users
  *
  */
-router.patch('/verified-users/:id', isManager, managerPermissions, assignUsersToManagerValidation, assignUsersToManagers, managerAssignmentNotification);
+router.patch('/verified-users/:id', isManager, managerPermissions, assignUsersToManagerValidation, assignUsersToManagers);
 
 export default router;
