@@ -150,7 +150,7 @@ router.get('/', isLogedIn, permit(['view travel requests']), getTravelRequest); 
  *
  */
 
-router.put('/', isLogedIn, travelRequestsValidation, permit(['cancel travel requests']), cancel_travelRequest);
+router.put('/',isLogedIn, travelRequestsValidation, permit(['cancel travel requests']), cancel_travelRequest);
 
 // ----------------- View a particular travelrequest --------------------
 

@@ -9,7 +9,7 @@ export function createTravelComment(req, res, query, next) {
         .catch(err => {
             switch(err.parent.code){
                 case '23503':
-                    res.status(400).json({message:res.__("Travel request with this id does not exist.")})
+                    res.status(400).json({message:("Travel request with this id does not exist.")})
                     break
                 default:
                     next(err)

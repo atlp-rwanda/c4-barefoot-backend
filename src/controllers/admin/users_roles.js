@@ -26,7 +26,7 @@ export const findUsers = async (req, res, next) => {
       return res.status(200).json({ status: 200, users });
     }
 
-    throw new applicationError(res.__('Failed to fetch users, try again!'), 500);
+    throw new applicationError(('Failed to fetch users, try again!'), 500);
   } catch (error) {
     next(error);
   }
@@ -39,8 +39,8 @@ export const updateUserRole = async (req, res, next) => {
     const roles = readData.getPermissionsObject();
 
     /* check if role exist */
-    if (!roles.hasOwnProperty(role)) { throw new notFound(res.__('Role not exist!')); }
-    if (role === 'administrator') { throw new accessDenied(res.__('Access denied!')); }
+    if (!roles.hasOwnProperty(role)) { throw new notFound(('Role not exist!')); }
+    if (role === 'administrator') { throw new accessDenied(('Access denied!')); }
 
     /* check if the user exist */
     const findUser = await usersService.getUser({ email });
@@ -50,15 +50,15 @@ export const updateUserRole = async (req, res, next) => {
         /* update the user role */
         const upDate = await usersService.updateUserRole({ email, user_role_id: findRole.id });
         if (upDate) {
-          res.status(201).json({ status: 201, message: res.__(`The user role is updated to ${role}`) });
+          res.status(201).json({ status: 201, message: (`The user role is updated to ${role}`) });
         } else {
-          throw new applicationError(res.__('Failed to update this role, try again!'), 500);
+          throw new applicationError(('Failed to update this role, try again!'), 500);
         }
       } else {
-        throw new notFound(res.__(`${role} does not exist`));
+        throw new notFound((`${role} does not exist`));
       }
     } else {
-      throw new notFound(res.__(`${email} does not exist or not verified!`));
+      throw new notFound((`${email} does not exist or not verified!`));
     }
   } catch (err) {
     next(err);
@@ -72,12 +72,12 @@ export const deleteOne = async (req, res, next) => {
     if (findUser) {
       const deleted = await usersService.deleteUser(userEmail);
       if (deleted) {
-        res.status(200).json({ status: 200, message: res.__('The user is deleted successfully!') });
+        res.status(200).json({ status: 200, message: ('The user is deleted successfully!') });
       } else {
-        throw new applicationError(res.__('Failed to delete this user! Try again'), 500);
+        throw new applicationError(('Failed to delete this user! Try again'), 500);
       }
     } else {
-      throw new notFound(userEmail+ res.__(" does not exist!"));
+      throw new notFound((`${userEmail} does not exist!`));
     }
   } catch (error) {
     next(error);
@@ -92,7 +92,7 @@ export const assignLineManager = async (req, res, next) => {
       const findRoleById = await roleServices.findRoleById({ id: findUser.user_role_id });
       if (findRoleById) {
         if (findRoleById.name !== 'requester' && findRoleById.name !== 'manager') {
-          throw new accessDenied(res.__(`Cannot assign line manager to this user! ${findRoleById.name}`), 403);
+          throw new accessDenied((`Cannot assign line manager to this user! ${findRoleById.name}`), 403);
         }
       }
       const findManagerById = await usersService.findManagerById(manager_id);
@@ -101,18 +101,18 @@ export const assignLineManager = async (req, res, next) => {
         if (findRoleById && (findRoleById.name === 'manager')) {
           const updateUser = await usersService.updateUser({ email, manager_id });
           if (updateUser) {
-            res.status(201).json({ status: 201, message: res.__('Line manager is assigned successfully') });
+            res.status(201).json({ status: 201, message: ('Line manager is assigned successfully') });
           } else {
-            throw new applicationError(res.__('Failed to assign this line manager, try again!'));
+            throw new applicationError(('Failed to assign this line manager, try again!'));
           }
         } else {
-          throw new notFound(res.__('Line manager does not exist!'));
+          throw new notFound(('Line manager does not exist!'));
         }
       } else {
-        throw new notFound(res.__('The line manager does not exist'), 404);
+        throw new notFound(('The line manager does not exist'), 404);
       }
     } else {
-      throw new notFound(res.__('No user found!'), 404);
+      throw new notFound(('No user found!'), 404);
     }
   } catch (err) {
     next(err);
@@ -129,28 +129,28 @@ export const createRole = async (req, res, next) => {
     /* a constructor holding all permissions */
 
     function Perm() {
-      this[res.__('edit profile')] = 1,
+      this[('edit profile')] = 1,
 
-      this[res.__('assign requesters to manager')] = 0,
-      this[res.__('create travel requests')] = 0,
-      this[res.__('view travel requests')] = 0,
-      this[res.__('edit travel requests')] = 0,
-      this[res.__('cancel travel requests')] = 0,
+      this[('assign requesters to manager')] = 0,
+      this[('create travel requests')] = 0,
+      this[('view travel requests')] = 0,
+      this[('edit travel requests')] = 0,
+      this[('cancel travel requests')] = 0,
 
-      this[res.__('approve direct reports travel requests')] = 0,
-      this[res.__('view direct reports travel requests')] = 0,
-      this[res.__('reject direct reports travel requests')] = 0,
+      this[('approve direct reports travel requests')] = 0,
+      this[('view direct reports travel requests')] = 0,
+      this[('reject direct reports travel requests')] = 0,
 
-      this[res.__('view accommodations')] = 1,
-      this[res.__('create accommodations')] = 0,
-      this[res.__('update accommodations')] = 0,
-      this[res.__('delete accommodations')] = 0,
-      this[res.__('book accommodations')] = 0,
+      this[('view accommodations')] = 1,
+      this[('create accommodations')] = 0,
+      this[('update accommodations')] = 0,
+      this[('delete accommodations')] = 0,
+      this[('book accommodations')] = 0,
 
-      this[res.__('view locations')] = 1,
-      this[res.__('create locations')] = 0,
-      this[res.__('update locations')] = 0,
-      this[res.__('delete locations')] = 0;
+      this[('view locations')] = 1,
+      this[('create locations')] = 0,
+      this[('update locations')] = 0,
+      this[('delete locations')] = 0;
     }
 
     // import existing data in index.json
@@ -161,7 +161,7 @@ export const createRole = async (req, res, next) => {
     const role = `${requestData.role}`;
     if (roles.hasOwnProperty(role)) {
       existProp = true;
-      throw new userBadRequest(res.__('Role exist!'));
+      throw new userBadRequest(('Role exist!'));
     }
     /* if request role doesn't exist, then create one */
     if (!existProp) {
@@ -179,9 +179,9 @@ export const createRole = async (req, res, next) => {
         const dataJson = JSON.stringify(roles, null, 2);
         roleServices.saveInFile(dataJson);
 
-        res.status(201).json({ status: 201, message: res.__('Role created successfully') });
+        res.status(201).json({ status: 201, message: ('Role created successfully') });
       } else {
-        throw new applicationError(res.__('Failed to create this role, try again!'), 500);
+        throw new applicationError(('Failed to create this role, try again!'), 500);
       }
     }
   } catch (err) {
@@ -195,11 +195,11 @@ export const getAllRoles = async (req, res, next) => {
     const allRoles = await roleServices.findRoles({});
 
     if (allRoles) {
-      if (!allRoles.rows.length) { throw new notFound(res.__('No role found')); }
+      if (!allRoles.rows.length) { throw new notFound(('No role found')); }
       return res.status(200).json({ status: 200, roles: allRoles });
     }
 
-    throw new applicationError(res.__('Failed to fetch roles, try again!'), 500);
+    throw new applicationError(('Failed to fetch roles, try again!'), 500);
   } catch (error) {
     next(error);
   }
@@ -216,7 +216,7 @@ export const updatePermissions = (req, res, next) => {
     const role = `${requestData.role}`;
     if (!roles.hasOwnProperty(role)) {
       existProp = false;
-      throw new notFound(res.__('Role not exist!'));
+      throw new notFound(('Role not exist!'));
     }
 
     if (existProp) {
@@ -243,10 +243,10 @@ export const updatePermissions = (req, res, next) => {
       roleServices.saveInFile(dataJson);
 
       if (validPermission != '') {
-        throw new userBadRequest({ message: res.__('These permissions or values are not allowed'), 'failed permissions': validPermission, success: roles[role] });
+        throw new userBadRequest({ message: ('These permissions or values are not allowed'), 'failed permissions': validPermission, success: roles[role] });
       } else {
         res.status(201).json({
-          status: 201, message: res.__('Permissions updated successfully'), 'failed permissions': validPermission, success: roles[role]
+          status: 201, message: ('Permissions updated successfully'), 'failed permissions': validPermission, success: roles[role]
         });
       }
     }
@@ -265,10 +265,10 @@ export const deleteRoles = async (req, res, next) => {
     /* check if index.json does not have this requested role */
     if (!roles.hasOwnProperty(requestRole)) {
       existProp = false;
-      throw new notFound(res.__('Role not exist!'));
+      throw new notFound(('Role not exist!'));
     }
 
-    if (requestRole === 'administrator') { throw new accessDenied(res.__('Can not delete the administrator role!')); }
+    if (requestRole === 'administrator') { throw new accessDenied(('Can not delete the administrator role!')); }
     if (existProp) {
       if (delete roles[requestRole]) {
         const dataJson = JSON.stringify(roles, null, 2);
@@ -283,14 +283,14 @@ export const deleteRoles = async (req, res, next) => {
           if (deletedRole) {
             /* save changes */
             roleServices.saveInFile(dataJson);
-            return res.status(200).json({ status: 200, message: res.__('Role deleted successfully'), role: requestRole });
+            return res.status(200).json({ status: 200, message: ('Role deleted successfully'), role: requestRole });
           }
-          throw new applicationError(res.__('Failed to delete this role, try again!'), 500);
+          throw new applicationError(('Failed to delete this role, try again!'), 500);
         } else {
-          throw new notFound(res.__('Role not found!'), 404);
+          throw new notFound(('Role not found!'), 404);
         }
       } else {
-        throw new applicationError(res.__('Failed to delete this role, try again!'), 500);
+        throw new applicationError(('Failed to delete this role, try again!'), 500);
       }
     }
   } catch (err) {
