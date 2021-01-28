@@ -66,8 +66,8 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
   });
   
   const user = {
-    email: 'sequester@gmail.com',
-    password: 'password',
+    email: 'mj@gmail.com',
+    password: 'manager1',
   };
   it('Should get travel requests if you are logged in', async () => {
     const User = await request(app).post('/api/v1/user/login').send(user);
@@ -88,8 +88,8 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
   });
 
   const MANAGER = {
-    email: 'mj@gmail.com',
-    password: 'manager1',
+    email: 'managertwo@gmail.com',
+    password: 'manaager2',
   };
   it('should return all travel requests sent', async () => {
     User = await request(app).post('/api/v1/user/login').send(MANAGER);
