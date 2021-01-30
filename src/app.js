@@ -12,6 +12,9 @@ import passport from "passport";
 import cookieSession from 'cookie-session';
 import i18n from './controllers/i18n';
 
+import location from './controllers/locations'
+
+
 
 const app = express();
 app.use(cors());
@@ -22,6 +25,12 @@ app.use(cookieSession({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+// app.use((req, res, next) => {
+//   req.location = 'location';
+//   next ();
+// })
 
 const port = process.env.PORT || 3000;
 

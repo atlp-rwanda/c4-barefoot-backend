@@ -14,7 +14,6 @@ export const isAllowedToReview = async (req, res, next)=>{
             }else{
                 throw new accessDenied(res.__('Not allowed to review this accommodation'));
             }
-
         }
     }
     catch( error ){

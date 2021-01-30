@@ -1,0 +1,9 @@
+{
+	"Page Requested not found": "Page Requested not found",
+	"Verify your email": "Verify your email",
+	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN5ZW1lem9icm93biIsImlhdCI6MTYxMTA0MzgxNiwiZXhwIjoxNjExNjQ4NjE2fQ.EAqjcxmwAR5EI8QCQS4XwVaLN3kXjdd2BPOoNZ7l3XQ'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN5ZW1lem9icm93biIsImlhdCI6MTYxMTA0MzgxNiwiZXhwIjoxNjExNjQ4NjE2fQ.EAqjcxmwAR5EI8QCQS4XwVaLN3kXjdd2BPOoNZ7l3XQ'>Link</a>",
+	"session has expired, please login": "session has expired, please login",
+	"You don't have an account with this email: manager_id@gmail.com": "You don't have an account with this email: manager_id@gmail.com",
+	"login successful": "login successful",
+	"You don't have permissions to [create locations]": "You don't have permissions to [create locations]"
+}
