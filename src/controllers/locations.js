@@ -56,18 +56,17 @@ function callback(error, response, body) {
   if (!error && response.statusCode == 200) {
    
     const info = JSON.parse(body);
-    console.log(info);
+    //console.log(info);
     req.body.weather =info;
     weatherData = info;
-   // console.log(weatherData);
+    //console.log("3435664523",weatherData);
     //return info;
-    // res.status(200).json({
-    //     
+    // res.status(200).json({    
     // })
   }
 }
 request(options, callback);
-console.log("******1234",weatherInfo);
+//console.log(weatherInfo);
 return weatherInfo;
 }
 
@@ -78,8 +77,8 @@ export const getOneLocation = async (req, res, next) => {
     if (!singleLocation) {
       throw new locationNotFound(res.__('Location does not exist'));
     }
-     const returnWeather = getWeatherData(req, singleLocation.LocationName);
-    console.log("245364564",req.body);
+     const returnWeather = await getWeatherData(req, singleLocation.LocationName);
+    //console.log(req.body);
     res.status(200).json({singleLocation, weatherData});
   } catch (error) {
     next(error);
