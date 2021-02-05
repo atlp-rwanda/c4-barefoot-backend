@@ -8,7 +8,7 @@ const showBookings = async (req, res, next) => {
     const user = await getUserData(req, res);
     const booking = await models.Booking.findAll({ where: { username: user.username } });
     if (!booking[0]) {
-      res.json('You do not have any bookings');
+      res.status(404).json({message:'You do not have any bookings'});
     }
     res.status(200).json(booking);
   } catch (error) {

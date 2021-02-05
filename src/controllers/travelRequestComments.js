@@ -25,13 +25,13 @@ const TravelRequestComment = async (req, res, next) => {
         }else if(decoded.id===travel.managerId){
           reciver = await findUserById(travel.userId)
         }
-        const mailOptions = {
-          email: reciver.email,
-          subject: 'Your travel request',
-          name:reciver.username,
-          body: `<p></br>Hope this email finds you well. Thank you for sending your request at</br>Barefoot nomad ,${decoded.username} commented on the travel request you created or you manage.</p><p>Kindly regard</p>`
-        };
-        await sendEmail(mailOptions);
+        // const mailOptions = {
+        //   email: reciver.email,
+        //   subject: 'Your travel request',
+        //   name:reciver.username,
+        //   body: `<p></br>Hope this email finds you well. Thank you for sending your request at</br>Barefoot nomad ,${decoded.username} commented on the travel request you created or you manage.</p><p>Kindly regard</p>`
+        // };
+        // await sendEmail(mailOptions);
         try {
             createTravelComment(req, res, commentBody, next);
               //in-app notification and email notification
@@ -42,16 +42,16 @@ const TravelRequestComment = async (req, res, next) => {
                   };
                   const notification = await models.Notification.create(newNotificantion);
               //  pusher.trigger('bare-foot-normad', 'notification', notification);
-              res.status(201).json({ status: 201, message: 'Operation performed successfully!' });
+              res.status(201).json({ status: 201, message: res.__('Operation performed successfully!') });
               next();
           } catch (err) {
             next(err);
           }
         } else {
-          throw new BadRequestError(('You must provide comment'));
+          throw new BadRequestError(res.__('You must provide comment'));
         }
       } else {
-        throw new BadRequestError(('this travel request do not exit'));
+        throw new BadRequestError(res.__('this travel request do not exit'));
       }
     } catch (err) {
     next(err);

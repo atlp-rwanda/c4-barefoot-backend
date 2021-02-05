@@ -1,6 +1,6 @@
 
 import getDataFromToken from '../helper/tokenToData';
-import { displayTravelRequest, findTrip, findTripByTravelRequests } from '../services/tripHistorySearch.js'
+import { displayTravelRequest, findTrip } from '../services/tripHistorySearch.js'
 import db from '../models';
 
 export const getTripHistory = async (req, res, next) => {
@@ -51,6 +51,6 @@ export const getTotalOfTripsByLocation = async (req, res, next) => {
 
 
   } catch (err) {
-    return res.status(401).json(err.message);
+    return res.status(500).json(err.message);
   }
 };

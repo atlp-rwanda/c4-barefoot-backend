@@ -23,7 +23,7 @@ module.exports = {
       returnDate: {
         type: Sequelize.DATE
       },
-      AccommodationId: {
+      accommodationId: {
         type: Sequelize.UUID
       },
       travelId: {

@@ -9,8 +9,8 @@ let travelRequestId = '';
 
 describe('TRAVEL REQUEST END-POINTS TESTING', () => {
   const REQUESTER = {
-    email: 'sequester@gmail.com',
-    password: 'password',
+    email: 'mj@gmail.com',
+    password: 'manager1',
   };
   const tripRequest = {
     trip: [
@@ -38,7 +38,13 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
     expect(res.body).to.have.deep.property('message').equals('Trip request sent successfully');
   });
   it('Should cancel a travel request if it is created', async () => {
-    const requestData = { travelRequestId, action: 'cancel' };
+    //login the user
+    User = await request(app).post('/api/v1/user/login').send(REQUESTER);
+    const requestData = { 
+      travelRequestId,
+      action: 'cancel' 
+    };
+    //cancel the trip request made
     const res = await request(app)
       .put('/api/v1/requests')
       .set('Authorization', `Bearer ${User.body.data}`)
@@ -48,6 +54,7 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
     expect(res.body).to.have.deep.property('message').equals('Travel request canceled successfully!');
   });
   it('Should edit the not-approved travel requests', async () => {
+    User = await request(app).post('/api/v1/user/login').send(REQUESTER);
     const editRequest = { tripId, updates: { reason: 'testing' } };
     const res = await request(app)
       .put(`/api/v1/requests/${travelRequestId}`)
@@ -59,8 +66,8 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
   });
   
   const user = {
-    email: 'sequester@gmail.com',
-    password: 'password',
+    email: 'mj@gmail.com',
+    password: 'manager1',
   };
   it('Should get travel requests if you are logged in', async () => {
     const User = await request(app).post('/api/v1/user/login').send(user);
@@ -71,7 +78,7 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
     expect(res.body).to.be.an('array');
   });
   it('Should get a single travel requests if you are logged in', async () => {
-    const User = await request(app).post('/api/v1/user/login').send(user);
+    User = await request(app).post('/api/v1/user/login').send(REQUESTER);
     const res = await request(app)
       .get('/api/v1/requests')
       .set('Authorization', `Bearer ${User.body.data}`)
@@ -81,8 +88,8 @@ describe('TRAVEL REQUEST END-POINTS TESTING', () => {
   });
 
   const MANAGER = {
-    email: 'mj@gmail.com',
-    password: 'manager1',
+    email: 'managertwo@gmail.com',
+    password: 'manaager2',
   };
   it('should return all travel requests sent', async () => {
     User = await request(app).post('/api/v1/user/login').send(MANAGER);

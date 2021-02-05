@@ -1,7 +1,7 @@
 import { request, expect, use } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/app';
-import { verifiedUserToken, notManagerVerifiedUserToken, subscribedManagerToken } from './mockData';
+import { verifiedUserToken, notManagerVerifiedUserToken, subscribedManagerToken, validUser } from './mockData';
 
 use(chaiHttp);
 describe('Testing notifiactions', () => {
@@ -36,12 +36,6 @@ describe('Testing notifiactions', () => {
   let travelRequestId = '';
   let User = '';
   let tripId = '';
-
-  it('It should assign user to managers', async () => {
-    const res = await request(app).patch('/api/v1/assignUserstoManager/verified-users/d74fcc5e-5755-4366-83ef-cf306b013c46').send({ manager_id: '0ce36391-2c08-4703-bddb-a4ea8cccbbc5' }).set('Authorization', `Bearer ${subscribedManagerToken}`);
-    expect(res).to.have.status(200);
-    expect(res.type).to.equal('application/json');
-  });
 
   
 
@@ -81,9 +75,8 @@ describe('Testing notifiactions', () => {
       .post(`/api/v1/comment/${travelRequestId}`)
       .set('Authorization', `Bearer ${User.body.data}`)
       .send(Comment);
-    expect(res).to.have.status(200);
-    expect(res.body).to.have.deep.property('tCommentData');
-    expect(res.body).to.have.deep.property('message').equals('comment created successfully');
+    expect(res).to.have.status(201);
+    expect(res.body).to.have.deep.property('message');
   });
 
 });

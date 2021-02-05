@@ -13,8 +13,8 @@ describe('STATISTICS END-POINTS TESTING', () => {
     expect(res.body).to.have.property('numberOfActiveUsers');
     expect(res.body).to.have.property('numberOfAccommodation');
     expect(res.body).to.have.property('numberOfLocation');
-    expect(res.body).to.have.property('mostVisitedLocations');
-    expect(res.body).to.have.property('top5VisitedBookedAccommodations');
+    expect(res.body).to.have.property('sortedVisitedLocation');
+    expect(res.body).to.have.property('SortedBookedAccomodation');
     expect(res.status).to.equal(200);
   });
 

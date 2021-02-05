@@ -10,7 +10,7 @@ let User = '';
 describe('AMENITIES END-POINTS TESTING', () => {
   it('should update amenity', async () => {
     User = await request(app).post('/api/v1/user/login').send(travelAdmin);
-    const res = await request(app).patch('/api/v1/amenities/cf701c80-a729-4922-a04c-553015514a96').set('Authorization', `Bearer ${User.body.data}`).send(validAmenity);
+    const res = await request(app).patch('/api/v1/amenities/1d9809ca-072a-45fe-9f24-82a8132a8872').set('Authorization', `Bearer ${User.body.data}`).send(validAmenity);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(201);
     expect(res.body).to.have.property('message');
