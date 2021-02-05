@@ -22,7 +22,7 @@ export default function permit(permission) {
 
         /* check if this role exist */
         if (!rolesData.hasOwnProperty(role)) {
-          throw new notFound(res.__('Role does not exist'));
+          throw new notFound(('Role does not exist'));
         }
         let allowed = !!permission.length;
         if (permission[0] === 'all') {
@@ -44,7 +44,7 @@ export default function permit(permission) {
         for (let i = 0; i < permission.length; i++) {
           /* check if this task does not exist */
           if (!rolesData[role].hasOwnProperty(permission[i])) {
-            throw new notFound(res.__(`Permission does not exist! ["${permission[i]}"]`));
+            throw new notFound((`Permission does not exist! ["${permission[i]}"]`));
           }
 
           /* check if rolesData[role][permission[i]] is 1 or 0
@@ -56,10 +56,10 @@ export default function permit(permission) {
         if (allowed) {
           next();
         } else {
-          throw new accessDenied(res.__(`You don't have permissions to [${permission}]`));
+          throw new accessDenied((`You don't have permissions to [${permission}]`));
         }
       } else {
-        throw new ApplicationError(res.__('Failed to retrieve the user role, Try again later!'));
+        throw new ApplicationError(('Failed to retrieve the user role, Try again later!'));
       }
     } catch (error) {
       next(error);

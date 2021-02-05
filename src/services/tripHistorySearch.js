@@ -17,9 +17,7 @@ export const findTrip = async (query, location, limit, offset) => {
 
 export const displayTravelRequest = async (query) => {
     let travels = await db.TravelRequest.findAndCountAll({ where: query })
-
-    return travels
-
+    return travels;
 }
 
 

@@ -21,12 +21,17 @@ module.exports = (sequelize, DataTypes) => {
     To: {
       type: DataTypes.DATE,
       allowNull: false
+    },
+    checkedout: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   });
 
   Booking.associate = (models) => {
     Booking.belongsTo(models.Accommodation, {
-      foreignKey: 'AccommodationId',
+      foreignKey: 'accommodationId',
       as: 'accommodation'
 
     });

@@ -12,10 +12,10 @@ const getDataFromToken = async (req, res, next) => {
       const userInfo = UserServices.getUserByUserName(user.username);
       return userInfo;
     } catch (e) {
-      return res.status(401).json({ message: res.__('session has expired, please login') });
+      return res.status(401).json({ message: ('session has expired, please login') });
     }
   } else {
-    return res.status(404).json({ status: 404, message: res.__('No token found!') });
+    return res.status(404).json({ status: 404, message: ('No token found!') });
   }
 };
 

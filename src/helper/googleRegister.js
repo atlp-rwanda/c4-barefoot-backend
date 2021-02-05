@@ -9,6 +9,7 @@ const register=async(user)=>{
         profile_picture:user.photos[0].value,varified:user.verified,
     };
     let account=await models.User.create(User);
+    return account;
 
 }
 export default register;

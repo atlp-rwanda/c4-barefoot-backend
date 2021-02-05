@@ -9,10 +9,10 @@ export const createTripValidation= (req, res, next) =>{
                 originCity: Joi.string().required(),
                 destination: Joi.string().required(),
                 tripDate: Joi.date().iso().required().messages({
-                    "date.format":res.__('Trip Date is not a correct iso 8601 format')
+                    "date.format":('Trip Date is not a correct iso 8601 format')
                 }),
                 returnDate: Joi.date().iso().messages({
-                    "date.format":res.__('Returning Date is not a correct iso 8601 format')
+                    "date.format":('Returning Date is not a correct iso 8601 format')
                 }),
                 accommodationId: Joi.string().required(),
                 reason: Joi.string().required()
@@ -32,10 +32,10 @@ export const editTripValidation = (req, res, next) =>{
                 originCity: Joi.string(),
                 destination: Joi.string(),
                 tripDate: Joi.date().iso().messages({
-                    "date.format":res.__('Trip Date is not a correct iso 8601 format')
+                    "date.format":('Trip Date is not a correct iso 8601 format')
                 }),
                 returnDate: Joi.date().iso().messages({
-                    "date.format":res.__('Returning Date is not a correct iso 8601 format')
+                    "date.format":('Returning Date is not a correct iso 8601 format')
                 }),
                 accommodationId: Joi.string().min(36).max(36),
                 reason: Joi.string()
@@ -43,7 +43,7 @@ export const editTripValidation = (req, res, next) =>{
     })
   const { error } = schema.validate(req.body);
   if (error) throw new BadRequestError(error.details[0].message);
-  if(Object.keys(req.body.updates).length === 0) { throw new BadRequestError(res.__("updates can not be empty!"));}
+  if(Object.keys(req.body.updates).length === 0) { throw new BadRequestError(("updates can not be empty!"));}
   next();
 }
 

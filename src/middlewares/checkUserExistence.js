@@ -1,16 +1,17 @@
 import userExist from '../services/findUser';
 import register from '../helper/googleRegister'
 const checkUserExistance=async(req,res,next)=>{
-        let user;
+        let user,account;
         if(req.user){ 
              user=req.user;}
         else{
             user=req.body.user;
         }
-        let account= await userExist(user.email);
+        account= await userExist(user.email);
         if(!account){
-           await register(user);
+           account =await register(user);
         }
+        req.body.user=account;
         next()
     }
 export default checkUserExistance;

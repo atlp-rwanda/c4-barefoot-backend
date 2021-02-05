@@ -11,7 +11,7 @@ const assignUsers = async (req, res, next) => {
         const manager = await findManager(data, page);
 
         return res.status(200).json({
-          status: 200, message: res.__('available managers'), page, managers: manager
+          status: 200, message: 'available managers', page, managers: manager
         });
       }
     });

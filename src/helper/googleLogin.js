@@ -5,11 +5,11 @@ import 'dotenv/config';
 
 const successlogIn=async(account)=>{
     const token=jwt.sign({
-         email:account.email,
-        userId:account.id
-    },process.env.jwt_key,
+         email:account.user_role_id,
+        userId:account.username
+    },process.env.TOKEN_SECRET,
     {
-        expiresIn:'1h'
+        expiresIn:'7d'
     })
     try{
         const user= await models.User.update({refreshtoken:token},{where:{email:account.email}})
