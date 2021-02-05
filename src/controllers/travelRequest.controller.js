@@ -49,13 +49,13 @@ export const cancel_travelRequest = async (req, res, next) => {
       const findTravelRequest = await travelRequestServices.findItById({ travelId: travelRequestId });
       if (findTravelRequest) {
         if (findTravelRequest.userId === userId) {
-          const changes = res.__('canceled');
+          const changes = 'canceled';
           if (findTravelRequest.status === 'pending') {
             const updateStatus = await travelRequestServices.updateStatus({ travelId: travelRequestId, status: { status: changes } });
             if (updateStatus) {
               const newNotificantion = {
                 user_id: userId,
-                title: 'Cancel Travel Request',
+                title: res.__('Cancel Travel Request'),
                 message: `You ${req.body.action}ed your travel request`
                   };
 

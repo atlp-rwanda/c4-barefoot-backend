@@ -20,7 +20,7 @@ describe('REQUEST COMMENTING END-POINTS TESTING', () => {
       .set('Authorization', `Bearer ${User.body.data}`)
       .send(comment);
     expect(res).to.have.status(201);
-    expect(res.body).to.have.deep.property('message').equals('Operation performed successfully!');
+    expect(res.body).to.have.deep.property('message');
   });
   it('Should not post comment to non-existing travel request id', async () => {
     const User = await request(app).post('/api/v1/user/login').send(user);

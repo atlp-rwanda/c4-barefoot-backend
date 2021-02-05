@@ -10,7 +10,7 @@ describe('TRAVEL REQUESTS', () => {
     password: 'password',
   };
   it('Should not get direct travel request if you are not logged in',async () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiNzI1NGE5ZTctMmUxYi00ZjgzLWFkNzMtNzhiOTBkZDNkZjc3IiwidXNlcm5hbWUiOiJtYW5hZ2VyT25lIiwiaWF0IjoxNjExNTAyNTUzLCJleHAiOjE2MTIxMDczNTN9.iy6QJMfp2GZvtO_KpMIAeCP2RPeyq-jcSr46Bqolxgk';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiNzI1NGE5ZTctMmUxYi00ZjgzLWFkNzMtNzhiOTBkZDNkZjc3IiwidXNlcm5hbWUiOiJtYW5hZ2VydHdvIiwiaWF0IjoxNjEyNTM3MTc4LCJleHAiOjE2MTMxNDE5Nzh9.I1O3f3OIHY7ODrZQ_eBV-yNUOlhzqZqrdL9FRlpMDuo';
     const res = await request(app)
       .get('/api/v1/directReports/')
       .set('Authorization', `Bearer ${token}`);
