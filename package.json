@@ -4,6 +4,7 @@
   "description": "Backend API for Barefoot Nomad ",
   "main": "app.js",
   "scripts": {
+    "heroku-postbuild": "NODE_ENV=production npm run migrate && NODE_ENV=production npm run seed",
     "start": "NODE_ENV=production npm run migrate && babel-node ./src/app.js",
     "test-local": "cross-env NODE_ENV=development nyc --reporter=html --reporter=text mocha --require @babel/register ./tests/*.test.js --timeout 1000000 --exit || true",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/app.js",
