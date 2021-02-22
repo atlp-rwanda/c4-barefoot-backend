@@ -1,5 +1,6 @@
 import fs from 'fs';
 import models from '../models';
+import path from 'path'
 
 exports.createOne = (data) => {
   const created = models.Role.create(data);
@@ -28,9 +29,13 @@ exports.deleteOne = (data) => {
   return deleted;
 };
 
-exports.readFile = () => fs.readFileSync('./src/config/permissions/index.json');
+exports.readFile = () =>{
+  const file= path.resolve(__dirname,'../config/permissions/index.json');
+  return fs.readFileSync(file)};
 
-exports.saveInFile = (data) => fs.writeFileSync('./src/config/permissions/index.json', data);
+exports.saveInFile = (data) => {
+  const file= path.resolve(__dirname,'../config/permissions/index.json');
+  return fs.writeFileSync(file, data)};
 
 exports.roles = async () => {
   const role = await models.Role.findAll();
