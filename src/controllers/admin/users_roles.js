@@ -224,7 +224,7 @@ export const updateRoles = async (req, res, next) => {
       roles[requestData.name]=perm;
     };
   }
-  // return res.send({permissions: roles[requestData.name]});
+ 
   try {
     const update = await models.Role.update(requestData,{where:{id:id}});  
     const dataJson = JSON.stringify(roles, null, 2);
