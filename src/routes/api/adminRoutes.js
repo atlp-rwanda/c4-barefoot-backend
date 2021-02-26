@@ -3,7 +3,7 @@ import {
   roleValidation, updateValidation, updateUserRoleValidation, deleteValidation, deleteValidationEmail, assignLineManagerValidation
 } from '../../middlewares/validation/createRole';
 import {
-  findUsers, updateUserRole, deleteOne, createRole, getAllRoles, updatePermissions, deleteRoles, assignLineManager
+  findUsers, updateUserRole, deleteOne, createRole, getAllRoles, updatePermissions, deleteRoles, assignLineManager,updateRoles,findPermissonsByRole
 } from '../../controllers/admin/users_roles';
 import { changeUserRole } from '../../middlewares/changeUserRole';
 import permit from '../../middlewares/accessControl';
@@ -116,6 +116,109 @@ router.get('/roles', getAllRoles);
  */
 
 router.post('/roles', roleValidation, createRole);
+
+/* update a role  */
+
+/**
+ * @swagger
+ *
+ * /api/v1/admin/roles/id:
+ *    put:
+ *      summary: A route that allows the super administrator to Update the a role
+ *      tags: [Super administrator]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/role'
+ *      responses:
+ *        "201":
+ *          description: Role Updated successfully
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/roleCreated'
+ *        "400":
+ *          description: Role exists
+ *        "500":
+ *          description: Failed to create this role, try again
+ *
+ * components:
+ *    schemas:
+ *      role:
+ *        type: object
+ *        required:
+ *          - role
+ *          - description
+ *        properties:
+ *           role:
+ *             type: string
+ *           description:
+ *             type: string
+ *      roleCreated:
+ *        type: object
+ *        properties:
+ *           status:
+ *             type: integer
+ *             example: 201
+ *           message:
+ *             type: string
+ *             example: Role updated successfully
+ */
+
+router.put('/roles/:id', roleValidation, updateRoles);
+
+/* Get role's permission*/
+
+/**
+ * @swagger
+ *
+ * /api/v1/admin/permission/id:
+ *    get:
+ *      summary: A route that allows the super administrator to get the permission of a given role Id
+ *      tags: [Super administrator]
+ *      requestBody:
+ *        required: false
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/role'
+ *      responses:
+ *        "200":
+ *          description: permissions
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/roleCreated'
+ *        "404":
+ *          description: Role does not exit exists
+ *  
+ *
+ * components:
+ *    schemas:
+ *      role:
+ *        type: object
+ *        required:
+ *          - role
+ *          - description
+ *        properties:
+ *           role:
+ *             type: string
+ *           description:
+ *             type: string
+ *      roleCreated:
+ *        type: object
+ *        properties:
+ *           status:
+ *             type: integer
+ *             example: 201
+ *           message:
+ *             type: string
+ *             example: Role updated successfully
+ */
+
+router.get('/permission/:id',findPermissonsByRole);
 
 /* update role's permissions */
 

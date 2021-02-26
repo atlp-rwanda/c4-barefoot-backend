@@ -5,6 +5,7 @@ import notFound from '../../utils/Errors/notFoundRequestError';
 import roleServices from '../../services/roles';
 import accessDenied from '../../utils/Errors/accessDenied';
 import readData from '../../utils/readData';
+import models from '../../models'
 
 export const findUsers = async (req, res, next) => {
   try {
@@ -203,6 +204,46 @@ export const getAllRoles = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+export const updateRoles = async (req, res, next) => {
+  const id =req.params.id
+  const requestData={name:'',description:''}
+  requestData.name = req.body.role;
+  requestData.description = req.body.description;
+  const roles = readData.getPermissionsObject();
+  const role= await models.Role.findOne({where:{id:id}});
+  let perm=null;
+  if (roles.hasOwnProperty(role.name)) {
+    if(role.name != requestData.name){
+      perm=roles[role.name];
+      console.log(perm)
+    }
+  }
+  if(perm){
+    if(delete roles[role.name]){
+      roles[requestData.name]=perm;
+    };
+  }
+  // return res.send({permissions: roles[requestData.name]});
+  try {
+    const update = await models.Role.update(requestData,{where:{id:id}});  
+    const dataJson = JSON.stringify(roles, null, 2);
+    roleServices.saveInFile(dataJson);
+    return res.send({message:"update successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+};
+
+export const findPermissonsByRole = async (req, res, next) => {
+  const roles = readData.getPermissionsObject();
+  const id =req.params.id
+  const role= await models.Role.findOne({where:{id:id}});
+  if (roles.hasOwnProperty(role.name)) {
+   return res.send({permissions: roles[role.name]});
+  }
+  return res.status(404).send({message:"role Not found"});
 };
 
 export const updatePermissions = (req, res, next) => {
