@@ -1,6 +1,9 @@
 import db from '../models';
+import userService from './user.service';
+import accommodations from './accommodations';
+import {findTravelUserInfo, findTripAccomodations} from './travelAuxData';
 
-const findTravelRequest = (res, query, next, pagination) => {
+const findTravelRequest = async (res, query, next, pagination) => {
   const resultSet = [];
   db.TravelRequest.findAndCountAll({ where: query, ...pagination })
     .then((tRequestDataSet) => {
@@ -8,7 +11,7 @@ const findTravelRequest = (res, query, next, pagination) => {
         let counter = tRequestDataSet.rows.length;
         tRequestDataSet.rows.forEach((tRequestData) => {
           db.Trip.findAll({ where: { travelId: tRequestData.travelId } })
-            .then((tripData) => {
+            .then(async (tripData) => {
               counter -= 1;
               if (tripData != null) {
                 const allData = {
@@ -17,7 +20,25 @@ const findTravelRequest = (res, query, next, pagination) => {
                   Trip: tripData,
                 };
                 resultSet.push(allData);
-                if (counter === 0) { res.json(resultSet); }
+                if (counter === 0) {
+                  const newData=await Promise.all(resultSet.map( async (travel) => {
+                    try{
+                      const userInfo = await findTravelUserInfo(travel); 
+                      const accommodationInfo= await findTripAccomodations(travel)
+                      
+                      return {
+                        travelRequestInfo: travel,
+                        userInfo: userInfo,
+                        accommodationInfo: accommodationInfo
+                      }
+                    }
+                    catch(err){
+                      next(err)
+                    }
+                   
+                  }))
+                   res.json(newData); 
+                }
               }
             })
             .catch((err) => {
