@@ -60,6 +60,27 @@
     "update locations": 0,
     "delete locations": 0
   },
+  "travel-admin": {
+    "edit profile": 1,
+    "assign requesters to manager": 0,
+    "create travel requests": 0,
+    "view travel requests": 0,
+    "edit travel requests": 0,
+    "cancel travel requests": 0,
+    "approve direct reports travel requests": 0,
+    "view direct reports travel requests": 0,
+    "reject direct reports travel requests": 0,
+    "view accommodations": 1,
+    "create accommodations": 1,
+    "update accommodations": 1,
+    "delete accommodations": 1,
+    "book accommodations": 1,
+    "view locations": 1,
+    "create locations": 1,
+    "update locations": 1,
+    "delete locations": 1,
+    "view statistics": 1
+  },
   "travel-team-member": {
     "edit profile": 1,
     "assign requesters to manager": 0,
