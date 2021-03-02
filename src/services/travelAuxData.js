@@ -11,8 +11,12 @@ if( travel.Trip.length > 0 && travel.Trip[0].dataValues.accommodationId !== null
     const accommodationInfo = await Promise.all(travel.Trip.map( async (trip) =>{
 
       const accommodation= await accommodations.getSingleAccommodation(trip.dataValues.accommodationId);
-      
-      return checkAccomodationData(accommodation);
+      if( accommodation ){
+        return accommodation.dataValues
+      }
+      else{
+        return { error: 'No info on this accomodation'}
+      }
     }))
     return accommodationInfo;
 
