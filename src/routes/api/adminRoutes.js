@@ -225,7 +225,7 @@ router.get('/permission/:id',findPermissonsByRole);
 /**
  * @swagger
  *
- * /api/v1/admin/roles/update:
+ * /api/v1/admin/role/update:
  *    put:
  *      summary: A route that allows the super administrator to update permissions
  *      tags: [Super administrator]
@@ -281,7 +281,7 @@ router.get('/permission/:id',findPermissonsByRole);
  *                 type: integer
  *                 example: 1
  */
-router.put('/roles/update', updateValidation, updatePermissions);
+router.put('/role/update', updateValidation, updatePermissions);
 
 /* delete a role */
 
