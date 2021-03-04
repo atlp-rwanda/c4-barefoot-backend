@@ -21,10 +21,18 @@ const getSingleAccommodation = (query) => {
   const singleAccommodation = models.Accommodation.findOne({ where: { id: query }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
   return singleAccommodation;
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> changed the seeds to be able to work along and changes the stattype of refreshtoken in the database
 const getAccommodationsWithlocationId = (locationId) => {
   const Accommodations = models.Accommodation.findAll({ where: { locationID: locationId }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
   return Accommodations;
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> changed the seeds to be able to work along and changes the stattype of refreshtoken in the database
 export default {
   getAccommodation, getSingleAccommodation, getAccommodationsWithlocationId
 };
