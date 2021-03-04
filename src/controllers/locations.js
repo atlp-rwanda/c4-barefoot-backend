@@ -64,8 +64,10 @@ export const deleteLocation = async (req, res, next) => {
     }
 
     const dltLocation = await models.Location.destroy({ where: { id: req.params.id } });
-    res.status(201).json({ status: 201, message:'Location has been deleted' });
+    res.status(201).json({ status: 201, message: 'Location has been deleted' });
   } catch (error) {
     next(error);
   }
 };
+
+
