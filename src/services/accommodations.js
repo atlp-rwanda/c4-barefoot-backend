@@ -26,5 +26,5 @@ const getAccommodationsWithlocationId = (locationId) => {
   return Accommodations;
 };
 export default {
-  getAccommodation, getSingleAccommodation,getAccommodationLocationId 
+  getAccommodation, getSingleAccommodation, getAccommodationsWithlocationId
 };
