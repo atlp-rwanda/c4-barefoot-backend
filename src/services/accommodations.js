@@ -32,6 +32,14 @@ const getAccommodationsWithlocationId = (locationId) => {
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
+>>>>>>> changed the seeds to be able to work along and changes the stattype of refreshtoken in the database
+=======
+const getAccommodationsWithlocationId = (locationId) => {
+  const Accommodations = models.Accommodation.findAll({ where: { locationID: locationId }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
+  return Accommodations;
+};
+
 >>>>>>> changed the seeds to be able to work along and changes the stattype of refreshtoken in the database
 export default {
   getAccommodation, getSingleAccommodation, getAccommodationsWithlocationId
