@@ -37,7 +37,7 @@ export const getOneAccommodation = async (req, res, next) => {
       throw new accommodationNotFound(('Accommodation does not exist'));
     }
     // const amenities = await models.Amenity.findOne({ where: { accommodationId: id }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
-    res.status(200).json({ singleAccommodation});
+    res.status(200).json({ singleAccommodation });
   } catch (error) {
     next(error);
   }
@@ -94,3 +94,16 @@ export const bookAccomodation = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getAccommodationsBylocationId = async (req, res, next) => {
+  const locationId = req.params.locationId
+  try {
+    const accommodations = await accommodationService.getAccommodationsWithlocationId(locationId);
+    if (!accommodations) {
+      throw new accommodationNotFound(('There are no accommodations available'));
+    }
+    res.status(200).json({ status: 200, accommodations });
+  } catch (error) {
+    next(error);
+  }
+}
