@@ -1,25 +1,30 @@
 import nodemailer from 'nodemailer';
 import 'dotenv/config';
 import {google} from 'googleapis';
+import sgMail from '@sendgrid/mail'
 import emailTemplate from './emailTemplate';
-const oAuth2Client=new google.auth.OAuth2(process.env.CLIENT_ID,process.env.CLIENT_SECRET,process.env.REDIRECT_URL);
-oAuth2Client.setCredentials({refresh_token:process.env.REFRESH_TOKEN});
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
+// const oAuth2Client=new google.auth.OAuth2(process.env.CLIENT_ID,process.env.CLIENT_SECRET,process.env.REDIRECT_URL);
+// oAuth2Client.setCredentials({refresh_token:process.env.REFRESH_TOKEN});
+
 
 const sendEmail = async (userInfo) =>{
-  const accessToken= await oAuth2Client.getAccessToken() 
-  const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
+  // const accessToken= await oAuth2Client.getAccessToken() 
+  // const transporter = nodemailer.createTransport({
+  //     service: 'gmail',
+  //     auth: {
 
-        type:'OAuth2',
-        user: process.env.GMAIL_EMAIL,
-        clientId:process.env.CLIENT_ID,
-        clientSecret:process.env.CLIENT_SECRET,
-        refreshToken:process.env.REFRESH_TOKEN,
-        accessToken:accessToken
+  //       type:'OAuth2',
+  //       user: process.env.GMAIL_EMAIL,
+  //       clientId:process.env.CLIENT_ID,
+  //       clientSecret:process.env.CLIENT_SECRET,
+  //       refreshToken:process.env.REFRESH_TOKEN,
+  //       accessToken:accessToken,
 
-      }
-    });
+  //     }
+  //   });
   const mailOptions = {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
     to: userInfo.email,
@@ -27,11 +32,11 @@ const sendEmail = async (userInfo) =>{
     html: emailTemplate(userInfo)
   };
   try {
-    const sendmail = transporter.sendMail(mailOptions);
+    const sendmail = sgMail.send(mailOptions);
     return sendmail;
   }
   catch(err){
      return err;;
   }
 }
-export default sendEmail;// 
+export default sendEmail;
