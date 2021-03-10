@@ -52,18 +52,16 @@ describe('ROLES END-POINTS TESTING', () => {
   });
 
   it('should update role', async () => {
-    const res = await request(app).put('/api/v1/admin/roles/update').send(testPerm).set('Authorization', `Bearer ${User.body.data}`);
+    const res = await request(app).put('/api/v1/admin/role/update').send(testPerm).set('Authorization', `Bearer ${User.body.data}`);
     expect(res.type).to.equal('application/json');
 
     expect(res).to.have.status(201);
     expect(res.body).to.have.property('message');
-    expect(res.body).to.have.property('failed permissions');
-    expect(res.body).to.have.property('success');
-    expect(res.body.message).to.equal('Permissions updated successfully');
+    expect(res.body.message).to.equal('update successfully');
   });
 
   it('should validate role updates input', async () => {
-    const res = await request(app).put('/api/v1/admin/roles/update').send({ invalidTest: 'invalidTest' }).set('Authorization', `Bearer ${User.body.data}`);
+    const res = await request(app).put('/api/v1/admin/role/update').send({ invalidTest: 'invalidTest' }).set('Authorization', `Bearer ${User.body.data}`);
 
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(400);
