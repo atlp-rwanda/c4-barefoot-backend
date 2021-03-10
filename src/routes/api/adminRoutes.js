@@ -3,8 +3,9 @@ import {
   roleValidation, updateValidation, updateUserRoleValidation, deleteValidation, deleteValidationEmail, assignLineManagerValidation
 } from '../../middlewares/validation/createRole';
 import {
-  findUsers, updateUserRole, deleteOne, createRole, getAllRoles, updatePermissions, deleteRoles, assignLineManager,updateRoles,findPermissonsByRole
+  findUsers,updateUserRole, deleteOne, createRole, getAllRoles, updatePermissions, deleteRoles, assignLineManager,findPermissonsByRole
 } from '../../controllers/admin/users_roles';
+import updateRoles from '../../controllers/admin/updateRoles';
 import { changeUserRole } from '../../middlewares/changeUserRole';
 import permit from '../../middlewares/accessControl';
 

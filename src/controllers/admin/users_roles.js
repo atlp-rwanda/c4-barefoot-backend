@@ -205,36 +205,6 @@ export const getAllRoles = async (req, res, next) => {
     next(error);
   }
 };
-export const updateRoles = async (req, res, next) => {
-  const id =req.params.id
-  const requestData={name:'',description:''}
-  requestData.name = req.body.role;
-  requestData.description = req.body.description;
-  const roles = readData.getPermissionsObject();
-  const role= await models.Role.findOne({where:{id:id}});
-  let perm=null;
-  if (roles.hasOwnProperty(role.name)) {
-    if(role.name != requestData.name){
-      perm=roles[role.name];
-      console.log(perm)
-    }
-  }
-  if(perm){
-    if(delete roles[role.name]){
-      roles[requestData.name]=perm;
-    };
-  }
- 
-  try {
-    const update = await models.Role.update(requestData,{where:{id:id}});  
-    const dataJson = JSON.stringify(roles, null, 2);
-    roleServices.saveInFile(dataJson);
-    return res.send({message:"update successfully" });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-
-};
 
 export const findPermissonsByRole = async (req, res, next) => {
   const roles = readData.getPermissionsObject();
