@@ -22,4 +22,4 @@ const sendEmail = async (userInfo) =>{
      return err;;
   }
 }
-export default sendEmail;// 
+export default sendEmail;
