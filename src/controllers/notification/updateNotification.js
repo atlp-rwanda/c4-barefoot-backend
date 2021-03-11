@@ -6,7 +6,6 @@ const updateNotifications = async (req, res) => {
   const notificationId = req.params.id;
   const status = 'readed';
   const userData = req.headers.authorization;
-  console.log(req.headers);
   if (!userData) return res.status(401).json({ status: 401, message: ('Unauthorized, Please login!') });
   const token = userData.split(' ')[1];
   const decoded = await verifyToken(token);
@@ -17,7 +16,7 @@ const updateNotifications = async (req, res) => {
     const updated = await updateNotification(notificationId);
     console.log(updated);
     // return res.status(200).json({ status: 200, message: ('notification updated successful!') });
-    return res.status(200).json({ status: 200, message: res.__('notification updated successful!'), notification});
+    return res.status(200).json({ status: 200, message: res.__('notification updated successful!'), notificationMessage: notification.message, notificationId: notification.id });
 
 
   } catch (error) {
