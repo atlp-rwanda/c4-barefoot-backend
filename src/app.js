@@ -39,7 +39,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 8000;
 
 // routes
 app.use(express.json());
