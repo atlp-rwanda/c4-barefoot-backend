@@ -14,7 +14,7 @@ if( travel.Trip.length > 0 && travel.Trip[0].dataValues.accommodationId !== null
       
       return checkAccomodationData(accommodation);
     }))
-    rseturn accommodationInfo;
+    return accommodationInfo;
 
     
   }
