@@ -5,13 +5,12 @@ import badRequest from '../utils/Errors/badRequestError';
 import retrieveLocations from '../services/getLocations';
 
 export const getLocations = async (req, res, next) => {
-  const page = Number(req.query.page);
   try {
-    const locations = await retrieveLocations(page);
+    const locations = await retrieveLocations();
     if (!locations) {
       throw new locationNotFound(('There are no locations available'));
     }
-    res.status(200).json({ status: 200, page, locations });
+    res.status(200).json({ status: 200, locations });
   } catch (error) {
     next(error);
   }
