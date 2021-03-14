@@ -44,10 +44,11 @@ const sendRequestApprovalNotification= async (req,res,next)=>{
     const receiverId= travelRequest.dataValues.userId;
 
     const subscriptions= await findSubscription(receiverId);
+    const actionString = req.body.action === 'approve' ? 'approved' : 'rejected'; 
 
     const payload= JSON.stringify({
-        title: 'Travel request approved',
-        body: `Your Trip have been ${req.body.action}d by your manager`
+        title: `Travel request ${actionString}`,
+        body: `Your Trip have been ${actionString} by your manager`
     });
 
 
