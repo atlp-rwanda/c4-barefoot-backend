@@ -5,6 +5,7 @@ import notFound from '../../utils/Errors/notFoundRequestError';
 import roleServices from '../../services/roles';
 import accessDenied from '../../utils/Errors/accessDenied';
 import readData from '../../utils/readData';
+import models from '../../models'
 
 export const findUsers = async (req, res, next) => {
   try {
@@ -203,6 +204,16 @@ export const getAllRoles = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+export const findPermissonsByRole = async (req, res, next) => {
+  const roles = readData.getPermissionsObject();
+  const id =req.params.id
+  const role= await models.Role.findOne({where:{id:id}});
+  if (roles.hasOwnProperty(role.name)) {
+   return res.send({permissions: roles[role.name]});
+  }
+  return res.status(404).send({message:"role Not found"});
 };
 
 export const updatePermissions = (req, res, next) => {

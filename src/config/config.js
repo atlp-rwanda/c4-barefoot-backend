@@ -13,7 +13,10 @@ module.exports = {
     operatorsAliases: 0, 
     logging: false,
     dialectOptions: {
-
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
     }
   },
   test: {

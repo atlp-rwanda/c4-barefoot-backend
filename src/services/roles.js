@@ -41,3 +41,7 @@ exports.roles = async () => {
   const role = await models.Role.findAll();
   return role;
 };
+exports.updateRole = async (data,id) => {
+  const result = await models.Role.update(data,{where:{id:id}});
+  return result;
+};
