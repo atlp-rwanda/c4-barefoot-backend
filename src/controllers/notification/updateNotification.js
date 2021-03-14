@@ -15,10 +15,7 @@ const updateNotifications = async (req, res) => {
   try {
     const updated = await updateNotification(notificationId);
     console.log(updated);
-    // return res.status(200).json({ status: 200, message: ('notification updated successful!') });
-    return res.status(200).json({ status: 200, message: res.__('notification updated successful!'), notificationMessage: notification.message, notificationId: notification.id });
-
-
+    return res.status(200).json({ status: 200, message: ('notification updated successful!') });
   } catch (error) {
     console.log(error.message, error.stack);
   }
