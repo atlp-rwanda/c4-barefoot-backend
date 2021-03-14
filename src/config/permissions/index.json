@@ -109,12 +109,15 @@
     "approve direct reports travel requests": 0,
     "view direct reports travel requests": 0,
     "reject direct reports travel requests": 0,
-    "create accommodations": 0,
-    "update accommodations": 0,
-    "delete accommodations": 0,
-    "book accommodations": 0,
-    "create locations": 0,
-    "update locations": 0,
-    "delete locations": 0
+    "view accommodations": 1,
+    "create accommodations": 1,
+    "update accommodations": 1,
+    "delete accommodations": 1,
+    "book accommodations": 1,
+    "view locations": 1,
+    "create locations": 1,
+    "update locations": 1,
+    "delete locations": 1,
+    "view statistics": 1
   }
 }
