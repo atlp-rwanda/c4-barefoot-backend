@@ -12,21 +12,11 @@ const notific = async (req, res) => {
   const decoded = await verifyToken(token);
   const user = await isUserExist(decoded.username);
   try {
-    const [count, unread] = await models.Notification.findAndCountAll({
-      where: {
-        user_id: user.id,
-        status: "not readed"
-      }
-    })
-
-    const notifications = await models.Notification.find({
-      where: { 
-        user_id: user.id,
-        status: 'readed'
-      }
+    const notifications = await models.Notification.findAndCountAll({
+      where: { user_id: user.id }
     });
-    console.log(count);
-    return res.status(200).json({ status: 200, message: ('user\'s Notifications'), readNotifications:notifications,unreadCount:count, unReadNotifications:unread });
+
+    return res.status(200).json({ status: 200, message: ('user\'s Notifications'), notifications });
   } catch (error) {
     res.json(error.message, error.stack);
   }
