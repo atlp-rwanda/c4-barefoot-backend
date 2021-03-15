@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     LocationName: DataTypes.STRING,
     country: DataTypes.STRING,
     description: DataTypes.STRING,
+    currency: DataTypes.STRING,
     link: DataTypes.STRING
   });
 
@@ -19,6 +20,5 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'cascade'
     });
   };
-
   return Location;
 };

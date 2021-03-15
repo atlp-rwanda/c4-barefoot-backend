@@ -3,8 +3,17 @@ import chaiHttp from 'chai-http';
 import app from '../src/app';
 import {
   travelAdmin, validLocation, invalidLocation, updateLocation
-} from './dummyData';
 
+  
+} from './dummyData';
+const validLocation1 = {
+  id: 'ae45da99-d1c5-493a-9e66-b0ffb722uay1',
+  LocationName: 'Capetown',
+  country: 'South Africa',
+  description: 'Some random description',
+  link: 'safari.com'
+};
+let locationId = "";
 use(chaiHttp);
 
 let User = '';
@@ -22,10 +31,11 @@ describe('LOCATIONS END-POINT TESTING', () => {
 
   it('should create the location', async () => {
     User = await request(app).post('/api/v1/user/login').send(travelAdmin);
-    const res = await request(app).post('/api/v1/locations').set('Authorization', `Bearer ${User.body.data}`).send(validLocation);
+    const res = await request(app).post('/api/v1/locations').set('Authorization', `Bearer ${User.body.data}`).send(validLocation1);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(201);
     expect(res.body).to.have.property('location');
+    locationId = res.body.location.id
   });
 
   it('Should not create location', async () => {
@@ -38,12 +48,11 @@ describe('LOCATIONS END-POINT TESTING', () => {
 
   it('Should get particular location', async () => {
     User = await request(app).post('/api/v1/user/login').send(travelAdmin);
-    const res = await request(app).get(`/api/v1/locations/${validLocation.id}`).set('Authorization', `Bearer ${User.body.data}`);
+    const res = await request(app).get(`/api/v1/locations/02a7c9b2-efc5-4562-a9a1-ab79bdc43959`).set('Authorization', `Bearer ${User.body.data}`);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(200);
-    expect(res.body).to.have.property('LocationName');
-    expect(res.body.LocationName).to.equal('Capetown');
   });
+
 
   it('Should not get location that does not exist', async () => {
     User = await request(app).post('/api/v1/user/login').send(travelAdmin);
@@ -56,7 +65,7 @@ describe('LOCATIONS END-POINT TESTING', () => {
 
   it('Should update location', async () => {
     User = await request(app).post('/api/v1/user/login').send(travelAdmin);
-    const res = await request(app).patch(`/api/v1/locations/${validLocation.id}`).set('Authorization', `Bearer ${User.body.data}`).send(updateLocation);
+    const res = await request(app).patch(`/api/v1/locations/02a7c9b2-efc5-4562-a9a1-ab79bdc43959`).set('Authorization', `Bearer ${User.body.data}`).send(updateLocation);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(201);
     expect(res.body).to.have.property('message');
@@ -74,7 +83,7 @@ describe('LOCATIONS END-POINT TESTING', () => {
 
   it('Should delete location', async () => {
     User = await request(app).post('/api/v1/user/login').send(travelAdmin);
-    const res = await request(app).delete(`/api/v1/locations/${validLocation.id}`).set('Authorization', `Bearer ${User.body.data}`);
+    const res = await request(app).delete(`/api/v1/locations/${locationId}`).set('Authorization', `Bearer ${User.body.data}`);
     expect(res.type).to.equal('application/json');
     expect(res).to.have.status(201);
     expect(res.body).to.have.property('message');
