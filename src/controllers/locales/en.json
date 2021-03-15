@@ -1,17 +1,23 @@
 {
 	"Page Requested not found": "Page Requested not found",
+
 	"successfully Logged In": "successfully Logged In",
+
 	"Unauthorized": "Unauthorized",
 	"Access denied": "Access denied",
 	"Assign user to manager": "Assign user to manager",
 	"You were assigned to manager of 38eb202c-3f67-4eed-b7ac-9c31bc226e0c": "You were assigned to manager of 38eb202c-3f67-4eed-b7ac-9c31bc226e0c",
+
 	"session has expired, please login": "session has expired, please login",
+
 	"You don't have permissions to [view direct reports travel requests]": "You don't have permissions to [view direct reports travel requests]",
 	"Unauthorized, Please login!": "Unauthorized, Please login!",
 	"user's Notifications": "user's Notifications",
 	"Location does not exist": "Location does not exist",
+
 	"Location successfully updated": "Location successfully updated",
 	"Location has been deleted": "Location has been deleted",
+
 	"This location can not be deleted with linked accomodations.": "This location can not be deleted with linked accomodations.",
 	"You don't have an account with this email: habajeun@gmail.com": "You don't have an account with this email: habajeun@gmail.com",
 	"Logout successful!": "Logout successful!",
@@ -19,6 +25,8 @@
 	"available managers": "available managers",
 	"rate": "rate",
 	"review": "review",
+
+
 	"Please login!": "Please login!",
 	"Account already exists": "Account already exists",
 	"Invalid token": "Invalid token",
@@ -26,6 +34,7 @@
 	"Trip Date is not a correct iso 8601 format": "Trip Date is not a correct iso 8601 format",
 	"Returning Date is not a correct iso 8601 format": "Returning Date is not a correct iso 8601 format",
 	"Trip request sent successfully": "Trip request sent successfully",
+
 	"You don't have permissions to [approve direct reports travel requests,reject direct reports travel requests]": "You don't have permissions to [approve direct reports travel requests,reject direct reports travel requests]",
 	"login successful": "login successful",
 	"pending": "pending",
@@ -34,12 +43,14 @@
 	"The travel request is already approved": "The travel request is already approved",
 	"Operation performed successfully!": "Operation performed successfully!",
 	"Failed to approve this travel request, try again!": "Failed to approve this travel request, try again!",
+
 	"reject Travel Request": "reject Travel Request",
 	"Your travel request was rejectd!": "Your travel request was rejectd!",
 	"reject": "reject",
 	"approved": "approved",
 	"approve Travel Request": "approve Travel Request",
 	"Your travel request was approved!": "Your travel request was approved!",
+
 	"You don't have an account with this email: shumbushedgar@gmail.com": "You don't have an account with this email: shumbushedgar@gmail.com",
 	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzMTg0MSwiZXhwIjoxNjExMTM2NjQxfQ.DwJx9dQIyAnSLoLNbaXz5uE0Xqr5maRNFTynyOJZxM4'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzMTg0MSwiZXhwIjoxNjExMTM2NjQxfQ.DwJx9dQIyAnSLoLNbaXz5uE0Xqr5maRNFTynyOJZxM4'>Link</a>",
 	"<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzMTkyMCwiZXhwIjoxNjExMTM2NzIwfQ.KP6mLOODZ2Sr34b2aTysNMAEeH9iZIaEa9OJxM-EMrA'>Link</a>": "<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='http://localhost:3000/api/v1/user/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNZSU1BTkFKUiIsImlhdCI6MTYxMDUzMTkyMCwiZXhwIjoxNjExMTM2NzIwfQ.KP6mLOODZ2Sr34b2aTysNMAEeH9iZIaEa9OJxM-EMrA'>Link</a>",
@@ -56,5 +67,6 @@
 	"Review added successfully!": "Review added successfully!",
 	"You are not loged in": "You are not loged in",
 	"Amenity successfully updated": "Amenity successfully updated"
+
 
 }

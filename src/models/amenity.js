@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    accommodationId: {
+
+    AccommodationId: {
 
       allowNull: true,
       type: DataTypes.UUID
