@@ -15,6 +15,9 @@ import reviewsRoutes from './api/ratesAndReviewsRoutes';
 import bookingsRoute from './api/bookingsRoute';
 import notiRoute from './api/notification';
 
+import currencyConverter from './api/currencyConverter';
+import weatherData from './api/weatherApi';
+
 import triproute from './api/tripRoute'
 
 //import signinWithGoogleRoute from "./api/signinWithGooglerRoute";
@@ -25,6 +28,10 @@ import statistics from "./api/statistics";
 const routes = express.Router();
 
 routes.use('/user', userRoute);
+
+routes.use('/weather', weatherData);
+routes.use('/convert', currencyConverter);
+
 routes.use('/requests', travelRequestroutes);
 routes.use('/directReports', directreportsRoutes);
 routes.use('/comment', tRequestsCommentsRoutes);
