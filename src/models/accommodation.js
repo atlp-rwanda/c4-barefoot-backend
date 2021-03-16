@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     locationID: { allowNull: true, type: DataTypes.UUID },
     propertyType: DataTypes.STRING,
     numberOfRooms: DataTypes.INTEGER,
+    price: DataTypes.INTEGER,
     typeOfBed: DataTypes.STRING,
     title: DataTypes.STRING,
     description: DataTypes.STRING,
