@@ -29,6 +29,20 @@ export const getAccommodations = async (req, res, next) => {
   }
 };
 
+export const getAccommodationsByLocation = async (req, res, next) => {
+  const page = Number(req.query.page);
+
+  try {
+    const accommodations = await accommodationService.getAccommodation(page);
+    if (!accommodations) {
+      throw new accommodationNotFound(('There are no accommodations available'));
+    }
+    res.status(200).json({ status: 200, page, accommodations });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const getOneAccommodation = async (req, res, next) => {
   const { id } = req.params;
   try {
