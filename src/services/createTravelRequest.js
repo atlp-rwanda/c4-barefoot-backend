@@ -9,7 +9,6 @@ const createTravelRequest = async (req, res, request, next) => {
           counter -= 1;
           record.travelId = tRequestData.travelId;
           if (counter == 0) {
-            console.log(req.body.trip)
             db.Trip.bulkCreate(req.body.trip, { hooks: true })
               .then((tripData) => {
                 const allData = { ...tRequestData.get({ plain: true }), tripData };
