@@ -58,7 +58,7 @@ export const approve_reject_TravelRequest = async (req, res, next) => {
                 message: `Your travel request was ${req.body.action}ed!`
                   };
                   const notification = await models.Notification.create(newNotificantion);
-                //  pusher.trigger('bare-foot-normad', 'notification', notification);
+                 pusher.trigger('bare-foot-normad', 'notification', notification);
                 const mailOptions = {
                   email: user.email,
                   subject: 'Your travel request',
