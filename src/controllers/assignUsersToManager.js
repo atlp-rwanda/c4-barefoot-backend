@@ -6,7 +6,7 @@ import sendEmail from '../helper/sendEmail';
 
 const assignUsersToManager = async (req, res, next) => {
   const userId = req.params.id;
-  const { manager_id } = req.query;
+  const { manager_id } = req.body;
   try {
     const user = await findUser(userId);
     if (!user) {
