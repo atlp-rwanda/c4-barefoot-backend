@@ -1,5 +1,5 @@
 import express from 'express';
-import notifications from '../../controllers/notification/getNotifications';
+import { readedNotific, unReadedNotific } from '../../controllers/notification/getNotifications';
 import updateNotification from '../../controllers/notification/updateNotification';
 import subscribe from '../../controllers/notification/subscribe';
 
@@ -35,7 +35,8 @@ const router = express.Router();
  *               description: retrieved notifications
  *
  */
-router.get('/notifications', notifications);
+router.get('/read', readedNotific);
+router.get('/unRead', unReadedNotific);
 
 /**
  * @swagger
@@ -69,7 +70,7 @@ router.get('/notifications', notifications);
  *               example: Notification upadted successful
  *
  */
-router.patch('/notifications/:id', updateNotification);
+router.put('/:id', updateNotification);
 
 router.post('/subscribe', subscribe);
 

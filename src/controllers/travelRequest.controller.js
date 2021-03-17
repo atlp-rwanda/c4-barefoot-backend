@@ -12,6 +12,7 @@ import findUserById from '../services/findUserById'
 
 export const travelRequest = async (req, res, next) => {
   const decoded = await getDataFromToken(req, res, next);
+  console.log(decoded);
   try {
     if (decoded.manager_id) {
       const request = {
@@ -31,14 +32,15 @@ export const travelRequest = async (req, res, next) => {
         }
       }
       const manager = await findUserById(decoded.manager_id)
+      console.log(manager.id);
       const newNotificantion = {
-        managerId: decoded.id,
+        user_id: manager.id,
         title: 'your user has made a Travel Request',
         message: "The user you are assigned to has made a travel request  "
           };
           
        const notification = await models.Notification.create(newNotificantion);
-      //  pusher.trigger('bare-foot-normad', 'notification', notification);
+      pusher.trigger('bare-foot-normad', 'notification', notification);
       const mailOptions = {
         email: manager.email,
         subject: 'your user has made a request',
@@ -75,6 +77,7 @@ try {
                 message: `You ${req.body.action}ed your travel request`
                   };
                const notification = await models.Notification.create(newNotificantion);
+               pusher.trigger('bare-foot-normad', 'notification', notification);
                const mailOptions = {
                 email: user.email,
                 name:user.username,
