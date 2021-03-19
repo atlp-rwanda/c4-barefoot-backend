@@ -2,6 +2,7 @@ import express from 'express';
 import {
   createAccommodation,
   getAccommodations,
+  getAccommodationsByLocation,
   getOneAccommodation,
   updateAccommodation,
   deleteAccommodation,
@@ -256,7 +257,7 @@ router.get('/:id', permit(['view accommodations']), getOneAccommodation);
 /**
  * @swagger
  *
- * /api/v1/accommodations/location/{country}:
+ * /api/v1/accommodations/location/{locationId}:
  *  get:
  *    summary: This route retrieves accommodations with in the specified location by providing country 
  *    tags: [Many Accommodations or One]
@@ -386,7 +387,7 @@ router.get('/:id', permit(['view accommodations']), getOneAccommodation);
  *                      description: Availability of wifi
  *                      example: false
  */
- router.get('/location/:country', permit(['view accommodations']), getOneAccommodation);
+ router.get('/location/:country', permit(['view accommodations']), getAccommodationsByLocation);
 
 /**
  * @swagger

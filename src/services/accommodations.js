@@ -8,11 +8,19 @@ const getAccommodation = (page = 1) => {
   return accommodations;
 };
 
+const getAccommodationLocationId = (page,country) => {
+  // if (Number.isNaN(page)) { page = 1; }
+  const pageSize = 6;
+  const skip = (page-1) * pageSize;
+  const accommodations = models.Accommodation.findAndCountAll({ limit: pageSize, offset: skip,where:{locationID:country} });
+  return accommodations;
+};
+
 const getSingleAccommodation = (query) => {
   const singleAccommodation = models.Accommodation.findOne({ where: { id: query }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
   return singleAccommodation;
 };
 
 export default {
-  getAccommodation, getSingleAccommodation
+  getAccommodation, getSingleAccommodation,getAccommodationLocationId 
 };

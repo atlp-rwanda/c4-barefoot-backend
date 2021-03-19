@@ -30,10 +30,11 @@ export const getAccommodations = async (req, res, next) => {
 };
 
 export const getAccommodationsByLocation = async (req, res, next) => {
-  const page = Number(req.query.page);
+  const country= req.params.country;
+  const page = req.query.page?(Number(req.query.page)):(1);
 
   try {
-    const accommodations = await accommodationService.getAccommodation(page);
+    const accommodations = await accommodationService.getAccommodationLocationId(page,country);
     if (!accommodations) {
       throw new accommodationNotFound(('There are no accommodations available'));
     }
@@ -48,10 +49,11 @@ export const getOneAccommodation = async (req, res, next) => {
   try {
     const singleAccommodation = await accommodationService.getSingleAccommodation(id);
     if (!singleAccommodation) {
-      throw new accommodationNotFound(('Accommodation does not exist'));
+      throw new accommodationNotFound(('accommodation does not exist'));
     }
-    // const amenities = await models.Amenity.findOne({ where: { accommodationId: id }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
-    res.status(200).json({ singleAccommodation});
+     const amenities = await models.Amenity.findOne({ where: { accommodationId: id }, attributes: { exclude: ['createdAt', 'updatedAt','id','accommodationId'] } });
+     singleAccommodation.amenities=amenities;
+    res.status(200).json({ singleAccommodation,amenities});
   } catch (error) {
     next(error);
   }
