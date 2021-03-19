@@ -3,6 +3,7 @@ import getDataFromToken from '../helper/tokenToData';
 import { createTravelComment } from '../services/createTravelRequestComment';
 import findUserById from '../services/findUserById';
 import models from '../models';
+import pusher from '../config/pusher';
 import sendEmail from '../helper/sendEmail';
 import { decode } from 'jsonwebtoken';
 const TravelRequestComment = async (req, res, next) => {
@@ -41,7 +42,7 @@ const TravelRequestComment = async (req, res, next) => {
                 message: `Your travel request was ${req.body.action}ed!`
                   };
                   const notification = await models.Notification.create(newNotificantion);
-              //  pusher.trigger('bare-foot-normad', 'notification', notification);
+               pusher.trigger('bare-foot-normad', 'notification', notification);
               res.status(201).json({ status: 201, message: 'Operation performed successfully!' });
               next();
           } catch (err) {
