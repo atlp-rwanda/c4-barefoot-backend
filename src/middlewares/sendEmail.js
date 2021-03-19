@@ -13,7 +13,9 @@ export const sendVerificationEmail = async (req, res, next) => {
   const userInfo = {
     email: email,
     subject: 'Verify your email',
-    html: `<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='${process.env.FRONTEND_URL}/user/verification?token=${accessToken}'>Link</a>`
+    html: `<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='${process.env.FRONTEND_URL}/user/verification?token=${accessToken}'>Link</a>`,
+    name: `Welcome to Barefoot Nomad, Click on the link below to verify your email`,
+    body:`<a href='${process.env.FRONTEND_URL}/user/verification?token=${accessToken}'>Link</a>`
   };
 
   const sendmail = await sendEmail(userInfo);
