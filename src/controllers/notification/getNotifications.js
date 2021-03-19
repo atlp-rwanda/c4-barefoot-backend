@@ -23,7 +23,8 @@ export const readedNotific = async (req, res) => {
           status: 'readed'
         }
        
-      }
+      },
+      order: ['created_At', 'DESC']
     });
     return res.status(200).json({ status: 200, message: ('user\'s Notifications'), notifications });
   } catch (error) {
@@ -49,7 +50,10 @@ export const unReadedNotific = async (req, res)=>{
           status: 'not readed'
         }
        
-      }
+      },
+      order: [
+        ['createdAt', 'DESC']
+      ]
     });
     return res.status(200).json({ status: 200, message: ('user\'s Notifications'), notifications });
   } catch (error) {
