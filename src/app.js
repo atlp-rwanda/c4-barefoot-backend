@@ -42,7 +42,13 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const port = process.env.PORT || 8000;
+
+// app.use((req, res, next) => {
+//   req.location = 'location';
+//   next ();
+// })
+
+const port = process.env.PORT || 4000;
 
 // routes
 app.use(express.json());
@@ -93,7 +99,11 @@ server.listen(port, () => {
   }
 });
 cron.schedule('* * * * *', () => {
+<<<<<<< HEAD
   expiredBookings();
+=======
+ expiredBookings();
+>>>>>>> upadating branch to main
 });
 
 //chat handler
@@ -101,6 +111,7 @@ io.use(handshake).on("connection", userConnection);
 
 export default app;
 
+<<<<<<< HEAD
 // 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
 // SIGNIN_CLIENT_ID=516433117857-286j7mbmh4c3s03dfqrkvm9io3o9075g.apps.googleusercontent.com
 // SIGNIN_CLIENT_SECRET=F_7jOdSqzOvQTdj889GeBS6y
@@ -123,3 +134,5 @@ export default app;
 
 1//04F8mTg9uoagqCgYIARAAGAQSNwF-L9Irim7Z_YUyufgjVFkkcV7NWkswRPlI1JFv7ghPUmlOu5K_3HStUNlMf5OcrD3A-sabXi4
 // ya29.a0AfH6SMDrNJb4XR88kLT7EDY2Z69CsLkHZ5QGUEp3hG0nWaND8QC3-8QI5DfwlfrI-5zCkJvEGIz3SQUvlaIUo7HYnN_3JVnbpQYYFriKhJ3ad9u5xDzcVVlQi6QpmfHlMvyv3PVkIhEDRPc80yqfBN4tlXyJ
+=======
+>>>>>>> upadating branch to main
