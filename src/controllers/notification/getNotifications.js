@@ -33,7 +33,7 @@ export const readedNotific = async (req, res) => {
   }
 };
 
-export cssonst unReadedNotific = async (req, res)=>{
+export const unReadedNotific = async (req, res)=>{
   const userData = req.headers.authorization;
   if (!userData) return res.status(401).json({ status: 401, message: ('Unauthorized, Please login!') });
   const token = userData.split(' ')[1];
