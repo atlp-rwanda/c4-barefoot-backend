@@ -101,25 +101,3 @@ io.use(handshake).on("connection", userConnection);
 
 export default app;
 
-// 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
-// SIGNIN_CLIENT_ID=516433117857-286j7mbmh4c3s03dfqrkvm9io3o9075g.apps.googleusercontent.com
-// SIGNIN_CLIENT_SECRET=F_7jOdSqzOvQTdj889GeBS6y
-// SIGNIN_REDIECT_URL=http://localhost:3000/api/v1/google/signin/check
-
-
-
-
-
-// 706682876120-t11q38b8brmdr2bce5ugcnrlfl4ei8f4.apps.googleusercontent.com
-// O6IeJVDLaFj5RPQ9a6-DtdWj
-
-
-
-// SIGNIN_CLIENT_ID=516433117857-286j7mbmh4c3s03dfqrkvm9io3o9075g.apps.googleusercontent.com
-// SIGNIN_CLIENT_SECRET=F_7jOdSqzOvQTdj889GeBS6y
-// SIGNIN_REDIECT_URL=http://localhost:3000/api/v1/google/signin/check
-
-
-
-1//04F8mTg9uoagqCgYIARAAGAQSNwF-L9Irim7Z_YUyufgjVFkkcV7NWkswRPlI1JFv7ghPUmlOu5K_3HStUNlMf5OcrD3A-sabXi4
-// ya29.a0AfH6SMDrNJb4XR88kLT7EDY2Z69CsLkHZ5QGUEp3hG0nWaND8QC3-8QI5DfwlfrI-5zCkJvEGIz3SQUvlaIUo7HYnN_3JVnbpQYYFriKhJ3ad9u5xDzcVVlQi6QpmfHlMvyv3PVkIhEDRPc80yqfBN4tlXyJ
