@@ -1,4 +1,5 @@
 import models from '../models';
+import { Op } from 'sequelize';
 
 const getAccommodation = (page = 1) => {
   if (Number.isNaN(page)) { page = 1; }
@@ -12,7 +13,7 @@ const getAccommodationLocationId = (page,country) => {
   // if (Number.isNaN(page)) { page = 1; }
   const pageSize = 6;
   const skip = (page-1) * pageSize;
-  const accommodations = models.Accommodation.findAndCountAll({ limit: pageSize, offset: skip,where:{locationID:country} });
+  const accommodations = models.Accommodation.findAndCountAll({ limit: pageSize, offset: skip,where:{locationID:country,numberOfRooms:{[Op.gt]:0}}});
   return accommodations;
 };
 
