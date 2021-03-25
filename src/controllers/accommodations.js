@@ -35,10 +35,11 @@ export const getAccommodationsByLocation = async (req, res, next) => {
 
   try {
     const accommodations = await accommodationService.getAccommodationLocationId(page,country);
+    const nation=accommodations.rows[0].country
     if (!accommodations) {
       throw new accommodationNotFound(('There are no accommodations available'));
     }
-    res.status(200).json({ status: 200, page, accommodations });
+    res.status(200).json({ status: 200, page, accommodations,nation });
   } catch (error) {
     next(error);
   }

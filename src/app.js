@@ -44,7 +44,7 @@ app.use(passport.session());
 
 
 
-const port = process.env.PORT || 3300;
+const port = process.env.PORT || 3000;
 
 // routes
 app.use(express.json());
