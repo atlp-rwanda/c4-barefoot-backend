@@ -6,6 +6,7 @@ import ApplicationError from '../utils/Errors/applicationError';
 
 export const getTravelRequest = async (req, res, next) => {
   const decoded = await getDataFromToken(req, res, next);
+  console.log(decoded.id);
   try {
     const id = req.params.requestId;
     const userid = decoded.id.toString();
@@ -16,7 +17,7 @@ export const getTravelRequest = async (req, res, next) => {
     if (id) { // get a specific travel request
       query = { userId: userid, travelId: id };
     } else { // get all travel request
-      query = { userId: userid };
+      query = { userId: decoded.id };
     }
     findTravelRequest(res, query, next, pagination);
   } catch (err) {
