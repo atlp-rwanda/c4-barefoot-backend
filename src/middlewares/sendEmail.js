@@ -31,7 +31,7 @@ export const sendVerificationEmail = async (req, res, next) => {
     next(error);
     next(error.message);
   }
-};
+};    
 
 
 export const sendResetPasswordEmail = async (req, res, next) => {
