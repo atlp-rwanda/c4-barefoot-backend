@@ -5,7 +5,7 @@ import BadRequestError from '../utils/Errors/badRequestError';
 export default function (req, res, next) {
     const schema = Joi.object({
         travelRequestId: Joi.string().required().min(36).max(36),
-        action: Joi.string().valid('cancel').required()
+        action: Joi.string().required()
     });
   const { error } = schema.validate(req.body);
   if (error) {

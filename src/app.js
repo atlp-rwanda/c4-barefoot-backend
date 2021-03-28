@@ -43,12 +43,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// app.use((req, res, next) => {
-//   req.location = 'location';
-//   next ();
-// })
+const port = process.env.PORT || 4000;
 
-const port = process.env.PORT || 3000;
 
 // routes
 app.use(express.json());
