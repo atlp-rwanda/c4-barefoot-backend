@@ -24,7 +24,7 @@ export const readedNotific = async (req, res) => {
         }
        
       },
-      order: ['created_At', 'DESC']
+      order: ['createdAt', 'DESC']
     });
     return res.status(200).json({ status: 200, message: ('user\'s Notifications'), notifications });
   } catch (error) {
