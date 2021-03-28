@@ -13,7 +13,7 @@ export const sendVerificationEmail = async (req, res, next) => {
   const userInfo = {
     email: email,
     subject: 'Verify your email',
-    html: `<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href='${process.env.FRONTEND_URL}/user/verification?token=${accessToken}'>Link</a>`,
+    html: `<p>Welcome to Barefoot Nomad, Click on the link below to verify your email.</p> <br> <a href=${process.env.FRONTEND_URL}/user/verification?token=${accessToken}>Link</a>`,
     name: 'Welcome to Barefoot Nomad, Click on the link below to verify your email',
     body:`<a href='${process.env.FRONTEND_URL}/user/verification?token=${accessToken}'>Link</a>`
   };
@@ -46,7 +46,7 @@ export const sendResetPasswordEmail = async (req, res, next) => {
     const userInfo = {
       email: email,
       subject: 'Reset your password',
-      html: `<p>Hello, you requested to reset your password on Barefoot Nomad, Click on the link below to enter new password.</p> <br> <a href='${process.env.FRONTEND_URL}/user/reset-password?token=${resetToken}'><b>Reset password Link</b></a>`
+      html: `<p>Hello, you requested to reset your password on Barefoot Nomad, Click on the link below to enter new password.</p> <br> <a href=${process.env.FRONTEND_URL}/user/reset-password?token=${resetToken}><b>Reset password Link</b></a>`
     };
 
     const sendmail = await sendEmail(userInfo);
