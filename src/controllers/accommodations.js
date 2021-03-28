@@ -31,11 +31,14 @@ export const getAccommodations = async (req, res, next) => {
 
 export const getAccommodationsByLocation = async (req, res, next) => {
   const country= req.params.country;
+  let nation=null;
   const page = req.query.page?(Number(req.query.page)):(1);
 
   try {
     const accommodations = await accommodationService.getAccommodationLocationId(page,country);
-    const nation=accommodations.rows[0].country
+    if(accommodations.rows.length>0){
+      nation=accommodations.rows[0].country
+    }
     if (!accommodations) {
       throw new accommodationNotFound(('There are no accommodations available'));
     }
