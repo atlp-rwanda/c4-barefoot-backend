@@ -31,7 +31,7 @@ export const sendVerificationEmail = async (req, res, next) => {
     next(error);
     next(error.message);
   }
-};
+};    
 
 
 export const sendResetPasswordEmail = async (req, res, next) => {
@@ -44,7 +44,7 @@ export const sendResetPasswordEmail = async (req, res, next) => {
     const resetToken = generateToken({ username: userFound.username });
 
     const userInfo = {
-      email: email,
+      em ssail: email,
       subject: 'Reset your password',
       html: `<p>Hello, you requested to reset your password on Barefoot Nomad, Click on the link below to enter new password.</p> <br> <a href=${process.env.FRONTEND_URL}/user/reset-password?token=${resetToken}><b>Reset password Link</b></a>`
     };
