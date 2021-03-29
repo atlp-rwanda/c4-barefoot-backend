@@ -22,6 +22,9 @@ import { expiredBookings } from '../src/controllers/bookingsController';
 
 // const expired = new Checkout();
 
+import location from './controllers/locations'
+
+
 
 const app = express();
 const server = http.createServer(app);
@@ -39,7 +42,9 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const port = process.env.PORT || 3000;
+
+const port = process.env.PORT || 4000;
+
 
 // routes
 app.use(express.json());
