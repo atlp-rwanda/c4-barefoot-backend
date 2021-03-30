@@ -115,7 +115,7 @@ const router = express.Router();
  *
  *
  */
-router.get('/', permit(['view accommodations']), getAccommodations);
+router.get('/', getAccommodations);
 
 /**
  * @swagger
