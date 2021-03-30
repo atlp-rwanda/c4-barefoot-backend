@@ -18,10 +18,6 @@ module.exports = {
           onupdate: 'cascade'
         }
       },
-      travelId: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-      },
       title: {
         allowNull: false,
         type: Sequelize.STRING
