@@ -9,6 +9,7 @@ export const signUp=async(req,res)=>{
     let user;
     user=req.body.user;
     const result=await loginUser(user);
+    res.redirect(`${process.env.FRONTEND_URL}/token?q=${result.token}`)
     res.send({
         status: 200,
         message:'successfully Logged In',
