@@ -43,7 +43,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 
 // routes
