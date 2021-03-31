@@ -45,6 +45,6 @@ const router = express.Router();
  *                      example: Amenity successfully updated
  */
 
-router.patch('/:id', permit(['update accommodations']), updateAmenity);
+router.patch('/:accommodationId', permit(['update accommodations']), updateAmenity);
 
 export default router;
