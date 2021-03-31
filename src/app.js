@@ -42,8 +42,6 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
 const port = process.env.PORT || 3000;
 
 // routes
@@ -95,7 +93,7 @@ server.listen(port, () => {
   }
 });
 cron.schedule('* * * * *', () => {
- expiredBookings();
+  expiredBookings();
 });
 
 //chat handler
