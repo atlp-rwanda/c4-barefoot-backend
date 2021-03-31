@@ -12,7 +12,6 @@ const getSingleAccommodation = (query) => {
   const singleAccommodation = models.Accommodation.findOne({ where: { id: query }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
   return singleAccommodation;
 };
-
 const getAccommodationsWithlocationId = (locationId) => {
   const Accommodations = models.Accommodation.findAll({ where: { locationID: locationId }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
   return Accommodations;
