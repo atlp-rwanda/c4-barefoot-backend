@@ -15,6 +15,7 @@ export default {
       password: hashPassword('manager_id'),
       verified: true,
       user_role_id: roles.MANAGER,
+      refreshtoken: ' ',
     },
     {
       id: 'a9610cf3-4056-41dd-92ca-463088e23d07',
@@ -28,7 +29,8 @@ export default {
       password: hashPassword('With_LineManager'),
       verified: true,
       user_role_id: roles.MANAGER,
-      manager_id: 'fb94de4d-47ff-4079-89e8-b0186c0a3be8'
+      manager_id: 'fb94de4d-47ff-4079-89e8-b0186c0a3be8',
+      refreshtoken: ' ',
     },
     {
       id: '122a0d86-8b78-4bb8-b28f-8e5f7811c456',
@@ -41,7 +43,8 @@ export default {
       email: 'superadmin@gmail.com',
       password: hashPassword('Superadmin'),
       verified: true,
-      user_role_id: roles.SUPER_ADMIN
+      user_role_id: roles.SUPER_ADMIN,
+      refreshtoken: ' ',
     },
     {
       id: 'fb94de4d-47ff-4079-89e8-b0186c0a3be8',
@@ -55,7 +58,8 @@ export default {
       address: 'Kigali',
       language: 'English',
       user_role_id: roles.MANAGER,
-      manager_id: '0ce36391-2c08-4703-bddb-a4ea8cccbbc5'
+      manager_id: '0ce36391-2c08-4703-bddb-a4ea8cccbbc5',
+      refreshtoken: ' ',
     }, {
       id: '0ce36391-2c08-4703-bddb-a4ea8cccbbc5',
       first_name: 'Manager',
@@ -69,6 +73,7 @@ export default {
       language: 'English',
       user_role_id: roles.MANAGER,
       manager_id: 'fb94de4d-47ff-4079-89e8-b0186c0a3be8',
+      refreshtoken: ' ',
     }, {
       id: '83b2a3e7-9ba4-4d3f-b3a3-d31940ee2edc',
       first_name: 'Requester',
@@ -81,7 +86,8 @@ export default {
       user_role_id: roles.REQUESTER,
       address: 'Kigali',
       language: 'English',
-      verified: true
+      verified: true,
+      refreshtoken: ' ',
     }, {
       id: 'd74fcc5e-5755-4366-83ef-cf306b013c46',
       first_name: 'pushRequester',
@@ -94,7 +100,8 @@ export default {
       user_role_id: roles.REQUESTER,
       address: 'Kigali',
       language: 'English',
-      verified: true
+      verified: true,
+      refreshtoken: ' ',
     }, {
       id: '2d647115-3af7-4df0-99aa-6656c764829f',
       first_name: 'Travel',
@@ -106,7 +113,8 @@ export default {
       user_role_id: roles.TRAVEL_ADMIN,
       address: 'Kigali',
       language: 'English',
-      verified: true
+      verified: true,
+      refreshtoken: ' ',
     }
 
   ], {}),
