@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn('Trips', 'destionationId', {
+    await queryInterface.addColumn('Trips', 'destinationId', {
       type: Sequelize.UUID,
       allowNull: true,
     }, {
@@ -12,7 +12,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('Trips', 'destionationId', {
-      type: Sequelize.UUID,
+      type: Sequelize.STRING,
       allowNull: true,
     }, {
       after: 'destination',
