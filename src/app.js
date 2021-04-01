@@ -99,7 +99,7 @@ server.listen(port, () => {
   }
 });
 cron.schedule('* * * * *', () => {
- expiredBookings();
+  expiredBookings();
 });
 
 //chat handler

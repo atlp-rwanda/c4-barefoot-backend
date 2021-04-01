@@ -30,15 +30,19 @@ export const getAccommodations = async (req, res, next) => {
 };
 
 export const getAccommodationsByLocation = async (req, res, next) => {
-  const country= req.params.country;
-  const page = req.query.page?(Number(req.query.page)):(1);
+  const country = req.params.country;
+  let nation = null;
+  const page = req.query.page ? (Number(req.query.page)) : (1);
 
   try {
-    const accommodations = await accommodationService.getAccommodationLocationId(page,country);
+    const accommodations = await accommodationService.getAccommodationLocationId(page, country);
+    if (accommodations.rows.length > 0) {
+      nation = accommodations.rows[0].country
+    }
     if (!accommodations) {
       throw new accommodationNotFound(('There are no accommodations available'));
     }
-    res.status(200).json({ status: 200, page, accommodations });
+    res.status(200).json({ status: 200, page, accommodations, nation });
   } catch (error) {
     next(error);
   }
@@ -51,9 +55,9 @@ export const getOneAccommodation = async (req, res, next) => {
     if (!singleAccommodation) {
       throw new accommodationNotFound(('accommodation does not exist'));
     }
-     const amenities = await models.Amenity.findOne({ where: { accommodationId: id }, attributes: { exclude: ['createdAt', 'updatedAt','id','accommodationId'] } });
-     singleAccommodation.amenities=amenities;
-    res.status(200).json({ singleAccommodation,amenities});
+    const amenities = await models.Amenity.findOne({ where: { accommodationId: id }, attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'accommodationId'] } });
+    singleAccommodation.amenities = amenities;
+    res.status(200).json({ singleAccommodation, amenities });
   } catch (error) {
     next(error);
   }
@@ -110,3 +114,16 @@ export const bookAccomodation = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getAccommodationsBylocationId = async (req, res, next) => {
+  const locationId = req.params.locationId
+  try {
+    const accommodations = await accommodationService.getAccommodationsWithlocationId(locationId);
+    if (!accommodations) {
+      throw new accommodationNotFound(('There are no accommodations available'));
+    }
+    res.status(200).json({ status: 200, accommodations });
+  } catch (error) {
+    next(error);
+  }
+}
