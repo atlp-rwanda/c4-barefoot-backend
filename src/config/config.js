@@ -12,12 +12,6 @@ module.exports = {
     seederStorageTableName: 'sequelize_data',
     operatorsAliases: 0,
     logging: false,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
-    }
   },
   test: {
     use_env_variable: 'CI_DB_URL',
