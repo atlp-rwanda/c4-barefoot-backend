@@ -1,16 +1,25 @@
 import models from '../models';
 import getUserData from '../helper/tokenToData';
 import notFound from '../utils/Errors/notFoundRequestError';
-import {Op} from 'sequelize';
+import { Op } from 'sequelize';
 
 const showBookings = async (req, res, next) => {
   try {
     const user = await getUserData(req, res);
-    const booking = await models.Booking.findAll({ where: { username: user.username } });
+    const booking = await models.Booking.findAll({
+      where: { username: user.username }, include: [
+        {
+          model: models.Accommodation,
+          as: 'accommodation'
+        }
+      ]
+    });
+
     if (!booking[0]) {
       res.json('You do not have any bookings');
     }
-    res.status(200).json(booking);
+
+    res.status(200).json({ booking });
   } catch (error) {
     next(error);
   }
@@ -18,21 +27,21 @@ const showBookings = async (req, res, next) => {
 const expiredBookings = async () => {
   try {
     const booking = await models.Booking.findAll({
-        where: {
+      where: {
         To: {
           [Op.lte]: new Date()
         },
         checkedout: false
       }
     });
-    
+
     booking.forEach(async singleBooking => {
       // 
       await models.Accommodation.increment(
         {
           numberOfRooms: +1
         }, {
-          where: {
+        where: {
           id: singleBooking.accommodationId
         }
       })
@@ -42,7 +51,7 @@ const expiredBookings = async () => {
       {
         checkedout: true
       }, {
-        where: {
+      where: {
         To: {
           [Op.lte]: new Date()
         },
@@ -60,4 +69,3 @@ export {
   showBookings,
   expiredBookings
 };
- 
