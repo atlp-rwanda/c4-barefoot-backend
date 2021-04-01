@@ -4,6 +4,7 @@ import ApplicationError from '../../utils/Errors/applicationError';
 import BadRequestError from '../../utils/Errors/badRequestError';
 import NotFoundRequestError from '../../utils/Errors/notFoundRequestError';
 import { comparePassword, generateToken } from '../../utils/auth';
+import findRole from '../../services/findRoleById';
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -42,11 +43,12 @@ const login = async (req, res, next) => {
       verified: isUser.verified,
     };
     const userToken = await generateToken(userData);
+    const role= await findRole(userData.role);
     // updating user refresh token in database
     await isUser.update({ refreshtoken: userToken });
     res.cookie('make', userToken, { httpOnly: false, path: '/api/v1/user/refresh-token' });
     return res.status(200).json({
-      status: 200, message: ('login successful'), data: userToken, profile: userProfile
+      status: 200, message: ('login successful'), data: userToken, profile: userProfile, role: role.name
     });
   } catch (err) {
     next(err);
