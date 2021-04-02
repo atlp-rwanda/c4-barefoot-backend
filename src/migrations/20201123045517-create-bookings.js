@@ -10,7 +10,7 @@ module.exports = {
       username: {
         type: Sequelize.STRING,
       },
-      accommodationId: {
+      AccommodationId: {
         allowNull: true,
         type: Sequelize.UUID,
         references: {
