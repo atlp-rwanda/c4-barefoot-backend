@@ -4,7 +4,6 @@ import ApplicationError from '../utils/Errors/applicationError';
 import notFoundRequestError from '../utils/Errors/notFoundRequestError';
 
 export const createReviews = async (req, res, next) => {
-
     let query = req.body;
     query.accommodationId = req.params.accommodationId;
 
@@ -33,30 +32,33 @@ export const getReviews = async (req, res, next) => {
 
     try{
         const page = req.query.page || 1;
-        const limit = req.query.limit || 3;
+        const limit = req.query.limit || 10;
         const skip = ((page - 1) === -1) ? 0 : (page - 1) * limit;
         const paginatedReviews = {
-            offset: skip,
-            limit,
+            // offset: skip,
+            // limit,
             attributes: ['rate', 'review']
     
         }
-
-
         const findAllRatings = await findRatings({accommodationId: accommodationId },paginatedReviews);
         if(findAllRatings){
             if(!findAllRatings.allRatings.count){ throw new notFoundRequestError(("No reviews found, be the first to rate this accommodation!"))}
-            
+            let sum = 0;
+            const sumofrates = findAllRatings.allRatings.rows.map((rate) => {
+                sum = sum + rate.rate;
+            })
             //calculating the average of rates
             const ratesData = {
                 totalRates: findAllRatings.allRatings.count,
+                actualRate: Math.round(sum/findAllRatings.allRatings.count),
                 oneStar: `${((findAllRatings.oneStar.count * 100)/ findAllRatings.allRatings.count).toFixed(0)}%`,
                 twoStar: `${((findAllRatings.twoStar.count* 100)/ findAllRatings.allRatings.count).toFixed(0)}%`,
                 threeStar: `${((findAllRatings.threeStar.count * 100)/ findAllRatings.allRatings.count).toFixed(0)}%`,
                 fourStar: `${((findAllRatings.fourStar.count * 100)/ findAllRatings.allRatings.count).toFixed(0)}%`,
                 fiveStar: `${((findAllRatings.fiveStar.count * 100)/ findAllRatings.allRatings.count).toFixed(0)}%`
             }
-
+            // const allrates = findAllRatings.map
+            // const 
 
             return res.status(200).json({status:200, rates: ratesData, reviews: findAllRatings.reviews});
         }
