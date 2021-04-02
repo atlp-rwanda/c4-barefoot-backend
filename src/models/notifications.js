@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     message: {
       type: DataTypes.STRING
     },
+    travelId: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
     status: {
       type: DataTypes.STRING,
       defaultValue: 'not readed'

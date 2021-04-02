@@ -42,7 +42,13 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const port = process.env.PORT || 3000;
+
+// app.use((req, res, next) => {
+//   req.location = 'location';
+//   next ();
+// })
+
+const port = process.env.PORT || 4000;
 
 // routes
 app.use(express.json());
@@ -100,3 +106,4 @@ cron.schedule('* * * * *', () => {
 io.use(handshake).on("connection", userConnection);
 
 export default app;
+
