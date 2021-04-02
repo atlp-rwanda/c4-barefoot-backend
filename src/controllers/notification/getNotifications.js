@@ -61,4 +61,4 @@ export const unReadedNotific = async (req, res)=>{
     res.json(error);
   }
 }
-export default notific;
+export default readedNotific;
