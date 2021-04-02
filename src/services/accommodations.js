@@ -14,5 +14,5 @@ const getSingleAccommodation = (query) => {
 };
 
 export default {
-  getAccommodation, getSingleAccommodation,getAccommodationLocationId 
+  getAccommodation, getSingleAccommodation
 };
