@@ -42,7 +42,13 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const port = process.env.PORT || 3000;
+
+// app.use((req, res, next) => {
+//   req.location = 'location';
+//   next ();
+// })
+
+const port = process.env.PORT || 4000;
 
 // routes
 app.use(express.json());
@@ -93,10 +99,11 @@ server.listen(port, () => {
   }
 });
 cron.schedule('* * * * *', () => {
-  expiredBookings();
+ expiredBookings();
 });
 
 //chat handler
 io.use(handshake).on("connection", userConnection);
 
 export default app;
+

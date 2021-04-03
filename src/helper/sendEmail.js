@@ -7,6 +7,7 @@ import emailTemplate from './emailTemplate';
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const sendEmail = async (userInfo) =>{
+  console.log(userInfo)
   
   const mailOptions = {
     from: `"Barefoot Nomad"<${process.env.GMAIL_EMAIL}>`,
@@ -22,4 +23,4 @@ const sendEmail = async (userInfo) =>{
      return err;;
   }
 }
-export default sendEmail;// 
+export default sendEmail;

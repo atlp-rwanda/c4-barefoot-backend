@@ -5,7 +5,7 @@ export default function (req, res, next) {
   const schema = Joi.object({
     manager_id: Joi.string().required(),
   });
-  const { error } = schema.validate(req.query);
+  const { error } = schema.validate(req.body);
   if (error) {
     throw new BadRequestError(error.details[0].message);
   }
