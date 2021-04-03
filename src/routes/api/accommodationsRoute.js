@@ -745,7 +745,7 @@ router.get('/in/:locationId', permit(['view accommodations']), getAccommodations
  *                      type: string
  *                      description: The unique id ofr the amenity
  *                      example: dda5e181-6390-48e5-a5ee-238fb40359a4
- *                  AccommodationId:
+ *                  accommodationId:
  *                      type: string
  *                      description: Foreign key of corresponding accommodation
  *                      example: 952595eb-b193-4391-9196-6840f7ad293d
@@ -881,7 +881,7 @@ router.get('/:id', permit(['view accommodations']), getOneAccommodation);
  *                      type: string
  *                      description: The unique id ofr the amenity
  *                      example: dda5e181-6390-48e5-a5ee-238fb40359a4
- *                  AccommodationId:
+ *                  accommodationId:
  *                      type: string
  *                      description: Foreign key of corresponding accommodation
  *                      example: 952595eb-b193-4391-9196-6840f7ad293d
