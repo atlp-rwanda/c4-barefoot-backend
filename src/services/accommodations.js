@@ -16,6 +16,11 @@ const getAccommodationsWithlocationId = (locationId) => {
   const Accommodations = models.Accommodation.findAll({ where: { locationID: locationId }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
   return Accommodations;
 };
+// const getAccommodationsWithlocationId = (locationId) => {
+//   const Accommodations = models.Accommodation.findAll({ where: { locationID: locationId }, attributes: { exclude: ['createdAt', 'updatedAt'] } });
+//   return Accommodations;
+// };
+
 export default {
-  getAccommodation, getSingleAccommodation,getAccommodationsWithlocationId
-}
+  getAccommodation, getSingleAccommodation, getAccommodationsWithlocationId,
+};
