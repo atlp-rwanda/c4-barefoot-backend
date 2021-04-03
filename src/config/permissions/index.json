@@ -139,5 +139,25 @@
     "create locations": 0,
     "update locations": 0,
     "delete locations": 0
+  },
+  "dsvfvd": {
+    "edit profile": 1,
+    "assign requesters to manager": 0,
+    "create travel requests": 0,
+    "view travel requests": 0,
+    "edit travel requests": 0,
+    "cancel travel requests": 0,
+    "approve direct reports travel requests": 0,
+    "view direct reports travel requests": 0,
+    "reject direct reports travel requests": 0,
+    "view accommodations": 1,
+    "create accommodations": 0,
+    "update accommodations": 0,
+    "delete accommodations": 0,
+    "book accommodations": 0,
+    "view locations": 1,
+    "create locations": 0,
+    "update locations": 0,
+    "delete locations": 0
   }
 }
